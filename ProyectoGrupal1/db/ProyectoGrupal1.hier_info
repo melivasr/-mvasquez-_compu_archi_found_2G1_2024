@@ -1,0 +1,38 @@
+|subtractor2Bits
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+b[0] => _.IN1
+b[1] => _.IN1
+s[0] <= fulladderOP:unidades.port3
+s[1] <= fulladderOP:decenas.port3
+cout <= fulladderOP:decenas.port4
+
+
+|subtractor2Bits|fulladderOP:unidades
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|subtractor2Bits|fulladderOP:decenas
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
