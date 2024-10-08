@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSXFC6D6F31C6
-set_global_assignment -name TOP_LEVEL_ENTITY spi_slave
+set_global_assignment -name TOP_LEVEL_ENTITY uart_fpga_top
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 23.1STD.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:24:19  OCTOBER 07, 2024"
 set_global_assignment -name LAST_QUARTUS_VERSION "23.1std.1 Lite Edition"
@@ -52,26 +52,49 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
-set_global_assignment -name SYSTEMVERILOG_FILE uart.sv
-set_global_assignment -name SYSTEMVERILOG_FILE uart_tx_tb.sv
 set_global_assignment -name SYSTEMVERILOG_FILE uart_tx.sv
-set_global_assignment -name SYSTEMVERILOG_FILE tb_uart_rx.sv
 set_global_assignment -name SYSTEMVERILOG_FILE uart_rx.sv
 set_location_assignment PIN_AF14 -to clock
 set_location_assignment PIN_W15 -to i_Rx_Serial
-set_location_assignment PIN_AA30 -to i_Tx_DV
-set_location_assignment PIN_AF24 -to o_Rx_Byte[7]
-set_location_assignment PIN_AE24 -to o_Rx_Byte[6]
-set_location_assignment PIN_AF25 -to o_Rx_Byte[5]
-set_location_assignment PIN_AG25 -to o_Rx_Byte[4]
-set_location_assignment PIN_AD24 -to o_Rx_Byte[3]
-set_location_assignment PIN_AC23 -to o_Rx_Byte[2]
-set_location_assignment PIN_AB23 -to o_Rx_Byte[1]
-set_location_assignment PIN_AA24 -to o_Rx_Byte[0]
 set_location_assignment PIN_AK2 -to o_Tx_Serial
-set_location_assignment PIN_AC29 -to signal
-set_global_assignment -name SYSTEMVERILOG_FILE spi_slave.sv
+set_global_assignment -name SYSTEMVERILOG_FILE uart_fpga_top.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_AB30 -to switches[0]
+set_location_assignment PIN_Y27 -to switches[1]
+set_location_assignment PIN_AB28 -to switches[2]
+set_location_assignment PIN_AC30 -to switches[3]
+set_location_assignment PIN_W25 -to switches[4]
+set_location_assignment PIN_V25 -to switches[5]
+set_location_assignment PIN_AC28 -to switches[6]
+set_location_assignment PIN_AD30 -to switches[7]
+set_location_assignment PIN_AJ4 -to button
+set_location_assignment PIN_AK4 -to reset_n
+set_location_assignment PIN_AA24 -to leds[0]
+set_location_assignment PIN_AB23 -to leds[1]
+set_location_assignment PIN_AC23 -to leds[2]
+set_location_assignment PIN_AD24 -to leds[3]
+set_location_assignment PIN_AG25 -to leds[4]
+set_location_assignment PIN_AF25 -to leds[5]
+set_location_assignment PIN_AE24 -to leds[6]
+set_location_assignment PIN_AF24 -to leds[7]
+set_global_assignment -name SYSTEMVERILOG_FILE BCD_to_7Segment.sv
+set_location_assignment PIN_W17 -to display_segments[0]
+set_location_assignment PIN_V18 -to display_segments[1]
+set_location_assignment PIN_AG17 -to display_segments[2]
+set_location_assignment PIN_AG16 -to display_segments[3]
+set_location_assignment PIN_AH17 -to display_segments[4]
+set_location_assignment PIN_AG18 -to display_segments[5]
+set_location_assignment PIN_AH18 -to display_segments[6]
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH uart_fpga_top_tb -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_NAME uart_fpga_top_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id uart_fpga_top_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME uart_fpga_top_tb -section_id uart_fpga_top_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE uart_fpga_top_tb.sv -section_id uart_fpga_top_tb
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

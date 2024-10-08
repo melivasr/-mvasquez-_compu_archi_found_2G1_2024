@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SerialCom
-Mon Oct  7 15:19:35 2024
+Mon Oct  7 22:56:04 2024
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -10,7 +10,21 @@ Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |uart_fpga_top|uart_rx:uart_rx_inst|r_SM_Main
+  9. State Machine - |uart_fpga_top|uart_tx:uart_tx_inst|r_SM_Main
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst
+ 15. Parameter Settings for User Entity Instance: uart_rx:uart_rx_inst
+ 16. Port Connectivity Checks: "uart_tx:uart_tx_inst"
+ 17. Post-Synthesis Netlist Statistics for Top Partition
+ 18. Elapsed Time Per Partition
+ 19. Analysis & Synthesis Messages
 
 
 
@@ -34,22 +48,27 @@ https://fpgasoftware.intel.com/eula.
 
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                 ;
-+-----------------------------+------------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Mon Oct  7 15:19:35 2024              ;
-; Quartus Prime Version       ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
-; Revision Name               ; SerialCom                                      ;
-; Top-level Entity Name       ; spi_slave                                      ;
-; Family                      ; Cyclone V                                      ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                      ;
-; Total registers             ; N/A until Partition Merge                      ;
-; Total pins                  ; N/A until Partition Merge                      ;
-; Total virtual pins          ; N/A until Partition Merge                      ;
-; Total block memory bits     ; N/A until Partition Merge                      ;
-; Total PLLs                  ; N/A until Partition Merge                      ;
-; Total DLLs                  ; N/A until Partition Merge                      ;
-+-----------------------------+------------------------------------------------+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++---------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Mon Oct  7 22:56:04 2024          ;
+; Quartus Prime Version           ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
+; Revision Name                   ; SerialCom                                      ;
+; Top-level Entity Name           ; uart_fpga_top                                  ;
+; Family                          ; Cyclone V                                      ;
+; Logic utilization (in ALMs)     ; N/A                                            ;
+; Total registers                 ; 81                                             ;
+; Total pins                      ; 21                                             ;
+; Total virtual pins              ; 0                                              ;
+; Total block memory bits         ; 0                                              ;
+; Total DSP Blocks                ; 0                                              ;
+; Total HSSI RX PCSs              ; 0                                              ;
+; Total HSSI PMA RX Deserializers ; 0                                              ;
+; Total HSSI TX PCSs              ; 0                                              ;
+; Total HSSI PMA TX Serializers   ; 0                                              ;
+; Total PLLs                      ; 0                                              ;
+; Total DLLs                      ; 0                                              ;
++---------------------------------+------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -58,7 +77,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSXFC6D6F31C6     ;                    ;
-; Top-level entity name                                                           ; spi_slave          ; SerialCom          ;
+; Top-level entity name                                                           ; uart_fpga_top      ; SerialCom          ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
@@ -148,11 +167,211 @@ https://fpgasoftware.intel.com/eula.
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processors 2-16        ;   0.0%      ;
 +----------------------------+-------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                                   ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                                                               ; Library ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; uart_tx.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv       ;         ;
+; uart_rx.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_rx.sv       ;         ;
+; uart_fpga_top.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv ;         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimate of Logic utilization (ALMs needed) ; 60          ;
+;                                             ;             ;
+; Combinational ALUT usage for logic          ; 90          ;
+;     -- 7 input functions                    ; 6           ;
+;     -- 6 input functions                    ; 20          ;
+;     -- 5 input functions                    ; 12          ;
+;     -- 4 input functions                    ; 7           ;
+;     -- <=3 input functions                  ; 45          ;
+;                                             ;             ;
+; Dedicated logic registers                   ; 81          ;
+;                                             ;             ;
+; I/O pins                                    ; 21          ;
+;                                             ;             ;
+; Total DSP Blocks                            ; 0           ;
+;                                             ;             ;
+; Maximum fan-out node                        ; clock~input ;
+; Maximum fan-out                             ; 81          ;
+; Total fan-out                               ; 635         ;
+; Average fan-out                             ; 2.98        ;
++---------------------------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                      ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------+---------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                 ; Entity Name   ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------+---------------+--------------+
+; |uart_fpga_top             ; 90 (2)              ; 81 (20)                   ; 0                 ; 0          ; 21   ; 0            ; |uart_fpga_top                      ; uart_fpga_top ; work         ;
+;    |uart_rx:uart_rx_inst|  ; 53 (53)             ; 35 (35)                   ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_rx:uart_rx_inst ; uart_rx       ; work         ;
+;    |uart_tx:uart_tx_inst|  ; 35 (35)             ; 26 (26)                   ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_tx:uart_tx_inst ; uart_tx       ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------+---------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |uart_fpga_top|uart_rx:uart_rx_inst|r_SM_Main                                                                                     ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
+; Name                     ; r_SM_Main.s_RX_STOP_BIT ; r_SM_Main.s_RX_DATA_BITS ; r_SM_Main.s_RX_START_BIT ; r_SM_Main.s_IDLE ; r_SM_Main.s_CLEANUP ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
+; r_SM_Main.s_IDLE         ; 0                       ; 0                        ; 0                        ; 0                ; 0                   ;
+; r_SM_Main.s_RX_START_BIT ; 0                       ; 0                        ; 1                        ; 1                ; 0                   ;
+; r_SM_Main.s_RX_DATA_BITS ; 0                       ; 1                        ; 0                        ; 1                ; 0                   ;
+; r_SM_Main.s_RX_STOP_BIT  ; 1                       ; 0                        ; 0                        ; 1                ; 0                   ;
+; r_SM_Main.s_CLEANUP      ; 0                       ; 0                        ; 0                        ; 1                ; 1                   ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |uart_fpga_top|uart_tx:uart_tx_inst|r_SM_Main                                                                                     ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
+; Name                     ; r_SM_Main.s_TX_STOP_BIT ; r_SM_Main.s_TX_DATA_BITS ; r_SM_Main.s_TX_START_BIT ; r_SM_Main.s_IDLE ; r_SM_Main.s_CLEANUP ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
+; r_SM_Main.s_IDLE         ; 0                       ; 0                        ; 0                        ; 0                ; 0                   ;
+; r_SM_Main.s_TX_START_BIT ; 0                       ; 0                        ; 1                        ; 1                ; 0                   ;
+; r_SM_Main.s_TX_DATA_BITS ; 0                       ; 1                        ; 0                        ; 1                ; 0                   ;
+; r_SM_Main.s_TX_STOP_BIT  ; 1                       ; 0                        ; 0                        ; 1                ; 0                   ;
+; r_SM_Main.s_CLEANUP      ; 0                       ; 0                        ; 0                        ; 1                ; 1                   ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
+
+
++------------------------------------------------------------+
+; Registers Removed During Synthesis                         ;
++---------------------------------------+--------------------+
+; Register name                         ; Reason for Removal ;
++---------------------------------------+--------------------+
+; uart_rx:uart_rx_inst|r_SM_Main~7      ; Lost fanout        ;
+; uart_rx:uart_rx_inst|r_SM_Main~8      ; Lost fanout        ;
+; uart_tx:uart_tx_inst|r_SM_Main~2      ; Lost fanout        ;
+; uart_tx:uart_tx_inst|r_SM_Main~3      ; Lost fanout        ;
+; Total Number of Removed Registers = 4 ;                    ;
++---------------------------------------+--------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 81    ;
+; Number of registers using Synchronous Clear  ; 32    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 20    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 48    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; uart_rx:uart_rx_inst|r_Rx_Data         ; 10      ;
+; button_sync1                           ; 2       ;
+; button_prev                            ; 1       ;
+; uart_rx:uart_rx_inst|r_Rx_Data_R       ; 1       ;
+; button_sync0                           ; 1       ;
+; Total number of inverted registers = 5 ;         ;
++----------------------------------------+---------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
+; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |uart_fpga_top|uart_tx:uart_tx_inst|r_Clock_Count[11] ;
+; 7:1                ; 16 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |uart_fpga_top|uart_rx:uart_rx_inst|r_Clock_Count[5]  ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |uart_fpga_top|uart_rx:uart_rx_inst|r_Bit_Index       ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |uart_fpga_top|uart_tx:uart_tx_inst|r_Bit_Index       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_rx:uart_rx_inst ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "uart_tx:uart_tx_inst"                                                                    ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                             ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; o_Tx_Done ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 81                          ;
+;     CLR               ; 4                           ;
+;     ENA CLR           ; 16                          ;
+;     ENA SCLR          ; 32                          ;
+;     plain             ; 29                          ;
+; arriav_lcell_comb     ; 90                          ;
+;     arith             ; 32                          ;
+;         1 data inputs ; 32                          ;
+;     extend            ; 6                           ;
+;         7 data inputs ; 6                           ;
+;     normal            ; 52                          ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 4                           ;
+;         3 data inputs ; 7                           ;
+;         4 data inputs ; 7                           ;
+;         5 data inputs ; 12                          ;
+;         6 data inputs ; 20                          ;
+; boundary_port         ; 21                          ;
+;                       ;                             ;
+; Max LUT depth         ; 4.00                        ;
+; Average LUT depth     ; 2.23                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
 
 
 +-------------------------------+
@@ -161,32 +380,39 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Mon Oct  7 15:19:29 2024
+    Info: Processing started: Mon Oct  7 22:55:57 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SerialCom -c SerialCom
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
-Info (12021): Found 1 design units, including 1 entities, in source file uart.sv
-    Info (12023): Found entity 1: uart File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file uart_tx_tb.sv
-    Info (12023): Found entity 1: uart_tx_tb File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_tb.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file uart_tx.sv
     Info (12023): Found entity 1: uart_tx File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file tb_uart_rx.sv
-    Info (12023): Found entity 1: tb_uart_rx File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/tb_uart_rx.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file uart_rx.sv
     Info (12023): Found entity 1: uart_rx File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_rx.sv Line: 1
-Error (10170): Verilog HDL syntax error at spi_slave.sv(14) near text: â. Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/spi_slave.sv Line: 14
-Error (10170): Verilog HDL syntax error at spi_slave.sv(14) near text: "â";  expecting ";". Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/spi_slave.sv Line: 14
-Error (10170): Verilog HDL syntax error at spi_slave.sv(14) near text: €. Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/spi_slave.sv Line: 14
-Error (10170): Verilog HDL syntax error at spi_slave.sv(14) near text: ™. Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/spi_slave.sv Line: 14
-Error (10170): Verilog HDL syntax error at spi_slave.sv(18) near text: "<";  expecting "<=", or "=", or "+=", or "-=", or "*=", or "/=", or "%=", or "&=", or "|=", or "^=", or "<<=", or ">>=", or "<<<=", or ">>>=", or "++", or "--". Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/spi_slave.sv Line: 18
-Error (10759): Verilog HDL error at spi_slave.sv(18): object mosi declared in a list of port declarations cannot be redeclared within the module body File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/spi_slave.sv Line: 18
-Error (10112): Ignored design unit "spi_slave" at spi_slave.sv(1) due to previous errors File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/spi_slave.sv Line: 1
-Info (12021): Found 0 design units, including 0 entities, in source file spi_slave.sv
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 7 errors, 1 warning
-    Error: Peak virtual memory: 4774 megabytes
-    Error: Processing ended: Mon Oct  7 15:19:35 2024
-    Error: Elapsed time: 00:00:06
-    Error: Total CPU time (on all processors): 00:00:07
+Info (12021): Found 1 design units, including 1 entities, in source file uart_fpga_top.sv
+    Info (12023): Found entity 1: uart_fpga_top File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bcd_to_7segment.sv
+    Info (12023): Found entity 1: BCD_to_7Segment File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/BCD_to_7Segment.sv Line: 1
+Info (12127): Elaborating entity "uart_fpga_top" for the top level hierarchy
+Info (12128): Elaborating entity "uart_tx" for hierarchy "uart_tx:uart_tx_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 64
+Warning (10036): Verilog HDL or VHDL warning at uart_tx.sv(24): object "r_Tx_Done" assigned a value but never read File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 24
+Warning (10036): Verilog HDL or VHDL warning at uart_tx.sv(25): object "r_Tx_Active" assigned a value but never read File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 25
+Warning (10230): Verilog HDL assignment warning at uart_tx.sv(50): truncated value with size 32 to match size of target (16) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 50
+Warning (10230): Verilog HDL assignment warning at uart_tx.sv(63): truncated value with size 32 to match size of target (16) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 63
+Warning (10230): Verilog HDL assignment warning at uart_tx.sv(70): truncated value with size 32 to match size of target (3) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 70
+Warning (10230): Verilog HDL assignment warning at uart_tx.sv(84): truncated value with size 32 to match size of target (16) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 84
+Info (12128): Elaborating entity "uart_rx" for hierarchy "uart_rx:uart_rx_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 74
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 4 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 131 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 12 input pins
+    Info (21059): Implemented 9 output pins
+    Info (21061): Implemented 110 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 4876 megabytes
+    Info: Processing ended: Mon Oct  7 22:56:04 2024
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:08
 
 

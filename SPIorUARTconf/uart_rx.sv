@@ -73,6 +73,7 @@ module uart_rx
            
           if (r_Bit_Index < 3'd7) begin
             r_Bit_Index <= r_Bit_Index + 3'd1;
+            r_SM_Main   <= s_RX_DATA_BITS;
           end else begin
             r_Bit_Index <= 3'd0;
             r_SM_Main   <= s_RX_STOP_BIT;  // Todos los bits recibidos
@@ -85,7 +86,12 @@ module uart_rx
         if (r_Clock_Count < CLKS_PER_BIT-1) begin
           r_Clock_Count <= r_Clock_Count + 16'd1;
         end else begin
-          r_Rx_DV       <= 1'b1;  // Indica que el dato es válido
+          if (r_Rx_Data == 1'b1) begin  // Verificar si el stop bit es válido
+            r_Rx_DV       <= 1'b1;  // Indica que el dato es válido
+          end else begin
+            // Manejar error de stop bit si es necesario
+            r_Rx_DV <= 1'b0;
+          end
           r_Clock_Count <= 16'd0;
           r_SM_Main     <= s_CLEANUP;
         end
@@ -106,4 +112,4 @@ module uart_rx
   assign o_Rx_DV   = r_Rx_DV;
   assign o_Rx_Byte = r_Rx_Byte;
    
-endmodule // uart_rx
+endmodule

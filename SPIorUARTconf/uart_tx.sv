@@ -4,7 +4,7 @@ module uart_tx
     input  logic       i_Clock,
     input  logic       i_Tx_DV,          // Señal para iniciar la transmisión
     output logic       o_Tx_Active,      // Salida activa durante la transmisión
-	 input  logic [7:0]  i_Tx_Byte,
+    input  logic [7:0] i_Tx_Byte,
     output logic       o_Tx_Serial = 1'b1,  // Inicializar a 1
     output logic       o_Tx_Done   = 1'b0   // Indicar que la transmisión ha finalizado
    );
@@ -20,7 +20,7 @@ module uart_tx
    state_t r_SM_Main = s_IDLE;
 
    logic [15:0] r_Clock_Count = 16'd0;     // Contador para medir CLKS_PER_BIT
-   logic [2:0]  r_Bit_Index   = 3'd0;      // Índice de bit (0-5)
+   logic [2:0]  r_Bit_Index   = 3'd0;      // Índice de bit (0-7)
    logic        r_Tx_Done     = 1'b0;      // Indicar que la transmisión ha finalizado
    logic        r_Tx_Active   = 1'b0;      // Indicar que la transmisión está activa
 
@@ -55,7 +55,7 @@ module uart_tx
          end
        end
 
-       // Estado TX_DATA_BITS: Enviar los 6 bits de datos (LSB primero)
+       // Estado TX_DATA_BITS: Enviar los 8 bits de datos (LSB primero)
        s_TX_DATA_BITS: begin
          o_Tx_Serial <= i_Tx_Byte[r_Bit_Index];  // Enviar el bit correspondiente (LSB primero)
 
@@ -65,7 +65,7 @@ module uart_tx
          end else begin
            r_Clock_Count <= 16'd0;
 
-           // Verificar si se han enviado los 6 bits
+           // Verificar si se han enviado los 8 bits
            if (r_Bit_Index < 7) begin
              r_Bit_Index <= r_Bit_Index + 1;  // Incrementar el índice para el siguiente bit
              r_SM_Main   <= s_TX_DATA_BITS;
