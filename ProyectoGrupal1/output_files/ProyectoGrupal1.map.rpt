@@ -1,5 +1,5 @@
 Analysis & Elaboration report for ProyectoGrupal1
-Thu Oct 03 15:40:00 2024
+Fri Oct 11 15:59:34 2024
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -10,9 +10,7 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   2. Analysis & Elaboration Summary
   3. Parallel Compilation
   4. Analysis & Elaboration Settings
-  5. Port Connectivity Checks: "subtractor2Bits:subtractor_inst|fulladderOP:unidades"
-  6. Port Connectivity Checks: "fulladder2Bits:fulladder_inst|fulladderOP:unidades"
-  7. Analysis & Elaboration Messages
+  5. Analysis & Elaboration Messages
 
 
 
@@ -39,7 +37,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------+
 ; Analysis & Elaboration Summary                                              ;
 +-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Successful - Thu Oct 03 15:40:00 2024       ;
+; Analysis & Elaboration Status ; Successful - Fri Oct 11 15:59:34 2024       ;
 ; Quartus Prime Version         ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                 ; ProyectoGrupal1                             ;
 ; Top-level Entity Name         ; ALU                                         ;
@@ -157,33 +155,13 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "subtractor2Bits:subtractor_inst|fulladderOP:unidades"                                                                                                                                ;
-+---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port    ; Type  ; Severity ; Details                                                                                                                                                                            ;
-+---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; cin     ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (1 bits) it drives.  The 31 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
-; cin[-1] ; Input ; Info     ; Stuck at VCC                                                                                                                                                                       ;
-+---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "fulladder2Bits:fulladder_inst|fulladderOP:unidades"                                                                                                                                  ;
-+---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port    ; Type  ; Severity ; Details                                                                                                                                                                            ;
-+---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; cin     ; Input ; Warning  ; Input port expression (32 bits) is wider than the input port (1 bits) it drives.  The 31 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
-; cin[-1] ; Input ; Info     ; Stuck at GND                                                                                                                                                                       ;
-+---------+-------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
 +---------------------------------+
 ; Analysis & Elaboration Messages ;
 +---------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Thu Oct 03 15:39:51 2024
+    Info: Processing started: Fri Oct 11 15:59:27 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ProyectoGrupal1 -c ProyectoGrupal1 --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -195,32 +173,25 @@ Info (12021): Found 1 design units, including 1 entities, in source file fulladd
     Info (12023): Found entity 1: fulladderOP File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file fulladder2bits.sv
     Info (12023): Found entity 1: fulladder2Bits File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file fulladder2bits_tb.sv
-    Info (12023): Found entity 1: fulladder2Bits_tb File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits_tb.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file subtractor2bits.sv
-    Info (12023): Found entity 1: subtractor2Bits File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux2a1.sv
     Info (12023): Found entity 1: mux2a1 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mux8a2.sv
     Info (12023): Found entity 1: mux8a2 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux8a2.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file alu.sv
     Info (12023): Found entity 1: ALU File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file muxcarry.sv
-    Info (12023): Found entity 1: muxcarry File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/muxcarry.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file alu_testbench.sv
+    Info (12023): Found entity 1: ALU_testbench File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv Line: 1
 Info (12127): Elaborating entity "ALU" for the top level hierarchy
 Info (12128): Elaborating entity "andOP" for hierarchy "andOP:and_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 6
-Info (12128): Elaborating entity "orOP" for hierarchy "orOP:or_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 7
-Info (12128): Elaborating entity "fulladder2Bits" for hierarchy "fulladder2Bits:fulladder_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 8
+Info (12128): Elaborating entity "orOP" for hierarchy "orOP:or_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 8
+Info (12128): Elaborating entity "mux2a1" for hierarchy "mux2a1:mux2_inst_1" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 10
+Info (12128): Elaborating entity "fulladder2Bits" for hierarchy "fulladder2Bits:fulladder_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 13
 Info (12128): Elaborating entity "fulladderOP" for hierarchy "fulladder2Bits:fulladder_inst|fulladderOP:unidades" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv Line: 5
-Info (12128): Elaborating entity "subtractor2Bits" for hierarchy "subtractor2Bits:subtractor_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 9
-Info (12128): Elaborating entity "mux8a2" for hierarchy "mux8a2:mux_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 11
-Info (12128): Elaborating entity "mux2a1" for hierarchy "mux8a2:mux_inst|mux2a1:mux1" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux8a2.sv Line: 6
-Info (12128): Elaborating entity "muxcarry" for hierarchy "muxcarry:muxcarry_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 13
-Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 4759 megabytes
-    Info: Processing ended: Thu Oct 03 15:40:00 2024
-    Info: Elapsed time: 00:00:09
+Info (12128): Elaborating entity "mux8a2" for hierarchy "mux8a2:mux8_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 15
+Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4769 megabytes
+    Info: Processing ended: Fri Oct 11 15:59:34 2024
+    Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:08
 
 

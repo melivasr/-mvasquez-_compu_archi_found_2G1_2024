@@ -1,13 +1,16 @@
 |ALU
-a[0] => a[0].IN4
-a[1] => a[1].IN4
-b[0] => b[0].IN4
-b[1] => b[1].IN4
-s[0] => s[0].IN2
+a[0] => a[0].IN3
+a[1] => a[1].IN3
+b[0] => b[0].IN3
+b[1] => b[1].IN3
+s[0] => s[0].IN4
 s[1] => s[1].IN1
-y[0] <= mux8a2:mux_inst.port5
-y[1] <= mux8a2:mux_inst.port5
-c <= muxcarry:muxcarry_inst.port3
+y[0] << mux8a2:mux8_inst.port5
+y[1] << mux8a2:mux8_inst.port5
+c << c.DB_MAX_OUTPUT_PORT_TYPE
+z << z.DB_MAX_OUTPUT_PORT_TYPE
+n << mux8a2:mux8_inst.port5
+o << o.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |ALU|andOP:and_inst
@@ -28,11 +31,28 @@ z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
 z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
 
 
+|ALU|mux2a1:mux2_inst_1
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ALU|mux2a1:mux2_inst_0
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
 |ALU|fulladder2Bits:fulladder_inst
 a[0] => a[0].IN1
 a[1] => a[1].IN1
 b[0] => b[0].IN1
 b[1] => b[1].IN1
+carry_in => carry_in.IN1
 s[0] <= fulladderOP:unidades.port3
 s[1] <= fulladderOP:decenas.port3
 cout <= fulladderOP:decenas.port4
@@ -66,60 +86,22 @@ s <= s.DB_MAX_OUTPUT_PORT_TYPE
 cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|subtractor2Bits:subtractor_inst
-a[0] => a[0].IN1
-a[1] => a[1].IN1
-b[0] => _.IN1
-b[1] => _.IN1
-s[0] <= fulladderOP:unidades.port3
-s[1] <= fulladderOP:decenas.port3
-cout <= fulladderOP:decenas.port4
-
-
-|ALU|subtractor2Bits:subtractor_inst|fulladderOP:unidades
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|ALU|subtractor2Bits:subtractor_inst|fulladderOP:decenas
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|ALU|mux8a2:mux_inst
+|ALU|mux8a2:mux8_inst
+s[0] => s[0].IN1
+s[1] => s[1].IN1
+r[0] => r[0].IN1
+r[1] => r[1].IN1
 o[0] => o[0].IN1
 o[1] => o[1].IN1
 a[0] => a[0].IN1
 a[1] => a[1].IN1
-f[0] => f[0].IN1
-f[1] => f[1].IN1
-r[0] => r[0].IN1
-r[1] => r[1].IN1
-s[0] => s[0].IN2
-s[1] => s[1].IN4
+t[0] => t[0].IN2
+t[1] => t[1].IN4
 y[0] <= mux2a1:mux6.port3
 y[1] <= mux2a1:mux5.port3
 
 
-|ALU|mux8a2:mux_inst|mux2a1:mux1
+|ALU|mux8a2:mux8_inst|mux2a1:mux1
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -127,7 +109,7 @@ s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux_inst|mux2a1:mux2
+|ALU|mux8a2:mux8_inst|mux2a1:mux2
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -135,7 +117,7 @@ s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux_inst|mux2a1:mux3
+|ALU|mux8a2:mux8_inst|mux2a1:mux3
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -143,7 +125,7 @@ s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux_inst|mux2a1:mux4
+|ALU|mux8a2:mux8_inst|mux2a1:mux4
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -151,7 +133,7 @@ s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux_inst|mux2a1:mux5
+|ALU|mux8a2:mux8_inst|mux2a1:mux5
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -159,17 +141,10 @@ s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux_inst|mux2a1:mux6
+|ALU|mux8a2:mux8_inst|mux2a1:mux6
 a => y.IN0
 b => y.IN0
 s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|ALU|muxcarry:muxcarry_inst
-c1 => y.IN0
-c2 => y.IN1
 s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 

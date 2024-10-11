@@ -12,124 +12,98 @@
 # 
 # vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/andOP.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:09 on Oct 03,2024
+# Start time: 15:59:40 on Oct 11,2024
 # vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/andOP.sv 
 # -- Compiling module andOP
 # 
 # Top level modules:
 # 	andOP
-# End time: 15:40:09 on Oct 03,2024, Elapsed time: 0:00:00
+# End time: 15:59:40 on Oct 11,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/orOP.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:10 on Oct 03,2024
+# Start time: 15:59:40 on Oct 11,2024
 # vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/orOP.sv 
 # -- Compiling module orOP
 # 
 # Top level modules:
 # 	orOP
-# End time: 15:40:10 on Oct 03,2024, Elapsed time: 0:00:00
+# End time: 15:59:40 on Oct 11,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:10 on Oct 03,2024
+# Start time: 15:59:40 on Oct 11,2024
 # vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv 
 # -- Compiling module fulladderOP
 # 
 # Top level modules:
 # 	fulladderOP
-# End time: 15:40:10 on Oct 03,2024, Elapsed time: 0:00:00
+# End time: 15:59:41 on Oct 11,2024, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:10 on Oct 03,2024
+# Start time: 15:59:41 on Oct 11,2024
 # vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv 
 # -- Compiling module fulladder2Bits
 # 
 # Top level modules:
 # 	fulladder2Bits
-# End time: 15:40:10 on Oct 03,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv}
-# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:10 on Oct 03,2024
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv 
-# -- Compiling module subtractor2Bits
-# 
-# Top level modules:
-# 	subtractor2Bits
-# End time: 15:40:10 on Oct 03,2024, Elapsed time: 0:00:00
+# End time: 15:59:41 on Oct 11,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:10 on Oct 03,2024
+# Start time: 15:59:41 on Oct 11,2024
 # vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv 
 # -- Compiling module mux2a1
 # 
 # Top level modules:
 # 	mux2a1
-# End time: 15:40:10 on Oct 03,2024, Elapsed time: 0:00:00
+# End time: 15:59:41 on Oct 11,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux8a2.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:10 on Oct 03,2024
+# Start time: 15:59:41 on Oct 11,2024
 # vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux8a2.sv 
 # -- Compiling module mux8a2
 # 
 # Top level modules:
 # 	mux8a2
-# End time: 15:40:10 on Oct 03,2024, Elapsed time: 0:00:00
+# End time: 15:59:41 on Oct 11,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:10 on Oct 03,2024
+# Start time: 15:59:41 on Oct 11,2024
 # vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv 
 # -- Compiling module ALU
 # 
 # Top level modules:
 # 	ALU
-# End time: 15:40:10 on Oct 03,2024, Elapsed time: 0:00:00
+# End time: 15:59:41 on Oct 11,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/muxcarry.sv}
+# 
+# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:11 on Oct 03,2024
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/muxcarry.sv 
-# -- Compiling module muxcarry
+# Start time: 15:59:41 on Oct 11,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv 
+# -- Compiling module ALU_testbench
 # 
 # Top level modules:
-# 	muxcarry
-# End time: 15:40:11 on Oct 03,2024, Elapsed time: 0:00:00
+# 	ALU_testbench
+# End time: 15:59:41 on Oct 11,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits_tb.sv}
-# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:40:11 on Oct 03,2024
-# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits_tb.sv 
-# -- Compiling module fulladder2Bits_tb
-# 
-# Top level modules:
-# 	fulladder2Bits_tb
-# End time: 15:40:11 on Oct 03,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# 
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  fulladder2Bits_tb
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs=""+acc"" fulladder2Bits_tb 
-# Start time: 15:40:11 on Oct 03,2024
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  ALU_testbench
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs=""+acc"" ALU_testbench 
+# Start time: 15:59:41 on Oct 11,2024
 # Loading sv_std.std
-# Loading work.fulladder2Bits_tb
+# Loading work.ALU_testbench
 # Loading work.ALU
 # Loading work.andOP
 # Loading work.orOP
+# Loading work.mux2a1
 # Loading work.fulladder2Bits
 # Loading work.fulladderOP
-# Loading work.subtractor2Bits
 # Loading work.mux8a2
-# Loading work.mux2a1
-# Loading work.muxcarry
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'cin'. The port definition is at: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv(1).
-#    Time: 0 ps  Iteration: 0  Instance: /fulladder2Bits_tb/dut/fulladder_inst/unidades File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv Line: 5
-# ** Warning: (vsim-3015) [PCDPC] - Port size (1) does not match connection size (32) for port 'cin'. The port definition is at: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv(1).
-#    Time: 0 ps  Iteration: 0  Instance: /fulladder2Bits_tb/dut/subtractor_inst/unidades File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv Line: 5
 # 
 # add wave *
 # view structure
@@ -137,5 +111,5 @@
 # view signals
 # .main_pane.objects.interior.cs.body.tree
 # run -all
-# End time: 15:41:20 on Oct 03,2024, Elapsed time: 0:01:09
-# Errors: 0, Warnings: 2
+# End time: 16:00:16 on Oct 11,2024, Elapsed time: 0:00:35
+# Errors: 0, Warnings: 0

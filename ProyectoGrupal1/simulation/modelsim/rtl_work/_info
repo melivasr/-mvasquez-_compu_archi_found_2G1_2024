@@ -11,24 +11,24 @@ cModel Technology
 Z0 dC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/simulation/modelsim
 vALU
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1727991610
+Z2 !s110 1728683981
 !i10b 1
-!s100 M>RSAMS;7hnm`9TDC>lEM3
+!s100 c6ZBi?DMIV:[a@<TSggN<0
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
-I;_hd?kcL7SDm;khMh0z8D1
+IZ8XDaIjOH:25`71g0GT]F2
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-w1727991591
+w1728678848
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv
-!i122 7
-L0 1 16
+!i122 6
+L0 1 23
 Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1727991610.000000
+Z6 !s108 1728683981.000000
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv|
 !i113 1
@@ -36,9 +36,36 @@ Z7 o-sv -work work
 Z8 !s92 -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1
 Z9 tCvgOpt 0
 n@a@l@u
+vALU_testbench
+R1
+R2
+!i10b 1
+!s100 <AziGO^CEGA_9J_C[:C2H0
+R3
+I3;zU@A^j52W<32`>TeO_R0
+R4
+S1
+R0
+w1728683967
+8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv
+FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv
+!i122 7
+L0 1 100
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv|
+!i113 1
+R7
+R8
+R9
+n@a@l@u_testbench
 vandOP
 R1
-!s110 1727991609
+Z10 !s110 1728683980
 !i10b 1
 !s100 B;LR6RhaVWj0MeBfMXSg[2
 R3
@@ -46,16 +73,16 @@ IjQ[iHo>K3OVazLSTH:h`k2
 R4
 S1
 R0
-Z10 w1727987247
+Z11 w1727987247
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/andOP.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/andOP.sv
 !i122 0
-Z11 L0 1 5
+Z12 L0 1 5
 R5
 r1
 !s85 0
 31
-!s108 1727991609.000000
+Z13 !s108 1728683980.000000
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/andOP.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/andOP.sv|
 !i113 1
@@ -67,17 +94,17 @@ vfulladder2Bits
 R1
 R2
 !i10b 1
-!s100 5aRJ6^>z;B00Mf?>C4o[W1
+!s100 S;W]mkB5l5?R=K@mG2LR;3
 R3
-Ih;Q2GeD?DNDb:bB>l]jNz1
+I1hFjzVE:ZcOCO5J>Qij272
 R4
 S1
 R0
-R10
+w1728677166
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv
 !i122 3
-Z12 L0 1 9
+L0 1 9
 R5
 r1
 !s85 0
@@ -90,33 +117,6 @@ R7
 R8
 R9
 nfulladder2@bits
-vfulladder2Bits_tb
-R1
-Z13 !s110 1727991611
-!i10b 1
-!s100 LOOnM@Ednh6?;z2c?:Xcl3
-R3
-IAXD:gd@`g;B^<zW=5L1Mo0
-R4
-S1
-R0
-w1727991589
-8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits_tb.sv
-FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits_tb.sv
-!i122 9
-L0 1 40
-R5
-r1
-!s85 0
-31
-Z14 !s108 1727991611.000000
-!s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits_tb.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits_tb.sv|
-!i113 1
-R7
-R8
-R9
-nfulladder2@bits_tb
 vfulladderOP
 R1
 R2
@@ -127,7 +127,7 @@ IUi8D]noL;0Y@PJi^o>UET0
 R4
 S1
 R0
-R10
+R11
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv
 !i122 2
@@ -136,7 +136,7 @@ R5
 r1
 !s85 0
 31
-R6
+R13
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv|
 !i113 1
@@ -157,7 +157,7 @@ R0
 w1727987564
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv
-!i122 5
+!i122 4
 L0 1 3
 R5
 r1
@@ -174,16 +174,16 @@ vmux8a2
 R1
 R2
 !i10b 1
-!s100 Hf>KF@9WN?VmFn7MY2<FD2
+!s100 XD7:N]g_Zj?U?>AD@i4MN1
 R3
-IfLHQhZHon4zVR>e32_aln3
+IkC>CnAQ@J2OLJLbhk]Q7m2
 R4
 S1
 R0
-w1727988183
+w1728677656
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux8a2.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux8a2.sv
-!i122 6
+!i122 5
 L0 1 14
 R5
 r1
@@ -196,35 +196,9 @@ R6
 R7
 R8
 R9
-vmuxcarry
-R1
-R13
-!i10b 1
-!s100 R7];WAbGFbzkG<nS]6<_W2
-R3
-IKjfJQf8H[_aR2]hbYPiRZ0
-R4
-S1
-R0
-w1727991220
-8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/muxcarry.sv
-FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/muxcarry.sv
-!i122 8
-R11
-R5
-r1
-!s85 0
-31
-R14
-!s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/muxcarry.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/muxcarry.sv|
-!i113 1
-R7
-R8
-R9
 vorOP
 R1
-R2
+R10
 !i10b 1
 !s100 KR>bB;0I4jOUm681G]mG=2
 R3
@@ -232,16 +206,16 @@ I1Mh@CTX8;;m;FK>ieYQlL1
 R4
 S1
 R0
-R10
+R11
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/orOP.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/orOP.sv
 !i122 1
-R11
+R12
 R5
 r1
 !s85 0
 31
-R6
+R13
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/orOP.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/orOP.sv|
 !i113 1
@@ -249,30 +223,3 @@ R7
 R8
 R9
 nor@o@p
-vsubtractor2Bits
-R1
-R2
-!i10b 1
-!s100 Y7F]>e@GT6[l]]W5M@<`63
-R3
-IE;T;zJ3^M>BZAal3e`XRB0
-R4
-S1
-R0
-R10
-8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv
-FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv
-!i122 4
-R12
-R5
-r1
-!s85 0
-31
-R6
-!s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv|
-!i113 1
-R7
-R8
-R9
-nsubtractor2@bits

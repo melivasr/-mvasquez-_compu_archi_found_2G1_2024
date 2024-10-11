@@ -9,15 +9,13 @@ vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/Proye
 vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/orOP.sv}
 vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv}
 vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv}
-vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/subtractor2Bits.sv}
 vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv}
 vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux8a2.sv}
 vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv}
-vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/muxcarry.sv}
 
-vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits_tb.sv}
+vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv}
 
-vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  fulladder2Bits_tb
+vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  ALU_testbench
 
 add wave *
 view structure
