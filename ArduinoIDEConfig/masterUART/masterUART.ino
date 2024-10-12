@@ -1,85 +1,113 @@
+// masterUART.ino
 // Definición de pines para los botones y UART
-const int botonInfo1Pin = 2;       // GPIO2
-const int botonInfo2Pin = 3;       // GPIO3
-const int botonConfirmPin = 6;     // GPIO6
+const int botonInfo1Pin = 2;       // GPIO2, Bit 1
+const int botonInfo0Pin = 3;       // GPIO3, Bit 0
+const int botonConfirmPin = 4;     // GPIO4, Confirmación
 const int txPin = 7;               // GPIO7 para UART TX
-const int rxPin = 8;               // GPIO8 para UART RX
+// Pine UART rx predefinidos para Serial1
 
-// Variables para almacenar el estado actual de los botones de información
-bool estadoInfo1 = HIGH;           // Inicialmente no presionado (pull-up)
-bool estadoInfo2 = HIGH;
+// Variables para detectar el cambio de estado del botón de confirmación
+bool previousConfirmState = HIGH;  // Estado anterior del botón de confirmación (Inicialmente no presionado)
+bool currentConfirmState = HIGH;   // Estado actual del botón de confirmación
+bool buttonPressed = false;        // Bandera para indicar si el botón ha sido presionado
 
-// Variables para el botón de confirmación
-bool estadoConfirmAnterior = HIGH;
-bool esperandoLiberacionConfirm = false;
-
-// Variables para la recepción UART
-unsigned char receivedByte = 0;
+// Variables para el debounce del botón de confirmación
+unsigned long lastDebounceTime = 0;
+unsigned long debounceDelay = 50;  // 50 ms de debounce
 
 void setup() {
-  // Iniciar la comunicación Serial USB para el monitor serial
-  Serial.begin(115200);
-
-  // Esperar a que se inicie el monitor serial (opcional)
-  while (!Serial) {
-    ; // Esperar a que se conecte el monitor serial
-  }
-
-  // Configurar los pines de los botones como entradas con resistencias de pull-up internas
+  // Configurar los pines de los botones como entradas con resistencias pull-up internas
   pinMode(botonInfo1Pin, INPUT_PULLUP);
-  pinMode(botonInfo2Pin, INPUT_PULLUP);
+  pinMode(botonInfo0Pin, INPUT_PULLUP);
   pinMode(botonConfirmPin, INPUT_PULLUP);
-
-  // Configurar los pines de transmisión y recepción UART
   pinMode(txPin, OUTPUT);
   digitalWrite(txPin, HIGH);  // Estado inactivo (alto) en UART TX
-
-  pinMode(rxPin, INPUT);  // Configurar rxPin como entrada
+  
+  // Inicializar la comunicación UART y el monitor serial
+  Serial1.begin(9600);  // Inicializa UART1 a 9600 baudios
+  Serial.begin(9600);   // Inicializa el monitor serial a 9600 baudios
 
   Serial.println("Emisor y receptor UART iniciado. Esperando interacción...");
 }
 
 void loop() {
-  // Leer el estado actual de los botones de información
-  estadoInfo1 = digitalRead(botonInfo1Pin);
-  estadoInfo2 = digitalRead(botonInfo2Pin);
-
-  // Actualizar el registro de 8 bits basado en el estado de los botones de información
-  unsigned char registro8Bits = 0x00;  // Resetear a 00000000
-  if (estadoInfo1 == LOW) {
-    registro8Bits |= (1 << 1);  // Establecer Bit 1
-  }
-  if (estadoInfo2 == LOW) {
-    registro8Bits |= (1 << 0);  // Establecer Bit 0
-  }
-
+  // Leer el estado de los botones de información
+  bool info1State = digitalRead(botonInfo1Pin) == LOW;  // Botón presionado es LOW
+  bool info0State = digitalRead(botonInfo0Pin) == LOW;
+  
   // Leer el estado actual del botón de confirmación
-  bool estadoConfirmActual = digitalRead(botonConfirmPin);
+  int reading = digitalRead(botonConfirmPin);
+  
+  // Verificar si el estado del botón ha cambiado
+  if (reading != previousConfirmState) {
+    lastDebounceTime = millis();  // Reiniciar el contador de debounce
+  }
+  
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    // Si el estado ha permanecido estable por el tiempo de debounce
+    if (reading != currentConfirmState) {
+      currentConfirmState = reading;
+      // Detectar cuando el botón se presiona
+      if (currentConfirmState == LOW && !buttonPressed) {
+        buttonPressed = true;
+      }
+      // Detectar cuando el botón se suelta
+      if (currentConfirmState == HIGH && buttonPressed) {
+        buttonPressed = false;
+        // Construir un byte con los estados de los botones
+        byte dataToSend = 0;
+        dataToSend |= (info0State << 0);  // Bit 0
+        dataToSend |= (info1State << 1);  // Bit 1
+        // Enviar los datos a través de UART1 y mostrar detalles
+        sendByte(dataToSend);
+        enviarByteConDetalles(dataToSend);
+      }
+    }
+  }
+  
+  // Actualizar el estado previo del botón de confirmación
+  previousConfirmState = reading;
+  
+  // Verificar si hay datos recibidos en UART1
+  if (Serial1.available()) {
+    byte receivedData = Serial1.read();
+    mostrarDetallesRecepcion(receivedData);
+    // Reenviar los mismos datos a través de UART1
+    sendByte(receivedData);
+    enviarByteConDetalles(receivedData);
+  }
+}
 
-  // Detectar el flanco de bajada (presión del botón de confirmación)
-  if (estadoConfirmAnterior == HIGH && estadoConfirmActual == LOW) {
-    esperandoLiberacionConfirm = true;  // Indicar que estamos esperando que se suelte el botón
+// Función para enviar un byte y mostrar los detalles de la trama UART
+void enviarByteConDetalles(unsigned char data) {
+  // Construir la trama UART manualmente
+  unsigned char trama[10];
+  trama[0] = 0; // Start bit
+
+  // Bits de datos (LSB primero)
+  for (int i = 0; i < 8; i++) {
+    trama[i + 1] = (data >> i) & 0x01;
   }
 
-  // Detectar el flanco de subida (liberación del botón de confirmación)
-  if (esperandoLiberacionConfirm && estadoConfirmAnterior == LOW && estadoConfirmActual == HIGH) {
-    // Enviar el byte por UART utilizando software UART
-    sendByte(registro8Bits);
-    esperandoLiberacionConfirm = false;  // Resetear el estado de espera
-  }
+  trama[9] = 1; // Stop bit
 
-  // Actualizar el estado anterior del botón de confirmación
-  estadoConfirmAnterior = estadoConfirmActual;
-
-  // Verificar si hay datos disponibles en UART
-  if (digitalRead(rxPin) == LOW) {  // Detectar start bit
-    // Iniciar la lectura del byte
-    receivedByte = readByte();
-    // (Opcional) Enviar una respuesta de vuelta
-    sendByte(receivedByte);
+  // Imprimir los bits individuales con etiquetas
+  Serial.println("Transmisor: Detalles de la trama UART:");
+  Serial.print("Start bit: ");
+  Serial.println(trama[0]);
+  for (int i = 1; i <= 8; i++) {
+    Serial.print("Data bit D");
+    Serial.print(i - 1);
+    Serial.print(": ");
+    Serial.println(trama[i]);
   }
-  // Pequeño retraso para estabilidad
-  delay(10);
+  Serial.print("Stop bit: ");
+  Serial.println(trama[9]);
+  Serial.println();
+  Serial.println();
+
+  // Enviar el byte usando Serial1
+  Serial1.write(data);
 }
 
 // Función para enviar un byte por UART utilizando software UART (bit-banging)
@@ -106,42 +134,31 @@ void sendByte(unsigned char data) {
   interrupts();
 }
 
-// Función para leer un byte por UART utilizando software UART (bit-banging)
-unsigned char readByte() {
-  const int bitDuration = 104;  // Duración del bit en microsegundos para 9600 baudios
-  unsigned char data = 0;
-  // Deshabilitar interrupciones para mantener la temporización precisa
-  noInterrupts();
-  // Ya hemos detectado el inicio del start bit (línea en LOW)
-  // Esperar a la mitad del start bit para confirmar
-  delayMicroseconds(bitDuration / 2);
-  if (digitalRead(rxPin) != LOW) {
-    // No es un start bit válido
-    interrupts();
-    return 0;
-  }
+// Función para mostrar los detalles de la recepción de un byte
+void mostrarDetallesRecepcion(unsigned char data) {
+  // Construir la trama UART manualmente (asumiendo que se recibió correctamente)
+  unsigned char trama[10];
+  trama[0] = 0; // Start bit
 
-  // Ahora, para cada uno de los 8 bits de datos
+  // Bits de datos (LSB primero)
   for (int i = 0; i < 8; i++) {
-    // Esperar un bit completo para llegar al centro del bit
-    delayMicroseconds(bitDuration);
-    // Leer el bit
-    bool bit = digitalRead(rxPin);
-    if (bit) {
-      data |= (1 << i);
-    }
+    trama[i + 1] = (data >> i) & 0x01;
   }
 
-  // Esperar un bit completo para el stop bit
-  delayMicroseconds(bitDuration);
-  // Verificar el stop bit
-  if (digitalRead(rxPin) != HIGH) {
-    // Stop bit inválido
-    interrupts();
-    return 0;
-  }
+  trama[9] = 1; // Stop bit
 
-  // Habilitar interrupciones nuevamente
-  interrupts();
-  return data;
+  // Imprimir los bits individuales con etiquetas
+  Serial.println("Receptor: Detalles de la trama UART recibida:");
+  Serial.print("Start bit: ");
+  Serial.println(trama[0]);
+  for (int i = 1; i <= 8; i++) {
+    Serial.print("Data bit D");
+    Serial.print(i - 1);
+    Serial.print(": ");
+    Serial.println(trama[i]);
+  }
+  Serial.print("Stop bit: ");
+  Serial.println(trama[9]);
+  Serial.println();
+  Serial.println();
 }

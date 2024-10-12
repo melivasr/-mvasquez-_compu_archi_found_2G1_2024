@@ -41,12 +41,15 @@ module uart_fpga_top (
         if (!reset_n) begin
             tx_start <= 1'b0;
             tx_data  <= 8'd0;
+				received_data <= 8'd0;
         end else begin
             if (button_released && !tx_busy) begin
                 tx_start <= 1'b1;
                 tx_data  <= switches;  // Captura el valor de los switches
             end else begin
                 tx_start <= 1'b0;
+            end if (rx_dv) begin
+                received_data <= rx_data;
             end
         end
     end
@@ -72,17 +75,6 @@ module uart_fpga_top (
         .o_Rx_DV   (rx_dv),
         .o_Rx_Byte (rx_data)
     );
-
-    // Almacenar el byte recibido cuando está disponible
-    always_ff @(posedge clock or negedge reset_n) begin
-        if (!reset_n) begin
-            received_data <= 8'd0;
-        end else begin
-            if (rx_dv) begin
-                received_data <= rx_data;
-            end
-        end
-    end
 
     // Asignación del dato recibido a los LEDs
     assign leds = received_data;
