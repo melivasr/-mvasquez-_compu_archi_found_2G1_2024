@@ -1,0 +1,15 @@
+// uart_tx_mux_5.sv
+module uart_tx_mux_5 (
+    input  logic        sel,
+    input  logic [2:0]  a,
+    input  logic [2:0]  b,
+    output logic [2:0]  y
+);
+    // 3-bit 2:1 Multiplexer using uart_tx_mux_4
+    uart_tx_mux_4 #(.N(3)) mux_inst (
+        .sel(sel),
+        .a(a),
+        .b(b),
+        .y(y)
+    );
+endmodule

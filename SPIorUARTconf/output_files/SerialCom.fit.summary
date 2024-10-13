@@ -1,12 +1,12 @@
-Fitter Status : Successful - Sat Oct 12 23:35:32 2024
+Fitter Status : Successful - Sun Oct 13 04:54:41 2024
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : SerialCom
 Top-level Entity Name : uart_fpga_top
 Family : Cyclone V
 Device : 5CSXFC6D6F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 169 / 41,910 ( < 1 % )
-Total registers : 255
+Logic utilization (in ALMs) : 159 / 41,910 ( < 1 % )
+Total registers : 238
 Total pins : 42 / 499 ( 8 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 5,662,720 ( 0 % )

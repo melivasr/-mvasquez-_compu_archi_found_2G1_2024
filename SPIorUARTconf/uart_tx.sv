@@ -2,17 +2,17 @@
 module uart_tx
   #(parameter int CLKS_PER_BIT = 5208)
   (
-    input  logic                i_Clock,
-    input  logic                i_Enable,
-    input  logic                i_Tx_DV,
-    input  logic [7:0]          i_Tx_Byte,
-    output logic                o_Tx_Active,
-    output logic                o_Tx_Serial,
-    output logic                o_Tx_Done
+    input  logic                       i_Clock,
+    input  logic                       i_Enable,
+    input  logic                       i_Tx_DV,
+    input  logic [7:0]                 i_Tx_Byte,
+    output logic                       o_Tx_Active,
+    output logic                       o_Tx_Serial,
+    output logic                       o_Tx_Done
   );
   import uart_tx_pkg::*;
 
-  // Señales de estado
+  // Señales de estado como tipos enumerados
   uart_tx_pkg::state_t current_state;
   uart_tx_pkg::state_t next_state;
 
@@ -48,7 +48,7 @@ module uart_tx
   uart_tx_bit_index #(.CLKS_PER_BIT(CLKS_PER_BIT)) bit_idx (
     .i_Clock(i_Clock),
     .i_Enable(i_Enable),
-    .current_state(current_state),  // Cambiado de next_state a current_state
+    .current_state(current_state),  // Utiliza current_state como tipo enumerado
     .clock_count(clock_count),
     .bit_index(bit_index),
     .bit_index_enable(bit_index_enable)
@@ -72,14 +72,21 @@ module uart_tx
     .o_Tx_Active(o_Tx_Active)
   );
 
-  // Registro de Estado
-  always_ff @(posedge i_Clock or negedge i_Enable) begin
-    if (!i_Enable) begin
-      current_state <= s_IDLE;
-    end else begin
-      current_state <= next_state;
-    end
-  end
+  // Instanciar Mux para seleccionar entre next_state y s_IDLE basado en i_Enable
+  uart_tx_pkg::state_t mux_current_state;
+  uart_tx_mux_5 mux_current_state_mux (
+    .sel(~i_Enable),
+    .a(s_IDLE),
+    .b(next_state),
+    .y(mux_current_state)
+  );
+
+  // Instanciar Flip-Flops para current_state usando D_FF_Manual
+  D_FF_Manual #(.N(3)) dff_current_state (
+    .clk(i_Clock),
+    .reset(~i_Enable),
+    .d(mux_current_state),
+    .q(current_state)
+  );
 
 endmodule
-
