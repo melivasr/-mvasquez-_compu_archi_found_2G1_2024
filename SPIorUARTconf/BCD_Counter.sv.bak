@@ -1,0 +1,27 @@
+module BCD_Counter(
+    input logic clk,
+    input logic reset,
+    input logic enable,
+    input logic load,
+    input logic [3:0] load_value,
+    output logic [3:0] count_q,
+    output logic [3:0] count_d,
+    output logic borrow_out
+);
+
+    // Flip-flops D para el registro del contador
+    D_FF #(.N(4)) contador_reg (
+        .clk(clk),
+        .reset(reset),
+        .d(count_d),
+        .q(count_q)
+    );
+
+    // Lógica combinacional para el conteo BCD
+    logic [3:0] next_count;
+
+    assign borrow_out = (count_q == 4'd0);
+    assign next_count = borrow_out ? 4'd9 : count_q - 1'b1;
+    assign count_d = load ? load_value : (enable ? next_count : count_q);
+
+endmodule

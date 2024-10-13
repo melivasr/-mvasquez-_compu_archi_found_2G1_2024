@@ -40,6 +40,78 @@
 					"strict" : false
 				},
 				{
+					"name" : "seg_unidades[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_handshake[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_handshake[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_handshake[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_handshake[6]",
+					"strict" : false
+				},
+				{
 					"name" : "clock",
 					"strict" : false
 				},

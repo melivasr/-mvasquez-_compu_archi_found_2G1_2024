@@ -1,0 +1,22 @@
+module Counter_N_bits #(parameter N = 26, parameter MAX_COUNT = 49_999_999)(
+    input logic clk,
+    input logic reset,
+    input logic enable,
+    output logic [N-1:0] count_q,
+    output logic [N-1:0] count_d,
+    output logic terminal_count
+);
+
+    // Flip-flops D para el registro del contador
+    D_FF_Manual #(.N(N)) contador_reg (
+        .clk(clk),
+        .reset(reset),
+        .d(count_d),
+        .q(count_q)
+    );
+
+    // Lógica combinacional para el conteo
+    assign terminal_count = (count_q == MAX_COUNT);
+    assign count_d = terminal_count ? {N{1'b0}} : (enable ? count_q + 1'b1 : count_q);
+
+endmodule

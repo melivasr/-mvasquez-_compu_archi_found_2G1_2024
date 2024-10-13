@@ -80,13 +80,6 @@ set_location_assignment PIN_AF25 -to leds[5]
 set_location_assignment PIN_AE24 -to leds[6]
 set_location_assignment PIN_AF24 -to leds[7]
 set_global_assignment -name SYSTEMVERILOG_FILE BCD_to_7Segment.sv
-set_location_assignment PIN_W17 -to display_segments[0]
-set_location_assignment PIN_V18 -to display_segments[1]
-set_location_assignment PIN_AG17 -to display_segments[2]
-set_location_assignment PIN_AG16 -to display_segments[3]
-set_location_assignment PIN_AH17 -to display_segments[4]
-set_location_assignment PIN_AG18 -to display_segments[5]
-set_location_assignment PIN_AH18 -to display_segments[6]
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
@@ -97,4 +90,41 @@ set_global_assignment -name EDA_TEST_BENCH_NAME uart_fpga_top_tb -section_id eda
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id uart_fpga_top_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME uart_fpga_top_tb -section_id uart_fpga_top_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE uart_fpga_top_tb.sv -section_id uart_fpga_top_tb
+set_global_assignment -name SYSTEMVERILOG_FILE uart_handshake.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Timer.sv
+set_location_assignment PIN_W17 -to seg_handshake[0]
+set_location_assignment PIN_V18 -to seg_handshake[1]
+set_location_assignment PIN_AG17 -to seg_handshake[2]
+set_location_assignment PIN_AG16 -to seg_handshake[3]
+set_location_assignment PIN_AH17 -to seg_handshake[4]
+set_location_assignment PIN_AG18 -to seg_handshake[5]
+set_location_assignment PIN_AH18 -to seg_handshake[6]
+set_location_assignment PIN_AB21 -to seg_decenas[6]
+set_location_assignment PIN_AF19 -to seg_decenas[5]
+set_location_assignment PIN_AE19 -to seg_decenas[4]
+set_location_assignment PIN_AG20 -to seg_decenas[3]
+set_location_assignment PIN_AF20 -to seg_decenas[2]
+set_location_assignment PIN_AG21 -to seg_decenas[1]
+set_location_assignment PIN_AF21 -to seg_decenas[0]
+set_location_assignment PIN_AH22 -to seg_unidades[6]
+set_location_assignment PIN_AF23 -to seg_unidades[5]
+set_location_assignment PIN_AG23 -to seg_unidades[4]
+set_location_assignment PIN_AE23 -to seg_unidades[3]
+set_location_assignment PIN_AE22 -to seg_unidades[2]
+set_location_assignment PIN_AG22 -to seg_unidades[1]
+set_location_assignment PIN_AD21 -to seg_unidades[0]
+set_global_assignment -name SYSTEMVERILOG_FILE Counter_N_bits.sv
+set_global_assignment -name SYSTEMVERILOG_FILE BCD_Counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE D_FF_Cell.sv
+set_global_assignment -name SYSTEMVERILOG_FILE D_FF_Manual.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Comparator_N_bits.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Adder_N_bits.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Mux2to1_N_bits.sv
+set_global_assignment -name SYSTEMVERILOG_FILE uart_tx_pkg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE uart_tx_mux_1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE uart_tx_mux_2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE uart_tx_mux_3.sv
+set_global_assignment -name SYSTEMVERILOG_FILE uart_tx_fsm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE uart_tx_clk_counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE uart_tx_bit_index.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -1,5 +1,13 @@
 
-State Machine - |uart_fpga_top|uart_rx:uart_rx_inst|r_SM_Main
+State Machine - |uart_fpga_top|uart_handshake:handshake_inst|hs_state
+Name hs_state.HS_WAIT_RX hs_state.HS_WAIT_TX hs_state.HS_INIT hs_state.HS_IDLE hs_state.HS_DONE 
+hs_state.HS_IDLE 0 0 0 0 0 
+hs_state.HS_INIT 0 0 1 1 0 
+hs_state.HS_WAIT_TX 0 1 0 1 0 
+hs_state.HS_WAIT_RX 1 0 0 1 0 
+hs_state.HS_DONE 0 0 0 1 1 
+
+State Machine - |uart_fpga_top|uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_SM_Main
 Name r_SM_Main.s_RX_STOP_BIT r_SM_Main.s_RX_DATA_BITS r_SM_Main.s_RX_START_BIT r_SM_Main.s_IDLE r_SM_Main.s_CLEANUP 
 r_SM_Main.s_IDLE 0 0 0 0 0 
 r_SM_Main.s_RX_START_BIT 0 0 1 1 0 
@@ -7,10 +15,10 @@ r_SM_Main.s_RX_DATA_BITS 0 1 0 1 0
 r_SM_Main.s_RX_STOP_BIT 1 0 0 1 0 
 r_SM_Main.s_CLEANUP 0 0 0 1 1 
 
-State Machine - |uart_fpga_top|uart_tx:uart_tx_inst|r_SM_Main
-Name r_SM_Main.s_TX_STOP_BIT r_SM_Main.s_TX_DATA_BITS r_SM_Main.s_TX_START_BIT r_SM_Main.s_IDLE r_SM_Main.s_CLEANUP 
+State Machine - |uart_fpga_top|uart_rx:uart_rx_inst|r_SM_Main
+Name r_SM_Main.s_RX_STOP_BIT r_SM_Main.s_RX_DATA_BITS r_SM_Main.s_RX_START_BIT r_SM_Main.s_IDLE r_SM_Main.s_CLEANUP 
 r_SM_Main.s_IDLE 0 0 0 0 0 
-r_SM_Main.s_TX_START_BIT 0 0 1 1 0 
-r_SM_Main.s_TX_DATA_BITS 0 1 0 1 0 
-r_SM_Main.s_TX_STOP_BIT 1 0 0 1 0 
+r_SM_Main.s_RX_START_BIT 0 0 1 1 0 
+r_SM_Main.s_RX_DATA_BITS 0 1 0 1 0 
+r_SM_Main.s_RX_STOP_BIT 1 0 0 1 0 
 r_SM_Main.s_CLEANUP 0 0 0 1 1 

@@ -1,0 +1,30 @@
+module Timer #(parameter N = 27, parameter MAX_COUNT = 100_000_000) (
+    input clk,
+    input rst,
+    input en,
+    output reg t0
+);
+    reg [N-1:0] count;
+
+    always_ff @(negedge clk or posedge rst) begin
+        if (rst) begin
+            count <= 0;
+            t0 <= 0;
+        end else if (en) begin
+            if (t0 == 1) begin
+                // Mantener t0 en 1 hasta que se resetee
+                t0 <= t0;
+                count <= count;
+            end else if (count == MAX_COUNT - 1) begin
+                count <= 0;
+                t0 <= 1;
+            end else begin
+                count <= count + 1;
+                t0 <= 0;
+            end
+        end else begin
+            count <= 0;
+            t0 <= 0;
+        end
+    end
+endmodule

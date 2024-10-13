@@ -1,5 +1,5 @@
 Flow report for SerialCom
-Sat Oct 12 11:56:33 2024
+Sat Oct 12 23:35:43 2024
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -41,16 +41,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +---------------------------------+------------------------------------------------+
-; Flow Status                     ; Successful - Sat Oct 12 11:56:33 2024          ;
+; Flow Status                     ; Successful - Sat Oct 12 23:35:43 2024          ;
 ; Quartus Prime Version           ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name                   ; SerialCom                                      ;
 ; Top-level Entity Name           ; uart_fpga_top                                  ;
 ; Family                          ; Cyclone V                                      ;
 ; Device                          ; 5CSXFC6D6F31C6                                 ;
 ; Timing Models                   ; Final                                          ;
-; Logic utilization (in ALMs)     ; 56 / 41,910 ( < 1 % )                          ;
-; Total registers                 ; 108                                            ;
-; Total pins                      ; 21 / 499 ( 4 % )                               ;
+; Logic utilization (in ALMs)     ; 169 / 41,910 ( < 1 % )                         ;
+; Total registers                 ; 255                                            ;
+; Total pins                      ; 42 / 499 ( 8 % )                               ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0 / 5,662,720 ( 0 % )                          ;
 ; Total DSP Blocks                ; 0 / 112 ( 0 % )                                ;
@@ -68,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/12/2024 11:55:40 ;
+; Start date & time ; 10/12/2024 23:34:36 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; SerialCom           ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------+----------------------------------------+---------------+---------------+-----------------------------------+
 ; Assignment Name                      ; Value                                  ; Default Value ; Entity Name   ; Section Id                        ;
 +--------------------------------------+----------------------------------------+---------------+---------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 42806234020840.172875574013980         ; --            ; --            ; --                                ;
+; COMPILER_SIGNATURE_ID                ; 42806234020840.172879767629904         ; --            ; --            ; --                                ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --            ; uart_fpga_top_tb                  ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --            ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --            ; eda_board_design_boundary_scan    ;
@@ -110,12 +110,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:06     ; 1.0                     ; 4868 MB             ; 00:00:08                           ;
-; Fitter               ; 00:00:35     ; 1.0                     ; 7944 MB             ; 00:01:30                           ;
-; Assembler            ; 00:00:04     ; 1.0                     ; 4864 MB             ; 00:00:04                           ;
-; Timing Analyzer      ; 00:00:03     ; 1.2                     ; 5299 MB             ; 00:00:03                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4732 MB             ; 00:00:01                           ;
-; Total                ; 00:00:49     ; --                      ; --                  ; 00:01:46                           ;
+; Analysis & Synthesis ; 00:00:07     ; 1.0                     ; 4903 MB             ; 00:00:08                           ;
+; Fitter               ; 00:00:49     ; 1.0                     ; 7890 MB             ; 00:01:35                           ;
+; Assembler            ; 00:00:04     ; 1.0                     ; 4858 MB             ; 00:00:04                           ;
+; Timing Analyzer      ; 00:00:04     ; 1.5                     ; 5294 MB             ; 00:00:04                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4726 MB             ; 00:00:01                           ;
+; Total                ; 00:01:05     ; --                      ; --                  ; 00:01:52                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

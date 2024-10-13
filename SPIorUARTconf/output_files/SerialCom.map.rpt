@@ -1,5 +1,5 @@
 Analysis & Synthesis report for SerialCom
-Sat Oct 12 11:55:46 2024
+Sat Oct 12 23:34:42 2024
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -13,18 +13,64 @@ Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |uart_fpga_top|uart_rx:uart_rx_inst|r_SM_Main
-  9. State Machine - |uart_fpga_top|uart_tx:uart_tx_inst|r_SM_Main
- 10. Registers Removed During Synthesis
- 11. General Register Statistics
- 12. Inverted Register Statistics
- 13. Multiplexer Restructuring Statistics (Restructuring Performed)
- 14. Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst
- 15. Parameter Settings for User Entity Instance: uart_rx:uart_rx_inst
- 16. Port Connectivity Checks: "uart_tx:uart_tx_inst"
- 17. Post-Synthesis Netlist Statistics for Top Partition
- 18. Elapsed Time Per Partition
- 19. Analysis & Synthesis Messages
+  8. State Machine - |uart_fpga_top|uart_handshake:handshake_inst|hs_state
+  9. State Machine - |uart_fpga_top|uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_SM_Main
+ 10. State Machine - |uart_fpga_top|uart_rx:uart_rx_inst|r_SM_Main
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Inverted Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst
+ 16. Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst|uart_tx_fsm:fsm
+ 17. Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter
+ 18. Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx
+ 19. Parameter Settings for User Entity Instance: uart_rx:uart_rx_inst
+ 20. Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_tx:uart_tx_inst
+ 21. Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_fsm:fsm
+ 22. Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter
+ 23. Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx
+ 24. Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_rx:uart_rx_inst
+ 25. Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz
+ 26. Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg
+ 27. Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|Comparator_N_bits:terminal_count_comparator
+ 28. Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer
+ 29. Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:enable_mux
+ 30. Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:terminal_count_mux
+ 31. Parameter Settings for User Entity Instance: Timer:timer_inst|Comparator_N_bits:unidades_zero_comparator
+ 32. Parameter Settings for User Entity Instance: Timer:timer_inst|Comparator_N_bits:decenas_zero_comparator
+ 33. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg
+ 34. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Comparator_N_bits:borrow_comparator
+ 35. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer
+ 36. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:borrow_mux
+ 37. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:enable_mux
+ 38. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:load_mux
+ 39. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg
+ 40. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Comparator_N_bits:borrow_comparator
+ 41. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer
+ 42. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:borrow_mux
+ 43. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:enable_mux
+ 44. Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:load_mux
+ 45. Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:decenas_counter"
+ 46. Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:borrow_mux"
+ 47. Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst"
+ 48. Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer"
+ 49. Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter|Comparator_N_bits:borrow_comparator"
+ 50. Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter"
+ 51. Port Connectivity Checks: "Timer:timer_inst|Comparator_N_bits:decenas_zero_comparator"
+ 52. Port Connectivity Checks: "Timer:timer_inst|Comparator_N_bits:unidades_zero_comparator"
+ 53. Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:terminal_count_mux"
+ 54. Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst"
+ 55. Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer"
+ 56. Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz|Comparator_N_bits:terminal_count_comparator"
+ 57. Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz"
+ 58. Port Connectivity Checks: "uart_handshake:handshake_inst|uart_tx:uart_tx_inst"
+ 59. Port Connectivity Checks: "uart_handshake:handshake_inst"
+ 60. Port Connectivity Checks: "uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx"
+ 61. Port Connectivity Checks: "uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter"
+ 62. Port Connectivity Checks: "uart_tx:uart_tx_inst"
+ 63. Post-Synthesis Netlist Statistics for Top Partition
+ 64. Elapsed Time Per Partition
+ 65. Analysis & Synthesis Messages
 
 
 
@@ -51,14 +97,14 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sat Oct 12 11:55:46 2024          ;
+; Analysis & Synthesis Status     ; Successful - Sat Oct 12 23:34:42 2024          ;
 ; Quartus Prime Version           ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name                   ; SerialCom                                      ;
 ; Top-level Entity Name           ; uart_fpga_top                                  ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 81                                             ;
-; Total pins                      ; 21                                             ;
+; Total registers                 ; 174                                            ;
+; Total pins                      ; 42                                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0                                              ;
 ; Total DSP Blocks                ; 0                                              ;
@@ -175,15 +221,32 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                                   ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                                                               ; Library ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
-; uart_tx.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv       ;         ;
-; uart_rx.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_rx.sv       ;         ;
-; uart_fpga_top.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv ;         ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                                                         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                                                                     ; Library ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; uart_tx.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv             ;         ;
+; uart_rx.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_rx.sv             ;         ;
+; uart_fpga_top.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv       ;         ;
+; BCD_to_7Segment.sv               ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/BCD_to_7Segment.sv     ;         ;
+; uart_handshake.sv                ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_handshake.sv      ;         ;
+; Timer.sv                         ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Timer.sv               ;         ;
+; Counter_N_bits.sv                ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Counter_N_bits.sv      ;         ;
+; BCD_Counter.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/BCD_Counter.sv         ;         ;
+; D_FF_Cell.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/D_FF_Cell.sv           ;         ;
+; D_FF_Manual.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/D_FF_Manual.sv         ;         ;
+; Comparator_N_bits.sv             ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Comparator_N_bits.sv   ;         ;
+; Adder_N_bits.sv                  ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Adder_N_bits.sv        ;         ;
+; Mux2to1_N_bits.sv                ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Mux2to1_N_bits.sv      ;         ;
+; uart_tx_pkg.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_pkg.sv         ;         ;
+; uart_tx_mux_1.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_mux_1.sv       ;         ;
+; uart_tx_mux_2.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_mux_2.sv       ;         ;
+; uart_tx_mux_3.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_mux_3.sv       ;         ;
+; uart_tx_fsm.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_fsm.sv         ;         ;
+; uart_tx_clk_counter.sv           ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_clk_counter.sv ;         ;
+; uart_tx_bit_index.sv             ; yes             ; User SystemVerilog HDL File  ; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_bit_index.sv   ;         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------------+
@@ -191,38 +254,135 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-------------+
 ; Resource                                    ; Usage       ;
 +---------------------------------------------+-------------+
-; Estimate of Logic utilization (ALMs needed) ; 60          ;
+; Estimate of Logic utilization (ALMs needed) ; 174         ;
 ;                                             ;             ;
-; Combinational ALUT usage for logic          ; 90          ;
-;     -- 7 input functions                    ; 6           ;
-;     -- 6 input functions                    ; 20          ;
-;     -- 5 input functions                    ; 12          ;
-;     -- 4 input functions                    ; 7           ;
-;     -- <=3 input functions                  ; 45          ;
+; Combinational ALUT usage for logic          ; 278         ;
+;     -- 7 input functions                    ; 2           ;
+;     -- 6 input functions                    ; 64          ;
+;     -- 5 input functions                    ; 47          ;
+;     -- 4 input functions                    ; 41          ;
+;     -- <=3 input functions                  ; 124         ;
 ;                                             ;             ;
-; Dedicated logic registers                   ; 81          ;
+; Dedicated logic registers                   ; 174         ;
 ;                                             ;             ;
-; I/O pins                                    ; 21          ;
+; I/O pins                                    ; 42          ;
 ;                                             ;             ;
 ; Total DSP Blocks                            ; 0           ;
 ;                                             ;             ;
 ; Maximum fan-out node                        ; clock~input ;
-; Maximum fan-out                             ; 81          ;
-; Total fan-out                               ; 635         ;
-; Average fan-out                             ; 2.98        ;
+; Maximum fan-out                             ; 174         ;
+; Total fan-out                               ; 1737        ;
+; Average fan-out                             ; 3.24        ;
 +---------------------------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                      ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------+---------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                 ; Entity Name   ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------+---------------+--------------+
-; |uart_fpga_top             ; 90 (2)              ; 81 (20)                   ; 0                 ; 0          ; 21   ; 0            ; |uart_fpga_top                      ; uart_fpga_top ; work         ;
-;    |uart_rx:uart_rx_inst|  ; 53 (53)             ; 35 (35)                   ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_rx:uart_rx_inst ; uart_rx       ; work         ;
-;    |uart_tx:uart_tx_inst|  ; 35 (35)             ; 26 (26)                   ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_tx:uart_tx_inst ; uart_tx       ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------+---------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                ;
++---------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node                                    ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                  ; Entity Name         ; Library Name ;
++---------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; |uart_fpga_top                                                ; 278 (16)            ; 174 (20)                  ; 0                 ; 0          ; 42   ; 0            ; |uart_fpga_top                                                                                                                       ; uart_fpga_top       ; work         ;
+;    |Timer:timer_inst|                                         ; 69 (1)              ; 34 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst                                                                                                      ; Timer               ; work         ;
+;       |BCD_Counter:decenas_counter|                           ; 7 (0)               ; 4 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter                                                                          ; BCD_Counter         ; work         ;
+;          |Adder_N_bits:decrementer|                           ; 2 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer                                                 ; Adder_N_bits        ; work         ;
+;             |Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst|  ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst  ; Full_Adder          ; work         ;
+;             |Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst|  ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst  ; Full_Adder          ; work         ;
+;          |Comparator_N_bits:borrow_comparator|                ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Comparator_N_bits:borrow_comparator                                      ; Comparator_N_bits   ; work         ;
+;          |D_FF_Manual:contador_reg|                           ; 0 (0)               ; 4 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg                                                 ; D_FF_Manual         ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[0].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[0].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[1].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[1].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[2].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[2].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[3].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[3].dff_cell                 ; D_FF_Cell           ; work         ;
+;          |Mux2to1_N_bits:load_mux|                            ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:load_mux                                                  ; Mux2to1_N_bits      ; work         ;
+;       |BCD_Counter:unidades_counter|                          ; 6 (0)               ; 4 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter                                                                         ; BCD_Counter         ; work         ;
+;          |Comparator_N_bits:borrow_comparator|                ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Comparator_N_bits:borrow_comparator                                     ; Comparator_N_bits   ; work         ;
+;          |D_FF_Manual:contador_reg|                           ; 0 (0)               ; 4 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg                                                ; D_FF_Manual         ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[0].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[0].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[1].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[1].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[2].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[2].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[3].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[3].dff_cell                ; D_FF_Cell           ; work         ;
+;          |Mux2to1_N_bits:load_mux|                            ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:load_mux                                                 ; Mux2to1_N_bits      ; work         ;
+;       |BCD_to_7Segment:bcd_decenas|                           ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_to_7Segment:bcd_decenas                                                                          ; BCD_to_7Segment     ; work         ;
+;       |BCD_to_7Segment:bcd_unidades|                          ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|BCD_to_7Segment:bcd_unidades                                                                         ; BCD_to_7Segment     ; work         ;
+;       |Counter_N_bits:contador_1hz|                           ; 41 (0)              ; 26 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz                                                                          ; Counter_N_bits      ; work         ;
+;          |Adder_N_bits:incrementer|                           ; 5 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer                                                 ; Adder_N_bits        ; work         ;
+;             |Full_Adder:FULL_ADDER_ARRAY[10].full_adder_inst| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[10].full_adder_inst ; Full_Adder          ; work         ;
+;             |Full_Adder:FULL_ADDER_ARRAY[12].full_adder_inst| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[12].full_adder_inst ; Full_Adder          ; work         ;
+;             |Full_Adder:FULL_ADDER_ARRAY[15].full_adder_inst| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[15].full_adder_inst ; Full_Adder          ; work         ;
+;             |Full_Adder:FULL_ADDER_ARRAY[20].full_adder_inst| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[20].full_adder_inst ; Full_Adder          ; work         ;
+;          |Comparator_N_bits:terminal_count_comparator|        ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Comparator_N_bits:terminal_count_comparator                              ; Comparator_N_bits   ; work         ;
+;          |D_FF_Manual:contador_reg|                           ; 1 (0)               ; 26 (0)                    ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg                                                 ; D_FF_Manual         ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[0].dff_cell|                 ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[0].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[10].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[10].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[11].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[11].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[12].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[12].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[13].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[13].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[14].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[14].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[15].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[15].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[16].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[16].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[17].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[17].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[18].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[18].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[19].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[19].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[1].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[1].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[20].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[20].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[21].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[21].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[22].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[22].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[23].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[23].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[24].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[24].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[25].dff_cell|                ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[25].dff_cell                ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[2].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[2].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[3].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[3].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[4].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[4].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[5].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[5].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[6].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[6].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[7].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[7].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[8].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[8].dff_cell                 ; D_FF_Cell           ; work         ;
+;             |D_FF_Cell:DFF_ARRAY[9].dff_cell|                 ; 0 (0)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[9].dff_cell                 ; D_FF_Cell           ; work         ;
+;          |Mux2to1_N_bits:terminal_count_mux|                  ; 27 (27)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:terminal_count_mux                                        ; Mux2to1_N_bits      ; work         ;
+;    |uart_handshake:handshake_inst|                            ; 104 (13)            ; 65 (8)                    ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_handshake:handshake_inst                                                                                         ; uart_handshake      ; work         ;
+;       |uart_rx:uart_rx_inst|                                  ; 55 (55)             ; 35 (35)                   ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_handshake:handshake_inst|uart_rx:uart_rx_inst                                                                    ; uart_rx             ; work         ;
+;       |uart_tx:uart_tx_inst|                                  ; 36 (0)              ; 22 (3)                    ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst                                                                    ; uart_tx             ; work         ;
+;          |uart_tx_bit_index:bit_idx|                          ; 10 (10)             ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx                                          ; uart_tx_bit_index   ; work         ;
+;          |uart_tx_clk_counter:clk_counter|                    ; 17 (17)             ; 16 (16)                   ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter                                    ; uart_tx_clk_counter ; work         ;
+;          |uart_tx_fsm:fsm|                                    ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_fsm:fsm                                                    ; uart_tx_fsm         ; work         ;
+;          |uart_tx_mux_1:mux1|                                 ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1                                                 ; uart_tx_mux_1       ; work         ;
+;    |uart_rx:uart_rx_inst|                                     ; 52 (52)             ; 33 (33)                   ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_rx:uart_rx_inst                                                                                                  ; uart_rx             ; work         ;
+;    |uart_tx:uart_tx_inst|                                     ; 37 (0)              ; 22 (3)                    ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_tx:uart_tx_inst                                                                                                  ; uart_tx             ; work         ;
+;       |uart_tx_bit_index:bit_idx|                             ; 10 (10)             ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx                                                                        ; uart_tx_bit_index   ; work         ;
+;       |uart_tx_clk_counter:clk_counter|                       ; 17 (17)             ; 16 (16)                   ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter                                                                  ; uart_tx_clk_counter ; work         ;
+;       |uart_tx_fsm:fsm|                                       ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_fsm:fsm                                                                                  ; uart_tx_fsm         ; work         ;
+;       |uart_tx_mux_1:mux1|                                    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1                                                                               ; uart_tx_mux_1       ; work         ;
+;       |uart_tx_mux_3:mux3|                                    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_mux_3:mux3                                                                               ; uart_tx_mux_3       ; work         ;
++---------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |uart_fpga_top|uart_handshake:handshake_inst|hs_state                                                    ;
++---------------------+---------------------+---------------------+------------------+------------------+------------------+
+; Name                ; hs_state.HS_WAIT_RX ; hs_state.HS_WAIT_TX ; hs_state.HS_INIT ; hs_state.HS_IDLE ; hs_state.HS_DONE ;
++---------------------+---------------------+---------------------+------------------+------------------+------------------+
+; hs_state.HS_IDLE    ; 0                   ; 0                   ; 0                ; 0                ; 0                ;
+; hs_state.HS_INIT    ; 0                   ; 0                   ; 1                ; 1                ; 0                ;
+; hs_state.HS_WAIT_TX ; 0                   ; 1                   ; 0                ; 1                ; 0                ;
+; hs_state.HS_WAIT_RX ; 1                   ; 0                   ; 0                ; 1                ; 0                ;
+; hs_state.HS_DONE    ; 0                   ; 0                   ; 0                ; 1                ; 1                ;
++---------------------+---------------------+---------------------+------------------+------------------+------------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |uart_fpga_top|uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_SM_Main                                                       ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
+; Name                     ; r_SM_Main.s_RX_STOP_BIT ; r_SM_Main.s_RX_DATA_BITS ; r_SM_Main.s_RX_START_BIT ; r_SM_Main.s_IDLE ; r_SM_Main.s_CLEANUP ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
+; r_SM_Main.s_IDLE         ; 0                       ; 0                        ; 0                        ; 0                ; 0                   ;
+; r_SM_Main.s_RX_START_BIT ; 0                       ; 0                        ; 1                        ; 1                ; 0                   ;
+; r_SM_Main.s_RX_DATA_BITS ; 0                       ; 1                        ; 0                        ; 1                ; 0                   ;
+; r_SM_Main.s_RX_STOP_BIT  ; 1                       ; 0                        ; 0                        ; 1                ; 0                   ;
+; r_SM_Main.s_CLEANUP      ; 0                       ; 0                        ; 0                        ; 1                ; 1                   ;
++--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
 
 
 Encoding Type:  One-Hot
@@ -239,31 +399,30 @@ Encoding Type:  One-Hot
 +--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
 
 
-Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |uart_fpga_top|uart_tx:uart_tx_inst|r_SM_Main                                                                                     ;
-+--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
-; Name                     ; r_SM_Main.s_TX_STOP_BIT ; r_SM_Main.s_TX_DATA_BITS ; r_SM_Main.s_TX_START_BIT ; r_SM_Main.s_IDLE ; r_SM_Main.s_CLEANUP ;
-+--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
-; r_SM_Main.s_IDLE         ; 0                       ; 0                        ; 0                        ; 0                ; 0                   ;
-; r_SM_Main.s_TX_START_BIT ; 0                       ; 0                        ; 1                        ; 1                ; 0                   ;
-; r_SM_Main.s_TX_DATA_BITS ; 0                       ; 1                        ; 0                        ; 1                ; 0                   ;
-; r_SM_Main.s_TX_STOP_BIT  ; 1                       ; 0                        ; 0                        ; 1                ; 0                   ;
-; r_SM_Main.s_CLEANUP      ; 0                       ; 0                        ; 0                        ; 1                ; 1                   ;
-+--------------------------+-------------------------+--------------------------+--------------------------+------------------+---------------------+
-
-
-+------------------------------------------------------------+
-; Registers Removed During Synthesis                         ;
-+---------------------------------------+--------------------+
-; Register name                         ; Reason for Removal ;
-+---------------------------------------+--------------------+
-; uart_rx:uart_rx_inst|r_SM_Main~7      ; Lost fanout        ;
-; uart_rx:uart_rx_inst|r_SM_Main~8      ; Lost fanout        ;
-; uart_tx:uart_tx_inst|r_SM_Main~2      ; Lost fanout        ;
-; uart_tx:uart_tx_inst|r_SM_Main~3      ; Lost fanout        ;
-; Total Number of Removed Registers = 4 ;                    ;
-+---------------------------------------+--------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                          ;
++----------------------------------------------------------------+----------------------------------------------------------------------------+
+; Register name                                                  ; Reason for Removal                                                         ;
++----------------------------------------------------------------+----------------------------------------------------------------------------+
+; uart_handshake:handshake_inst|tx_data[0]                       ; Merged with uart_handshake:handshake_inst|tx_data[1]                       ;
+; uart_handshake:handshake_inst|tx_data[1]                       ; Merged with uart_handshake:handshake_inst|tx_data[2]                       ;
+; uart_handshake:handshake_inst|tx_data[2]                       ; Merged with uart_handshake:handshake_inst|tx_data[3]                       ;
+; uart_handshake:handshake_inst|tx_data[3]                       ; Merged with uart_handshake:handshake_inst|tx_data[4]                       ;
+; uart_handshake:handshake_inst|tx_data[4]                       ; Merged with uart_handshake:handshake_inst|tx_data[5]                       ;
+; uart_handshake:handshake_inst|tx_data[5]                       ; Merged with uart_handshake:handshake_inst|tx_data[6]                       ;
+; uart_handshake:handshake_inst|tx_data[6]                       ; Merged with uart_handshake:handshake_inst|tx_data[7]                       ;
+; uart_rx:uart_rx_inst|r_Rx_Data                                 ; Merged with uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_Rx_Data   ;
+; uart_rx:uart_rx_inst|r_Rx_Data_R                               ; Merged with uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_Rx_Data_R ;
+; uart_handshake:handshake_inst|hs_state~9                       ; Lost fanout                                                                ;
+; uart_handshake:handshake_inst|hs_state~10                      ; Lost fanout                                                                ;
+; uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_SM_Main~7 ; Lost fanout                                                                ;
+; uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_SM_Main~8 ; Lost fanout                                                                ;
+; uart_rx:uart_rx_inst|r_SM_Main~7                               ; Lost fanout                                                                ;
+; uart_rx:uart_rx_inst|r_SM_Main~8                               ; Lost fanout                                                                ;
+; uart_handshake:handshake_inst|hs_state.HS_DONE                 ; Lost fanout                                                                ;
+; uart_handshake:handshake_inst|hs_state.HS_IDLE                 ; Lost fanout                                                                ;
+; Total Number of Removed Registers = 17                         ;                                                                            ;
++----------------------------------------------------------------+----------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -271,40 +430,45 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 81    ;
-; Number of registers using Synchronous Clear  ; 32    ;
+; Total registers                              ; 174   ;
+; Number of registers using Synchronous Clear  ; 92    ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 20    ;
+; Number of registers using Asynchronous Clear ; 106   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 48    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+--------------------------------------------------+
-; Inverted Register Statistics                     ;
-+----------------------------------------+---------+
-; Inverted Register                      ; Fan out ;
-+----------------------------------------+---------+
-; uart_rx:uart_rx_inst|r_Rx_Data         ; 10      ;
-; button_sync1                           ; 2       ;
-; button_prev                            ; 1       ;
-; uart_rx:uart_rx_inst|r_Rx_Data_R       ; 1       ;
-; button_sync0                           ; 1       ;
-; Total number of inverted registers = 5 ;         ;
-+----------------------------------------+---------+
++--------------------------------------------------------------------------+
+; Inverted Register Statistics                                             ;
++----------------------------------------------------------------+---------+
+; Inverted Register                                              ; Fan out ;
++----------------------------------------------------------------+---------+
+; uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_Rx_Data   ; 26      ;
+; button_sync1                                                   ; 3       ;
+; button_prev                                                    ; 2       ;
+; uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_Rx_Data_R ; 1       ;
+; button_sync0                                                   ; 1       ;
+; Total number of inverted registers = 5                         ;         ;
++----------------------------------------------------------------+---------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                      ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                            ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
-; 4:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |uart_fpga_top|uart_tx:uart_tx_inst|r_Clock_Count[11] ;
-; 7:1                ; 16 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |uart_fpga_top|uart_rx:uart_rx_inst|r_Clock_Count[5]  ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |uart_fpga_top|uart_rx:uart_rx_inst|r_Bit_Index       ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |uart_fpga_top|uart_tx:uart_tx_inst|r_Bit_Index       ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|clock_count[15] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|clock_count[13]                               ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 0 LEs                ; 80 LEs                 ; Yes        ; |uart_fpga_top|uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_Clock_Count[6]                                ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 0 LEs                ; 80 LEs                 ; Yes        ; |uart_fpga_top|uart_rx:uart_rx_inst|r_Clock_Count[12]                                                             ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |uart_fpga_top|uart_handshake:handshake_inst|uart_rx:uart_rx_inst|r_Bit_Index                                     ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |uart_fpga_top|uart_rx:uart_rx_inst|r_Bit_Index                                                                   ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|bit_index             ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|bit_index                                           ;
+; 5:1                ; 5 bits    ; 15 LEs        ; 15 LEs               ; 0 LEs                  ; No         ; |uart_fpga_top|uart_handshake:handshake_inst|Selector1                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------+
@@ -317,6 +481,36 @@ Encoding Type:  One-Hot
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst|uart_tx_fsm:fsm ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter ;
++----------------+-------+--------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                     ;
++----------------+-------+--------------------------------------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                                                           ;
++----------------+-------+--------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx ;
++----------------+-------+--------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                               ;
++----------------+-------+--------------------------------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                                                     ;
++----------------+-------+--------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-------------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: uart_rx:uart_rx_inst ;
 +----------------+-------+------------------------------------------+
@@ -325,6 +519,429 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; CLKS_PER_BIT   ; 5208  ; Signed Integer                           ;
 +----------------+-------+------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_tx:uart_tx_inst ;
++----------------+-------+------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                   ;
++----------------+-------+------------------------------------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                                                         ;
++----------------+-------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_fsm:fsm ;
++----------------+-------+----------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                   ;
++----------------+-------+----------------------------------------------------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                                                                         ;
++----------------+-------+----------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter ;
++----------------+-------+--------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                   ;
++----------------+-------+--------------------------------------------------------------------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                                                                                         ;
++----------------+-------+--------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx ;
++----------------+-------+--------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                             ;
++----------------+-------+--------------------------------------------------------------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                                                                                   ;
++----------------+-------+--------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_handshake:handshake_inst|uart_rx:uart_rx_inst ;
++----------------+-------+------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                   ;
++----------------+-------+------------------------------------------------------------------------+
+; CLKS_PER_BIT   ; 5208  ; Signed Integer                                                         ;
++----------------+-------+------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz ;
++----------------+----------+---------------------------------------------------------------+
+; Parameter Name ; Value    ; Type                                                          ;
++----------------+----------+---------------------------------------------------------------+
+; N              ; 26       ; Signed Integer                                                ;
+; MAX_COUNT      ; 49999999 ; Signed Integer                                                ;
++----------------+----------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; N              ; 26    ; Signed Integer                                                                            ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|Comparator_N_bits:terminal_count_comparator ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                         ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------+
+; N              ; 26    ; Signed Integer                                                                                               ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; N              ; 26    ; Signed Integer                                                                            ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:enable_mux ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; N              ; 26    ; Signed Integer                                                                             ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:terminal_count_mux ;
++----------------+-------+----------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                               ;
++----------------+-------+----------------------------------------------------------------------------------------------------+
+; N              ; 26    ; Signed Integer                                                                                     ;
++----------------+-------+----------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|Comparator_N_bits:unidades_zero_comparator ;
++----------------+-------+---------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                            ;
++----------------+-------+---------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                  ;
++----------------+-------+---------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|Comparator_N_bits:decenas_zero_comparator ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                             ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Comparator_N_bits:borrow_comparator ;
++----------------+-------+-------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                  ;
++----------------+-------+-------------------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                                        ;
++----------------+-------+-------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                             ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:borrow_mux ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                        ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                              ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:enable_mux ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                        ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                              ;
++----------------+-------+---------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:load_mux ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                            ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                            ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Comparator_N_bits:borrow_comparator ;
++----------------+-------+------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                 ;
++----------------+-------+------------------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                                       ;
++----------------+-------+------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                      ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                            ;
++----------------+-------+-------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:borrow_mux ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                             ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:enable_mux ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                             ;
++----------------+-------+--------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:load_mux ;
++----------------+-------+------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                     ;
++----------------+-------+------------------------------------------------------------------------------------------+
+; N              ; 4     ; Signed Integer                                                                           ;
++----------------+-------+------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:decenas_counter"                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_value ; Input  ; Info     ; Stuck at GND                                                                        ;
+; count_d    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; borrow_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:borrow_mux" ;
++-----------+-------+----------+----------------------------------------------------------------------+
+; Port      ; Type  ; Severity ; Details                                                              ;
++-----------+-------+----------+----------------------------------------------------------------------+
+; in1[2..1] ; Input ; Info     ; Stuck at GND                                                         ;
+; in1[3]    ; Input ; Info     ; Stuck at VCC                                                         ;
+; in1[0]    ; Input ; Info     ; Stuck at VCC                                                         ;
++-----------+-------+----------+----------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst" ;
++------+-------+----------+-------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                 ;
++------+-------+----------+-------------------------------------------------------------------------------------------------------------------------+
+; cin  ; Input ; Info     ; Stuck at GND                                                                                                            ;
++------+-------+----------+-------------------------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer" ;
++-----------+--------+----------+--------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                            ;
++-----------+--------+----------+--------------------------------------------------------------------+
+; b         ; Input  ; Info     ; Stuck at VCC                                                       ;
+; carry_out ; Output ; Info     ; Explicitly unconnected                                             ;
++-----------+--------+----------+--------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter|Comparator_N_bits:borrow_comparator" ;
++------+-------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                             ;
++------+-------+----------+-------------------------------------------------------------------------------------+
+; b    ; Input ; Info     ; Stuck at GND                                                                        ;
++------+-------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|BCD_Counter:unidades_counter"                                                  ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_value[1..0] ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_value[3..2] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; count_d          ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|Comparator_N_bits:decenas_zero_comparator" ;
++------+-------+----------+--------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                      ;
++------+-------+----------+--------------------------------------------------------------+
+; b    ; Input ; Info     ; Stuck at GND                                                 ;
++------+-------+----------+--------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|Comparator_N_bits:unidades_zero_comparator" ;
++------+-------+----------+---------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                       ;
++------+-------+----------+---------------------------------------------------------------+
+; b    ; Input ; Info     ; Stuck at GND                                                  ;
++------+-------+----------+---------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:terminal_count_mux" ;
++------+-------+----------+----------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                          ;
++------+-------+----------+----------------------------------------------------------------------------------+
+; in1  ; Input ; Info     ; Stuck at GND                                                                     ;
++------+-------+----------+----------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst" ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                                                                                ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------+
+; cin  ; Input ; Info     ; Stuck at GND                                                                                                           ;
++------+-------+----------+------------------------------------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer" ;
++-----------+--------+----------+-------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                           ;
++-----------+--------+----------+-------------------------------------------------------------------+
+; b[25..1]  ; Input  ; Info     ; Stuck at GND                                                      ;
+; b[0]      ; Input  ; Info     ; Stuck at VCC                                                      ;
+; carry_out ; Output ; Info     ; Explicitly unconnected                                            ;
++-----------+--------+----------+-------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz|Comparator_N_bits:terminal_count_comparator" ;
++-----------+-------+----------+---------------------------------------------------------------------------------------+
+; Port      ; Type  ; Severity ; Details                                                                               ;
++-----------+-------+----------+---------------------------------------------------------------------------------------+
+; b[23..19] ; Input ; Info     ; Stuck at VCC                                                                          ;
+; b[15..12] ; Input ; Info     ; Stuck at VCC                                                                          ;
+; b[6..0]   ; Input ; Info     ; Stuck at VCC                                                                          ;
+; b[11..7]  ; Input ; Info     ; Stuck at GND                                                                          ;
+; b[25]     ; Input ; Info     ; Stuck at VCC                                                                          ;
+; b[24]     ; Input ; Info     ; Stuck at GND                                                                          ;
+; b[18]     ; Input ; Info     ; Stuck at GND                                                                          ;
+; b[17]     ; Input ; Info     ; Stuck at VCC                                                                          ;
+; b[16]     ; Input ; Info     ; Stuck at GND                                                                          ;
++-----------+-------+----------+---------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Timer:timer_inst|Counter_N_bits:contador_1hz"                                          ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; enable  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; count_q ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; count_d ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "uart_handshake:handshake_inst|uart_tx:uart_tx_inst"                                        ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; o_Tx_Active ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "uart_handshake:handshake_inst"                                                                ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port           ; Type   ; Severity ; Details                                                                             ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; handshake_done ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx"                                                 ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; bit_index_enable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter"                                           ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; clk_count_enable ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------+
@@ -341,27 +958,30 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 81                          ;
-;     CLR               ; 4                           ;
+; arriav_ff             ; 174                         ;
+;     CLR               ; 57                          ;
+;     CLR SCLR          ; 33                          ;
 ;     ENA CLR           ; 16                          ;
 ;     ENA SCLR          ; 32                          ;
-;     plain             ; 29                          ;
-; arriav_lcell_comb     ; 90                          ;
-;     arith             ; 32                          ;
-;         1 data inputs ; 32                          ;
-;     extend            ; 6                           ;
-;         7 data inputs ; 6                           ;
-;     normal            ; 52                          ;
-;         1 data inputs ; 2                           ;
-;         2 data inputs ; 4                           ;
-;         3 data inputs ; 7                           ;
-;         4 data inputs ; 7                           ;
-;         5 data inputs ; 12                          ;
-;         6 data inputs ; 20                          ;
-; boundary_port         ; 21                          ;
+;     SCLR              ; 27                          ;
+;     plain             ; 9                           ;
+; arriav_lcell_comb     ; 280                         ;
+;     arith             ; 64                          ;
+;         1 data inputs ; 64                          ;
+;     extend            ; 2                           ;
+;         7 data inputs ; 2                           ;
+;     normal            ; 214                         ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 21                          ;
+;         3 data inputs ; 36                          ;
+;         4 data inputs ; 41                          ;
+;         5 data inputs ; 47                          ;
+;         6 data inputs ; 64                          ;
+; boundary_port         ; 42                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 4.00                        ;
-; Average LUT depth     ; 2.23                        ;
+; Average LUT depth     ; 2.62                        ;
 +-----------------------+-----------------------------+
 
 
@@ -380,39 +1000,95 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Sat Oct 12 11:55:40 2024
+    Info: Processing started: Sat Oct 12 23:34:35 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off SerialCom -c SerialCom
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file uart_tx.sv
-    Info (12023): Found entity 1: uart_tx File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 1
+    Info (12023): Found entity 1: uart_tx File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 2
 Info (12021): Found 1 design units, including 1 entities, in source file uart_rx.sv
     Info (12023): Found entity 1: uart_rx File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_rx.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file uart_fpga_top.sv
     Info (12023): Found entity 1: uart_fpga_top File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file bcd_to_7segment.sv
     Info (12023): Found entity 1: BCD_to_7Segment File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/BCD_to_7Segment.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file uart_handshake.sv
+    Info (12023): Found entity 1: uart_handshake File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_handshake.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file timer.sv
+    Info (12023): Found entity 1: Timer File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Timer.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file counter_n_bits.sv
+    Info (12023): Found entity 1: Counter_N_bits File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Counter_N_bits.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bcd_counter.sv
+    Info (12023): Found entity 1: BCD_Counter File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/BCD_Counter.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file d_ff_cell.sv
+    Info (12023): Found entity 1: D_FF_Cell File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/D_FF_Cell.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file d_ff_manual.sv
+    Info (12023): Found entity 1: D_FF_Manual File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/D_FF_Manual.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file comparator_n_bits.sv
+    Info (12023): Found entity 1: Comparator_N_bits File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Comparator_N_bits.sv Line: 1
+Info (12021): Found 2 design units, including 2 entities, in source file adder_n_bits.sv
+    Info (12023): Found entity 1: Adder_N_bits File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Adder_N_bits.sv Line: 1
+    Info (12023): Found entity 2: Full_Adder File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Adder_N_bits.sv Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file mux2to1_n_bits.sv
+    Info (12023): Found entity 1: Mux2to1_N_bits File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Mux2to1_N_bits.sv Line: 1
+Info (12021): Found 1 design units, including 0 entities, in source file uart_tx_pkg.sv
+    Info (12022): Found design unit 1: uart_tx_pkg (SystemVerilog) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_pkg.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file uart_tx_mux_1.sv
+    Info (12023): Found entity 1: uart_tx_mux_1 File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_mux_1.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file uart_tx_mux_2.sv
+    Info (12023): Found entity 1: uart_tx_mux_2 File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_mux_2.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file uart_tx_mux_3.sv
+    Info (12023): Found entity 1: uart_tx_mux_3 File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_mux_3.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file uart_tx_fsm.sv
+    Info (12023): Found entity 1: uart_tx_fsm File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_fsm.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file uart_tx_clk_counter.sv
+    Info (12023): Found entity 1: uart_tx_clk_counter File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_clk_counter.sv Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file uart_tx_bit_index.sv
+    Info (12023): Found entity 1: uart_tx_bit_index File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_bit_index.sv Line: 2
+Warning (10236): Verilog HDL Implicit Net warning at Timer.sv(53): created implicit net for "unidades_borrow" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Timer.sv Line: 53
+Warning (10236): Verilog HDL Implicit Net warning at Timer.sv(65): created implicit net for "decenas_borrow" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Timer.sv Line: 65
 Info (12127): Elaborating entity "uart_fpga_top" for the top level hierarchy
-Info (12128): Elaborating entity "uart_tx" for hierarchy "uart_tx:uart_tx_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 67
-Warning (10036): Verilog HDL or VHDL warning at uart_tx.sv(24): object "r_Tx_Done" assigned a value but never read File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 24
-Warning (10036): Verilog HDL or VHDL warning at uart_tx.sv(25): object "r_Tx_Active" assigned a value but never read File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 25
-Warning (10230): Verilog HDL assignment warning at uart_tx.sv(50): truncated value with size 32 to match size of target (16) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 50
-Warning (10230): Verilog HDL assignment warning at uart_tx.sv(63): truncated value with size 32 to match size of target (16) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 63
-Warning (10230): Verilog HDL assignment warning at uart_tx.sv(70): truncated value with size 32 to match size of target (3) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 70
-Warning (10230): Verilog HDL assignment warning at uart_tx.sv(84): truncated value with size 32 to match size of target (16) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 84
-Info (12128): Elaborating entity "uart_rx" for hierarchy "uart_rx:uart_rx_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 77
+Info (12128): Elaborating entity "uart_tx" for hierarchy "uart_tx:uart_tx_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 97
+Info (12128): Elaborating entity "uart_tx_fsm" for hierarchy "uart_tx:uart_tx_inst|uart_tx_fsm:fsm" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 36
+Info (12128): Elaborating entity "uart_tx_clk_counter" for hierarchy "uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 45
+Warning (10230): Verilog HDL assignment warning at uart_tx_clk_counter.sv(25): truncated value with size 32 to match size of target (16) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_clk_counter.sv Line: 25
+Info (12128): Elaborating entity "uart_tx_bit_index" for hierarchy "uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 55
+Warning (10230): Verilog HDL assignment warning at uart_tx_bit_index.sv(27): truncated value with size 32 to match size of target (3) File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx_bit_index.sv Line: 27
+Info (12128): Elaborating entity "uart_tx_mux_1" for hierarchy "uart_tx:uart_tx_inst|uart_tx_mux_1:mux1" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 63
+Info (12128): Elaborating entity "uart_tx_mux_2" for hierarchy "uart_tx:uart_tx_inst|uart_tx_mux_2:mux2" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 68
+Info (12128): Elaborating entity "uart_tx_mux_3" for hierarchy "uart_tx:uart_tx_inst|uart_tx_mux_3:mux3" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_tx.sv Line: 73
+Info (12128): Elaborating entity "uart_rx" for hierarchy "uart_rx:uart_rx_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 108
+Info (12128): Elaborating entity "uart_handshake" for hierarchy "uart_handshake:handshake_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 124
+Info (12128): Elaborating entity "Timer" for hierarchy "Timer:timer_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 137
+Info (12128): Elaborating entity "Counter_N_bits" for hierarchy "Timer:timer_inst|Counter_N_bits:contador_1hz" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Timer.sv Line: 27
+Info (12128): Elaborating entity "D_FF_Manual" for hierarchy "Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Counter_N_bits.sv Line: 15
+Info (12128): Elaborating entity "D_FF_Cell" for hierarchy "Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[0].dff_cell" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/D_FF_Manual.sv Line: 17
+Info (12128): Elaborating entity "Comparator_N_bits" for hierarchy "Timer:timer_inst|Counter_N_bits:contador_1hz|Comparator_N_bits:terminal_count_comparator" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Counter_N_bits.sv Line: 22
+Info (12128): Elaborating entity "Adder_N_bits" for hierarchy "Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Counter_N_bits.sv Line: 31
+Info (12128): Elaborating entity "Full_Adder" for hierarchy "Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Adder_N_bits.sv Line: 20
+Info (12128): Elaborating entity "Mux2to1_N_bits" for hierarchy "Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:enable_mux" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Counter_N_bits.sv Line: 40
+Info (12128): Elaborating entity "Comparator_N_bits" for hierarchy "Timer:timer_inst|Comparator_N_bits:unidades_zero_comparator" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Timer.sv Line: 34
+Info (12128): Elaborating entity "BCD_Counter" for hierarchy "Timer:timer_inst|BCD_Counter:unidades_counter" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Timer.sv Line: 54
+Info (12128): Elaborating entity "D_FF_Manual" for hierarchy "Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/BCD_Counter.sv Line: 17
+Info (12128): Elaborating entity "Adder_N_bits" for hierarchy "Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/BCD_Counter.sv Line: 33
+Info (12128): Elaborating entity "Mux2to1_N_bits" for hierarchy "Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:borrow_mux" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/BCD_Counter.sv Line: 42
+Info (12128): Elaborating entity "BCD_to_7Segment" for hierarchy "Timer:timer_inst|BCD_to_7Segment:bcd_unidades" File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/Timer.sv Line: 75
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "seg_handshake[0]" is stuck at GND File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 12
+    Warning (13410): Pin "seg_handshake[4]" is stuck at GND File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 12
+    Warning (13410): Pin "seg_handshake[5]" is stuck at GND File: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/uart_fpga_top.sv Line: 12
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 4 registers lost all their fanouts during netlist optimizations.
+Info (17049): 8 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 131 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 339 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 12 input pins
-    Info (21059): Implemented 9 output pins
-    Info (21061): Implemented 110 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 4868 megabytes
-    Info: Processing ended: Sat Oct 12 11:55:46 2024
-    Info: Elapsed time: 00:00:06
+    Info (21059): Implemented 30 output pins
+    Info (21061): Implemented 297 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 9 warnings
+    Info: Peak virtual memory: 4903 megabytes
+    Info: Processing ended: Sat Oct 12 23:34:42 2024
+    Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:08
 
 

@@ -1,25 +1,6 @@
 |uart_fpga_top
-clock => clock.IN2
-reset_n => received_data[0].ACLR
-reset_n => received_data[1].ACLR
-reset_n => received_data[2].ACLR
-reset_n => received_data[3].ACLR
-reset_n => received_data[4].ACLR
-reset_n => received_data[5].ACLR
-reset_n => received_data[6].ACLR
-reset_n => received_data[7].ACLR
-reset_n => tx_data[0].ACLR
-reset_n => tx_data[1].ACLR
-reset_n => tx_data[2].ACLR
-reset_n => tx_data[3].ACLR
-reset_n => tx_data[4].ACLR
-reset_n => tx_data[5].ACLR
-reset_n => tx_data[6].ACLR
-reset_n => tx_data[7].ACLR
-reset_n => tx_start.ACLR
-reset_n => button_prev.PRESET
-reset_n => button_sync1.PRESET
-reset_n => button_sync0.PRESET
+clock => clock.IN4
+reset_n => reset_n.IN1
 button => button_sync0.DATAIN
 switches[0] => tx_data.DATAB
 switches[1] => tx_data.DATAB
@@ -29,46 +10,234 @@ switches[4] => tx_data.DATAB
 switches[5] => tx_data.DATAB
 switches[6] => tx_data.DATAB
 switches[7] => tx_data.DATAB
-i_Rx_Serial => i_Rx_Serial.IN1
-o_Tx_Serial <= uart_tx:uart_tx_inst.o_Tx_Serial
-leds[0] <= received_data[0].DB_MAX_OUTPUT_PORT_TYPE
-leds[1] <= received_data[1].DB_MAX_OUTPUT_PORT_TYPE
-leds[2] <= received_data[2].DB_MAX_OUTPUT_PORT_TYPE
-leds[3] <= received_data[3].DB_MAX_OUTPUT_PORT_TYPE
-leds[4] <= received_data[4].DB_MAX_OUTPUT_PORT_TYPE
-leds[5] <= received_data[5].DB_MAX_OUTPUT_PORT_TYPE
-leds[6] <= received_data[6].DB_MAX_OUTPUT_PORT_TYPE
-leds[7] <= received_data[7].DB_MAX_OUTPUT_PORT_TYPE
+i_Rx_Serial => i_Rx_Serial.IN2
+o_Tx_Serial << o_Tx_Serial.DB_MAX_OUTPUT_PORT_TYPE
+leds[0] << leds.DB_MAX_OUTPUT_PORT_TYPE
+leds[1] << leds.DB_MAX_OUTPUT_PORT_TYPE
+leds[2] << leds.DB_MAX_OUTPUT_PORT_TYPE
+leds[3] << leds.DB_MAX_OUTPUT_PORT_TYPE
+leds[4] << leds.DB_MAX_OUTPUT_PORT_TYPE
+leds[5] << leds.DB_MAX_OUTPUT_PORT_TYPE
+leds[6] << leds.DB_MAX_OUTPUT_PORT_TYPE
+leds[7] << leds.DB_MAX_OUTPUT_PORT_TYPE
+seg_unidades[0] << Timer:timer_inst.seg_unidades
+seg_unidades[1] << Timer:timer_inst.seg_unidades
+seg_unidades[2] << Timer:timer_inst.seg_unidades
+seg_unidades[3] << Timer:timer_inst.seg_unidades
+seg_unidades[4] << Timer:timer_inst.seg_unidades
+seg_unidades[5] << Timer:timer_inst.seg_unidades
+seg_unidades[6] << Timer:timer_inst.seg_unidades
+seg_decenas[0] << Timer:timer_inst.seg_decenas
+seg_decenas[1] << Timer:timer_inst.seg_decenas
+seg_decenas[2] << Timer:timer_inst.seg_decenas
+seg_decenas[3] << Timer:timer_inst.seg_decenas
+seg_decenas[4] << Timer:timer_inst.seg_decenas
+seg_decenas[5] << Timer:timer_inst.seg_decenas
+seg_decenas[6] << Timer:timer_inst.seg_decenas
+seg_handshake[0] << BCD_to_7Segment:bcd_to_7seg_inst.seg
+seg_handshake[1] << BCD_to_7Segment:bcd_to_7seg_inst.seg
+seg_handshake[2] << BCD_to_7Segment:bcd_to_7seg_inst.seg
+seg_handshake[3] << BCD_to_7Segment:bcd_to_7seg_inst.seg
+seg_handshake[4] << BCD_to_7Segment:bcd_to_7seg_inst.seg
+seg_handshake[5] << BCD_to_7Segment:bcd_to_7seg_inst.seg
+seg_handshake[6] << BCD_to_7Segment:bcd_to_7seg_inst.seg
 
 
 |uart_fpga_top|uart_tx:uart_tx_inst
-i_Clock => o_Tx_Active~reg0.CLK
-i_Clock => r_Bit_Index[0].CLK
-i_Clock => r_Bit_Index[1].CLK
-i_Clock => r_Bit_Index[2].CLK
-i_Clock => r_Clock_Count[0].CLK
-i_Clock => r_Clock_Count[1].CLK
-i_Clock => r_Clock_Count[2].CLK
-i_Clock => r_Clock_Count[3].CLK
-i_Clock => r_Clock_Count[4].CLK
-i_Clock => r_Clock_Count[5].CLK
-i_Clock => r_Clock_Count[6].CLK
-i_Clock => r_Clock_Count[7].CLK
-i_Clock => r_Clock_Count[8].CLK
-i_Clock => r_Clock_Count[9].CLK
-i_Clock => r_Clock_Count[10].CLK
-i_Clock => r_Clock_Count[11].CLK
-i_Clock => r_Clock_Count[12].CLK
-i_Clock => r_Clock_Count[13].CLK
-i_Clock => r_Clock_Count[14].CLK
-i_Clock => r_Clock_Count[15].CLK
-i_Clock => o_Tx_Done~reg0.CLK
-i_Clock => o_Tx_Serial~reg0.CLK
-i_Clock => r_SM_Main~1.DATAIN
-i_Tx_DV => o_Tx_Active.OUTPUTSELECT
-i_Tx_DV => Selector23.IN3
-i_Tx_DV => Selector22.IN2
-o_Tx_Active <= o_Tx_Active~reg0.DB_MAX_OUTPUT_PORT_TYPE
+i_Clock => uart_tx_fsm:fsm.i_Clock
+i_Clock => uart_tx_clk_counter:clk_counter.i_Clock
+i_Clock => uart_tx_bit_index:bit_idx.i_Clock
+i_Clock => current_state[0].CLK
+i_Clock => current_state[1].CLK
+i_Clock => current_state[2].CLK
+i_Enable => uart_tx_fsm:fsm.i_Enable
+i_Enable => uart_tx_clk_counter:clk_counter.i_Enable
+i_Enable => uart_tx_bit_index:bit_idx.i_Enable
+i_Enable => current_state[0].ACLR
+i_Enable => current_state[1].ACLR
+i_Enable => current_state[2].ACLR
+i_Tx_DV => uart_tx_fsm:fsm.i_Tx_DV
+i_Tx_Byte[0] => uart_tx_mux_1:mux1.i_Tx_Byte[0]
+i_Tx_Byte[1] => uart_tx_mux_1:mux1.i_Tx_Byte[1]
+i_Tx_Byte[2] => uart_tx_mux_1:mux1.i_Tx_Byte[2]
+i_Tx_Byte[3] => uart_tx_mux_1:mux1.i_Tx_Byte[3]
+i_Tx_Byte[4] => uart_tx_mux_1:mux1.i_Tx_Byte[4]
+i_Tx_Byte[5] => uart_tx_mux_1:mux1.i_Tx_Byte[5]
+i_Tx_Byte[6] => uart_tx_mux_1:mux1.i_Tx_Byte[6]
+i_Tx_Byte[7] => uart_tx_mux_1:mux1.i_Tx_Byte[7]
+o_Tx_Active <= uart_tx_mux_3:mux3.o_Tx_Active
+o_Tx_Serial <= uart_tx_mux_1:mux1.o_Tx_Serial
+o_Tx_Done <= uart_tx_mux_2:mux2.o_Tx_Done
+
+
+|uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_fsm:fsm
+i_Clock => ~NO_FANOUT~
+i_Enable => ~NO_FANOUT~
+i_Tx_DV => Selector1.IN9
+current_state[0] => Equal0.IN5
+current_state[0] => Equal1.IN5
+current_state[0] => Equal2.IN5
+current_state[0] => Equal3.IN5
+current_state[0] => Equal4.IN5
+current_state[1] => Equal0.IN4
+current_state[1] => Equal1.IN4
+current_state[1] => Equal2.IN4
+current_state[1] => Equal3.IN4
+current_state[1] => Equal4.IN4
+current_state[2] => Equal0.IN3
+current_state[2] => Equal1.IN3
+current_state[2] => Equal2.IN3
+current_state[2] => Equal3.IN3
+current_state[2] => Equal4.IN3
+clock_count[0] => LessThan1.IN32
+clock_count[1] => LessThan1.IN31
+clock_count[2] => LessThan1.IN30
+clock_count[3] => LessThan1.IN29
+clock_count[4] => LessThan1.IN28
+clock_count[5] => LessThan1.IN27
+clock_count[6] => LessThan1.IN26
+clock_count[7] => LessThan1.IN25
+clock_count[8] => LessThan1.IN24
+clock_count[9] => LessThan1.IN23
+clock_count[10] => LessThan1.IN22
+clock_count[11] => LessThan1.IN21
+clock_count[12] => LessThan1.IN20
+clock_count[13] => LessThan1.IN19
+clock_count[14] => LessThan1.IN18
+clock_count[15] => LessThan1.IN17
+bit_index[0] => LessThan0.IN6
+bit_index[1] => LessThan0.IN5
+bit_index[2] => LessThan0.IN4
+next_state[0] <= Selector1.DB_MAX_OUTPUT_PORT_TYPE
+next_state[1] <= Selector0.DB_MAX_OUTPUT_PORT_TYPE
+next_state[2] <= next_state.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter
+i_Clock => clk_count_enable~reg0.CLK
+i_Clock => clock_count[0]~reg0.CLK
+i_Clock => clock_count[1]~reg0.CLK
+i_Clock => clock_count[2]~reg0.CLK
+i_Clock => clock_count[3]~reg0.CLK
+i_Clock => clock_count[4]~reg0.CLK
+i_Clock => clock_count[5]~reg0.CLK
+i_Clock => clock_count[6]~reg0.CLK
+i_Clock => clock_count[7]~reg0.CLK
+i_Clock => clock_count[8]~reg0.CLK
+i_Clock => clock_count[9]~reg0.CLK
+i_Clock => clock_count[10]~reg0.CLK
+i_Clock => clock_count[11]~reg0.CLK
+i_Clock => clock_count[12]~reg0.CLK
+i_Clock => clock_count[13]~reg0.CLK
+i_Clock => clock_count[14]~reg0.CLK
+i_Clock => clock_count[15]~reg0.CLK
+i_Enable => clk_count_enable~reg0.ACLR
+i_Enable => clock_count[0]~reg0.ACLR
+i_Enable => clock_count[1]~reg0.ACLR
+i_Enable => clock_count[2]~reg0.ACLR
+i_Enable => clock_count[3]~reg0.ACLR
+i_Enable => clock_count[4]~reg0.ACLR
+i_Enable => clock_count[5]~reg0.ACLR
+i_Enable => clock_count[6]~reg0.ACLR
+i_Enable => clock_count[7]~reg0.ACLR
+i_Enable => clock_count[8]~reg0.ACLR
+i_Enable => clock_count[9]~reg0.ACLR
+i_Enable => clock_count[10]~reg0.ACLR
+i_Enable => clock_count[11]~reg0.ACLR
+i_Enable => clock_count[12]~reg0.ACLR
+i_Enable => clock_count[13]~reg0.ACLR
+i_Enable => clock_count[14]~reg0.ACLR
+i_Enable => clock_count[15]~reg0.ACLR
+next_state[0] => Equal0.IN5
+next_state[0] => Equal1.IN5
+next_state[0] => Equal2.IN5
+next_state[0] => Equal3.IN5
+next_state[0] => Equal4.IN5
+next_state[1] => Equal0.IN4
+next_state[1] => Equal1.IN4
+next_state[1] => Equal2.IN4
+next_state[1] => Equal3.IN4
+next_state[1] => Equal4.IN4
+next_state[2] => Equal0.IN3
+next_state[2] => Equal1.IN3
+next_state[2] => Equal2.IN3
+next_state[2] => Equal3.IN3
+next_state[2] => Equal4.IN3
+clock_count[0] <= clock_count[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[1] <= clock_count[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[2] <= clock_count[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[3] <= clock_count[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[4] <= clock_count[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[5] <= clock_count[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[6] <= clock_count[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[7] <= clock_count[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[8] <= clock_count[8]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[9] <= clock_count[9]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[10] <= clock_count[10]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[11] <= clock_count[11]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[12] <= clock_count[12]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[13] <= clock_count[13]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[14] <= clock_count[14]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[15] <= clock_count[15]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clk_count_enable <= clk_count_enable~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx
+i_Clock => bit_index_enable~reg0.CLK
+i_Clock => bit_index[0]~reg0.CLK
+i_Clock => bit_index[1]~reg0.CLK
+i_Clock => bit_index[2]~reg0.CLK
+i_Enable => bit_index_enable~reg0.ACLR
+i_Enable => bit_index[0]~reg0.ACLR
+i_Enable => bit_index[1]~reg0.ACLR
+i_Enable => bit_index[2]~reg0.ACLR
+current_state[0] => Equal1.IN5
+current_state[0] => Equal2.IN5
+current_state[0] => Equal3.IN5
+current_state[1] => Equal1.IN4
+current_state[1] => Equal2.IN4
+current_state[1] => Equal3.IN4
+current_state[2] => Equal1.IN3
+current_state[2] => Equal2.IN3
+current_state[2] => Equal3.IN3
+clock_count[0] => Equal0.IN6
+clock_count[1] => Equal0.IN5
+clock_count[2] => Equal0.IN4
+clock_count[3] => Equal0.IN31
+clock_count[4] => Equal0.IN3
+clock_count[5] => Equal0.IN30
+clock_count[6] => Equal0.IN2
+clock_count[7] => Equal0.IN29
+clock_count[8] => Equal0.IN28
+clock_count[9] => Equal0.IN27
+clock_count[10] => Equal0.IN1
+clock_count[11] => Equal0.IN26
+clock_count[12] => Equal0.IN0
+clock_count[13] => Equal0.IN25
+clock_count[14] => Equal0.IN24
+clock_count[15] => Equal0.IN23
+bit_index[0] <= bit_index[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+bit_index[1] <= bit_index[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+bit_index[2] <= bit_index[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+bit_index_enable <= bit_index_enable~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1
+current_state[0] => Equal0.IN5
+current_state[0] => Equal1.IN5
+current_state[0] => Equal2.IN5
+current_state[0] => Equal3.IN5
+current_state[0] => Equal4.IN5
+current_state[1] => Equal0.IN4
+current_state[1] => Equal1.IN4
+current_state[1] => Equal2.IN4
+current_state[1] => Equal3.IN4
+current_state[1] => Equal4.IN4
+current_state[2] => Equal0.IN3
+current_state[2] => Equal1.IN3
+current_state[2] => Equal2.IN3
+current_state[2] => Equal3.IN3
+current_state[2] => Equal4.IN3
 i_Tx_Byte[0] => Mux0.IN7
 i_Tx_Byte[1] => Mux0.IN6
 i_Tx_Byte[2] => Mux0.IN5
@@ -77,8 +246,27 @@ i_Tx_Byte[4] => Mux0.IN3
 i_Tx_Byte[5] => Mux0.IN2
 i_Tx_Byte[6] => Mux0.IN1
 i_Tx_Byte[7] => Mux0.IN0
-o_Tx_Serial <= o_Tx_Serial~reg0.DB_MAX_OUTPUT_PORT_TYPE
-o_Tx_Done <= o_Tx_Done~reg0.DB_MAX_OUTPUT_PORT_TYPE
+bit_index[0] => Mux0.IN10
+bit_index[1] => Mux0.IN9
+bit_index[2] => Mux0.IN8
+o_Tx_Serial <= Selector0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_mux_2:mux2
+current_state[0] => Equal0.IN5
+current_state[1] => Equal0.IN4
+current_state[2] => Equal0.IN3
+o_Tx_Done <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_tx:uart_tx_inst|uart_tx_mux_3:mux3
+current_state[0] => Equal0.IN5
+current_state[0] => Equal1.IN5
+current_state[1] => Equal0.IN4
+current_state[1] => Equal1.IN4
+current_state[2] => Equal0.IN3
+current_state[2] => Equal1.IN3
+o_Tx_Active <= o_Tx_Active.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |uart_fpga_top|uart_rx:uart_rx_inst
@@ -109,12 +297,45 @@ i_Clock => r_Clock_Count[12].CLK
 i_Clock => r_Clock_Count[13].CLK
 i_Clock => r_Clock_Count[14].CLK
 i_Clock => r_Clock_Count[15].CLK
-i_Clock => r_Rx_DV.CLK
+i_Clock => o_Rx_DV~reg0.CLK
 i_Clock => r_Rx_Data.CLK
 i_Clock => r_Rx_Data_R.CLK
 i_Clock => r_SM_Main~6.DATAIN
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => o_Rx_DV.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Bit_Index.OUTPUTSELECT
+i_Enable => r_Bit_Index.OUTPUTSELECT
+i_Enable => r_Bit_Index.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
 i_Rx_Serial => r_Rx_Data_R.DATAIN
-o_Rx_DV <= r_Rx_DV.DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_DV <= o_Rx_DV~reg0.DB_MAX_OUTPUT_PORT_TYPE
 o_Rx_Byte[0] <= r_Rx_Byte[0].DB_MAX_OUTPUT_PORT_TYPE
 o_Rx_Byte[1] <= r_Rx_Byte[1].DB_MAX_OUTPUT_PORT_TYPE
 o_Rx_Byte[2] <= r_Rx_Byte[2].DB_MAX_OUTPUT_PORT_TYPE
@@ -123,5 +344,1927 @@ o_Rx_Byte[4] <= r_Rx_Byte[4].DB_MAX_OUTPUT_PORT_TYPE
 o_Rx_Byte[5] <= r_Rx_Byte[5].DB_MAX_OUTPUT_PORT_TYPE
 o_Rx_Byte[6] <= r_Rx_Byte[6].DB_MAX_OUTPUT_PORT_TYPE
 o_Rx_Byte[7] <= r_Rx_Byte[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_handshake:handshake_inst
+clock => clock.IN2
+reset_n => handshake_active.ACLR
+reset_n => handshake_fail~reg0.ACLR
+reset_n => handshake_successful~reg0.ACLR
+reset_n => handshake_done~reg0.ACLR
+reset_n => tx_data[0].ACLR
+reset_n => tx_data[1].ACLR
+reset_n => tx_data[2].ACLR
+reset_n => tx_data[3].ACLR
+reset_n => tx_data[4].ACLR
+reset_n => tx_data[5].ACLR
+reset_n => tx_data[6].ACLR
+reset_n => tx_data[7].ACLR
+reset_n => tx_start.ACLR
+reset_n => hs_state~8.DATAIN
+i_Rx_Serial => i_Rx_Serial.IN1
+t0 => always0.IN1
+o_Tx_Serial <= uart_tx:uart_tx_inst.o_Tx_Serial
+handshake_done <= handshake_done~reg0.DB_MAX_OUTPUT_PORT_TYPE
+handshake_successful <= handshake_successful~reg0.DB_MAX_OUTPUT_PORT_TYPE
+handshake_fail <= handshake_fail~reg0.DB_MAX_OUTPUT_PORT_TYPE
+handshake_code[0] <= handshake_fail~reg0.DB_MAX_OUTPUT_PORT_TYPE
+handshake_code[1] <= handshake_code.DB_MAX_OUTPUT_PORT_TYPE
+handshake_code[2] <= handshake_code.DB_MAX_OUTPUT_PORT_TYPE
+handshake_code[3] <= handshake_code.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst
+i_Clock => uart_tx_fsm:fsm.i_Clock
+i_Clock => uart_tx_clk_counter:clk_counter.i_Clock
+i_Clock => uart_tx_bit_index:bit_idx.i_Clock
+i_Clock => current_state[0].CLK
+i_Clock => current_state[1].CLK
+i_Clock => current_state[2].CLK
+i_Enable => uart_tx_fsm:fsm.i_Enable
+i_Enable => uart_tx_clk_counter:clk_counter.i_Enable
+i_Enable => uart_tx_bit_index:bit_idx.i_Enable
+i_Enable => current_state[0].ACLR
+i_Enable => current_state[1].ACLR
+i_Enable => current_state[2].ACLR
+i_Tx_DV => uart_tx_fsm:fsm.i_Tx_DV
+i_Tx_Byte[0] => uart_tx_mux_1:mux1.i_Tx_Byte[0]
+i_Tx_Byte[1] => uart_tx_mux_1:mux1.i_Tx_Byte[1]
+i_Tx_Byte[2] => uart_tx_mux_1:mux1.i_Tx_Byte[2]
+i_Tx_Byte[3] => uart_tx_mux_1:mux1.i_Tx_Byte[3]
+i_Tx_Byte[4] => uart_tx_mux_1:mux1.i_Tx_Byte[4]
+i_Tx_Byte[5] => uart_tx_mux_1:mux1.i_Tx_Byte[5]
+i_Tx_Byte[6] => uart_tx_mux_1:mux1.i_Tx_Byte[6]
+i_Tx_Byte[7] => uart_tx_mux_1:mux1.i_Tx_Byte[7]
+o_Tx_Active <= uart_tx_mux_3:mux3.o_Tx_Active
+o_Tx_Serial <= uart_tx_mux_1:mux1.o_Tx_Serial
+o_Tx_Done <= uart_tx_mux_2:mux2.o_Tx_Done
+
+
+|uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_fsm:fsm
+i_Clock => ~NO_FANOUT~
+i_Enable => ~NO_FANOUT~
+i_Tx_DV => Selector1.IN9
+current_state[0] => Equal0.IN5
+current_state[0] => Equal1.IN5
+current_state[0] => Equal2.IN5
+current_state[0] => Equal3.IN5
+current_state[0] => Equal4.IN5
+current_state[1] => Equal0.IN4
+current_state[1] => Equal1.IN4
+current_state[1] => Equal2.IN4
+current_state[1] => Equal3.IN4
+current_state[1] => Equal4.IN4
+current_state[2] => Equal0.IN3
+current_state[2] => Equal1.IN3
+current_state[2] => Equal2.IN3
+current_state[2] => Equal3.IN3
+current_state[2] => Equal4.IN3
+clock_count[0] => LessThan1.IN32
+clock_count[1] => LessThan1.IN31
+clock_count[2] => LessThan1.IN30
+clock_count[3] => LessThan1.IN29
+clock_count[4] => LessThan1.IN28
+clock_count[5] => LessThan1.IN27
+clock_count[6] => LessThan1.IN26
+clock_count[7] => LessThan1.IN25
+clock_count[8] => LessThan1.IN24
+clock_count[9] => LessThan1.IN23
+clock_count[10] => LessThan1.IN22
+clock_count[11] => LessThan1.IN21
+clock_count[12] => LessThan1.IN20
+clock_count[13] => LessThan1.IN19
+clock_count[14] => LessThan1.IN18
+clock_count[15] => LessThan1.IN17
+bit_index[0] => LessThan0.IN6
+bit_index[1] => LessThan0.IN5
+bit_index[2] => LessThan0.IN4
+next_state[0] <= Selector1.DB_MAX_OUTPUT_PORT_TYPE
+next_state[1] <= Selector0.DB_MAX_OUTPUT_PORT_TYPE
+next_state[2] <= next_state.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter
+i_Clock => clk_count_enable~reg0.CLK
+i_Clock => clock_count[0]~reg0.CLK
+i_Clock => clock_count[1]~reg0.CLK
+i_Clock => clock_count[2]~reg0.CLK
+i_Clock => clock_count[3]~reg0.CLK
+i_Clock => clock_count[4]~reg0.CLK
+i_Clock => clock_count[5]~reg0.CLK
+i_Clock => clock_count[6]~reg0.CLK
+i_Clock => clock_count[7]~reg0.CLK
+i_Clock => clock_count[8]~reg0.CLK
+i_Clock => clock_count[9]~reg0.CLK
+i_Clock => clock_count[10]~reg0.CLK
+i_Clock => clock_count[11]~reg0.CLK
+i_Clock => clock_count[12]~reg0.CLK
+i_Clock => clock_count[13]~reg0.CLK
+i_Clock => clock_count[14]~reg0.CLK
+i_Clock => clock_count[15]~reg0.CLK
+i_Enable => clk_count_enable~reg0.ACLR
+i_Enable => clock_count[0]~reg0.ACLR
+i_Enable => clock_count[1]~reg0.ACLR
+i_Enable => clock_count[2]~reg0.ACLR
+i_Enable => clock_count[3]~reg0.ACLR
+i_Enable => clock_count[4]~reg0.ACLR
+i_Enable => clock_count[5]~reg0.ACLR
+i_Enable => clock_count[6]~reg0.ACLR
+i_Enable => clock_count[7]~reg0.ACLR
+i_Enable => clock_count[8]~reg0.ACLR
+i_Enable => clock_count[9]~reg0.ACLR
+i_Enable => clock_count[10]~reg0.ACLR
+i_Enable => clock_count[11]~reg0.ACLR
+i_Enable => clock_count[12]~reg0.ACLR
+i_Enable => clock_count[13]~reg0.ACLR
+i_Enable => clock_count[14]~reg0.ACLR
+i_Enable => clock_count[15]~reg0.ACLR
+next_state[0] => Equal0.IN5
+next_state[0] => Equal1.IN5
+next_state[0] => Equal2.IN5
+next_state[0] => Equal3.IN5
+next_state[0] => Equal4.IN5
+next_state[1] => Equal0.IN4
+next_state[1] => Equal1.IN4
+next_state[1] => Equal2.IN4
+next_state[1] => Equal3.IN4
+next_state[1] => Equal4.IN4
+next_state[2] => Equal0.IN3
+next_state[2] => Equal1.IN3
+next_state[2] => Equal2.IN3
+next_state[2] => Equal3.IN3
+next_state[2] => Equal4.IN3
+clock_count[0] <= clock_count[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[1] <= clock_count[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[2] <= clock_count[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[3] <= clock_count[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[4] <= clock_count[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[5] <= clock_count[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[6] <= clock_count[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[7] <= clock_count[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[8] <= clock_count[8]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[9] <= clock_count[9]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[10] <= clock_count[10]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[11] <= clock_count[11]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[12] <= clock_count[12]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[13] <= clock_count[13]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[14] <= clock_count[14]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clock_count[15] <= clock_count[15]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+clk_count_enable <= clk_count_enable~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx
+i_Clock => bit_index_enable~reg0.CLK
+i_Clock => bit_index[0]~reg0.CLK
+i_Clock => bit_index[1]~reg0.CLK
+i_Clock => bit_index[2]~reg0.CLK
+i_Enable => bit_index_enable~reg0.ACLR
+i_Enable => bit_index[0]~reg0.ACLR
+i_Enable => bit_index[1]~reg0.ACLR
+i_Enable => bit_index[2]~reg0.ACLR
+current_state[0] => Equal1.IN5
+current_state[0] => Equal2.IN5
+current_state[0] => Equal3.IN5
+current_state[1] => Equal1.IN4
+current_state[1] => Equal2.IN4
+current_state[1] => Equal3.IN4
+current_state[2] => Equal1.IN3
+current_state[2] => Equal2.IN3
+current_state[2] => Equal3.IN3
+clock_count[0] => Equal0.IN6
+clock_count[1] => Equal0.IN5
+clock_count[2] => Equal0.IN4
+clock_count[3] => Equal0.IN31
+clock_count[4] => Equal0.IN3
+clock_count[5] => Equal0.IN30
+clock_count[6] => Equal0.IN2
+clock_count[7] => Equal0.IN29
+clock_count[8] => Equal0.IN28
+clock_count[9] => Equal0.IN27
+clock_count[10] => Equal0.IN1
+clock_count[11] => Equal0.IN26
+clock_count[12] => Equal0.IN0
+clock_count[13] => Equal0.IN25
+clock_count[14] => Equal0.IN24
+clock_count[15] => Equal0.IN23
+bit_index[0] <= bit_index[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+bit_index[1] <= bit_index[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+bit_index[2] <= bit_index[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+bit_index_enable <= bit_index_enable~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1
+current_state[0] => Equal0.IN5
+current_state[0] => Equal1.IN5
+current_state[0] => Equal2.IN5
+current_state[0] => Equal3.IN5
+current_state[0] => Equal4.IN5
+current_state[1] => Equal0.IN4
+current_state[1] => Equal1.IN4
+current_state[1] => Equal2.IN4
+current_state[1] => Equal3.IN4
+current_state[1] => Equal4.IN4
+current_state[2] => Equal0.IN3
+current_state[2] => Equal1.IN3
+current_state[2] => Equal2.IN3
+current_state[2] => Equal3.IN3
+current_state[2] => Equal4.IN3
+i_Tx_Byte[0] => Mux0.IN7
+i_Tx_Byte[1] => Mux0.IN6
+i_Tx_Byte[2] => Mux0.IN5
+i_Tx_Byte[3] => Mux0.IN4
+i_Tx_Byte[4] => Mux0.IN3
+i_Tx_Byte[5] => Mux0.IN2
+i_Tx_Byte[6] => Mux0.IN1
+i_Tx_Byte[7] => Mux0.IN0
+bit_index[0] => Mux0.IN10
+bit_index[1] => Mux0.IN9
+bit_index[2] => Mux0.IN8
+o_Tx_Serial <= Selector0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_mux_2:mux2
+current_state[0] => Equal0.IN5
+current_state[1] => Equal0.IN4
+current_state[2] => Equal0.IN3
+o_Tx_Done <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_handshake:handshake_inst|uart_tx:uart_tx_inst|uart_tx_mux_3:mux3
+current_state[0] => Equal0.IN5
+current_state[0] => Equal1.IN5
+current_state[1] => Equal0.IN4
+current_state[1] => Equal1.IN4
+current_state[2] => Equal0.IN3
+current_state[2] => Equal1.IN3
+o_Tx_Active <= o_Tx_Active.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|uart_handshake:handshake_inst|uart_rx:uart_rx_inst
+i_Clock => r_Rx_Byte[0].CLK
+i_Clock => r_Rx_Byte[1].CLK
+i_Clock => r_Rx_Byte[2].CLK
+i_Clock => r_Rx_Byte[3].CLK
+i_Clock => r_Rx_Byte[4].CLK
+i_Clock => r_Rx_Byte[5].CLK
+i_Clock => r_Rx_Byte[6].CLK
+i_Clock => r_Rx_Byte[7].CLK
+i_Clock => r_Bit_Index[0].CLK
+i_Clock => r_Bit_Index[1].CLK
+i_Clock => r_Bit_Index[2].CLK
+i_Clock => r_Clock_Count[0].CLK
+i_Clock => r_Clock_Count[1].CLK
+i_Clock => r_Clock_Count[2].CLK
+i_Clock => r_Clock_Count[3].CLK
+i_Clock => r_Clock_Count[4].CLK
+i_Clock => r_Clock_Count[5].CLK
+i_Clock => r_Clock_Count[6].CLK
+i_Clock => r_Clock_Count[7].CLK
+i_Clock => r_Clock_Count[8].CLK
+i_Clock => r_Clock_Count[9].CLK
+i_Clock => r_Clock_Count[10].CLK
+i_Clock => r_Clock_Count[11].CLK
+i_Clock => r_Clock_Count[12].CLK
+i_Clock => r_Clock_Count[13].CLK
+i_Clock => r_Clock_Count[14].CLK
+i_Clock => r_Clock_Count[15].CLK
+i_Clock => o_Rx_DV~reg0.CLK
+i_Clock => r_Rx_Data.CLK
+i_Clock => r_Rx_Data_R.CLK
+i_Clock => r_SM_Main~6.DATAIN
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => r_SM_Main.OUTPUTSELECT
+i_Enable => o_Rx_DV.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Clock_Count.OUTPUTSELECT
+i_Enable => r_Bit_Index.OUTPUTSELECT
+i_Enable => r_Bit_Index.OUTPUTSELECT
+i_Enable => r_Bit_Index.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Enable => r_Rx_Byte.OUTPUTSELECT
+i_Rx_Serial => r_Rx_Data_R.DATAIN
+o_Rx_DV <= o_Rx_DV~reg0.DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_Byte[0] <= r_Rx_Byte[0].DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_Byte[1] <= r_Rx_Byte[1].DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_Byte[2] <= r_Rx_Byte[2].DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_Byte[3] <= r_Rx_Byte[3].DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_Byte[4] <= r_Rx_Byte[4].DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_Byte[5] <= r_Rx_Byte[5].DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_Byte[6] <= r_Rx_Byte[6].DB_MAX_OUTPUT_PORT_TYPE
+o_Rx_Byte[7] <= r_Rx_Byte[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst
+clk => clk.IN3
+reset => reset.IN3
+enable => comb.IN1
+enable => comb.IN1
+seg_unidades[0] <= BCD_to_7Segment:bcd_unidades.seg
+seg_unidades[1] <= BCD_to_7Segment:bcd_unidades.seg
+seg_unidades[2] <= BCD_to_7Segment:bcd_unidades.seg
+seg_unidades[3] <= BCD_to_7Segment:bcd_unidades.seg
+seg_unidades[4] <= BCD_to_7Segment:bcd_unidades.seg
+seg_unidades[5] <= BCD_to_7Segment:bcd_unidades.seg
+seg_unidades[6] <= BCD_to_7Segment:bcd_unidades.seg
+seg_decenas[0] <= BCD_to_7Segment:bcd_decenas.seg
+seg_decenas[1] <= BCD_to_7Segment:bcd_decenas.seg
+seg_decenas[2] <= BCD_to_7Segment:bcd_decenas.seg
+seg_decenas[3] <= BCD_to_7Segment:bcd_decenas.seg
+seg_decenas[4] <= BCD_to_7Segment:bcd_decenas.seg
+seg_decenas[5] <= BCD_to_7Segment:bcd_decenas.seg
+seg_decenas[6] <= BCD_to_7Segment:bcd_decenas.seg
+t0 <= zero_detected.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz
+clk => clk.IN1
+reset => reset.IN1
+enable => enable.IN1
+count_q[0] <= count_q[0].DB_MAX_OUTPUT_PORT_TYPE
+count_q[1] <= count_q[1].DB_MAX_OUTPUT_PORT_TYPE
+count_q[2] <= count_q[2].DB_MAX_OUTPUT_PORT_TYPE
+count_q[3] <= count_q[3].DB_MAX_OUTPUT_PORT_TYPE
+count_q[4] <= count_q[4].DB_MAX_OUTPUT_PORT_TYPE
+count_q[5] <= count_q[5].DB_MAX_OUTPUT_PORT_TYPE
+count_q[6] <= count_q[6].DB_MAX_OUTPUT_PORT_TYPE
+count_q[7] <= count_q[7].DB_MAX_OUTPUT_PORT_TYPE
+count_q[8] <= count_q[8].DB_MAX_OUTPUT_PORT_TYPE
+count_q[9] <= count_q[9].DB_MAX_OUTPUT_PORT_TYPE
+count_q[10] <= count_q[10].DB_MAX_OUTPUT_PORT_TYPE
+count_q[11] <= count_q[11].DB_MAX_OUTPUT_PORT_TYPE
+count_q[12] <= count_q[12].DB_MAX_OUTPUT_PORT_TYPE
+count_q[13] <= count_q[13].DB_MAX_OUTPUT_PORT_TYPE
+count_q[14] <= count_q[14].DB_MAX_OUTPUT_PORT_TYPE
+count_q[15] <= count_q[15].DB_MAX_OUTPUT_PORT_TYPE
+count_q[16] <= count_q[16].DB_MAX_OUTPUT_PORT_TYPE
+count_q[17] <= count_q[17].DB_MAX_OUTPUT_PORT_TYPE
+count_q[18] <= count_q[18].DB_MAX_OUTPUT_PORT_TYPE
+count_q[19] <= count_q[19].DB_MAX_OUTPUT_PORT_TYPE
+count_q[20] <= count_q[20].DB_MAX_OUTPUT_PORT_TYPE
+count_q[21] <= count_q[21].DB_MAX_OUTPUT_PORT_TYPE
+count_q[22] <= count_q[22].DB_MAX_OUTPUT_PORT_TYPE
+count_q[23] <= count_q[23].DB_MAX_OUTPUT_PORT_TYPE
+count_q[24] <= count_q[24].DB_MAX_OUTPUT_PORT_TYPE
+count_q[25] <= count_q[25].DB_MAX_OUTPUT_PORT_TYPE
+count_d[0] <= count_d[0].DB_MAX_OUTPUT_PORT_TYPE
+count_d[1] <= count_d[1].DB_MAX_OUTPUT_PORT_TYPE
+count_d[2] <= count_d[2].DB_MAX_OUTPUT_PORT_TYPE
+count_d[3] <= count_d[3].DB_MAX_OUTPUT_PORT_TYPE
+count_d[4] <= count_d[4].DB_MAX_OUTPUT_PORT_TYPE
+count_d[5] <= count_d[5].DB_MAX_OUTPUT_PORT_TYPE
+count_d[6] <= count_d[6].DB_MAX_OUTPUT_PORT_TYPE
+count_d[7] <= count_d[7].DB_MAX_OUTPUT_PORT_TYPE
+count_d[8] <= count_d[8].DB_MAX_OUTPUT_PORT_TYPE
+count_d[9] <= count_d[9].DB_MAX_OUTPUT_PORT_TYPE
+count_d[10] <= count_d[10].DB_MAX_OUTPUT_PORT_TYPE
+count_d[11] <= count_d[11].DB_MAX_OUTPUT_PORT_TYPE
+count_d[12] <= count_d[12].DB_MAX_OUTPUT_PORT_TYPE
+count_d[13] <= count_d[13].DB_MAX_OUTPUT_PORT_TYPE
+count_d[14] <= count_d[14].DB_MAX_OUTPUT_PORT_TYPE
+count_d[15] <= count_d[15].DB_MAX_OUTPUT_PORT_TYPE
+count_d[16] <= count_d[16].DB_MAX_OUTPUT_PORT_TYPE
+count_d[17] <= count_d[17].DB_MAX_OUTPUT_PORT_TYPE
+count_d[18] <= count_d[18].DB_MAX_OUTPUT_PORT_TYPE
+count_d[19] <= count_d[19].DB_MAX_OUTPUT_PORT_TYPE
+count_d[20] <= count_d[20].DB_MAX_OUTPUT_PORT_TYPE
+count_d[21] <= count_d[21].DB_MAX_OUTPUT_PORT_TYPE
+count_d[22] <= count_d[22].DB_MAX_OUTPUT_PORT_TYPE
+count_d[23] <= count_d[23].DB_MAX_OUTPUT_PORT_TYPE
+count_d[24] <= count_d[24].DB_MAX_OUTPUT_PORT_TYPE
+count_d[25] <= count_d[25].DB_MAX_OUTPUT_PORT_TYPE
+terminal_count <= terminal_count.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg
+clk => clk.IN26
+reset => reset.IN26
+d[0] => d[0].IN1
+d[1] => d[1].IN1
+d[2] => d[2].IN1
+d[3] => d[3].IN1
+d[4] => d[4].IN1
+d[5] => d[5].IN1
+d[6] => d[6].IN1
+d[7] => d[7].IN1
+d[8] => d[8].IN1
+d[9] => d[9].IN1
+d[10] => d[10].IN1
+d[11] => d[11].IN1
+d[12] => d[12].IN1
+d[13] => d[13].IN1
+d[14] => d[14].IN1
+d[15] => d[15].IN1
+d[16] => d[16].IN1
+d[17] => d[17].IN1
+d[18] => d[18].IN1
+d[19] => d[19].IN1
+d[20] => d[20].IN1
+d[21] => d[21].IN1
+d[22] => d[22].IN1
+d[23] => d[23].IN1
+d[24] => d[24].IN1
+d[25] => d[25].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+q[1] <= D_FF_Cell:DFF_ARRAY[1].dff_cell.q
+q[2] <= D_FF_Cell:DFF_ARRAY[2].dff_cell.q
+q[3] <= D_FF_Cell:DFF_ARRAY[3].dff_cell.q
+q[4] <= D_FF_Cell:DFF_ARRAY[4].dff_cell.q
+q[5] <= D_FF_Cell:DFF_ARRAY[5].dff_cell.q
+q[6] <= D_FF_Cell:DFF_ARRAY[6].dff_cell.q
+q[7] <= D_FF_Cell:DFF_ARRAY[7].dff_cell.q
+q[8] <= D_FF_Cell:DFF_ARRAY[8].dff_cell.q
+q[9] <= D_FF_Cell:DFF_ARRAY[9].dff_cell.q
+q[10] <= D_FF_Cell:DFF_ARRAY[10].dff_cell.q
+q[11] <= D_FF_Cell:DFF_ARRAY[11].dff_cell.q
+q[12] <= D_FF_Cell:DFF_ARRAY[12].dff_cell.q
+q[13] <= D_FF_Cell:DFF_ARRAY[13].dff_cell.q
+q[14] <= D_FF_Cell:DFF_ARRAY[14].dff_cell.q
+q[15] <= D_FF_Cell:DFF_ARRAY[15].dff_cell.q
+q[16] <= D_FF_Cell:DFF_ARRAY[16].dff_cell.q
+q[17] <= D_FF_Cell:DFF_ARRAY[17].dff_cell.q
+q[18] <= D_FF_Cell:DFF_ARRAY[18].dff_cell.q
+q[19] <= D_FF_Cell:DFF_ARRAY[19].dff_cell.q
+q[20] <= D_FF_Cell:DFF_ARRAY[20].dff_cell.q
+q[21] <= D_FF_Cell:DFF_ARRAY[21].dff_cell.q
+q[22] <= D_FF_Cell:DFF_ARRAY[22].dff_cell.q
+q[23] <= D_FF_Cell:DFF_ARRAY[23].dff_cell.q
+q[24] <= D_FF_Cell:DFF_ARRAY[24].dff_cell.q
+q[25] <= D_FF_Cell:DFF_ARRAY[25].dff_cell.q
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[1].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[2].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[3].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[4].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[5].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[6].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[7].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[8].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[9].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[10].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[11].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[12].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[13].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[14].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[15].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[16].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[17].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[18].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[19].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[20].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[21].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[22].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[23].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[24].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[25].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Comparator_N_bits:terminal_count_comparator
+a[0] => xnor_result.IN0
+a[1] => xnor_result.IN0
+a[2] => xnor_result.IN0
+a[3] => xnor_result.IN0
+a[4] => xnor_result.IN0
+a[5] => xnor_result.IN0
+a[6] => xnor_result.IN0
+a[7] => xnor_result.IN0
+a[8] => xnor_result.IN0
+a[9] => xnor_result.IN0
+a[10] => xnor_result.IN0
+a[11] => xnor_result.IN0
+a[12] => xnor_result.IN0
+a[13] => xnor_result.IN0
+a[14] => xnor_result.IN0
+a[15] => xnor_result.IN0
+a[16] => xnor_result.IN0
+a[17] => xnor_result.IN0
+a[18] => xnor_result.IN0
+a[19] => xnor_result.IN0
+a[20] => xnor_result.IN0
+a[21] => xnor_result.IN0
+a[22] => xnor_result.IN0
+a[23] => xnor_result.IN0
+a[24] => xnor_result.IN0
+a[25] => xnor_result.IN0
+b[0] => xnor_result.IN1
+b[1] => xnor_result.IN1
+b[2] => xnor_result.IN1
+b[3] => xnor_result.IN1
+b[4] => xnor_result.IN1
+b[5] => xnor_result.IN1
+b[6] => xnor_result.IN1
+b[7] => xnor_result.IN1
+b[8] => xnor_result.IN1
+b[9] => xnor_result.IN1
+b[10] => xnor_result.IN1
+b[11] => xnor_result.IN1
+b[12] => xnor_result.IN1
+b[13] => xnor_result.IN1
+b[14] => xnor_result.IN1
+b[15] => xnor_result.IN1
+b[16] => xnor_result.IN1
+b[17] => xnor_result.IN1
+b[18] => xnor_result.IN1
+b[19] => xnor_result.IN1
+b[20] => xnor_result.IN1
+b[21] => xnor_result.IN1
+b[22] => xnor_result.IN1
+b[23] => xnor_result.IN1
+b[24] => xnor_result.IN1
+b[25] => xnor_result.IN1
+equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+a[4] => a[4].IN1
+a[5] => a[5].IN1
+a[6] => a[6].IN1
+a[7] => a[7].IN1
+a[8] => a[8].IN1
+a[9] => a[9].IN1
+a[10] => a[10].IN1
+a[11] => a[11].IN1
+a[12] => a[12].IN1
+a[13] => a[13].IN1
+a[14] => a[14].IN1
+a[15] => a[15].IN1
+a[16] => a[16].IN1
+a[17] => a[17].IN1
+a[18] => a[18].IN1
+a[19] => a[19].IN1
+a[20] => a[20].IN1
+a[21] => a[21].IN1
+a[22] => a[22].IN1
+a[23] => a[23].IN1
+a[24] => a[24].IN1
+a[25] => a[25].IN1
+b[0] => b[0].IN1
+b[1] => b[1].IN1
+b[2] => b[2].IN1
+b[3] => b[3].IN1
+b[4] => b[4].IN1
+b[5] => b[5].IN1
+b[6] => b[6].IN1
+b[7] => b[7].IN1
+b[8] => b[8].IN1
+b[9] => b[9].IN1
+b[10] => b[10].IN1
+b[11] => b[11].IN1
+b[12] => b[12].IN1
+b[13] => b[13].IN1
+b[14] => b[14].IN1
+b[15] => b[15].IN1
+b[16] => b[16].IN1
+b[17] => b[17].IN1
+b[18] => b[18].IN1
+b[19] => b[19].IN1
+b[20] => b[20].IN1
+b[21] => b[21].IN1
+b[22] => b[22].IN1
+b[23] => b[23].IN1
+b[24] => b[24].IN1
+b[25] => b[25].IN1
+sum[0] <= Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst.sum
+sum[1] <= Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst.sum
+sum[2] <= Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst.sum
+sum[3] <= Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst.sum
+sum[4] <= Full_Adder:FULL_ADDER_ARRAY[4].full_adder_inst.sum
+sum[5] <= Full_Adder:FULL_ADDER_ARRAY[5].full_adder_inst.sum
+sum[6] <= Full_Adder:FULL_ADDER_ARRAY[6].full_adder_inst.sum
+sum[7] <= Full_Adder:FULL_ADDER_ARRAY[7].full_adder_inst.sum
+sum[8] <= Full_Adder:FULL_ADDER_ARRAY[8].full_adder_inst.sum
+sum[9] <= Full_Adder:FULL_ADDER_ARRAY[9].full_adder_inst.sum
+sum[10] <= Full_Adder:FULL_ADDER_ARRAY[10].full_adder_inst.sum
+sum[11] <= Full_Adder:FULL_ADDER_ARRAY[11].full_adder_inst.sum
+sum[12] <= Full_Adder:FULL_ADDER_ARRAY[12].full_adder_inst.sum
+sum[13] <= Full_Adder:FULL_ADDER_ARRAY[13].full_adder_inst.sum
+sum[14] <= Full_Adder:FULL_ADDER_ARRAY[14].full_adder_inst.sum
+sum[15] <= Full_Adder:FULL_ADDER_ARRAY[15].full_adder_inst.sum
+sum[16] <= Full_Adder:FULL_ADDER_ARRAY[16].full_adder_inst.sum
+sum[17] <= Full_Adder:FULL_ADDER_ARRAY[17].full_adder_inst.sum
+sum[18] <= Full_Adder:FULL_ADDER_ARRAY[18].full_adder_inst.sum
+sum[19] <= Full_Adder:FULL_ADDER_ARRAY[19].full_adder_inst.sum
+sum[20] <= Full_Adder:FULL_ADDER_ARRAY[20].full_adder_inst.sum
+sum[21] <= Full_Adder:FULL_ADDER_ARRAY[21].full_adder_inst.sum
+sum[22] <= Full_Adder:FULL_ADDER_ARRAY[22].full_adder_inst.sum
+sum[23] <= Full_Adder:FULL_ADDER_ARRAY[23].full_adder_inst.sum
+sum[24] <= Full_Adder:FULL_ADDER_ARRAY[24].full_adder_inst.sum
+sum[25] <= Full_Adder:FULL_ADDER_ARRAY[25].full_adder_inst.sum
+carry_out <= Full_Adder:FULL_ADDER_ARRAY[25].full_adder_inst.cout
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[4].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[5].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[6].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[7].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[8].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[9].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[10].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[11].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[12].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[13].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[14].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[15].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[16].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[17].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[18].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[19].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[20].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[21].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[22].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[23].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[24].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Adder_N_bits:incrementer|Full_Adder:FULL_ADDER_ARRAY[25].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:enable_mux
+in0[0] => out.IN0
+in0[1] => out.IN0
+in0[2] => out.IN0
+in0[3] => out.IN0
+in0[4] => out.IN0
+in0[5] => out.IN0
+in0[6] => out.IN0
+in0[7] => out.IN0
+in0[8] => out.IN0
+in0[9] => out.IN0
+in0[10] => out.IN0
+in0[11] => out.IN0
+in0[12] => out.IN0
+in0[13] => out.IN0
+in0[14] => out.IN0
+in0[15] => out.IN0
+in0[16] => out.IN0
+in0[17] => out.IN0
+in0[18] => out.IN0
+in0[19] => out.IN0
+in0[20] => out.IN0
+in0[21] => out.IN0
+in0[22] => out.IN0
+in0[23] => out.IN0
+in0[24] => out.IN0
+in0[25] => out.IN0
+in1[0] => out.IN0
+in1[1] => out.IN0
+in1[2] => out.IN0
+in1[3] => out.IN0
+in1[4] => out.IN0
+in1[5] => out.IN0
+in1[6] => out.IN0
+in1[7] => out.IN0
+in1[8] => out.IN0
+in1[9] => out.IN0
+in1[10] => out.IN0
+in1[11] => out.IN0
+in1[12] => out.IN0
+in1[13] => out.IN0
+in1[14] => out.IN0
+in1[15] => out.IN0
+in1[16] => out.IN0
+in1[17] => out.IN0
+in1[18] => out.IN0
+in1[19] => out.IN0
+in1[20] => out.IN0
+in1[21] => out.IN0
+in1[22] => out.IN0
+in1[23] => out.IN0
+in1[24] => out.IN0
+in1[25] => out.IN0
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[8] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[9] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[10] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[11] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[12] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[13] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[14] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[15] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[16] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[17] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[18] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[19] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[20] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[21] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[22] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[23] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[24] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[25] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Counter_N_bits:contador_1hz|Mux2to1_N_bits:terminal_count_mux
+in0[0] => out.IN0
+in0[1] => out.IN0
+in0[2] => out.IN0
+in0[3] => out.IN0
+in0[4] => out.IN0
+in0[5] => out.IN0
+in0[6] => out.IN0
+in0[7] => out.IN0
+in0[8] => out.IN0
+in0[9] => out.IN0
+in0[10] => out.IN0
+in0[11] => out.IN0
+in0[12] => out.IN0
+in0[13] => out.IN0
+in0[14] => out.IN0
+in0[15] => out.IN0
+in0[16] => out.IN0
+in0[17] => out.IN0
+in0[18] => out.IN0
+in0[19] => out.IN0
+in0[20] => out.IN0
+in0[21] => out.IN0
+in0[22] => out.IN0
+in0[23] => out.IN0
+in0[24] => out.IN0
+in0[25] => out.IN0
+in1[0] => out.IN0
+in1[1] => out.IN0
+in1[2] => out.IN0
+in1[3] => out.IN0
+in1[4] => out.IN0
+in1[5] => out.IN0
+in1[6] => out.IN0
+in1[7] => out.IN0
+in1[8] => out.IN0
+in1[9] => out.IN0
+in1[10] => out.IN0
+in1[11] => out.IN0
+in1[12] => out.IN0
+in1[13] => out.IN0
+in1[14] => out.IN0
+in1[15] => out.IN0
+in1[16] => out.IN0
+in1[17] => out.IN0
+in1[18] => out.IN0
+in1[19] => out.IN0
+in1[20] => out.IN0
+in1[21] => out.IN0
+in1[22] => out.IN0
+in1[23] => out.IN0
+in1[24] => out.IN0
+in1[25] => out.IN0
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[8] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[9] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[10] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[11] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[12] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[13] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[14] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[15] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[16] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[17] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[18] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[19] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[20] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[21] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[22] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[23] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[24] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[25] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Comparator_N_bits:unidades_zero_comparator
+a[0] => xnor_result.IN0
+a[1] => xnor_result.IN0
+a[2] => xnor_result.IN0
+a[3] => xnor_result.IN0
+b[0] => xnor_result.IN1
+b[1] => xnor_result.IN1
+b[2] => xnor_result.IN1
+b[3] => xnor_result.IN1
+equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|Comparator_N_bits:decenas_zero_comparator
+a[0] => xnor_result.IN0
+a[1] => xnor_result.IN0
+a[2] => xnor_result.IN0
+a[3] => xnor_result.IN0
+b[0] => xnor_result.IN1
+b[1] => xnor_result.IN1
+b[2] => xnor_result.IN1
+b[3] => xnor_result.IN1
+equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter
+clk => clk.IN1
+reset => reset.IN1
+enable => enable.IN1
+load => load.IN1
+load_value[0] => load_value[0].IN1
+load_value[1] => load_value[1].IN1
+load_value[2] => load_value[2].IN1
+load_value[3] => load_value[3].IN1
+count_q[0] <= count_q[0].DB_MAX_OUTPUT_PORT_TYPE
+count_q[1] <= count_q[1].DB_MAX_OUTPUT_PORT_TYPE
+count_q[2] <= count_q[2].DB_MAX_OUTPUT_PORT_TYPE
+count_q[3] <= count_q[3].DB_MAX_OUTPUT_PORT_TYPE
+count_d[0] <= count_d[0].DB_MAX_OUTPUT_PORT_TYPE
+count_d[1] <= count_d[1].DB_MAX_OUTPUT_PORT_TYPE
+count_d[2] <= count_d[2].DB_MAX_OUTPUT_PORT_TYPE
+count_d[3] <= count_d[3].DB_MAX_OUTPUT_PORT_TYPE
+borrow_out <= borrow_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg
+clk => clk.IN4
+reset => reset.IN4
+d[0] => d[0].IN1
+d[1] => d[1].IN1
+d[2] => d[2].IN1
+d[3] => d[3].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+q[1] <= D_FF_Cell:DFF_ARRAY[1].dff_cell.q
+q[2] <= D_FF_Cell:DFF_ARRAY[2].dff_cell.q
+q[3] <= D_FF_Cell:DFF_ARRAY[3].dff_cell.q
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[1].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[2].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[3].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Comparator_N_bits:borrow_comparator
+a[0] => xnor_result.IN0
+a[1] => xnor_result.IN0
+a[2] => xnor_result.IN0
+a[3] => xnor_result.IN0
+b[0] => xnor_result.IN1
+b[1] => xnor_result.IN1
+b[2] => xnor_result.IN1
+b[3] => xnor_result.IN1
+equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+b[0] => b[0].IN1
+b[1] => b[1].IN1
+b[2] => b[2].IN1
+b[3] => b[3].IN1
+sum[0] <= Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst.sum
+sum[1] <= Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst.sum
+sum[2] <= Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst.sum
+sum[3] <= Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst.sum
+carry_out <= Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst.cout
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:borrow_mux
+in0[0] => out.IN0
+in0[1] => out.IN0
+in0[2] => out.IN0
+in0[3] => out.IN0
+in1[0] => out.IN0
+in1[1] => out.IN0
+in1[2] => out.IN0
+in1[3] => out.IN0
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:enable_mux
+in0[0] => out.IN0
+in0[1] => out.IN0
+in0[2] => out.IN0
+in0[3] => out.IN0
+in1[0] => out.IN0
+in1[1] => out.IN0
+in1[2] => out.IN0
+in1[3] => out.IN0
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:unidades_counter|Mux2to1_N_bits:load_mux
+in0[0] => out.IN0
+in0[1] => out.IN0
+in0[2] => out.IN0
+in0[3] => out.IN0
+in1[0] => out.IN0
+in1[1] => out.IN0
+in1[2] => out.IN0
+in1[3] => out.IN0
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter
+clk => clk.IN1
+reset => reset.IN1
+enable => enable.IN1
+load => load.IN1
+load_value[0] => load_value[0].IN1
+load_value[1] => load_value[1].IN1
+load_value[2] => load_value[2].IN1
+load_value[3] => load_value[3].IN1
+count_q[0] <= count_q[0].DB_MAX_OUTPUT_PORT_TYPE
+count_q[1] <= count_q[1].DB_MAX_OUTPUT_PORT_TYPE
+count_q[2] <= count_q[2].DB_MAX_OUTPUT_PORT_TYPE
+count_q[3] <= count_q[3].DB_MAX_OUTPUT_PORT_TYPE
+count_d[0] <= count_d[0].DB_MAX_OUTPUT_PORT_TYPE
+count_d[1] <= count_d[1].DB_MAX_OUTPUT_PORT_TYPE
+count_d[2] <= count_d[2].DB_MAX_OUTPUT_PORT_TYPE
+count_d[3] <= count_d[3].DB_MAX_OUTPUT_PORT_TYPE
+borrow_out <= borrow_out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg
+clk => clk.IN4
+reset => reset.IN4
+d[0] => d[0].IN1
+d[1] => d[1].IN1
+d[2] => d[2].IN1
+d[3] => d[3].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+q[1] <= D_FF_Cell:DFF_ARRAY[1].dff_cell.q
+q[2] <= D_FF_Cell:DFF_ARRAY[2].dff_cell.q
+q[3] <= D_FF_Cell:DFF_ARRAY[3].dff_cell.q
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[1].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[2].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|D_FF_Manual:contador_reg|D_FF_Cell:DFF_ARRAY[3].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Comparator_N_bits:borrow_comparator
+a[0] => xnor_result.IN0
+a[1] => xnor_result.IN0
+a[2] => xnor_result.IN0
+a[3] => xnor_result.IN0
+b[0] => xnor_result.IN1
+b[1] => xnor_result.IN1
+b[2] => xnor_result.IN1
+b[3] => xnor_result.IN1
+equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+a[2] => a[2].IN1
+a[3] => a[3].IN1
+b[0] => b[0].IN1
+b[1] => b[1].IN1
+b[2] => b[2].IN1
+b[3] => b[3].IN1
+sum[0] <= Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst.sum
+sum[1] <= Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst.sum
+sum[2] <= Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst.sum
+sum[3] <= Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst.sum
+carry_out <= Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst.cout
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Adder_N_bits:decrementer|Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst
+a => sum.IN0
+a => cout.IN0
+b => sum.IN1
+b => cout.IN1
+cin => sum.IN1
+cin => cout.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:borrow_mux
+in0[0] => out.IN0
+in0[1] => out.IN0
+in0[2] => out.IN0
+in0[3] => out.IN0
+in1[0] => out.IN0
+in1[1] => out.IN0
+in1[2] => out.IN0
+in1[3] => out.IN0
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:enable_mux
+in0[0] => out.IN0
+in0[1] => out.IN0
+in0[2] => out.IN0
+in0[3] => out.IN0
+in1[0] => out.IN0
+in1[1] => out.IN0
+in1[2] => out.IN0
+in1[3] => out.IN0
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_Counter:decenas_counter|Mux2to1_N_bits:load_mux
+in0[0] => out.IN0
+in0[1] => out.IN0
+in0[2] => out.IN0
+in0[3] => out.IN0
+in1[0] => out.IN0
+in1[1] => out.IN0
+in1[2] => out.IN0
+in1[3] => out.IN0
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+sel => out.IN1
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_to_7Segment:bcd_unidades
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN0
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[2] => seg.IN1
+bcd[2] => seg.IN0
+bcd[2] => seg.IN0
+bcd[2] => seg.IN0
+bcd[2] => seg.IN1
+bcd[2] => seg.IN0
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+seg[0] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|Timer:timer_inst|BCD_to_7Segment:bcd_decenas
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN0
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[2] => seg.IN1
+bcd[2] => seg.IN0
+bcd[2] => seg.IN0
+bcd[2] => seg.IN0
+bcd[2] => seg.IN1
+bcd[2] => seg.IN0
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+seg[0] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|uart_fpga_top|BCD_to_7Segment:bcd_to_7seg_inst
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN0
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[2] => seg.IN1
+bcd[2] => seg.IN0
+bcd[2] => seg.IN0
+bcd[2] => seg.IN0
+bcd[2] => seg.IN1
+bcd[2] => seg.IN0
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+seg[0] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= seg.DB_MAX_OUTPUT_PORT_TYPE
 
 
