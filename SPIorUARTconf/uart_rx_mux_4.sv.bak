@@ -1,0 +1,10 @@
+module uart_rx_mux_4(
+  input  logic [2:0] sel,
+  input  logic [2:0] in0,
+  input  logic [2:0] in1,
+  output logic [2:0] out
+);
+  always_comb begin
+    out = (sel == 3'b000) ? in1 : in0; // Si es s_IDLE, usa in1, de lo contrario usa in0
+  end
+endmodule

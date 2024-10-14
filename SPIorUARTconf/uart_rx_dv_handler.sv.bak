@@ -1,0 +1,11 @@
+module uart_rx_dv_handler(
+  input  logic [2:0] r_SM_Main,
+  input  logic r_Rx_Data,
+  input  logic [15:0] r_Clock_Count,
+  input  int CLKS_PER_BIT,
+  output logic rx_dv
+);
+  always_comb begin
+    rx_dv = (r_SM_Main == 3'b011 && r_Clock_Count == CLKS_PER_BIT-1 && r_Rx_Data == 1'b1) ? 1'b1 : 1'b0;
+  end
+endmodule

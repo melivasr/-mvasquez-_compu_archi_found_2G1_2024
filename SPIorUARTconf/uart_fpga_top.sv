@@ -36,52 +36,88 @@ module uart_fpga_top (
     logic t0;
     logic timer_enable;
 
-    // Sincronización del botón al dominio de reloj
-    always_ff @(posedge clock or negedge reset_n) begin
-        if (!reset_n) begin
-            button_sync0 <= 1'b1;
-            button_sync1 <= 1'b1;
-            button_prev  <= 1'b1;
-        end else begin
-            button_sync0 <= button;
-            button_sync1 <= button_sync0;
-            button_prev  <= button_sync1;
-        end
-    end
+    // Señales para lógica estructural
+    logic tx_start_next;
+    logic [7:0] tx_data_next;
+    logic [7:0] received_data_next;
+
+    // Instanciación de los flip-flops para la sincronización del botón
+    D_FF_Manual button_sync0_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(button),
+        .q(button_sync0)
+    );
+
+    D_FF_Manual button_sync1_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(button_sync0),
+        .q(button_sync1)
+    );
+
+    D_FF_Manual button_prev_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(button_sync1),
+        .q(button_prev)
+    );
 
     // Detección del flanco de subida (liberación del botón)
     assign button_released = (button_prev == 1'b0) && (button_sync1 == 1'b1);
 
     // Habilitación de UART basada en handshake_successful y handshake_fail
-    assign uart_enable = handshake_successful && !handshake_fail;
+    assign uart_enable = handshake_successful && ~handshake_fail;
 
     // Habilitación del timer
-    assign timer_enable = !handshake_fail;
+    assign timer_enable = ~handshake_fail;
 
-    // Lógica para iniciar la transmisión UART al liberar el botón
-    always_ff @(posedge clock or negedge reset_n) begin
-        if (!reset_n) begin
-            tx_start      <= 1'b0;
-            tx_data       <= 8'd0;
-            received_data <= 8'd0;
-        end else begin
-            if (uart_enable) begin
-                if (button_released && !tx_busy) begin
-                    tx_start <= 1'b1;
-                    tx_data  <= switches;  // Captura el valor de los switches
-                end else begin
-                    tx_start <= 1'b0;
-                end
-                if (rx_dv) begin
-                    received_data <= rx_data;
-                end
-            end else begin
-                tx_start      <= 1'b0;
-                // Opcionalmente, limpiar received_data
-                // received_data <= 8'd0;
-            end
-        end
-    end
+    // Generación de señales para los multiplexores
+    // Mux para tx_start_next
+    uart_fpga_top_mux_2 tx_start_mux (
+        .sel(uart_enable & button_released & ~tx_busy),
+        .in0(1'b0),
+        .in1(1'b1),
+        .out(tx_start_next)
+    );
+
+    // Mux para tx_data_next
+    uart_fpga_top_mux_3 tx_data_mux (
+        .sel(uart_enable & button_released & ~tx_busy),
+        .in0(tx_data),
+        .in1(switches),
+        .out(tx_data_next)
+    );
+
+    // Mux para received_data_next
+    uart_fpga_top_mux_4 received_data_mux (
+        .sel(uart_enable & rx_dv),
+        .in0(received_data),
+        .in1(rx_data),
+        .out(received_data_next)
+    );
+
+    // Instanciación de los flip-flops para tx_start, tx_data y received_data
+    D_FF_Manual #(.N(1)) tx_start_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(tx_start_next),
+        .q(tx_start)
+    );
+
+    D_FF_Manual #(.N(8)) tx_data_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(tx_data_next),
+        .q(tx_data)
+    );
+
+    D_FF_Manual #(.N(8)) received_data_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(received_data_next),
+        .q(received_data)
+    );
 
     // Instancia del módulo UART Transmisor
     uart_tx #(
@@ -107,9 +143,6 @@ module uart_fpga_top (
         .o_Rx_Byte   (rx_data)
     );
 
-    // Asignación del dato recibido a los LEDs después del handshake
-    assign leds = (uart_enable) ? received_data : 8'd0;
-
     // Instancia del módulo de handshake
     uart_handshake handshake_inst (
         .clock               (clock),
@@ -123,13 +156,25 @@ module uart_fpga_top (
         .handshake_code      (handshake_code)
     );
 
-    // Multiplexor para o_Tx_Serial
-    assign o_Tx_Serial = uart_enable ? o_Tx_Serial_normal : handshake_o_Tx_Serial;
+    // Instancia de los multiplexores estructurales para reemplazar las asignaciones con "?"
+    uart_fpga_top_mux_0 leds_mux (
+        .sel(uart_enable),
+        .in0(8'd0),
+        .in1(received_data),
+        .out(leds)
+    );
+
+    uart_fpga_top_mux_1 tx_serial_mux (
+        .sel(uart_enable),
+        .in0(handshake_o_Tx_Serial),
+        .in1(o_Tx_Serial_normal),
+        .out(o_Tx_Serial)
+    );
 
     // Instancia del módulo Timer
     Timer timer_inst (
         .clk            (clock),
-        .reset          (!reset_n || handshake_fail),  // Reset si hay falla en el handshake
+        .reset          (~reset_n || handshake_fail),  // Reset si hay falla en el handshake
         .enable         (timer_enable),
         .seg_unidades   (seg_unidades),
         .seg_decenas    (seg_decenas),

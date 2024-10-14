@@ -1,4 +1,3 @@
-// uart_tx_fsm_structural.sv
 module uart_tx_fsm
   #(parameter int CLKS_PER_BIT = 5208)
   (

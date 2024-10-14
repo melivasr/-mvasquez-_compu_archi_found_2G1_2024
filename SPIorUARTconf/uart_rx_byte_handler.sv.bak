@@ -1,0 +1,16 @@
+module uart_rx_byte_handler(
+  input  logic [2:0] r_SM_Main,
+  input  logic r_Rx_Data,
+  input  logic [7:0] r_Rx_Byte,
+  input  logic [2:0] r_Bit_Index,
+  input  logic [15:0] r_Clock_Count,
+  input  int CLKS_PER_BIT,
+  output logic [7:0] next_byte
+);
+  always_comb begin
+    if (r_SM_Main == 3'b010 && r_Clock_Count == CLKS_PER_BIT-1) // s_RX_DATA_BITS
+      next_byte = {r_Rx_Byte[7:1], r_Rx_Data};
+    else
+      next_byte = r_Rx_Byte;
+  end
+endmodule

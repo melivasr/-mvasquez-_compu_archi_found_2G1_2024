@@ -1,0 +1,12 @@
+// uart_rx_sync.sv
+module uart_rx_sync (
+    input  logic       i_Clock,
+    input  logic       i_Rx_Serial,
+    output logic       o_Rx_Data_R,
+    output logic       o_Rx_Data
+);
+    always_ff @(posedge i_Clock) begin
+        o_Rx_Data_R <= i_Rx_Serial;
+        o_Rx_Data   <= o_Rx_Data_R;
+    end
+endmodule
