@@ -1,0 +1,30 @@
+module FSM_ALU (
+	input clk, reset, handshaking, confirm_op, 
+	input logic [1:0] switch_op,
+	output logic [1:0] alu_result
+
+);
+
+	logic [1:0] state;
+	logic [1:0] next_state;
+	logic s1_not, s0_not, c_not;
+	logic termn1_ns1, term2_ns1, term1_ns0, term2_ns0;
+	logic alu_enable;
+	logic [1:0] alu_out, mux_out;
+	//Negados
+	assign s1_not = ~state[1];
+	assign s0_not = ~state[0];
+	assign c_not = ~confirm_op;
+	// NS1 = (~S1 * S0 * c) + (S1 * ~S0)
+	// NS0 = (~S1 * ~S0 * h) + (~S1 * S0 *~c) + S1
+	//Términos para NS1 y NS2
+	assign termn1_ns1 = s1_not & state[0] & confirm_op;
+	assign termn2_ns1 = state[1] & state[0] & confirm_op;
+	assign termn1_ns0 = ~s1_not & ~s0 & handshaking;
+	assign termn2_ns0 = ~s1_not & state[0] & c_not;
+	//Unión de términos
+	assign next_state = termn1_ns1 | termn2_ns1;
+	assign state = termn1_ns0 | termn2_ns0 | state[1];
+	 
+
+endmodule
