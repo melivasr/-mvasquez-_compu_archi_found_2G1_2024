@@ -1,5 +1,0 @@
-module andOP(input logic a,b, output logic z);
-
-assing z = a & b;
-
-endmodule
