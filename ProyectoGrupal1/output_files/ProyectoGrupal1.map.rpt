@@ -1,5 +1,5 @@
 Analysis & Elaboration report for ProyectoGrupal1
-Fri Oct 11 15:59:34 2024
+Sat Oct 19 16:04:53 2024
 Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
 
 
@@ -10,7 +10,18 @@ Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
   2. Analysis & Elaboration Summary
   3. Parallel Compilation
   4. Analysis & Elaboration Settings
-  5. Analysis & Elaboration Messages
+  5. Port Connectivity Checks: "lessthan:lessthan_2"
+  6. Port Connectivity Checks: "fulladderOP:fulladder3"
+  7. Port Connectivity Checks: "fulladderOP:fulladder2"
+  8. Port Connectivity Checks: "fulladderOP:fulladder1"
+  9. Port Connectivity Checks: "mux2a1:mux2a1_3"
+ 10. Port Connectivity Checks: "mux2a1:mux2a1_2"
+ 11. Port Connectivity Checks: "mux2a1:mux2a1_1"
+ 12. Port Connectivity Checks: "lessthan:lessthan_1|fulladderOP:fulladder3"
+ 13. Port Connectivity Checks: "lessthan:lessthan_1|fulladderOP:fulladder2"
+ 14. Port Connectivity Checks: "lessthan:lessthan_1|fulladderOP:fulladder1"
+ 15. Port Connectivity Checks: "lessthan:lessthan_1"
+ 16. Analysis & Elaboration Messages
 
 
 
@@ -37,10 +48,10 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------------------------------------------+
 ; Analysis & Elaboration Summary                                              ;
 +-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Successful - Fri Oct 11 15:59:34 2024       ;
+; Analysis & Elaboration Status ; Successful - Sat Oct 19 16:04:53 2024       ;
 ; Quartus Prime Version         ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
 ; Revision Name                 ; ProyectoGrupal1                             ;
-; Top-level Entity Name         ; ALU                                         ;
+; Top-level Entity Name         ; PWM_Generator                               ;
 ; Family                        ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
 ; Total registers               ; N/A until Partition Merge                   ;
@@ -74,7 +85,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CSXFC6D6F31C6     ;                    ;
-; Top-level entity name                                                           ; ALU                ; ProyectoGrupal1    ;
+; Top-level entity name                                                           ; PWM_Generator      ; ProyectoGrupal1    ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
@@ -155,13 +166,116 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
++-------------------------------------------------+
+; Port Connectivity Checks: "lessthan:lessthan_2" ;
++------+-------+----------+-----------------------+
+; Port ; Type  ; Severity ; Details               ;
++------+-------+----------+-----------------------+
+; B[2] ; Input ; Info     ; Stuck at GND          ;
++------+-------+----------+-----------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "fulladderOP:fulladder3"                                                                                  ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                                                  ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; b    ; Input  ; Info     ; Stuck at GND                                                                                             ;
+; cout ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------+
+; Port Connectivity Checks: "fulladderOP:fulladder2" ;
++------+-------+----------+--------------------------+
+; Port ; Type  ; Severity ; Details                  ;
++------+-------+----------+--------------------------+
+; b    ; Input ; Info     ; Stuck at GND             ;
++------+-------+----------+--------------------------+
+
+
++----------------------------------------------------+
+; Port Connectivity Checks: "fulladderOP:fulladder1" ;
++------+-------+----------+--------------------------+
+; Port ; Type  ; Severity ; Details                  ;
++------+-------+----------+--------------------------+
+; b    ; Input ; Info     ; Stuck at VCC             ;
+; cin  ; Input ; Info     ; Stuck at GND             ;
++------+-------+----------+--------------------------+
+
+
++---------------------------------------------+
+; Port Connectivity Checks: "mux2a1:mux2a1_3" ;
++------+-------+----------+-------------------+
+; Port ; Type  ; Severity ; Details           ;
++------+-------+----------+-------------------+
+; a    ; Input ; Info     ; Stuck at GND      ;
++------+-------+----------+-------------------+
+
+
++---------------------------------------------+
+; Port Connectivity Checks: "mux2a1:mux2a1_2" ;
++------+-------+----------+-------------------+
+; Port ; Type  ; Severity ; Details           ;
++------+-------+----------+-------------------+
+; a    ; Input ; Info     ; Stuck at GND      ;
++------+-------+----------+-------------------+
+
+
++---------------------------------------------+
+; Port Connectivity Checks: "mux2a1:mux2a1_1" ;
++------+-------+----------+-------------------+
+; Port ; Type  ; Severity ; Details           ;
++------+-------+----------+-------------------+
+; a    ; Input ; Info     ; Stuck at GND      ;
++------+-------+----------+-------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "lessthan:lessthan_1|fulladderOP:fulladder3"                                                              ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                                                  ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; cout ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "lessthan:lessthan_1|fulladderOP:fulladder2"                                                              ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                                                  ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; s    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "lessthan:lessthan_1|fulladderOP:fulladder1"                                                              ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                                                  ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; cin  ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; s    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------+
+; Port Connectivity Checks: "lessthan:lessthan_1" ;
++---------+-------+----------+--------------------+
+; Port    ; Type  ; Severity ; Details            ;
++---------+-------+----------+--------------------+
+; B[1..0] ; Input ; Info     ; Stuck at VCC       ;
+; B[2]    ; Input ; Info     ; Stuck at GND       ;
++---------+-------+----------+--------------------+
+
+
 +---------------------------------+
 ; Analysis & Elaboration Messages ;
 +---------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
-    Info: Processing started: Fri Oct 11 15:59:27 2024
+    Info: Processing started: Sat Oct 19 16:04:36 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ProyectoGrupal1 -c ProyectoGrupal1 --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -181,17 +295,24 @@ Info (12021): Found 1 design units, including 1 entities, in source file alu.sv
     Info (12023): Found entity 1: ALU File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file alu_testbench.sv
     Info (12023): Found entity 1: ALU_testbench File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU_testbench.sv Line: 1
-Info (12127): Elaborating entity "ALU" for the top level hierarchy
-Info (12128): Elaborating entity "andOP" for hierarchy "andOP:and_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 6
-Info (12128): Elaborating entity "orOP" for hierarchy "orOP:or_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 8
-Info (12128): Elaborating entity "mux2a1" for hierarchy "mux2a1:mux2_inst_1" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 10
-Info (12128): Elaborating entity "fulladder2Bits" for hierarchy "fulladder2Bits:fulladder_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 13
-Info (12128): Elaborating entity "fulladderOP" for hierarchy "fulladder2Bits:fulladder_inst|fulladderOP:unidades" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladder2Bits.sv Line: 5
-Info (12128): Elaborating entity "mux8a2" for hierarchy "mux8a2:mux8_inst" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/ALU.sv Line: 15
-Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4769 megabytes
-    Info: Processing ended: Fri Oct 11 15:59:34 2024
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:08
+Info (12021): Found 1 design units, including 1 entities, in source file pwm_generator.sv
+    Info (12023): Found entity 1: PWM_Generator File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file pwm_generator_tb.sv
+    Info (12023): Found entity 1: PWM_Generator_tb File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file register.sv
+    Info (12023): Found entity 1: register File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/register.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file lessthan.sv
+    Info (12023): Found entity 1: lessthan File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 1
+Info (12127): Elaborating entity "PWM_Generator" for the top level hierarchy
+Info (12128): Elaborating entity "lessthan" for hierarchy "lessthan:lessthan_1" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv Line: 9
+Info (12128): Elaborating entity "fulladderOP" for hierarchy "lessthan:lessthan_1|fulladderOP:fulladder1" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 5
+Info (12128): Elaborating entity "mux2a1" for hierarchy "mux2a1:mux2a1_1" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv Line: 11
+Info (12128): Elaborating entity "register" for hierarchy "register:register" File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv Line: 20
+Warning (12241): 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 4759 megabytes
+    Info: Processing ended: Sat Oct 19 16:04:53 2024
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:09
 
 

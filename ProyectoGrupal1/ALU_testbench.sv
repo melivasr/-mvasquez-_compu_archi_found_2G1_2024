@@ -6,7 +6,10 @@ module ALU_testbench();
 	
 	ALU dut(a, b, s, y, c, z, n,o);
 	
+	
+	
 	initial begin
+	
 	
 	a=00;
 	b=00;

@@ -1,64 +1,22 @@
-|ALU
-a[0] => a[0].IN3
-a[1] => a[1].IN3
-b[0] => b[0].IN3
-b[1] => b[1].IN3
-s[0] => s[0].IN4
-s[1] => s[1].IN1
-y[0] << mux8a2:mux8_inst.port5
-y[1] << mux8a2:mux8_inst.port5
-c << c.DB_MAX_OUTPUT_PORT_TYPE
-z << z.DB_MAX_OUTPUT_PORT_TYPE
-n << mux8a2:mux8_inst.port5
-o << o.DB_MAX_OUTPUT_PORT_TYPE
+|PWM_Generator
+clk => clk.IN1
+reset => reset.IN1
+duty_cycle[0] => duty_cycle[0].IN1
+duty_cycle[1] => duty_cycle[1].IN1
+pwm_out << lessthan:lessthan_2.port2
 
 
-|ALU|andOP:and_inst
-a[0] => z.IN0
-a[1] => z.IN0
-b[0] => z.IN1
-b[1] => z.IN1
-z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
-z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
+|PWM_Generator|lessthan:lessthan_1
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+B[0] => _.IN1
+B[1] => _.IN1
+B[2] => _.IN1
+OUT <= fulladderOP:fulladder3.s
 
 
-|ALU|orOP:or_inst
-a[0] => z.IN0
-a[1] => z.IN0
-b[0] => z.IN1
-b[1] => z.IN1
-z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
-z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|ALU|mux2a1:mux2_inst_1
-a => y.IN0
-b => y.IN0
-s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|ALU|mux2a1:mux2_inst_0
-a => y.IN0
-b => y.IN0
-s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|ALU|fulladder2Bits:fulladder_inst
-a[0] => a[0].IN1
-a[1] => a[1].IN1
-b[0] => b[0].IN1
-b[1] => b[1].IN1
-carry_in => carry_in.IN1
-s[0] <= fulladderOP:unidades.port3
-s[1] <= fulladderOP:decenas.port3
-cout <= fulladderOP:decenas.port4
-
-
-|ALU|fulladder2Bits:fulladder_inst|fulladderOP:unidades
+|PWM_Generator|lessthan:lessthan_1|fulladderOP:fulladder1
 a => s.IN0
 a => cout.IN0
 a => cout.IN0
@@ -72,7 +30,7 @@ s <= s.DB_MAX_OUTPUT_PORT_TYPE
 cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|fulladder2Bits:fulladder_inst|fulladderOP:decenas
+|PWM_Generator|lessthan:lessthan_1|fulladderOP:fulladder2
 a => s.IN0
 a => cout.IN0
 a => cout.IN0
@@ -86,22 +44,21 @@ s <= s.DB_MAX_OUTPUT_PORT_TYPE
 cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux8_inst
-s[0] => s[0].IN1
-s[1] => s[1].IN1
-r[0] => r[0].IN1
-r[1] => r[1].IN1
-o[0] => o[0].IN1
-o[1] => o[1].IN1
-a[0] => a[0].IN1
-a[1] => a[1].IN1
-t[0] => t[0].IN2
-t[1] => t[1].IN4
-y[0] <= mux2a1:mux6.port3
-y[1] <= mux2a1:mux5.port3
+|PWM_Generator|lessthan:lessthan_1|fulladderOP:fulladder3
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux8_inst|mux2a1:mux1
+|PWM_Generator|mux2a1:mux2a1_1
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -109,7 +66,7 @@ s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux8_inst|mux2a1:mux2
+|PWM_Generator|mux2a1:mux2a1_2
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -117,7 +74,7 @@ s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux8_inst|mux2a1:mux3
+|PWM_Generator|mux2a1:mux2a1_3
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -125,27 +82,112 @@ s => y.IN1
 y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux8_inst|mux2a1:mux4
-a => y.IN0
-b => y.IN0
-s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
+|PWM_Generator|fulladderOP:fulladder1
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux8_inst|mux2a1:mux5
-a => y.IN0
-b => y.IN0
-s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
+|PWM_Generator|fulladderOP:fulladder2
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|ALU|mux8a2:mux8_inst|mux2a1:mux6
-a => y.IN0
-b => y.IN0
-s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
+|PWM_Generator|fulladderOP:fulladder3
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PWM_Generator|register:register
+D[0] => Q[0]~reg0.DATAIN
+D[1] => Q[1]~reg0.DATAIN
+D[2] => Q[2]~reg0.DATAIN
+clk => Q[0]~reg0.CLK
+clk => Q[1]~reg0.CLK
+clk => Q[2]~reg0.CLK
+reset => Q[0]~reg0.ACLR
+reset => Q[1]~reg0.ACLR
+reset => Q[2]~reg0.ACLR
+Q[0] <= Q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q[1] <= Q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q[2] <= Q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PWM_Generator|lessthan:lessthan_2
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+B[0] => _.IN1
+B[1] => _.IN1
+B[2] => _.IN1
+OUT <= fulladderOP:fulladder3.s
+
+
+|PWM_Generator|lessthan:lessthan_2|fulladderOP:fulladder1
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PWM_Generator|lessthan:lessthan_2|fulladderOP:fulladder2
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PWM_Generator|lessthan:lessthan_2|fulladderOP:fulladder3
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
