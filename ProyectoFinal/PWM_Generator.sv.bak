@@ -1,0 +1,15 @@
+module PWM_Generator(input  logic clk, input  logic [1:0] duty_cycle, output logic pwm_out);
+
+logic [1:0] counter; // Contador
+
+always_ff @(posedge clk) begin
+    if (counter < 3) begin
+        counter <= counter + 1; // Incrementar el contador
+    end else begin
+        counter <= 0; // Reiniciar el contador
+    end
+end
+
+assign pwm_out = (counter < duty_cycle); // Comparar el contador con el ciclo de trabajo
+
+endmodule;
