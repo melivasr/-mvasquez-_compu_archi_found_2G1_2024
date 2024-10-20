@@ -6,7 +6,7 @@ JedecChain;
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 	P ActionCode(Cfg)
-		Device PartName(5CSXFC6D6F31) Path("C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/output_files/") File("SerialCom.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSXFC6D6F31) Path("C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/output_files/") File("SerialCom.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

@@ -11,11 +11,13 @@ switches[5] => switches[5].IN1
 switches[6] => switches[6].IN1
 switches[7] => switches[7].IN1
 i_Rx_Serial => i_Rx_Serial.IN1
+salida_decodificada[0] => salida_decodificadaDedos_4bits[0].IN1
+salida_decodificada[1] => salida_decodificadaDedos_4bits[1].IN1
+entrada_dedos[0] => ~NO_FANOUT~
+entrada_dedos[1] => ~NO_FANOUT~
+entrada_dedos[2] => ~NO_FANOUT~
+entrada_dedos[3] => ~NO_FANOUT~
 o_Tx_Serial << uart_fpga_top:uart_instance.o_Tx_Serial
-entrada_dedos[0] => entrada_dedos[0].IN1
-entrada_dedos[1] => entrada_dedos[1].IN1
-entrada_dedos[2] => entrada_dedos[2].IN1
-entrada_dedos[3] => entrada_dedos[3].IN1
 leds[0] << uart_fpga_top:uart_instance.leds
 leds[1] << uart_fpga_top:uart_instance.leds
 leds[2] << uart_fpga_top:uart_instance.leds
@@ -52,25 +54,6 @@ seg_decodificador_dedos[3] << BCD_to_7Segment:bcd_to_7seg.seg
 seg_decodificador_dedos[4] << BCD_to_7Segment:bcd_to_7seg.seg
 seg_decodificador_dedos[5] << BCD_to_7Segment:bcd_to_7seg.seg
 seg_decodificador_dedos[6] << BCD_to_7Segment:bcd_to_7seg.seg
-currentMemori[0] << BCD_to_7Segment:bcd_to_7seg.seg
-currentMemori[1] << BCD_to_7Segment:bcd_to_7seg.seg
-currentMemori[2] << BCD_to_7Segment:bcd_to_7seg.seg
-currentMemori[3] << BCD_to_7Segment:bcd_to_7seg.seg
-currentMemori[4] << BCD_to_7Segment:bcd_to_7seg.seg
-currentMemori[5] << BCD_to_7Segment:bcd_to_7seg.seg
-currentMemori[6] << BCD_to_7Segment:bcd_to_7seg.seg
-
-
-|PG1_FAC_Top|Decodificador_Dedos:decodificador
-entrada[0] => salida.IN0
-entrada[1] => salida.IN1
-entrada[2] => salida.IN0
-entrada[2] => salida.IN1
-entrada[2] => salida.IN0
-entrada[3] => salida.IN1
-entrada[3] => salida.IN1
-salida[0] <= salida.DB_MAX_OUTPUT_PORT_TYPE
-salida[1] <= salida.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |PG1_FAC_Top|BCD_to_7Segment:bcd_to_7seg

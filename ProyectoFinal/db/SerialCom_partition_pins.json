@@ -136,43 +136,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "currentMemori[0]",
+					"name" : "salida_decodificada[0]",
 					"strict" : false
 				},
 				{
-					"name" : "currentMemori[2]",
-					"strict" : false
-				},
-				{
-					"name" : "currentMemori[3]",
-					"strict" : false
-				},
-				{
-					"name" : "currentMemori[4]",
-					"strict" : false
-				},
-				{
-					"name" : "currentMemori[5]",
-					"strict" : false
-				},
-				{
-					"name" : "currentMemori[6]",
-					"strict" : false
-				},
-				{
-					"name" : "entrada_dedos[2]",
-					"strict" : false
-				},
-				{
-					"name" : "entrada_dedos[3]",
-					"strict" : false
-				},
-				{
-					"name" : "entrada_dedos[0]",
-					"strict" : false
-				},
-				{
-					"name" : "entrada_dedos[1]",
+					"name" : "salida_decodificada[1]",
 					"strict" : false
 				},
 				{

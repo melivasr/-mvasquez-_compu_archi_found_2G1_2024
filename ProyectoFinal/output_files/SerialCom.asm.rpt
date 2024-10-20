@@ -1,5 +1,5 @@
 Assembler report for SerialCom
-Tue Oct 15 19:38:13 2024
+Sat Oct 19 22:26:23 2024
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -10,7 +10,7 @@ Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/output_files/SerialCom.sof
+  5. Assembler Device Options: C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/output_files/SerialCom.sof
   6. Assembler Messages
 
 
@@ -38,7 +38,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Tue Oct 15 19:38:13 2024 ;
+; Assembler Status      ; Successful - Sat Oct 19 22:26:23 2024 ;
 ; Revision Name         ; SerialCom                             ;
 ; Top-level Entity Name ; PG1_FAC_Top                           ;
 ; Family                ; Cyclone V                             ;
@@ -53,23 +53,23 @@ https://fpgasoftware.intel.com/eula.
 +--------+---------+---------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Assembler Generated Files                                                                                                                                                            ;
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; File Name                                                                                                                                                                            ;
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/output_files/SerialCom.sof ;
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                                                 ;
++-----------------------------------------------------------------------------------------------------------+
+; File Name                                                                                                 ;
++-----------------------------------------------------------------------------------------------------------+
+; C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/output_files/SerialCom.sof ;
++-----------------------------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/output_files/SerialCom.sof ;
-+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                                                                                                                                       ;
-+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; JTAG usercode  ; 0x00B62225                                                                                                                                                                                    ;
-; Checksum       ; 0x00B62225                                                                                                                                                                                    ;
-+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/output_files/SerialCom.sof ;
++----------------+--------------------------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                                            ;
++----------------+--------------------------------------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x00B5EF43                                                                                                         ;
+; Checksum       ; 0x00B5EF43                                                                                                         ;
++----------------+--------------------------------------------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -78,14 +78,14 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Tue Oct 15 19:38:09 2024
+    Info: Processing started: Sat Oct 19 22:26:18 2024
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off SerialCom -c SerialCom
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4875 megabytes
-    Info: Processing ended: Tue Oct 15 19:38:13 2024
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:04
+    Info: Peak virtual memory: 4873 megabytes
+    Info: Processing ended: Sat Oct 19 22:26:24 2024
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:05
 
 
