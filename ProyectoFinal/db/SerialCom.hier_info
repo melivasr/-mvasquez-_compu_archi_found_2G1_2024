@@ -1,31 +1,16 @@
 |PG1_FAC_Top
-clock => clock.IN1
+clock => clock.IN6
 reset_n => reset_n.IN1
 button => button.IN1
-switches[0] => switches[0].IN1
-switches[1] => switches[1].IN1
-switches[2] => switches[2].IN1
-switches[3] => switches[3].IN1
-switches[4] => switches[4].IN1
-switches[5] => switches[5].IN1
-switches[6] => switches[6].IN1
-switches[7] => switches[7].IN1
 i_Rx_Serial => i_Rx_Serial.IN1
-salida_decodificada[0] => salida_decodificadaDedos_4bits[0].IN1
-salida_decodificada[1] => salida_decodificadaDedos_4bits[1].IN1
-entrada_dedos[0] => ~NO_FANOUT~
-entrada_dedos[1] => ~NO_FANOUT~
-entrada_dedos[2] => ~NO_FANOUT~
-entrada_dedos[3] => ~NO_FANOUT~
+entrada_dedos[0] => entrada_dedos[0].IN1
+entrada_dedos[1] => entrada_dedos[1].IN1
+entrada_dedos[2] => entrada_dedos[2].IN1
+entrada_dedos[3] => entrada_dedos[3].IN1
+operation[0] => operation[0].IN1
+operation[1] => operation[1].IN1
+confirm_btn => confirm_btn.IN1
 o_Tx_Serial << uart_fpga_top:uart_instance.o_Tx_Serial
-leds[0] << uart_fpga_top:uart_instance.leds
-leds[1] << uart_fpga_top:uart_instance.leds
-leds[2] << uart_fpga_top:uart_instance.leds
-leds[3] << uart_fpga_top:uart_instance.leds
-leds[4] << uart_fpga_top:uart_instance.leds
-leds[5] << uart_fpga_top:uart_instance.leds
-leds[6] << uart_fpga_top:uart_instance.leds
-leds[7] << uart_fpga_top:uart_instance.leds
 seg_unidades[0] << uart_fpga_top:uart_instance.seg_unidades
 seg_unidades[1] << uart_fpga_top:uart_instance.seg_unidades
 seg_unidades[2] << uart_fpga_top:uart_instance.seg_unidades
@@ -54,6 +39,69 @@ seg_decodificador_dedos[3] << BCD_to_7Segment:bcd_to_7seg.seg
 seg_decodificador_dedos[4] << BCD_to_7Segment:bcd_to_7seg.seg
 seg_decodificador_dedos[5] << BCD_to_7Segment:bcd_to_7seg.seg
 seg_decodificador_dedos[6] << BCD_to_7Segment:bcd_to_7seg.seg
+seg_resultado[0] << BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[1] << BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[2] << BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[3] << BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[4] << BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[5] << BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[6] << BCD_to_7Segment:bcd_to_7seg_result.seg
+motor_in1 << PWM_Generator:pwm_instance.pwm_out
+motor_in2 << <GND>
+
+
+|PG1_FAC_Top|D_FF_Manual:button_sync0_ff
+clk => clk.IN1
+reset => reset.IN1
+d[0] => d[0].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+
+
+|PG1_FAC_Top|D_FF_Manual:button_sync0_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|D_FF_Manual:button_sync1_ff
+clk => clk.IN1
+reset => reset.IN1
+d[0] => d[0].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+
+
+|PG1_FAC_Top|D_FF_Manual:button_sync1_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|D_FF_Manual:button_prev_ff
+clk => clk.IN1
+reset => reset.IN1
+d[0] => d[0].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+
+
+|PG1_FAC_Top|D_FF_Manual:button_prev_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|Decodificador_Dedos:decodificador
+entrada[0] => salida.IN0
+entrada[1] => salida.IN1
+entrada[2] => salida.IN0
+entrada[2] => salida.IN1
+entrada[2] => salida.IN0
+entrada[3] => salida.IN1
+entrada[3] => salida.IN1
+salida[0] <= salida.DB_MAX_OUTPUT_PORT_TYPE
+salida[1] <= salida.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |PG1_FAC_Top|BCD_to_7Segment:bcd_to_7seg
@@ -107,20 +155,64 @@ seg[5] <= seg.DB_MAX_OUTPUT_PORT_TYPE
 seg[6] <= seg.DB_MAX_OUTPUT_PORT_TYPE
 
 
+|PG1_FAC_Top|BCD_to_7Segment:bcd_to_7seg_result
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN0
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[0] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN1
+bcd[1] => seg.IN0
+bcd[1] => seg.IN1
+bcd[2] => seg.IN1
+bcd[2] => seg.IN0
+bcd[2] => seg.IN0
+bcd[2] => seg.IN0
+bcd[2] => seg.IN1
+bcd[2] => seg.IN0
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+bcd[3] => seg.IN1
+seg[0] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+
+
 |PG1_FAC_Top|uart_fpga_top:uart_instance
-clock => clock.IN10
+clock => clock.IN7
 reset_n => reset_n.IN1
 button => button.IN1
-switches[0] => switches[0].IN1
-switches[1] => switches[1].IN1
-switches[2] => switches[2].IN1
-switches[3] => switches[3].IN1
-switches[4] => switches[4].IN1
-switches[5] => switches[5].IN1
-switches[6] => switches[6].IN1
-switches[7] => switches[7].IN1
 i_Rx_Serial => i_Rx_Serial.IN2
-o_Tx_Serial <= uart_fpga_top_mux_1:tx_serial_mux.out
+o_Tx_Serial <= uart_handshake:handshake_inst.o_Tx_Serial
+uart_enable <= uart_enable.DB_MAX_OUTPUT_PORT_TYPE
 leds[0] <= uart_fpga_top_mux_0:leds_mux.out
 leds[1] <= uart_fpga_top_mux_0:leds_mux.out
 leds[2] <= uart_fpga_top_mux_0:leds_mux.out
@@ -194,57 +286,6 @@ d => q~reg0.DATAIN
 q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_fpga_top_mux_2:tx_start_mux
-sel => out.IN0
-sel => out.IN0
-in0 => out.IN1
-in1 => out.IN1
-out <= out.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_fpga_top_mux_3:tx_data_mux
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-sel => out.IN0
-in0[0] => out.IN1
-in0[1] => out.IN1
-in0[2] => out.IN1
-in0[3] => out.IN1
-in0[4] => out.IN1
-in0[5] => out.IN1
-in0[6] => out.IN1
-in0[7] => out.IN1
-in1[0] => out.IN1
-in1[1] => out.IN1
-in1[2] => out.IN1
-in1[3] => out.IN1
-in1[4] => out.IN1
-in1[5] => out.IN1
-in1[6] => out.IN1
-in1[7] => out.IN1
-out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
-
-
 |PG1_FAC_Top|uart_fpga_top:uart_instance|uart_fpga_top_mux_4:received_data_mux
 sel => out.IN0
 sel => out.IN0
@@ -286,97 +327,6 @@ out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
 out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
 out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
 out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_start_ff
-clk => clk.IN1
-reset => reset.IN1
-d[0] => d[0].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_start_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff
-clk => clk.IN8
-reset => reset.IN8
-d[0] => d[0].IN1
-d[1] => d[1].IN1
-d[2] => d[2].IN1
-d[3] => d[3].IN1
-d[4] => d[4].IN1
-d[5] => d[5].IN1
-d[6] => d[6].IN1
-d[7] => d[7].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-q[1] <= D_FF_Cell:DFF_ARRAY[1].dff_cell.q
-q[2] <= D_FF_Cell:DFF_ARRAY[2].dff_cell.q
-q[3] <= D_FF_Cell:DFF_ARRAY[3].dff_cell.q
-q[4] <= D_FF_Cell:DFF_ARRAY[4].dff_cell.q
-q[5] <= D_FF_Cell:DFF_ARRAY[5].dff_cell.q
-q[6] <= D_FF_Cell:DFF_ARRAY[6].dff_cell.q
-q[7] <= D_FF_Cell:DFF_ARRAY[7].dff_cell.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff|D_FF_Cell:DFF_ARRAY[1].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff|D_FF_Cell:DFF_ARRAY[2].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff|D_FF_Cell:DFF_ARRAY[3].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff|D_FF_Cell:DFF_ARRAY[4].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff|D_FF_Cell:DFF_ARRAY[5].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff|D_FF_Cell:DFF_ARRAY[6].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:tx_data_ff|D_FF_Cell:DFF_ARRAY[7].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:received_data_ff
@@ -450,1176 +400,6 @@ q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |PG1_FAC_Top|uart_fpga_top:uart_instance|D_FF_Manual:received_data_ff|D_FF_Cell:DFF_ARRAY[7].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst
-i_Clock => i_Clock.IN1
-i_Enable => uart_tx_fsm:fsm.i_Enable
-i_Enable => uart_tx_clk_counter:clk_counter.i_Enable
-i_Enable => uart_tx_bit_index:bit_idx.i_Enable
-i_Enable => uart_tx_mux_5:mux_current_state_mux.sel
-i_Enable => _.IN1
-i_Tx_DV => uart_tx_fsm:fsm.i_Tx_DV
-i_Tx_Byte[0] => uart_tx_mux_1:mux1.i_Tx_Byte[0]
-i_Tx_Byte[1] => uart_tx_mux_1:mux1.i_Tx_Byte[1]
-i_Tx_Byte[2] => uart_tx_mux_1:mux1.i_Tx_Byte[2]
-i_Tx_Byte[3] => uart_tx_mux_1:mux1.i_Tx_Byte[3]
-i_Tx_Byte[4] => uart_tx_mux_1:mux1.i_Tx_Byte[4]
-i_Tx_Byte[5] => uart_tx_mux_1:mux1.i_Tx_Byte[5]
-i_Tx_Byte[6] => uart_tx_mux_1:mux1.i_Tx_Byte[6]
-i_Tx_Byte[7] => uart_tx_mux_1:mux1.i_Tx_Byte[7]
-o_Tx_Active <= uart_tx_mux_3:mux3.o_Tx_Active
-o_Tx_Serial <= uart_tx_mux_1:mux1.o_Tx_Serial
-o_Tx_Done <= uart_tx_mux_2:mux2.o_Tx_Done
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_fsm:fsm
-i_Clock => ~NO_FANOUT~
-i_Enable => ~NO_FANOUT~
-i_Tx_DV => t1.IN1
-current_state[0] => current_state[0].IN5
-current_state[1] => current_state[1].IN5
-current_state[2] => current_state[2].IN5
-clock_count[0] => LessThan2.IN32
-clock_count[0] => LessThan3.IN32
-clock_count[1] => LessThan2.IN31
-clock_count[1] => LessThan3.IN31
-clock_count[2] => LessThan2.IN30
-clock_count[2] => LessThan3.IN30
-clock_count[3] => LessThan2.IN29
-clock_count[3] => LessThan3.IN29
-clock_count[4] => LessThan2.IN28
-clock_count[4] => LessThan3.IN28
-clock_count[5] => LessThan2.IN27
-clock_count[5] => LessThan3.IN27
-clock_count[6] => LessThan2.IN26
-clock_count[6] => LessThan3.IN26
-clock_count[7] => LessThan2.IN25
-clock_count[7] => LessThan3.IN25
-clock_count[8] => LessThan2.IN24
-clock_count[8] => LessThan3.IN24
-clock_count[9] => LessThan2.IN23
-clock_count[9] => LessThan3.IN23
-clock_count[10] => LessThan2.IN22
-clock_count[10] => LessThan3.IN22
-clock_count[11] => LessThan2.IN21
-clock_count[11] => LessThan3.IN21
-clock_count[12] => LessThan2.IN20
-clock_count[12] => LessThan3.IN20
-clock_count[13] => LessThan2.IN19
-clock_count[13] => LessThan3.IN19
-clock_count[14] => LessThan2.IN18
-clock_count[14] => LessThan3.IN18
-clock_count[15] => LessThan2.IN17
-clock_count[15] => LessThan3.IN17
-bit_index[0] => LessThan0.IN6
-bit_index[0] => LessThan1.IN6
-bit_index[1] => LessThan0.IN5
-bit_index[1] => LessThan1.IN5
-bit_index[2] => LessThan0.IN4
-bit_index[2] => LessThan1.IN4
-next_state[0] <= next_state.DB_MAX_OUTPUT_PORT_TYPE
-next_state[1] <= next_state.DB_MAX_OUTPUT_PORT_TYPE
-next_state[2] <= comb.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_fsm:fsm|Comparator_N_bits:cmp_IDLE
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_fsm:fsm|Comparator_N_bits:cmp_TX_START_BIT
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_fsm:fsm|Comparator_N_bits:cmp_TX_DATA_BITS
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_fsm:fsm|Comparator_N_bits:cmp_TX_STOP_BIT
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_fsm:fsm|Comparator_N_bits:cmp_CLEANUP
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter
-i_Clock => i_Clock.IN2
-i_Enable => reset.IN2
-next_state[0] => next_state[0].IN5
-next_state[1] => next_state[1].IN5
-next_state[2] => next_state[2].IN5
-clock_count[0] <= clock_count[0].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[1] <= clock_count[1].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[2] <= clock_count[2].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[3] <= clock_count[3].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[4] <= clock_count[4].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[5] <= clock_count[5].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[6] <= clock_count[6].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[7] <= clock_count[7].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[8] <= clock_count[8].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[9] <= clock_count[9].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[10] <= clock_count[10].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[11] <= clock_count[11].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[12] <= clock_count[12].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[13] <= clock_count[13].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[14] <= clock_count[14].DB_MAX_OUTPUT_PORT_TYPE
-clock_count[15] <= clock_count[15].DB_MAX_OUTPUT_PORT_TYPE
-clk_count_enable <= D_FF_Manual:dff_clk_enable.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Comparator_N_bits:cmp_IDLE
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Comparator_N_bits:cmp_TX_START_BIT
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Comparator_N_bits:cmp_TX_DATA_BITS
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Comparator_N_bits:cmp_TX_STOP_BIT
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Comparator_N_bits:cmp_CLEANUP
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Comparator_N_bits:cmp_count_less
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-a[3] => xnor_result.IN0
-a[4] => xnor_result.IN0
-a[5] => xnor_result.IN0
-a[6] => xnor_result.IN0
-a[7] => xnor_result.IN0
-a[8] => xnor_result.IN0
-a[9] => xnor_result.IN0
-a[10] => xnor_result.IN0
-a[11] => xnor_result.IN0
-a[12] => xnor_result.IN0
-a[13] => xnor_result.IN0
-a[14] => xnor_result.IN0
-a[15] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-b[3] => xnor_result.IN1
-b[4] => xnor_result.IN1
-b[5] => xnor_result.IN1
-b[6] => xnor_result.IN1
-b[7] => xnor_result.IN1
-b[8] => xnor_result.IN1
-b[9] => xnor_result.IN1
-b[10] => xnor_result.IN1
-b[11] => xnor_result.IN1
-b[12] => xnor_result.IN1
-b[13] => xnor_result.IN1
-b[14] => xnor_result.IN1
-b[15] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder
-a[0] => a[0].IN1
-a[1] => a[1].IN1
-a[2] => a[2].IN1
-a[3] => a[3].IN1
-a[4] => a[4].IN1
-a[5] => a[5].IN1
-a[6] => a[6].IN1
-a[7] => a[7].IN1
-a[8] => a[8].IN1
-a[9] => a[9].IN1
-a[10] => a[10].IN1
-a[11] => a[11].IN1
-a[12] => a[12].IN1
-a[13] => a[13].IN1
-a[14] => a[14].IN1
-a[15] => a[15].IN1
-b[0] => b[0].IN1
-b[1] => b[1].IN1
-b[2] => b[2].IN1
-b[3] => b[3].IN1
-b[4] => b[4].IN1
-b[5] => b[5].IN1
-b[6] => b[6].IN1
-b[7] => b[7].IN1
-b[8] => b[8].IN1
-b[9] => b[9].IN1
-b[10] => b[10].IN1
-b[11] => b[11].IN1
-b[12] => b[12].IN1
-b[13] => b[13].IN1
-b[14] => b[14].IN1
-b[15] => b[15].IN1
-sum[0] <= Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst.sum
-sum[1] <= Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst.sum
-sum[2] <= Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst.sum
-sum[3] <= Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst.sum
-sum[4] <= Full_Adder:FULL_ADDER_ARRAY[4].full_adder_inst.sum
-sum[5] <= Full_Adder:FULL_ADDER_ARRAY[5].full_adder_inst.sum
-sum[6] <= Full_Adder:FULL_ADDER_ARRAY[6].full_adder_inst.sum
-sum[7] <= Full_Adder:FULL_ADDER_ARRAY[7].full_adder_inst.sum
-sum[8] <= Full_Adder:FULL_ADDER_ARRAY[8].full_adder_inst.sum
-sum[9] <= Full_Adder:FULL_ADDER_ARRAY[9].full_adder_inst.sum
-sum[10] <= Full_Adder:FULL_ADDER_ARRAY[10].full_adder_inst.sum
-sum[11] <= Full_Adder:FULL_ADDER_ARRAY[11].full_adder_inst.sum
-sum[12] <= Full_Adder:FULL_ADDER_ARRAY[12].full_adder_inst.sum
-sum[13] <= Full_Adder:FULL_ADDER_ARRAY[13].full_adder_inst.sum
-sum[14] <= Full_Adder:FULL_ADDER_ARRAY[14].full_adder_inst.sum
-sum[15] <= Full_Adder:FULL_ADDER_ARRAY[15].full_adder_inst.sum
-carry_out <= Full_Adder:FULL_ADDER_ARRAY[15].full_adder_inst.cout
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[3].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[4].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[5].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[6].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[7].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[8].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[9].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[10].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[11].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[12].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[13].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[14].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|Adder_N_bits:adder|Full_Adder:FULL_ADDER_ARRAY[15].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|uart_tx_mux_4:mux_clock_count
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-a[0] => y.IN1
-a[1] => y.IN1
-a[2] => y.IN1
-a[3] => y.IN1
-a[4] => y.IN1
-a[5] => y.IN1
-a[6] => y.IN1
-a[7] => y.IN1
-a[8] => y.IN1
-a[9] => y.IN1
-a[10] => y.IN1
-a[11] => y.IN1
-a[12] => y.IN1
-a[13] => y.IN1
-a[14] => y.IN1
-a[15] => y.IN1
-b[0] => y.IN1
-b[1] => y.IN1
-b[2] => y.IN1
-b[3] => y.IN1
-b[4] => y.IN1
-b[5] => y.IN1
-b[6] => y.IN1
-b[7] => y.IN1
-b[8] => y.IN1
-b[9] => y.IN1
-b[10] => y.IN1
-b[11] => y.IN1
-b[12] => y.IN1
-b[13] => y.IN1
-b[14] => y.IN1
-b[15] => y.IN1
-y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[3] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[4] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[5] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[6] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[7] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[8] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[9] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[10] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[11] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[12] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[13] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[14] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[15] <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|uart_tx_mux_5:mux_clk_enable
-sel => sel.IN1
-a[0] => a[0].IN1
-a[1] => a[1].IN1
-a[2] => a[2].IN1
-b[0] => b[0].IN1
-b[1] => b[1].IN1
-b[2] => b[2].IN1
-y[0] <= uart_tx_mux_4:mux_inst.y
-y[1] <= uart_tx_mux_4:mux_inst.y
-y[2] <= uart_tx_mux_4:mux_inst.y
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|uart_tx_mux_5:mux_clk_enable|uart_tx_mux_4:mux_inst
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-a[0] => y.IN1
-a[1] => y.IN1
-a[2] => y.IN1
-b[0] => y.IN1
-b[1] => y.IN1
-b[2] => y.IN1
-y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count
-clk => clk.IN16
-reset => reset.IN16
-d[0] => d[0].IN1
-d[1] => d[1].IN1
-d[2] => d[2].IN1
-d[3] => d[3].IN1
-d[4] => d[4].IN1
-d[5] => d[5].IN1
-d[6] => d[6].IN1
-d[7] => d[7].IN1
-d[8] => d[8].IN1
-d[9] => d[9].IN1
-d[10] => d[10].IN1
-d[11] => d[11].IN1
-d[12] => d[12].IN1
-d[13] => d[13].IN1
-d[14] => d[14].IN1
-d[15] => d[15].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-q[1] <= D_FF_Cell:DFF_ARRAY[1].dff_cell.q
-q[2] <= D_FF_Cell:DFF_ARRAY[2].dff_cell.q
-q[3] <= D_FF_Cell:DFF_ARRAY[3].dff_cell.q
-q[4] <= D_FF_Cell:DFF_ARRAY[4].dff_cell.q
-q[5] <= D_FF_Cell:DFF_ARRAY[5].dff_cell.q
-q[6] <= D_FF_Cell:DFF_ARRAY[6].dff_cell.q
-q[7] <= D_FF_Cell:DFF_ARRAY[7].dff_cell.q
-q[8] <= D_FF_Cell:DFF_ARRAY[8].dff_cell.q
-q[9] <= D_FF_Cell:DFF_ARRAY[9].dff_cell.q
-q[10] <= D_FF_Cell:DFF_ARRAY[10].dff_cell.q
-q[11] <= D_FF_Cell:DFF_ARRAY[11].dff_cell.q
-q[12] <= D_FF_Cell:DFF_ARRAY[12].dff_cell.q
-q[13] <= D_FF_Cell:DFF_ARRAY[13].dff_cell.q
-q[14] <= D_FF_Cell:DFF_ARRAY[14].dff_cell.q
-q[15] <= D_FF_Cell:DFF_ARRAY[15].dff_cell.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[1].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[2].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[3].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[4].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[5].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[6].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[7].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[8].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[9].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[10].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[11].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[12].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[13].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[14].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clock_count|D_FF_Cell:DFF_ARRAY[15].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clk_enable
-clk => clk.IN1
-reset => reset.IN1
-d[0] => d[0].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_clk_counter:clk_counter|D_FF_Manual:dff_clk_enable|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx
-i_Clock => i_Clock.IN2
-i_Enable => reset.IN2
-current_state[0] => current_state[0].IN3
-current_state[1] => current_state[1].IN3
-current_state[2] => current_state[2].IN3
-clock_count[0] => clock_count[0].IN1
-clock_count[1] => clock_count[1].IN1
-clock_count[2] => clock_count[2].IN1
-clock_count[3] => clock_count[3].IN1
-clock_count[4] => clock_count[4].IN1
-clock_count[5] => clock_count[5].IN1
-clock_count[6] => clock_count[6].IN1
-clock_count[7] => clock_count[7].IN1
-clock_count[8] => clock_count[8].IN1
-clock_count[9] => clock_count[9].IN1
-clock_count[10] => clock_count[10].IN1
-clock_count[11] => clock_count[11].IN1
-clock_count[12] => clock_count[12].IN1
-clock_count[13] => clock_count[13].IN1
-clock_count[14] => clock_count[14].IN1
-clock_count[15] => clock_count[15].IN1
-bit_index[0] <= bit_index[0].DB_MAX_OUTPUT_PORT_TYPE
-bit_index[1] <= bit_index[1].DB_MAX_OUTPUT_PORT_TYPE
-bit_index[2] <= bit_index[2].DB_MAX_OUTPUT_PORT_TYPE
-bit_index_enable <= D_FF_Manual:dff_bit_index_enable.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|Comparator_N_bits:cmp_IDLE
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|Comparator_N_bits:cmp_TX_DATA_BITS
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|Comparator_N_bits:cmp_CLEANUP
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|Comparator_N_bits:cmp_clock_count_eq
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-a[3] => xnor_result.IN0
-a[4] => xnor_result.IN0
-a[5] => xnor_result.IN0
-a[6] => xnor_result.IN0
-a[7] => xnor_result.IN0
-a[8] => xnor_result.IN0
-a[9] => xnor_result.IN0
-a[10] => xnor_result.IN0
-a[11] => xnor_result.IN0
-a[12] => xnor_result.IN0
-a[13] => xnor_result.IN0
-a[14] => xnor_result.IN0
-a[15] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-b[3] => xnor_result.IN1
-b[4] => xnor_result.IN1
-b[5] => xnor_result.IN1
-b[6] => xnor_result.IN1
-b[7] => xnor_result.IN1
-b[8] => xnor_result.IN1
-b[9] => xnor_result.IN1
-b[10] => xnor_result.IN1
-b[11] => xnor_result.IN1
-b[12] => xnor_result.IN1
-b[13] => xnor_result.IN1
-b[14] => xnor_result.IN1
-b[15] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|Adder_N_bits:adder_bit_index
-a[0] => a[0].IN1
-a[1] => a[1].IN1
-a[2] => a[2].IN1
-b[0] => b[0].IN1
-b[1] => b[1].IN1
-b[2] => b[2].IN1
-sum[0] <= Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst.sum
-sum[1] <= Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst.sum
-sum[2] <= Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst.sum
-carry_out <= Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst.cout
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|Adder_N_bits:adder_bit_index|Full_Adder:FULL_ADDER_ARRAY[0].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|Adder_N_bits:adder_bit_index|Full_Adder:FULL_ADDER_ARRAY[1].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|Adder_N_bits:adder_bit_index|Full_Adder:FULL_ADDER_ARRAY[2].full_adder_inst
-a => sum.IN0
-a => cout.IN0
-b => sum.IN1
-b => cout.IN1
-cin => sum.IN1
-cin => cout.IN1
-sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|uart_tx_mux_4:mux_bit_inc
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-a[0] => y.IN1
-a[1] => y.IN1
-a[2] => y.IN1
-b[0] => y.IN1
-b[1] => y.IN1
-b[2] => y.IN1
-y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|uart_tx_mux_4:mux_bit_next_mux2
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-a[0] => y.IN1
-a[1] => y.IN1
-a[2] => y.IN1
-b[0] => y.IN1
-b[1] => y.IN1
-b[2] => y.IN1
-y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|uart_tx_mux_4:mux_bit_next_mux3
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-a[0] => y.IN1
-a[1] => y.IN1
-a[2] => y.IN1
-b[0] => y.IN1
-b[1] => y.IN1
-b[2] => y.IN1
-y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|uart_tx_mux_4:mux_bit_enable
-sel => y.IN0
-sel => y.IN0
-a[0] => y.IN1
-b[0] => y.IN1
-y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|D_FF_Manual:dff_bit_index
-clk => clk.IN3
-reset => reset.IN3
-d[0] => d[0].IN1
-d[1] => d[1].IN1
-d[2] => d[2].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-q[1] <= D_FF_Cell:DFF_ARRAY[1].dff_cell.q
-q[2] <= D_FF_Cell:DFF_ARRAY[2].dff_cell.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|D_FF_Manual:dff_bit_index|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|D_FF_Manual:dff_bit_index|D_FF_Cell:DFF_ARRAY[1].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|D_FF_Manual:dff_bit_index|D_FF_Cell:DFF_ARRAY[2].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|D_FF_Manual:dff_bit_index_enable
-clk => clk.IN1
-reset => reset.IN1
-d[0] => d[0].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_bit_index:bit_idx|D_FF_Manual:dff_bit_index_enable|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1
-current_state[0] => current_state[0].IN5
-current_state[1] => current_state[1].IN5
-current_state[2] => current_state[2].IN5
-i_Tx_Byte[0] => Mux0.IN7
-i_Tx_Byte[1] => Mux0.IN6
-i_Tx_Byte[2] => Mux0.IN5
-i_Tx_Byte[3] => Mux0.IN4
-i_Tx_Byte[4] => Mux0.IN3
-i_Tx_Byte[5] => Mux0.IN2
-i_Tx_Byte[6] => Mux0.IN1
-i_Tx_Byte[7] => Mux0.IN0
-bit_index[0] => Mux0.IN10
-bit_index[1] => Mux0.IN9
-bit_index[2] => Mux0.IN8
-o_Tx_Serial <= o_Tx_Serial.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1|Comparator_N_bits:cmp_IDLE
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1|Comparator_N_bits:cmp_TX_START_BIT
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1|Comparator_N_bits:cmp_TX_DATA_BITS
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1|Comparator_N_bits:cmp_TX_STOP_BIT
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_1:mux1|Comparator_N_bits:cmp_CLEANUP
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_2:mux2
-current_state[0] => current_state[0].IN1
-current_state[1] => current_state[1].IN1
-current_state[2] => current_state[2].IN1
-o_Tx_Done <= Comparator_N_bits:cmp_CLEANUP.equal
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_2:mux2|Comparator_N_bits:cmp_CLEANUP
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_3:mux3
-current_state[0] => current_state[0].IN3
-current_state[1] => current_state[1].IN3
-current_state[2] => current_state[2].IN3
-o_Tx_Active <= o_Tx_Active.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_3:mux3|Comparator_N_bits:cmp_TX_START_BIT
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_3:mux3|Comparator_N_bits:cmp_TX_DATA_BITS
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_3:mux3|Comparator_N_bits:cmp_TX_STOP_BIT
-a[0] => xnor_result.IN0
-a[1] => xnor_result.IN0
-a[2] => xnor_result.IN0
-b[0] => xnor_result.IN1
-b[1] => xnor_result.IN1
-b[2] => xnor_result.IN1
-equal <= WideAnd0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_5:mux_current_state_mux
-sel => sel.IN1
-a[0] => a[0].IN1
-a[1] => a[1].IN1
-a[2] => a[2].IN1
-b[0] => b[0].IN1
-b[1] => b[1].IN1
-b[2] => b[2].IN1
-y[0] <= uart_tx_mux_4:mux_inst.y
-y[1] <= uart_tx_mux_4:mux_inst.y
-y[2] <= uart_tx_mux_4:mux_inst.y
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|uart_tx_mux_5:mux_current_state_mux|uart_tx_mux_4:mux_inst
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-sel => y.IN0
-a[0] => y.IN1
-a[1] => y.IN1
-a[2] => y.IN1
-b[0] => y.IN1
-b[1] => y.IN1
-b[2] => y.IN1
-y[0] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[1] <= y.DB_MAX_OUTPUT_PORT_TYPE
-y[2] <= y.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|D_FF_Manual:dff_current_state
-clk => clk.IN3
-reset => reset.IN3
-d[0] => d[0].IN1
-d[1] => d[1].IN1
-d[2] => d[2].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-q[1] <= D_FF_Cell:DFF_ARRAY[1].dff_cell.q
-q[2] <= D_FF_Cell:DFF_ARRAY[2].dff_cell.q
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|D_FF_Manual:dff_current_state|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|D_FF_Manual:dff_current_state|D_FF_Cell:DFF_ARRAY[1].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_tx:uart_tx_inst|D_FF_Manual:dff_current_state|D_FF_Cell:DFF_ARRAY[2].dff_cell
 clk => q~reg0.CLK
 reset => q~reg0.ACLR
 d => q~reg0.DATAIN
@@ -11984,14 +10764,6 @@ out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
 out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|uart_fpga_top:uart_instance|uart_fpga_top_mux_1:tx_serial_mux
-sel => out.IN0
-sel => out.IN0
-in0 => out.IN1
-in1 => out.IN1
-out <= out.DB_MAX_OUTPUT_PORT_TYPE
-
-
 |PG1_FAC_Top|uart_fpga_top:uart_instance|Timer:timer_inst
 clk => clk.IN3
 reset => reset.IN3
@@ -13581,5 +12353,409 @@ seg[3] <= seg.DB_MAX_OUTPUT_PORT_TYPE
 seg[4] <= seg.DB_MAX_OUTPUT_PORT_TYPE
 seg[5] <= seg.DB_MAX_OUTPUT_PORT_TYPE
 seg[6] <= seg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance
+clk => clk.IN4
+reset => reset.IN4
+handshaking => always0.IN1
+confirm_op => always0.IN1
+confirm_op => always0.IN1
+switch_op[0] => switch_op[0].IN1
+switch_op[1] => switch_op[1].IN1
+operand_a[0] => operand_a[0].IN1
+operand_a[1] => operand_a[1].IN1
+operand_b[0] => operand_b[0].IN1
+operand_b[1] => operand_b[1].IN1
+alu_result[0] <= alu_result[0].DB_MAX_OUTPUT_PORT_TYPE
+alu_result[1] <= alu_result[1].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|D_FF_Cell:ff_state0
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|D_FF_Cell:ff_state1
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst
+a[0] => a[0].IN3
+a[1] => a[1].IN3
+b[0] => b[0].IN3
+b[1] => b[1].IN3
+s[0] => s[0].IN4
+s[1] => s[1].IN1
+y[0] <= mux8a2:mux8_inst.port5
+y[1] <= mux8a2:mux8_inst.port5
+c <= c.DB_MAX_OUTPUT_PORT_TYPE
+z <= z.DB_MAX_OUTPUT_PORT_TYPE
+n <= mux8a2:mux8_inst.port5
+o <= o.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|andOP:and_inst
+a[0] => z.IN0
+a[1] => z.IN0
+b[0] => z.IN1
+b[1] => z.IN1
+z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
+z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|orOP:or_inst
+a[0] => z.IN0
+a[1] => z.IN0
+b[0] => z.IN1
+b[1] => z.IN1
+z[0] <= z.DB_MAX_OUTPUT_PORT_TYPE
+z[1] <= z.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux2a1:mux2_inst_1
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux2a1:mux2_inst_0
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|fulladder2Bits:fulladder_inst
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+b[0] => b[0].IN1
+b[1] => b[1].IN1
+carry_in => carry_in.IN1
+s[0] <= fulladderOP:unidades.port3
+s[1] <= fulladderOP:decenas.port3
+cout <= fulladderOP:decenas.port4
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|fulladder2Bits:fulladder_inst|fulladderOP:unidades
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|fulladder2Bits:fulladder_inst|fulladderOP:decenas
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux8a2:mux8_inst
+s[0] => s[0].IN1
+s[1] => s[1].IN1
+r[0] => r[0].IN1
+r[1] => r[1].IN1
+o[0] => o[0].IN1
+o[1] => o[1].IN1
+a[0] => a[0].IN1
+a[1] => a[1].IN1
+t[0] => t[0].IN2
+t[1] => t[1].IN4
+y[0] <= mux2a1:mux6.port3
+y[1] <= mux2a1:mux5.port3
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux8a2:mux8_inst|mux2a1:mux1
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux8a2:mux8_inst|mux2a1:mux2
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux8a2:mux8_inst|mux2a1:mux3
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux8a2:mux8_inst|mux2a1:mux4
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux8a2:mux8_inst|mux2a1:mux5
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|ALU:alu_inst|mux8a2:mux8_inst|mux2a1:mux6
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|mux2a1:mux_bit0
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|mux2a1:mux_bit1
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|D_FF_Cell:ff_result0
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|FSM_ALU:fsm_instance|D_FF_Cell:ff_result1
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance
+clk => clk.IN1
+reset => reset.IN1
+duty_cycle[0] => duty_cycle[0].IN1
+duty_cycle[1] => duty_cycle[1].IN1
+pwm_out <= lessthan:lessthan_2.port2
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_1
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+B[0] => _.IN1
+B[1] => _.IN1
+B[2] => _.IN1
+OUT <= fulladderOP:fulladder3.s
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_1|fulladderOP:fulladder1
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_1|fulladderOP:fulladder2
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_1|fulladderOP:fulladder3
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|mux2a1:mux2a1_1
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|mux2a1:mux2a1_2
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|mux2a1:mux2a1_3
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|fulladderOP:fulladder1
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|fulladderOP:fulladder2
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|fulladderOP:fulladder3
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|register:register
+D[0] => Q[0]~reg0.DATAIN
+D[1] => Q[1]~reg0.DATAIN
+D[2] => Q[2]~reg0.DATAIN
+clk => Q[0]~reg0.CLK
+clk => Q[1]~reg0.CLK
+clk => Q[2]~reg0.CLK
+reset => Q[0]~reg0.ACLR
+reset => Q[1]~reg0.ACLR
+reset => Q[2]~reg0.ACLR
+Q[0] <= Q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q[1] <= Q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q[2] <= Q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_2
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+B[0] => _.IN1
+B[1] => _.IN1
+B[2] => _.IN1
+OUT <= fulladderOP:fulladder3.s
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_2|fulladderOP:fulladder1
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_2|fulladderOP:fulladder2
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_2|fulladderOP:fulladder3
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 

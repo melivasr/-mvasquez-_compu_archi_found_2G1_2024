@@ -1,0 +1,27 @@
+module d_ff (
+    input logic clk, 
+    input logic reset,
+    input logic d,
+    output logic q
+);
+    logic q_int, d_not, clk_not;
+    logic s_master, r_master, q_master, q_master_not;
+    logic s_slave, r_slave;
+
+    // Inversores
+    assign d_not = ~d;
+    assign clk_not = ~clk;
+
+    // Lógica latch maestro con reseteo asíncrono
+    nand(s_master, d, clk_not, ~reset); // Si reset es 1, forzará s_master a 1
+    nand(r_master, d_not, clk_not, ~reset); // Si reset es 1, forzará r_master a 1
+    nand(q_master, s_master, q_master_not);
+    nand(q_master_not, r_master, q_master);
+
+    // Lógica latch esclavo con reseteo asíncrono
+    nand(s_slave, q_master, clk, ~reset); // Si reset es 1, forzará s_slave a 1
+    nand(r_slave, q_master_not, clk, ~reset); // Si reset es 1, forzará r_slave a 1
+    nand(q_int, s_slave, q);
+    nand(q, r_slave, q_int);
+
+endmodule

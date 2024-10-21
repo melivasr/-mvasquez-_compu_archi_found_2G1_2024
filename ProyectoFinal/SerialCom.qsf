@@ -58,35 +58,18 @@ set_location_assignment PIN_AF14 -to clock
 set_location_assignment PIN_W15 -to i_Rx_Serial
 set_location_assignment PIN_AK2 -to o_Tx_Serial
 set_global_assignment -name SYSTEMVERILOG_FILE uart_fpga_top.sv
-set_location_assignment PIN_AB30 -to switches[0]
-set_location_assignment PIN_Y27 -to switches[1]
-set_location_assignment PIN_AB28 -to switches[2]
-set_location_assignment PIN_AC30 -to switches[3]
-set_location_assignment PIN_W25 -to switches[4]
-set_location_assignment PIN_V25 -to switches[5]
-set_location_assignment PIN_AC28 -to switches[6]
-set_location_assignment PIN_AD30 -to switches[7]
 set_location_assignment PIN_AJ4 -to button
 set_location_assignment PIN_AK4 -to reset_n
-set_location_assignment PIN_AA24 -to leds[0]
-set_location_assignment PIN_AB23 -to leds[1]
-set_location_assignment PIN_AC23 -to leds[2]
-set_location_assignment PIN_AD24 -to leds[3]
-set_location_assignment PIN_AG25 -to leds[4]
-set_location_assignment PIN_AF25 -to leds[5]
-set_location_assignment PIN_AE24 -to leds[6]
-set_location_assignment PIN_AF24 -to leds[7]
 set_global_assignment -name SYSTEMVERILOG_FILE BCD_to_7Segment.sv
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH uart_fpga_top_tb -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH PWM_Generator_tb -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME uart_fpga_top_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id uart_fpga_top_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME uart_fpga_top_tb -section_id uart_fpga_top_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE uart_fpga_top_tb.sv -section_id uart_fpga_top_tb
 set_global_assignment -name SYSTEMVERILOG_FILE uart_handshake.sv
 set_global_assignment -name SYSTEMVERILOG_FILE Timer.sv
 set_location_assignment PIN_W17 -to seg_handshake[0]
@@ -163,17 +146,39 @@ set_location_assignment PIN_Y17 -to seg_decodificador_dedos[3]
 set_location_assignment PIN_Y18 -to seg_decodificador_dedos[4]
 set_location_assignment PIN_AF18 -to seg_decodificador_dedos[5]
 set_location_assignment PIN_W16 -to seg_decodificador_dedos[6]
-set_location_assignment PIN_Y16 -to entrada_dedos[0]
-set_location_assignment PIN_AK3 -to entrada_dedos[1]
-set_location_assignment PIN_AJ1 -to entrada_dedos[2]
-set_location_assignment PIN_AJ2 -to entrada_dedos[3]
-set_location_assignment PIN_AA12 -to currentMemori[6]
-set_location_assignment PIN_AC12 -to currentMemori[5]
-set_location_assignment PIN_AC9 -to currentMemori[4]
-set_location_assignment PIN_AD12 -to currentMemori[3]
-set_location_assignment PIN_AD11 -to currentMemori[2]
-set_location_assignment PIN_AD10 -to currentMemori[1]
-set_location_assignment PIN_AD9 -to currentMemori[0]
-set_location_assignment PIN_AC29 -to salida_decodificada[0]
-set_location_assignment PIN_AA30 -to salida_decodificada[1]
+set_location_assignment PIN_AC30 -to entrada_dedos[0]
+set_location_assignment PIN_AB28 -to entrada_dedos[1]
+set_location_assignment PIN_Y27 -to entrada_dedos[2]
+set_location_assignment PIN_AB30 -to entrada_dedos[3]
+set_global_assignment -name SYSTEMVERILOG_FILE FSM_ALU.sv
+set_location_assignment PIN_V25 -to operation[1]
+set_location_assignment PIN_W25 -to operation[0]
+set_global_assignment -name SYSTEMVERILOG_FILE FSM_ALU_tb.sv
+set_global_assignment -name EDA_TEST_BENCH_NAME FSM_ALU_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id FSM_ALU_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME FSM_ALU_tb -section_id FSM_ALU_tb
+set_location_assignment PIN_AA14 -to confirm_btn
+set_location_assignment PIN_AD20 -to seg_resultado[6]
+set_location_assignment PIN_AA19 -to seg_resultado[5]
+set_location_assignment PIN_AC20 -to seg_resultado[4]
+set_location_assignment PIN_AA20 -to seg_resultado[3]
+set_location_assignment PIN_AD19 -to seg_resultado[2]
+set_location_assignment PIN_W19 -to seg_resultado[1]
+set_location_assignment PIN_Y19 -to seg_resultado[0]
+set_location_assignment PIN_AE24 -to r_data[6]
+set_location_assignment PIN_AF24 -to r_data[7]
+set_location_assignment PIN_AC23 -to resultado_ALU[0]
+set_location_assignment PIN_AD24 -to resultado_ALU[1]
+set_global_assignment -name SYSTEMVERILOG_FILE PWM_Generator.sv
+set_location_assignment PIN_AG1 -to motor_in1
+set_location_assignment PIN_AG2 -to motor_in2
+set_global_assignment -name SYSTEMVERILOG_FILE PWM_Generator_tb.sv
+set_global_assignment -name EDA_TEST_BENCH_NAME PWM_Generator_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id PWM_Generator_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME PWM_Generator_tb -section_id PWM_Generator_tb
+set_location_assignment PIN_AF25 -to salida_decodificada[0]
+set_location_assignment PIN_AG25 -to salida_decodificada[1]
+set_global_assignment -name EDA_TEST_BENCH_FILE uart_fpga_top_tb.sv -section_id uart_fpga_top_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE FSM_ALU_tb.sv -section_id FSM_ALU_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE PWM_Generator_tb.sv -section_id PWM_Generator_tb
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

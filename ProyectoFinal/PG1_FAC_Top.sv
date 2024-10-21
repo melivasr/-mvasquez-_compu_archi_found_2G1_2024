@@ -2,30 +2,86 @@ module PG1_FAC_Top (
     input  logic        clock,
     input  logic        reset_n,
     input  logic        button,
-    input  logic [7:0]  switches,
     input  logic        i_Rx_Serial,
-	 input  logic [1:0]  salida_decodificada,
 	 input  logic [3:0]  entrada_dedos,
+	 input  logic [1:0]  operation,
+	 input  logic 			confirm_btn,
     output logic        o_Tx_Serial,
-    output logic [7:0]  leds,
     output logic [6:0]  seg_unidades,
     output logic [6:0]  seg_decenas,
     output logic [6:0]  seg_handshake,
-	 output logic [6:0]  seg_decodificador_dedos
-
+	 output logic [6:0]  seg_decodificador_dedos,
+	 output logic [6:0]  seg_resultado,
+	 output logic 			motor_in1, 
+	 output logic        motor_in2
 );
+
+	
+	
 	
 	// Señal interna para la salida del decodificador de dedos
-    //logic [1:0] salida_decodificada;
+    
 	 
 	 // Nueva señal para la salida del decodificador en formato de 4 bits
     logic [3:0] salida_decodificadaDedos_4bits;
 	 
+	 
+	 logic [7:0]  r_data;
+	 
+	 logic handshaking;
+	 
+	 logic [1:0] salida_decodificada;
+	 
+	 logic [1:0]  resultado_ALU;
+	 
+	 logic [1:0]  operands;
+	 
+	 
+	 
+	 
+	  // Señales internas para la sincronización del botón
+    logic button_sync0, button_sync1, button_prev;
+	 
+	 
+	 logic [3:0] resultado_ALU_4bits;
+
+
+	assign operands[0] = r_data[0];
+	assign operands[1] = r_data[1]; 
+	 
+	 
+	 
+	 // Instancias de flip-flops para la sincronización del botón
+    D_FF_Manual #(.N(1)) button_sync0_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(confirm_btn),
+        .q(button_sync0)
+    );
+
+    D_FF_Manual #(.N(1)) button_sync1_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(button_sync0),
+        .q(button_sync1)
+    );
+
+    D_FF_Manual #(.N(1)) button_prev_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(button_sync1),
+        .q(button_prev)
+    );
+
+    // Señal para el flanco ascendente del botón (confirm_op)
+    assign confirm_op = button_sync1 & ~button_prev;
+
+	 
 	 // Instancia del módulo Decodificador_Dedos
-    //Decodificador_Dedos decodificador (
-    //    .entrada(entrada_dedos),
-    //    .salida(salida_decodificada)
-    //);
+    Decodificador_Dedos decodificador (
+        .entrada(entrada_dedos),
+        .salida(salida_decodificada)
+    );
 	 
 	 // Conversión de la salida decodificada de 2 bits a 4 bits
     assign salida_decodificadaDedos_4bits = {2'b00, salida_decodificada};
@@ -36,19 +92,49 @@ module PG1_FAC_Top (
         .bcd(salida_decodificadaDedos_4bits),
         .seg(seg_decodificador_dedos)
     );
-
+	 
+	 // Conversión de resultado de la ALU de 2 bits a 4 bits
+	assign resultado_ALU_4bits = {2'b00, resultado_ALU};
+	
+	// Instancia del módulo BCD_to_7Segment
+    BCD_to_7Segment bcd_to_7seg_result (
+        .bcd(resultado_ALU_4bits),
+        .seg(seg_resultado)
+    );
+	
     // Instancia única del módulo uart_fpga_top
     uart_fpga_top uart_instance (
         .clock(clock),
         .reset_n(reset_n),
         .button(button),
-        .switches(switches),
         .i_Rx_Serial(i_Rx_Serial),
         .o_Tx_Serial(o_Tx_Serial),
-        .leds(leds),
+		  .uart_enable(handshaking),
+        .leds(r_data),
         .seg_unidades(seg_unidades),
         .seg_decenas(seg_decenas),
         .seg_handshake(seg_handshake)
     );
+	 assign zero = 1'b0;
+	 FSM_ALU fsm_instance(
+    .clk(clock),
+    .reset(~reset_n), // Ajustar según la polaridad del reset
+    .handshaking(handshaking),
+    .confirm_op(confirm_op), // Usar la señal sincronizada
+    .switch_op(operation),
+    .operand_a(salida_decodificada),
+    .operand_b(operands),
+    .alu_result(resultado_ALU)
+	);
+	PWM_Generator pwm_instance(
+	.clk(clock),
+   .reset(~reset_n), 
+	.duty_cycle(resultado_ALU),
+    .pwm_out(pwm_signal)
+	);
+
+	// Asignaciones de control del motor
+	assign motor_in1 = pwm_signal;
+	assign motor_in2 = 1'b0; // Si no necesitas invertir el sentido
 
 endmodule

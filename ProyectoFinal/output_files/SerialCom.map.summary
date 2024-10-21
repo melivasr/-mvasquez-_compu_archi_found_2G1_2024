@@ -1,17 +1,12 @@
-Analysis & Synthesis Status : Successful - Sat Oct 19 22:25:22 2024
+Analysis & Elaboration Status : Successful - Mon Oct 21 15:04:07 2024
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : SerialCom
 Top-level Entity Name : PG1_FAC_Top
 Family : Cyclone V
-Logic utilization (in ALMs) : N/A
-Total registers : 164
-Total pins : 55
-Total virtual pins : 0
-Total block memory bits : 0
-Total DSP Blocks : 0
-Total HSSI RX PCSs : 0
-Total HSSI PMA RX Deserializers : 0
-Total HSSI TX PCSs : 0
-Total HSSI PMA TX Serializers : 0
-Total PLLs : 0
-Total DLLs : 0
+Logic utilization (in ALMs) : N/A until Partition Merge
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total block memory bits : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge
+Total DLLs : N/A until Partition Merge
