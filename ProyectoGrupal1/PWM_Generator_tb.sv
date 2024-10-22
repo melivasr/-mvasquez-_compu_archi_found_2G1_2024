@@ -28,13 +28,13 @@ module PWM_Generator_tb();
 		  #20
 		  
 		  duty_cycle = 0;
-        #100;
-        duty_cycle = 1;
-        #100;
+        #300;
         duty_cycle = 2;
-        #100;
+        #300;
         duty_cycle = 3;
-        #100;
+        #300;
+        duty_cycle = 1;
+        #300;
         $finish;
     end
 	 

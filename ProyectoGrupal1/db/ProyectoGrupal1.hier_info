@@ -3,17 +3,19 @@ clk => clk.IN1
 reset => reset.IN1
 duty_cycle[0] => duty_cycle[0].IN1
 duty_cycle[1] => duty_cycle[1].IN1
-pwm_out << lessthan:lessthan_2.port2
+pwm_out <= lessthan:lessthan_2.port2
 
 
 |PWM_Generator|lessthan:lessthan_1
 A[0] => A[0].IN1
 A[1] => A[1].IN1
 A[2] => A[2].IN1
+A[3] => A[3].IN1
 B[0] => _.IN1
 B[1] => _.IN1
 B[2] => _.IN1
-OUT <= fulladderOP:fulladder3.s
+B[3] => _.IN1
+OUT <= fulladderOP:fulladder4.s
 
 
 |PWM_Generator|lessthan:lessthan_1|fulladderOP:fulladder1
@@ -58,6 +60,20 @@ s <= s.DB_MAX_OUTPUT_PORT_TYPE
 cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
+|PWM_Generator|lessthan:lessthan_1|fulladderOP:fulladder4
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
 |PWM_Generator|mux2a1:mux2a1_1
 a => y.IN0
 b => y.IN0
@@ -75,6 +91,14 @@ y <= y.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |PWM_Generator|mux2a1:mux2a1_3
+a => y.IN0
+b => y.IN0
+s => y.IN1
+s => y.IN1
+y <= y.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PWM_Generator|mux2a1:mux2a1_4
 a => y.IN0
 b => y.IN0
 s => y.IN1
@@ -124,29 +148,49 @@ s <= s.DB_MAX_OUTPUT_PORT_TYPE
 cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
+|PWM_Generator|fulladderOP:fulladder4
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
 |PWM_Generator|register:register
 D[0] => Q[0]~reg0.DATAIN
 D[1] => Q[1]~reg0.DATAIN
 D[2] => Q[2]~reg0.DATAIN
+D[3] => Q[3]~reg0.DATAIN
 clk => Q[0]~reg0.CLK
 clk => Q[1]~reg0.CLK
 clk => Q[2]~reg0.CLK
+clk => Q[3]~reg0.CLK
 reset => Q[0]~reg0.ACLR
 reset => Q[1]~reg0.ACLR
 reset => Q[2]~reg0.ACLR
+reset => Q[3]~reg0.ACLR
 Q[0] <= Q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 Q[1] <= Q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 Q[2] <= Q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+Q[3] <= Q[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |PWM_Generator|lessthan:lessthan_2
 A[0] => A[0].IN1
 A[1] => A[1].IN1
 A[2] => A[2].IN1
+A[3] => A[3].IN1
 B[0] => _.IN1
 B[1] => _.IN1
 B[2] => _.IN1
-OUT <= fulladderOP:fulladder3.s
+B[3] => _.IN1
+OUT <= fulladderOP:fulladder4.s
 
 
 |PWM_Generator|lessthan:lessthan_2|fulladderOP:fulladder1
@@ -178,6 +222,20 @@ cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |PWM_Generator|lessthan:lessthan_2|fulladderOP:fulladder3
+a => s.IN0
+a => cout.IN0
+a => cout.IN0
+b => s.IN1
+b => cout.IN1
+b => cout.IN0
+cin => s.IN1
+cin => cout.IN1
+cin => cout.IN1
+s <= s.DB_MAX_OUTPUT_PORT_TYPE
+cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PWM_Generator|lessthan:lessthan_2|fulladderOP:fulladder4
 a => s.IN0
 a => cout.IN0
 a => cout.IN0
