@@ -11,65 +11,65 @@ cModel Technology
 Z0 dC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/simulation/modelsim
 vfulladderOP
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1729375515
+!s110 1729629005
 !i10b 1
 !s100 ^OZmMfNTQKCZ:Mbfj>XKH1
-Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
 IUi8D]noL;0Y@PJi^o>UET0
-Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z3 VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-w1727987247
+w1729560711
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv
 !i122 0
 L0 1 6
-Z5 OV;L;2020.1;71
+Z4 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1729375515.000000
+!s108 1729629005.000000
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv|
 !i113 1
-Z7 o-sv -work work
-Z8 !s92 -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1
-Z9 tCvgOpt 0
+Z5 o-sv -work work
+Z6 !s92 -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1
+Z7 tCvgOpt 0
 nfulladder@o@p
 vlessthan
 R1
-Z10 !s110 1729375516
+Z8 !s110 1729629006
 !i10b 1
-!s100 46?8VHJR9LUf1MLD@^FD[0
+!s100 zb?]0ElOZ4jGh8FcW]6:Q3
+R2
+IMA`Rj1EDneGD?N85:SB[J1
 R3
-I?_GK8:Nc3bm]I=Ui;ChJ[0
-R4
 S1
 R0
-w1728967866
+w1729561102
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv
 !i122 4
-L0 1 9
-R5
+L0 1 10
+R4
 r1
 !s85 0
 31
-R6
+Z9 !s108 1729629006.000000
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv|
 !i113 1
+R5
+R6
 R7
-R8
-R9
 vmux2a1
 R1
-R2
+R8
 !i10b 1
 !s100 nH8cnd;68`c30X:jWW^>W0
-R3
+R2
 I8CDlj][maIV02@@CW?8PJ1
-R4
+R3
 S1
 R0
 w1727987564
@@ -77,94 +77,94 @@ w1727987564
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv
 !i122 1
 L0 1 3
-R5
+R4
 r1
 !s85 0
 31
-R6
+R9
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv|
 !i113 1
+R5
+R6
 R7
-R8
-R9
 vPWM_Generator
 R1
-R2
+R8
 !i10b 1
-!s100 4]IB8PQGn4bzW_5ZFVjgn0
+!s100 kRkK6::e=ZGFAW;9fzifV3
+R2
+IGlibIa`I`5ZE5gFRDXHFF1
 R3
-IcLN8OeYSIV2kHV_JNaPz71
-R4
 S1
 R0
-w1729033921
+w1729628979
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv
 !i122 2
-L0 1 24
-R5
+L0 1 26
+R4
 r1
 !s85 0
 31
-R6
+R9
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv|
 !i113 1
+R5
+R6
 R7
-R8
-R9
 n@p@w@m_@generator
 vPWM_Generator_tb
 R1
-R10
+R8
 !i10b 1
-!s100 5Rm5UBcC34PN_i=5R?`Kh0
+!s100 zN0W_R@mj[5Fm=HS:dC@K2
+R2
+INHS6bOIVTh3dGW3P^7A:c1
 R3
-I:DPIlSLVeO[`TBSFUAEf]1
-R4
 S1
 R0
-w1729034395
+w1729628991
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv
 !i122 5
 L0 1 43
-R5
+R4
 r1
 !s85 0
 31
-!s108 1729375516.000000
+R9
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv|
 !i113 1
+R5
+R6
 R7
-R8
-R9
 n@p@w@m_@generator_tb
 vregister
 R1
-R2
+R8
 !i10b 1
-!s100 P=YYk^CmCe0KPkDPPgI<k0
+!s100 e2@MDGeUSm;:W`Y4mV>RC3
+R2
+IQZL@iln@1J]eREoI@f6<K1
 R3
-I30[;mIfh=F:PflXLbDm9I0
-R4
 S1
 R0
-w1729033922
+w1729561349
 8C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/register.sv
 FC:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/register.sv
 !i122 3
 L0 1 8
-R5
+R4
 r1
 !s85 0
 31
-R6
+R9
 !s107 C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/register.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1|C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/register.sv|
 !i113 1
+R5
+R6
 R7
-R8
-R9
