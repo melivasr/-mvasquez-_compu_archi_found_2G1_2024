@@ -6,8 +6,13 @@ module FSM_ALU (
     input logic [1:0] switch_op,
     input logic [1:0] operand_a,
     input logic [1:0] operand_b,
-    output logic [1:0] alu_result
+    output logic [1:0] alu_result,
+    output logic       z,
+    output logic       n,
+    output logic       o,
+    output logic       c
 );
+
     logic [1:0] state;
     logic [1:0] next_state;
     logic alu_enable;
@@ -20,20 +25,10 @@ module FSM_ALU (
     assign is_state_wait_confirm = ~state[1] &  state[0];
     assign is_state_execute      =  state[1] & ~state[0];
 
-    // Calcular next_state combinando todas las condiciones en una sola asignación
-    always_comb begin
-        if (is_state_execute) begin
-            next_state = 2'b00; // Volver a IDLE desde EXECUTE
-        end else if (is_state_wait_confirm && confirm_op) begin
-            next_state = 2'b10; // Cambiar a EXECUTE
-        end else if (is_state_idle && handshaking) begin
-            next_state = 2'b01; // Cambiar a WAIT_CONFIRM
-        end else if (is_state_wait_confirm && ~confirm_op) begin
-            next_state = 2'b01; // Permanecer en WAIT_CONFIRM si confirm_op es 0
-        end else begin
-            next_state = state; // Mantener el estado actual
-        end
-    end
+    // Calcular next_state utilizando asignaciones combinacionales
+    assign next_state[1] = (~state[1] & state[0] & confirm_op);
+    assign next_state[0] = (~state[1] & ~state[0] & handshaking) | 
+                           (~state[1] & state[0] & ~confirm_op);
 
     // Flip-Flops de Estado
     D_FF_Cell ff_state0 (
@@ -57,7 +52,11 @@ module FSM_ALU (
         .a(operand_a),
         .b(operand_b),
         .s(switch_op),
-        .y(alu_out)
+        .y(alu_out),
+        .c(c),
+        .z(z),
+        .n(n),
+        .o(o)
     );
 
     // Muxes para actualizar el resultado

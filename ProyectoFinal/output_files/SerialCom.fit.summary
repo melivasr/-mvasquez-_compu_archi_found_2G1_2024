@@ -1,13 +1,13 @@
-Fitter Status : Successful - Thu Oct 24 00:22:57 2024
+Fitter Status : Successful - Thu Oct 24 12:34:05 2024
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : SerialCom
 Top-level Entity Name : PG1_FAC_Top
 Family : Cyclone V
 Device : 5CSXFC6D6F31C6
 Timing Models : Final
-Logic utilization (in ALMs) : 134 / 41,910 ( < 1 % )
-Total registers : 177
-Total pins : 48 / 499 ( 10 % )
+Logic utilization (in ALMs) : 176 / 41,910 ( < 1 % )
+Total registers : 209
+Total pins : 54 / 499 ( 11 % )
 Total virtual pins : 0
 Total block memory bits : 0 / 5,662,720 ( 0 % )
 Total RAM Blocks : 0 / 553 ( 0 % )

@@ -10,7 +10,7 @@ z2
 cModel Technology
 dC:/Users/Adriel/Desktop/Informacion-de-Prioridad/TEC/2024/Semestre_2/FAC/Evaluaciones/ProyectoGrupal1/-mvasquez-_compu_archi_found_2G1_2024/SPIorUARTconf/simulation/questa
 vio_buf_opdrn
-Z0 !s110 1729544669
+Z0 !s110 1729792353
 !i10b 1
 !s100 z0EcHz62UYUVHTAOUgnd]2
 Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -20,20 +20,20 @@ Z3 dC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFin
 Z4 w1715758842
 Z5 8c:/intelfpga_lite/23.1std/quartus/eda/sim_lib/sgate.v
 Z6 Fc:/intelfpga_lite/23.1std/quartus/eda/sim_lib/sgate.v
-!i122 25
+!i122 31
 L0 249 22
 Z7 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z8 !s108 1729544669.000000
+Z8 !s108 1729792352.000000
 !s107 c:/intelfpga_lite/23.1std/quartus/eda/sim_lib/sgate.v|
 Z9 !s90 -reportprogress|300|-vlog01compat|-work|sgate_ver|c:/intelfpga_lite/23.1std/quartus/eda/sim_lib/sgate.v|
 !i113 1
 Z10 o-vlog01compat -work sgate_ver
 Z11 tCvgOpt 0
 vio_buf_tri
-R0
+Z12 !s110 1729792352
 !i10b 1
 !s100 OkVkfhJlbI5njJOG1hTe^2
 R1
@@ -43,20 +43,20 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 221 23
 R7
 r1
 !s85 0
 31
 R8
-Z12 !s107 c:/intelfpga_lite/23.1std/quartus/eda/sim_lib/sgate.v|
+Z13 !s107 c:/intelfpga_lite/23.1std/quartus/eda/sim_lib/sgate.v|
 R9
 !i113 1
 R10
 R11
 vmux21
-R0
+R12
 !i10b 1
 !s100 Sc^=5aRZnTN9<QgD6G?[00
 R1
@@ -66,20 +66,20 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 191 26
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
 R11
 voper_add
-R0
+R12
 !i10b 1
 !s100 ZR=EZ2WV8G<94^6TNJgX?0
 R1
@@ -89,20 +89,20 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 19 74
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
 R11
 voper_addsub
-R0
+R12
 !i10b 1
 !s100 <1G1iC9RHGaXFX]m5]F:L1
 R1
@@ -112,14 +112,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 96 91
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -135,14 +135,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 1073 59
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -158,14 +158,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 1037 32
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -181,14 +181,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 395 85
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -204,14 +204,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 1136 17
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -227,14 +227,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 573 72
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -250,14 +250,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 854 88
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -273,14 +273,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 484 85
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -296,14 +296,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 275 68
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -319,14 +319,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 946 42
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -342,14 +342,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 650 79
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -365,14 +365,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 733 57
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -388,14 +388,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 794 56
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -411,14 +411,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 992 41
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10
@@ -434,14 +434,14 @@ R3
 R4
 R5
 R6
-!i122 25
+!i122 31
 L0 348 43
 R7
 r1
 !s85 0
 31
 R8
-R12
+R13
 R9
 !i113 1
 R10

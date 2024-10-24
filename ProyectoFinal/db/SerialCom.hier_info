@@ -1,5 +1,5 @@
 |PG1_FAC_Top
-clock => clock.IN3
+clock => clock.IN6
 reset_n => reset_n.IN1
 button => button.IN1
 i_Rx_Serial => i_Rx_Serial.IN1
@@ -9,7 +9,7 @@ entrada_dedos[2] => entrada_dedos[2].IN1
 entrada_dedos[3] => entrada_dedos[3].IN1
 operation[0] => operation[0].IN1
 operation[1] => operation[1].IN1
-confirm_btn => confirm_btn_sync0.DATAIN
+confirm_btn => confirm_btn.IN1
 o_Tx_Serial <= uart_fpga_top:uart_instance.o_Tx_Serial
 seg_unidades[0] <= uart_fpga_top:uart_instance.seg_unidades
 seg_unidades[1] <= uart_fpga_top:uart_instance.seg_unidades
@@ -47,7 +47,54 @@ seg_resultado[4] <= BCD_to_7Segment:bcd_to_7seg_result.seg
 seg_resultado[5] <= BCD_to_7Segment:bcd_to_7seg_result.seg
 seg_resultado[6] <= BCD_to_7Segment:bcd_to_7seg_result.seg
 motor_in1 <= PWM_Generator:pwm_instance.pwm_out
-prueba <= PWM_Generator:pwm_instance.pwm_out
+alu_z <= FSM_ALU:fsm_instance.z
+alu_n <= FSM_ALU:fsm_instance.n
+alu_o <= FSM_ALU:fsm_instance.o
+alu_c <= FSM_ALU:fsm_instance.c
+operands[0] <= operands[0].DB_MAX_OUTPUT_PORT_TYPE
+operands[1] <= operands[1].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|D_FF_Manual:button_sync0_ff
+clk => clk.IN1
+reset => reset.IN1
+d[0] => d[0].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+
+
+|PG1_FAC_Top|D_FF_Manual:button_sync0_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|D_FF_Manual:button_sync1_ff
+clk => clk.IN1
+reset => reset.IN1
+d[0] => d[0].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+
+
+|PG1_FAC_Top|D_FF_Manual:button_sync1_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|PG1_FAC_Top|D_FF_Manual:button_prev_ff
+clk => clk.IN1
+reset => reset.IN1
+d[0] => d[0].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+
+
+|PG1_FAC_Top|D_FF_Manual:button_prev_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |PG1_FAC_Top|Decodificador_Dedos:decodificador
@@ -12316,9 +12363,9 @@ seg[6] <= seg.DB_MAX_OUTPUT_PORT_TYPE
 |PG1_FAC_Top|FSM_ALU:fsm_instance
 clk => clk.IN4
 reset => reset.IN4
-handshaking => always0.IN1
-confirm_op => always0.IN1
-confirm_op => always0.IN1
+handshaking => next_state.IN1
+confirm_op => next_state.IN1
+confirm_op => next_state.IN1
 switch_op[0] => switch_op[0].IN1
 switch_op[1] => switch_op[1].IN1
 operand_a[0] => operand_a[0].IN1
@@ -12327,6 +12374,10 @@ operand_b[0] => operand_b[0].IN1
 operand_b[1] => operand_b[1].IN1
 alu_result[0] <= alu_result[0].DB_MAX_OUTPUT_PORT_TYPE
 alu_result[1] <= alu_result[1].DB_MAX_OUTPUT_PORT_TYPE
+z <= ALU:alu_inst.z
+n <= ALU:alu_inst.n
+o <= ALU:alu_inst.o
+c <= ALU:alu_inst.c
 
 
 |PG1_FAC_Top|FSM_ALU:fsm_instance|D_FF_Cell:ff_state0

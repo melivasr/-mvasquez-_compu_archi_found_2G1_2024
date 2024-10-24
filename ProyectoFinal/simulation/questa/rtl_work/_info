@@ -11,7 +11,7 @@ cModel Technology
 Z0 dC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/simulation/questa
 vAdder_N_bits
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1729544686
+Z2 !s110 1729792370
 !i10b 1
 !s100 NTa5o:6AADC@k;zX<[n3S1
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -28,7 +28,7 @@ Z8 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z9 !s108 1729544686.000000
+Z9 !s108 1729792370.000000
 Z10 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Adder_N_bits.sv|
 Z11 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Adder_N_bits.sv|
 !i113 1
@@ -38,34 +38,61 @@ Z14 tCvgOpt 0
 n@adder_@n_bits
 vALU
 R1
-Z15 !s110 1729544689
+Z15 !s110 1729792373
 !i10b 1
 !s100 OZ9WXXD4lVVBSed?MgzZL1
 R3
-IG:n3BoE=3Da;]]2WY>a=C3
+IbgZ`b@X0Fz7Ei8kImdzQS0
 R4
 S1
 R0
-Z16 w1729399063
-8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/alu.sv
-FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/alu.sv
+w1729758271
+8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU.sv
+FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU.sv
 !i122 37
-Z17 L0 1 24
+L0 1 24
 R8
 r1
 !s85 0
 31
-Z18 !s108 1729544689.000000
-!s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/alu.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/alu.sv|
+Z16 !s108 1729792373.000000
+!s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU.sv|
 !i113 1
 R12
 R13
 R14
 n@a@l@u
+vALU_testbench
+R1
+Z17 !s110 1729792376
+!i10b 1
+!s100 _hH7XoZNEjL<8i9M^d[5Y0
+R3
+I72?3[?PU_g@f82hb4Bi_<2
+R4
+S1
+R0
+w1729791441
+8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU_testbench.sv
+FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU_testbench.sv
+!i122 52
+L0 1 103
+R8
+r1
+!s85 0
+31
+!s108 1729792376.000000
+!s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU_testbench.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU_testbench.sv|
+!i113 1
+R12
+R13
+R14
+n@a@l@u_testbench
 vandOP
 R1
-R15
+Z18 !s110 1729792374
 !i10b 1
 !s100 B;LR6RhaVWj0MeBfMXSg[2
 R3
@@ -82,7 +109,7 @@ R8
 r1
 !s85 0
 31
-R18
+R16
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/andop.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/andop.sv|
 !i113 1
@@ -92,7 +119,7 @@ R14
 nand@o@p
 vBCD_Counter
 R1
-Z21 !s110 1729544685
+Z21 !s110 1729792369
 !i10b 1
 !s100 DWfca0]o;ADTCnOLLUn]G1
 R3
@@ -100,7 +127,7 @@ IUkJI3YEJB^aE_=XHC_`Pi1
 R4
 S1
 R0
-R16
+Z22 w1729399063
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/BCD_Counter.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/BCD_Counter.sv
 !i122 6
@@ -109,7 +136,7 @@ R8
 r1
 !s85 0
 31
-Z22 !s108 1729544685.000000
+Z23 !s108 1729792369.000000
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/BCD_Counter.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/BCD_Counter.sv|
 !i113 1
@@ -127,7 +154,7 @@ I`=A<Sj`7DXcXBiSbe_ZKO0
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/BCD_to_7Segment.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/BCD_to_7Segment.sv
 !i122 2
@@ -136,7 +163,7 @@ R8
 r1
 !s85 0
 31
-R22
+Z24 !s108 1729792368.000000
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/BCD_to_7Segment.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/BCD_to_7Segment.sv|
 !i113 1
@@ -146,7 +173,7 @@ R14
 n@b@c@d_to_7@segment
 vComparator_N_bits
 R1
-R2
+R21
 !i10b 1
 !s100 ?4;=i5<@2?Ib^;URng8LI3
 R3
@@ -154,16 +181,16 @@ I9oj@:NmEDJIk`BVXI@VK22
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Comparator_N_bits.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Comparator_N_bits.sv
 !i122 9
-Z23 L0 1 10
+Z25 L0 1 10
 R8
 r1
 !s85 0
 31
-R9
+R23
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Comparator_N_bits.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Comparator_N_bits.sv|
 !i113 1
@@ -181,7 +208,7 @@ IEP8oSb@nz0fIc>hL3oQIf2
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Counter_N_bits.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Counter_N_bits.sv
 !i122 5
@@ -190,7 +217,7 @@ R8
 r1
 !s85 0
 31
-R22
+R23
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Counter_N_bits.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Counter_N_bits.sv|
 !i113 1
@@ -208,16 +235,16 @@ IhdT;emT?XGXFQj?W?`cFS1
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/D_FF_Cell.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/D_FF_Cell.sv
 !i122 7
-Z24 L0 1 14
+Z26 L0 1 14
 R8
 r1
 !s85 0
 31
-R22
+R23
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/D_FF_Cell.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/D_FF_Cell.sv|
 !i113 1
@@ -227,7 +254,7 @@ R14
 n@d_@f@f_@cell
 vD_FF_Manual
 R1
-R2
+R21
 !i10b 1
 !s100 l5hWC7RPUmgVc;fZXZYi=2
 R3
@@ -235,7 +262,7 @@ I3?8SkFC<?QJM^bjU4j2N81
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/D_FF_Manual.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/D_FF_Manual.sv
 !i122 8
@@ -244,7 +271,7 @@ R8
 r1
 !s85 0
 31
-R22
+R23
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/D_FF_Manual.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/D_FF_Manual.sv|
 !i113 1
@@ -262,7 +289,7 @@ I^USbhR<L6VjzaWP3URhFB1
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Decodificador_Dedos.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Decodificador_Dedos.sv
 !i122 34
@@ -271,7 +298,7 @@ R8
 r1
 !s85 0
 31
-R18
+R16
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Decodificador_Dedos.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Decodificador_Dedos.sv|
 !i113 1
@@ -283,22 +310,22 @@ vFSM_ALU
 R1
 R15
 !i10b 1
-!s100 Llm3WIb0794j^Hkk6:GMa0
+!s100 GCmno5Y5f=Mm7zlI_59S63
 R3
-IUEkY]eGL>X5=:>e9ok_6Q1
+Ib?V?>R8mjE_fK5M;WIdKj1
 R4
 S1
 R0
-w1729462791
+w1729786350
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/FSM_ALU.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/FSM_ALU.sv
 !i122 35
-L0 1 92
+L0 1 159
 R8
 r1
 !s85 0
 31
-R18
+R16
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/FSM_ALU.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/FSM_ALU.sv|
 !i113 1
@@ -335,7 +362,7 @@ R14
 n@full_@adder
 vfulladder2Bits
 R1
-Z25 !s110 1729544690
+R18
 !i10b 1
 !s100 S;W]mkB5l5?R=K@mG2LR;3
 R3
@@ -347,12 +374,12 @@ w1729399043
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/fulladder2bits.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/fulladder2bits.sv
 !i122 41
-Z26 L0 1 9
+L0 1 9
 R8
 r1
 !s85 0
 31
-Z27 !s108 1729544690.000000
+Z27 !s108 1729792374.000000
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/fulladder2bits.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/fulladder2bits.sv|
 !i113 1
@@ -362,7 +389,7 @@ R14
 nfulladder2@bits
 vfulladderOP
 R1
-R25
+R18
 !i10b 1
 !s100 ^OZmMfNTQKCZ:Mbfj>XKH1
 R3
@@ -370,7 +397,7 @@ I7bRRia4P8@=F^21Cn>TCe2
 R4
 S1
 R0
-R19
+w1729725972
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/fulladderop.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/fulladderop.sv
 !i122 42
@@ -387,35 +414,9 @@ R12
 R13
 R14
 nfulladder@o@p
-vlessthan
-R1
-R25
-!i10b 1
-!s100 46?8VHJR9LUf1MLD@^FD[0
-R3
-I129iP?F04hFOCPz9mNT3i1
-R4
-S1
-R0
-R16
-8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/lessthan.sv
-FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/lessthan.sv
-!i122 44
-R26
-R8
-r1
-!s85 0
-31
-R27
-!s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/lessthan.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/lessthan.sv|
-!i113 1
-R12
-R13
-R14
 vmux2a1
 R1
-R25
+R18
 !i10b 1
 !s100 nH8cnd;68`c30X:jWW^>W0
 R3
@@ -423,7 +424,7 @@ I]NTXGoaS^EBF@FAPQ8LJ>3
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/mux2a1.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/mux2a1.sv
 !i122 40
@@ -449,11 +450,11 @@ IbZAi6OE=JZfYGe@InW>hL0
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Mux2to1_N_bits.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Mux2to1_N_bits.sv
 !i122 11
-R24
+R26
 R8
 r1
 !s85 0
@@ -468,7 +469,7 @@ R14
 n@mux2to1_@n_bits
 vmux8a2
 R1
-R25
+R18
 !i10b 1
 !s100 XD7:N]g_Zj?U?>AD@i4MN1
 R3
@@ -476,11 +477,11 @@ IeOj@0I^X>@2?_miSkO;j90
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/mux8a2.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/mux8a2.sv
 !i122 43
-R24
+R26
 R8
 r1
 !s85 0
@@ -494,7 +495,7 @@ R13
 R14
 vorOP
 R1
-R15
+R18
 !i10b 1
 !s100 KR>bB;0I4jOUm681G]mG=2
 R3
@@ -511,7 +512,7 @@ R8
 r1
 !s85 0
 31
-R18
+R27
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/orop.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/orop.sv|
 !i113 1
@@ -523,22 +524,22 @@ vPG1_FAC_Top
 R1
 R15
 !i10b 1
-!s100 5NV:]J:f?KRD2139U5X4j3
+!s100 oa8b_21lIXGz[EbICU]HV1
 R3
-IZoJI_kMQlOYU24KY1Noh90
+Ia=EbbiX^K]Y2l0iWGFiPI3
 R4
 S1
 R0
-w1729542769
+w1729792146
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PG1_FAC_Top.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PG1_FAC_Top.sv
 !i122 33
-L0 1 140
+L0 1 149
 R8
 r1
 !s85 0
 31
-R18
+R16
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PG1_FAC_Top.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PG1_FAC_Top.sv|
 !i113 1
@@ -550,22 +551,22 @@ vPWM_Generator
 R1
 R15
 !i10b 1
-!s100 4]IB8PQGn4bzW_5ZFVjgn0
+!s100 e=10@z12gl@4XMUHf3ZMh3
 R3
-IQ1_[Db2d1=5C>Mcc?nem30
+Ik]UdT<4Y<H=f62a>KAOJ30
 R4
 S1
 R0
-w1729542560
+w1729747031
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator.sv
 !i122 36
-R17
+L0 1 41
 R8
 r1
 !s85 0
 31
-R18
+R16
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator.sv|
 !i113 1
@@ -573,59 +574,6 @@ R12
 R13
 R14
 n@p@w@m_@generator
-vPWM_Generator_tb
-R1
-Z28 !s110 1729544691
-!i10b 1
-!s100 5Rm5UBcC34PN_i=5R?`Kh0
-R3
-IdK`P_0aT_Hcd8dhFlY4>@1
-R4
-S1
-R0
-w1729468517
-8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator_tb.sv
-FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator_tb.sv
-!i122 54
-L0 1 43
-R8
-r1
-!s85 0
-31
-Z29 !s108 1729544691.000000
-!s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator_tb.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator_tb.sv|
-!i113 1
-R12
-R13
-R14
-n@p@w@m_@generator_tb
-vregister
-R1
-R25
-!i10b 1
-!s100 P=YYk^CmCe0KPkDPPgI<k0
-R3
-I<Fd<6>dXV;@z<[H]24zM:0
-R4
-S1
-R0
-R16
-8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/register.sv
-FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/register.sv
-!i122 45
-L0 1 8
-R8
-r1
-!s85 0
-31
-R27
-!s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/register.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/register.sv|
-!i113 1
-R12
-R13
-R14
 vTimer
 R1
 R21
@@ -636,7 +584,7 @@ I=6PcTQGb:Iem3f_mXRDIZ2
 R4
 S1
 R0
-R16
+R22
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Timer.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Timer.sv
 !i122 4
@@ -645,7 +593,7 @@ R8
 r1
 !s85 0
 31
-R22
+R23
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Timer.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Timer.sv|
 !i113 1
@@ -655,7 +603,7 @@ R14
 n@timer
 vuart_fpga_top
 R1
-R21
+Z28 !s110 1729792368
 !i10b 1
 !s100 D9l1DkCD=k^]82CNFEZ;H2
 R3
@@ -663,7 +611,7 @@ IS[oTL9XFHoAe4TVL_>co;2
 R4
 S1
 R0
-w1729443114
+w1729752620
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top.sv
 !i122 1
@@ -672,7 +620,7 @@ R8
 r1
 !s85 0
 31
-R22
+R24
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top.sv|
 !i113 1
@@ -681,7 +629,7 @@ R13
 R14
 vuart_fpga_top_mux_0
 R1
-Z30 !s110 1729544688
+R15
 !i10b 1
 !s100 lh];]Wf?RlXVaDAE>GF6o2
 R3
@@ -689,16 +637,16 @@ IA?5PGfQla1DfoZ2>?zA@21
 R4
 S1
 R0
-Z31 w1729399064
+Z29 w1729399064
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top_mux_0.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top_mux_0.sv
 !i122 31
-Z32 L0 1 15
+Z30 L0 1 15
 R8
 r1
 !s85 0
 31
-Z33 !s108 1729544688.000000
+R16
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top_mux_0.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top_mux_0.sv|
 !i113 1
@@ -715,16 +663,16 @@ IH]fG7:LRlign37V`B@`E;1
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top_mux_4.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top_mux_4.sv
 !i122 32
-R32
+R30
 R8
 r1
 !s85 0
 31
-R18
+R16
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top_mux_4.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_fpga_top_mux_4.sv|
 !i113 1
@@ -741,7 +689,7 @@ IJ_6HN?;gVS>ohijRgd>z12
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_handshake.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_handshake.sv
 !i122 3
@@ -750,7 +698,7 @@ R8
 r1
 !s85 0
 31
-R22
+R23
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_handshake.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_handshake.sv|
 !i113 1
@@ -759,7 +707,7 @@ R13
 R14
 vuart_handshake_mux_0
 R1
-R30
+Z31 !s110 1729792372
 !i10b 1
 !s100 jSSBXTDL2YNddJj07=jGK2
 R3
@@ -767,16 +715,16 @@ IEmSbZbY7<M6<4AzbBAg2`3
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_handshake_mux_0.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_handshake_mux_0.sv
 !i122 30
-R23
+R25
 R8
 r1
 !s85 0
 31
-R33
+Z32 !s108 1729792372.000000
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_handshake_mux_0.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_handshake_mux_0.sv|
 !i113 1
@@ -785,7 +733,7 @@ R13
 R14
 vuart_rx
 R1
-!s110 1729544684
+R28
 !i10b 1
 !s100 3mDVJ5ZSL7o]XgeITjXK93
 R3
@@ -793,7 +741,7 @@ Ijl?;k]Ck:hOIdb_?4co7]0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx.sv
 !i122 0
@@ -802,7 +750,7 @@ R8
 r1
 !s85 0
 31
-!s108 1729544684.000000
+R24
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx.sv|
 !i113 1
@@ -811,7 +759,7 @@ R13
 R14
 vuart_rx_bit_decoder
 R1
-R30
+R31
 !i10b 1
 !s100 UNS6R7YH`B18MGA5gL[Ef0
 R3
@@ -819,7 +767,7 @@ IkdL^<8RKHP2fZ>WleRT=d1
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_bit_decoder.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_bit_decoder.sv
 !i122 27
@@ -828,7 +776,7 @@ R8
 r1
 !s85 0
 31
-R33
+R32
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_bit_decoder.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_bit_decoder.sv|
 !i113 1
@@ -837,7 +785,7 @@ R13
 R14
 vuart_rx_bit_handler
 R1
-Z34 !s110 1729544687
+Z33 !s110 1729792371
 !i10b 1
 !s100 HoabH28?NchcBb^U<1RDK1
 R3
@@ -845,7 +793,7 @@ IFLlCT[5PeXlAeb9DX@ZOi0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_bit_handler.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_bit_handler.sv
 !i122 21
@@ -854,7 +802,7 @@ R8
 r1
 !s85 0
 31
-Z35 !s108 1729544687.000000
+Z34 !s108 1729792371.000000
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_bit_handler.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_bit_handler.sv|
 !i113 1
@@ -863,7 +811,7 @@ R13
 R14
 vuart_rx_byte_handler
 R1
-R34
+R33
 !i10b 1
 !s100 `QF`TRBa?SDG[:=8hU_lH1
 R3
@@ -871,7 +819,7 @@ Ig9cdkgl:C<:DUnHhWUal]1
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_byte_handler.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_byte_handler.sv
 !i122 22
@@ -880,7 +828,7 @@ R8
 r1
 !s85 0
 31
-R35
+R34
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_byte_handler.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_byte_handler.sv|
 !i113 1
@@ -889,7 +837,7 @@ R13
 R14
 vuart_rx_counter
 R1
-R34
+R33
 !i10b 1
 !s100 dIiJj949dX5[b7gE:[9l61
 R3
@@ -897,7 +845,7 @@ I@9AiGKN4badBo<^nX:[m30
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_counter.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_counter.sv
 !i122 20
@@ -906,7 +854,7 @@ R8
 r1
 !s85 0
 31
-R35
+R34
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_counter.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_counter.sv|
 !i113 1
@@ -915,7 +863,7 @@ R13
 R14
 vuart_rx_dv_handler
 R1
-R34
+R33
 !i10b 1
 !s100 MDbe_GF7DbbfPHI^VFg0a2
 R3
@@ -923,16 +871,16 @@ IGDb]5:GO_I^7In3S7dk7I1
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_dv_handler.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_dv_handler.sv
 !i122 23
-Z36 L0 1 32
+Z35 L0 1 32
 R8
 r1
 !s85 0
 31
-R35
+R34
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_dv_handler.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_dv_handler.sv|
 !i113 1
@@ -949,7 +897,7 @@ Idn>K02Akj]IgC>LPe9OW82
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_fsm.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_fsm.sv
 !i122 14
@@ -967,7 +915,7 @@ R13
 R14
 vuart_rx_mux_1
 R1
-R34
+R2
 !i10b 1
 !s100 Ea<8HMWcYP`7;B:zICf9N0
 R3
@@ -975,7 +923,7 @@ ICmZ1Zef2h@ESa`b[Ka?9h3
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_1.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_1.sv
 !i122 16
@@ -993,7 +941,7 @@ R13
 R14
 vuart_rx_mux_10
 R1
-R30
+R31
 !i10b 1
 !s100 oe>oinJL`i8fDzdRn3K][2
 R3
@@ -1001,7 +949,7 @@ IRIb?e084lG02450CCdMli0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_10.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_10.sv
 !i122 29
@@ -1010,7 +958,7 @@ R8
 r1
 !s85 0
 31
-R33
+R32
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_10.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_10.sv|
 !i113 1
@@ -1019,7 +967,7 @@ R13
 R14
 vuart_rx_mux_2
 R1
-R34
+R33
 !i10b 1
 !s100 VAIkQ102>Y?:6]alMTBPg1
 R3
@@ -1027,7 +975,7 @@ Im0b;i`KCT>PgAdZUd5Em>0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_2.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_2.sv
 !i122 18
@@ -1036,7 +984,7 @@ R8
 r1
 !s85 0
 31
-R35
+R34
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_2.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_2.sv|
 !i113 1
@@ -1045,7 +993,7 @@ R13
 R14
 vuart_rx_mux_6
 R1
-R30
+R31
 !i10b 1
 !s100 X>APMd@KVn`1C?jW00e<P1
 R3
@@ -1053,7 +1001,7 @@ IGNG]nR9JmTTY67F34kBP23
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_6.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_6.sv
 !i122 24
@@ -1062,7 +1010,7 @@ R8
 r1
 !s85 0
 31
-R35
+R32
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_6.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_6.sv|
 !i113 1
@@ -1071,7 +1019,7 @@ R13
 R14
 vuart_rx_mux_7
 R1
-R30
+R31
 !i10b 1
 !s100 kBAZW]m9h86I>I@iDlj_42
 R3
@@ -1079,7 +1027,7 @@ IB<g@W3FV1[:1zFVe0P_CB3
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_7.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_7.sv
 !i122 25
@@ -1088,7 +1036,7 @@ R8
 r1
 !s85 0
 31
-R33
+R32
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_7.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_7.sv|
 !i113 1
@@ -1097,7 +1045,7 @@ R13
 R14
 vuart_rx_mux_8
 R1
-R30
+R31
 !i10b 1
 !s100 Qm^bj4m3NZB6V:cXPZeLO3
 R3
@@ -1105,16 +1053,16 @@ IJhkImF`3E2e1:VaXUkcCT0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_8.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_8.sv
 !i122 26
-Z37 L0 1 23
+Z36 L0 1 23
 R8
 r1
 !s85 0
 31
-R33
+R32
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_8.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_8.sv|
 !i113 1
@@ -1123,7 +1071,7 @@ R13
 R14
 vuart_rx_mux_9
 R1
-R30
+R31
 !i10b 1
 !s100 2D^G8eK1ZKB6TnO:Z4T6k3
 R3
@@ -1131,16 +1079,16 @@ I_DO4T^b^TTzURCTAnfhg^0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_9.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_9.sv
 !i122 28
-R36
+R35
 R8
 r1
 !s85 0
 31
-R33
+R32
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_9.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_mux_9.sv|
 !i113 1
@@ -1149,7 +1097,7 @@ R13
 R14
 vuart_rx_state_handler
 R1
-R34
+R33
 !i10b 1
 !s100 JcLoERzi_G4Uc><mm=f:K1
 R3
@@ -1157,7 +1105,7 @@ IK:NR0gG:HQYEJP^Q1l=WC0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_state_handler.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_state_handler.sv
 !i122 19
@@ -1166,7 +1114,7 @@ R8
 r1
 !s85 0
 31
-R35
+R34
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_state_handler.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_state_handler.sv|
 !i113 1
@@ -1175,7 +1123,7 @@ R13
 R14
 vuart_rx_state_machine
 R1
-R34
+R33
 !i10b 1
 !s100 D9_zGNF?5Ho[>;ACVzY0;2
 R3
@@ -1183,7 +1131,7 @@ I>NO]Qm>eRYF2B[dhg6G@20
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_state_machine.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_state_machine.sv
 !i122 17
@@ -1192,7 +1140,7 @@ R8
 r1
 !s85 0
 31
-R35
+R34
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_state_machine.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_state_machine.sv|
 !i113 1
@@ -1209,11 +1157,11 @@ Id6Pk;QbNd4AI?HP3_R4HQ0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_sync.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_rx_sync.sv
 !i122 15
-R37
+R36
 R8
 r1
 !s85 0
@@ -1227,8 +1175,8 @@ R13
 R14
 vuart_tx
 R1
-Z38 DXx4 work 11 uart_tx_pkg 0 22 OaZK@F]86;0`HXY3I@Sgi1
-R25
+Z37 DXx4 work 11 uart_tx_pkg 0 22 OaZK@F]86;0`HXY3I@Sgi1
+R18
 !i10b 1
 !s100 G>Va^2C]?cBFb3IBV^Fe31
 R3
@@ -1236,10 +1184,10 @@ I1^a:_70d9G[5aWLfg>A`V1
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx.sv
-!i122 46
+!i122 44
 L0 2 91
 R8
 r1
@@ -1254,8 +1202,8 @@ R13
 R14
 vuart_tx_bit_index
 R1
-R38
-R28
+R37
+Z38 !s110 1729792375
 !i10b 1
 !s100 Wa5gJ@?jNFJeZ45ZZ3LYA2
 R3
@@ -1263,16 +1211,16 @@ I8[P=9I8WOFo@9ZE49ihkl2
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_bit_index.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_bit_index.sv
-!i122 52
+!i122 50
 L0 2 120
 R8
 r1
 !s85 0
 31
-R29
+Z39 !s108 1729792375.000000
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_bit_index.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_bit_index.sv|
 !i113 1
@@ -1281,8 +1229,8 @@ R13
 R14
 vuart_tx_clk_counter
 R1
+R37
 R38
-R28
 !i10b 1
 !s100 n8CAZ7b?[1R7`P4[E4;gR0
 R3
@@ -1290,16 +1238,16 @@ IFm<Lo2[_NE@?^<SERMWbi0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_clk_counter.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_clk_counter.sv
-!i122 51
+!i122 49
 L0 2 115
 R8
 r1
 !s85 0
 31
-R29
+R39
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_clk_counter.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_clk_counter.sv|
 !i113 1
@@ -1308,8 +1256,8 @@ R13
 R14
 vuart_tx_fsm
 R1
+R37
 R38
-R28
 !i10b 1
 !s100 AY]:iCfbQDD@gm<RCQkS41
 R3
@@ -1317,16 +1265,16 @@ IadZWzI3IL^R9X;0ISR01K0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_fsm.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_fsm.sv
-!i122 50
+!i122 48
 L0 1 90
 R8
 r1
 !s85 0
 31
-R29
+R39
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_fsm.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_fsm.sv|
 !i113 1
@@ -1335,8 +1283,8 @@ R13
 R14
 vuart_tx_mux_1
 R1
+R37
 R38
-R25
 !i10b 1
 !s100 W=Mzh@1?S^OhWiKgS8UL`1
 R3
@@ -1344,10 +1292,10 @@ ImNInW`b;hMNnLcHSa9@Af0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_1.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_1.sv
-!i122 47
+!i122 45
 L0 2 54
 R8
 r1
@@ -1362,8 +1310,8 @@ R13
 R14
 vuart_tx_mux_2
 R1
+R37
 R38
-R28
 !i10b 1
 !s100 EQ7^zaS@HJZG_e_3Z5Kk;1
 R3
@@ -1371,16 +1319,16 @@ I8gIKB0HAYX^ZST9CGInib1
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_2.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_2.sv
-!i122 48
+!i122 46
 L0 2 21
 R8
 r1
 !s85 0
 31
-R29
+R39
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_2.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_2.sv|
 !i113 1
@@ -1389,8 +1337,8 @@ R13
 R14
 vuart_tx_mux_3
 R1
+R37
 R38
-R28
 !i10b 1
 !s100 BLGQ1VRe:XLc262?MKWD^3
 R3
@@ -1398,16 +1346,16 @@ IYaP[TXD3Ek=Yh3KzAZo>?2
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_3.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_3.sv
-!i122 49
+!i122 47
 L0 2 35
 R8
 r1
 !s85 0
 31
-R29
+R39
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_3.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_3.sv|
 !i113 1
@@ -1424,7 +1372,7 @@ IK8knT1f>4RbSPz<Efi6nj0
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_4.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_4.sv
 !i122 13
@@ -1442,8 +1390,8 @@ R13
 R14
 vuart_tx_mux_5
 R1
-R38
-R28
+R37
+R17
 !i10b 1
 !s100 c5YU:ISjZU8SL5M0dYBCc1
 R3
@@ -1451,16 +1399,16 @@ Ii[Pea8TMlm_2F8]1V^KIB2
 R4
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_5.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_5.sv
-!i122 53
+!i122 51
 L0 2 14
 R8
 r1
 !s85 0
 31
-R29
+R39
 !s107 C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_5.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal|C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_5.sv|
 !i113 1
@@ -1477,7 +1425,7 @@ IOaZK@F]86;0`HXY3I@Sgi1
 VOaZK@F]86;0`HXY3I@Sgi1
 S1
 R0
-R31
+R29
 8C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_pkg.sv
 FC:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_pkg.sv
 !i122 12

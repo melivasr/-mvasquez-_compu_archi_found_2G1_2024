@@ -132,7 +132,27 @@
 					"strict" : false
 				},
 				{
-					"name" : "prueba",
+					"name" : "alu_z",
+					"strict" : false
+				},
+				{
+					"name" : "alu_n",
+					"strict" : false
+				},
+				{
+					"name" : "alu_o",
+					"strict" : false
+				},
+				{
+					"name" : "alu_c",
+					"strict" : false
+				},
+				{
+					"name" : "operands[0]",
+					"strict" : false
+				},
+				{
+					"name" : "operands[1]",
 					"strict" : false
 				},
 				{
@@ -152,18 +172,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "clock",
-					"strict" : false
-				},
-				{
-					"name" : "reset_n",
-					"strict" : false
-				},
-				{
-					"name" : "confirm_btn",
-					"strict" : false
-				},
-				{
 					"name" : "operation[1]",
 					"strict" : false
 				},
@@ -172,7 +180,19 @@
 					"strict" : false
 				},
 				{
+					"name" : "clock",
+					"strict" : false
+				},
+				{
+					"name" : "reset_n",
+					"strict" : false
+				},
+				{
 					"name" : "i_Rx_Serial",
+					"strict" : false
+				},
+				{
+					"name" : "confirm_btn",
 					"strict" : false
 				}
 			]

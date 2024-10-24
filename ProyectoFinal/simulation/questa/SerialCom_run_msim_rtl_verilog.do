@@ -82,15 +82,13 @@ vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_fo
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/Decodificador_Dedos.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/FSM_ALU.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator.sv}
-vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/alu.sv}
+vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/andop.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/orop.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/mux2a1.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/fulladder2bits.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/fulladderop.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/mux8a2.sv}
-vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/lessthan.sv}
-vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/register.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_1.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_2.sv}
@@ -100,9 +98,9 @@ vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_fo
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_bit_index.sv}
 vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/uart_tx_mux_5.sv}
 
-vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/PWM_Generator_tb.sv}
+vlog -sv -work work +incdir+C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal {C:/Users/ASUS/source/repos/-mvasquez-_compu_archi_found_2G1_2024/ProyectoFinal/ALU_testbench.sv}
 
-vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  PWM_Generator_tb
+vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  ALU_testbench
 
 add wave *
 view structure

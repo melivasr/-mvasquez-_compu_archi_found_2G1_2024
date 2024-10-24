@@ -11,37 +11,42 @@ module PG1_FAC_Top (
     output logic [6:0]  seg_decenas,
     output logic [6:0]  seg_handshake,
 	 output logic [6:0]  seg_decodificador_dedos,
+	 output logic [6:0]  seg_uart,
 	 output logic [6:0]  seg_resultado,
 	 output logic 			motor_in1, 
-	 output logic        motor_in2 
+	 output logic       alu_z,
+    output logic       alu_n,
+    output logic       alu_o,
+    output logic       alu_c,
+	 output logic [1:0]  operands
 );
-
-	
-	assign motor_in2  = 0;
-	
-	// Señal interna para la salida del decodificador de dedos
-    logic [1:0] salida_decodificada;
+    
 	 
 	 // Nueva señal para la salida del decodificador en formato de 4 bits
     logic [3:0] salida_decodificadaDedos_4bits;
 	 
-	 logic [1:0] operands;
+	 
+	 logic [7:0]  r_data;
 	 
 	 logic handshaking;
 	 
-	 logic [7:0] r_data;
+	 logic [1:0] salida_decodificada;
 	 
-	 assign operand_a = r_data[1:0];
+	 logic [1:0]  resultado_ALU;
+	 
+	 
 	 
 	  // Señales internas para la sincronización del botón
     logic button_sync0, button_sync1, button_prev;
 	 
 	 
 	 logic [3:0] resultado_ALU_4bits;
-	 
-	 logic [7:0]  r_data;
-	 
-	 logic [1:0]  resultado_ALU;
+
+
+	assign operands[0] = r_data[0];
+	assign operands[1] = r_data[1]; 
+	
+	
 	 
 	 // Instancias de flip-flops para la sincronización del botón
     D_FF_Manual #(.N(1)) button_sync0_ff (
@@ -107,6 +112,14 @@ module PG1_FAC_Top (
         .seg_decenas(seg_decenas),
         .seg_handshake(seg_handshake)
     );
+	 assign resultado_UART_4bits = {2'b00, operands};
+	
+	// Instancia del módulo BCD_to_7Segment
+    BCD_to_7Segment bcd_to_7seg_uart (
+        .bcd(resultado_UART_4bits),
+        .seg(seg_uart)
+    );
+	 
 	 assign zero = 1'b0;
 	 FSM_ALU fsm_instance(
     .clk(clock),
@@ -114,16 +127,23 @@ module PG1_FAC_Top (
     .handshaking(handshaking),
     .confirm_op(confirm_op), // Usar la señal sincronizada
     .switch_op(operation),
-    .operand_a(operand_a),
-    .operand_b(salida_decodificada),
-    .alu_result(resultado_ALU)
+    .operand_a(salida_decodificada),
+    .operand_b(operands),
+    .alu_result(resultado_ALU),
+	 .z(alu_z),
+	 .n(alu_n),
+	 .o(alu_o),
+	 .c(alu_c)
+	 
 	);
 	PWM_Generator pwm_instance(
 	.clk(clock),
-   .reset(~reset_n), // Ajustar según la polaridad del reset
+   .reset(~reset_n), 
 	.duty_cycle(resultado_ALU),
-	.pwm_out(motor_in1),
-	
+    .pwm_out(pwm_signal)
 	);
 
-endmodule
+	// Asignaciones de control del motor
+	assign motor_in1 = pwm_signal;
+	
+endmodule 

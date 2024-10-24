@@ -1,112 +1,88 @@
 module PG1_FAC_Top (
-    input  logic        clock,
-    input  logic        reset_n,
-    input  logic        button,
-    input  logic        i_Rx_Serial,
-    input  logic [3:0]  entrada_dedos,
-    input  logic [1:0]  operation,
-    input  logic        confirm_btn,
-    output logic        o_Tx_Serial,
-    output logic [6:0]  seg_unidades,
-    output logic [6:0]  seg_decenas,
-    output logic [6:0]  seg_handshake,
-    output logic [6:0]  seg_decodificador_dedos,
-    output logic [6:0]  seg_resultado,
-    output logic        motor_in1, 
-    output logic        prueba
+    input  logic        clock,                     // Reloj del sistema
+    input  logic        reset_n,                   // Señal de reset activa en bajo
+    input  logic        button,                    // Botón de entrada
+    input  logic        i_Rx_Serial,               // Entrada serial para recepción UART
+    input  logic [3:0]  entrada_dedos,             // Entrada de 4 bits para el decodificador
+    input  logic [1:0]  operation,                 // Selección de la operación de la ALU
+    input  logic        confirm_btn,               // Botón para confirmar la operación
+    output logic        o_Tx_Serial,               // Salida serial para transmisión UART
+    output logic [6:0]  seg_unidades,              // Salida de display de 7 segmentos para unidades
+    output logic [6:0]  seg_decenas,               // Salida de display de 7 segmentos para decenas
+    output logic [6:0]  seg_handshake,             // Salida de display de 7 segmentos para el handshake
+    output logic [6:0]  seg_decodificador_dedos,   // Salida de display de 7 segmentos para la decodificación de entrada
+    output logic [6:0]  seg_resultado,             // Salida de display de 7 segmentos para el resultado de la ALU
+    output logic        motor_in1,                 // Control del motor (PWM)
+    output logic        alu_z,                     // Bandera de zero de la ALU
+    output logic        alu_n,                     // Bandera de negativo de la ALU
+    output logic        alu_o,                     // Bandera de overflow de la ALU
+    output logic        alu_c,                     // Bandera de carry de la ALU
+    output logic [1:0]  operands                   // Operandos para la ALU
 );
 
     // Señales internas
-    logic [3:0] salida_decodificadaDedos_4bits;
-    logic [7:0] r_data;
-    logic handshaking;
-    logic [1:0] salida_decodificada;
-    logic [1:0] resultado_ALU;
-    logic [1:0] acumulado;       // Registro para el acumulado
-    logic [3:0] resultado_ALU_4bits;
-    logic pwm_signal;
-    logic [1:0] operands;        // Señal para operands
+    logic [3:0] salida_decodificadaDedos_4bits;    // Señal de salida del decodificador en formato de 4 bits
+    logic [7:0] r_data;                            // Datos recibidos desde el UART
+    logic handshaking;                             // Señal para indicar el estado de handshake
+    logic [1:0] salida_decodificada;               // Salida del decodificador
+    logic [1:0] resultado_ALU;                     // Resultado de la ALU en formato de 2 bits
+    logic button_sync0, button_sync1, button_prev; // Señales para la sincronización del botón
+    logic [3:0] resultado_ALU_4bits;               // Resultado de la ALU convertido a 4 bits
 
-    // Sincronización y detección de confirm_btn
-    logic confirm_btn_sync0, confirm_btn_sync1;
-    logic confirm_btn_pulse;
+    // Asignación de los primeros dos bits de r_data a operands
+    assign operands[0] = r_data[0];
+    assign operands[1] = r_data[1];
+    
+    // Sincronización del botón para evitar rebotes
+    D_FF_Manual #(.N(1)) button_sync0_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(confirm_btn),
+        .q(button_sync0)
+    );
 
-    // Sincronización y detección de confirm_btn
-    always_ff @(posedge clock or negedge reset_n) begin
-        if (!reset_n) begin
-            confirm_btn_sync0 <= 1'b0;
-            confirm_btn_sync1 <= 1'b0;
-        end else begin
-            confirm_btn_sync0 <= confirm_btn;
-            confirm_btn_sync1 <= confirm_btn_sync0;
-        end
-    end
+    D_FF_Manual #(.N(1)) button_sync1_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(button_sync0),
+        .q(button_sync1)
+    );
 
-    assign confirm_btn_pulse = confirm_btn_sync0 && ~confirm_btn_sync1;
+    D_FF_Manual #(.N(1)) button_prev_ff (
+        .clk(clock),
+        .reset(~reset_n),
+        .d(button_sync1),
+        .q(button_prev)
+    );
 
-    // Asignar operands de r_data
-    always_ff @(posedge clock or negedge reset_n) begin
-        if (!reset_n) begin
-            operands <= 2'b00;
-        end else begin
-            operands <= r_data[1:0];
-        end
-    end
+    // Señal para detectar el flanco ascendente del botón (confirm_op)
+    assign confirm_op = button_sync1 & ~button_prev;
 
-    // Detección de cambios en operands
-    logic [1:0] operands_prev;
-    logic operands_changed_pulse;
-
-    always_ff @(posedge clock or negedge reset_n) begin
-        if (!reset_n) begin
-            operands_prev <= 2'b00;
-            operands_changed_pulse <= 1'b0;
-        end else begin
-            if (operands_prev != operands) begin
-                operands_changed_pulse <= 1'b1;
-                operands_prev <= operands;
-            end else begin
-                operands_changed_pulse <= 1'b0;
-            end
-        end
-    end
-
-    // Actualizar acumulado con prioridad a confirm_btn_pulse
-    always_ff @(posedge clock or negedge reset_n) begin
-        if (!reset_n) begin
-            acumulado <= 2'b00; // Resetear acumulado
-        end else if (confirm_btn_pulse) begin
-            acumulado <= resultado_ALU; // Actualizar con el resultado de la ALU
-        end else if (operands_changed_pulse) begin
-            acumulado <= operands; // Actualizar acumulado con operands cuando cambia
-        end
-    end
-
-    // Decodificación de la entrada_dedos
+    // Instancia del módulo Decodificador_Dedos, convierte entrada_dedos a salida_decodificada
     Decodificador_Dedos decodificador (
         .entrada(entrada_dedos),
         .salida(salida_decodificada)
     );
 
-    // Conversión de salida decodificada a 4 bits
+    // Conversión de la salida decodificada de 2 bits a 4 bits para el display
     assign salida_decodificadaDedos_4bits = {2'b00, salida_decodificada};
 
-    // Conversión de acumulado a 4 bits para visualización
-    assign resultado_ALU_4bits = {2'b00, acumulado};
-
-    // Instancia del módulo BCD_to_7Segment para salida decodificada
+    // Instancia del módulo BCD_to_7Segment para mostrar el valor decodificado en el display
     BCD_to_7Segment bcd_to_7seg (
         .bcd(salida_decodificadaDedos_4bits),
         .seg(seg_decodificador_dedos)
     );
 
-    // Instancia del módulo BCD_to_7Segment para el acumulado
+    // Conversión de resultado de la ALU de 2 bits a 4 bits para el display
+    assign resultado_ALU_4bits = {2'b00, resultado_ALU};
+
+    // Instancia del módulo BCD_to_7Segment para mostrar el resultado de la ALU en el display
     BCD_to_7Segment bcd_to_7seg_result (
         .bcd(resultado_ALU_4bits),
         .seg(seg_resultado)
     );
 
-    // Instancia única del módulo uart_fpga_top
+    // Instancia del módulo uart_fpga_top para manejar la comunicación UART
     uart_fpga_top uart_instance (
         .clock(clock),
         .reset_n(reset_n),
@@ -120,28 +96,31 @@ module PG1_FAC_Top (
         .seg_handshake(seg_handshake)
     );
 
-    // Instancia del FSM_ALU
-    FSM_ALU fsm_instance (
+    // Instancia del módulo FSM_ALU para controlar la operación de la ALU
+    FSM_ALU fsm_instance(
         .clk(clock),
         .reset(~reset_n),
         .handshaking(handshaking),
-        .confirm_op(confirm_btn_pulse),
+        .confirm_op(confirm_op),
         .switch_op(operation),
-        .operand_a(acumulado),           // 'operand_a' es el acumulado
-        .operand_b(salida_decodificada), // 'operand_b' es la salida decodificada
-        .alu_result(resultado_ALU)
+        .operand_a(salida_decodificada),
+        .operand_b(operands),
+        .alu_result(resultado_ALU),
+        .z(alu_z),
+        .n(alu_n),
+        .o(alu_o),
+        .c(alu_c)
     );
 
-    // Instancia del generador de PWM
-    PWM_Generator pwm_instance (
+    // Instancia del módulo PWM_Generator para generar la señal de control del motor
+    PWM_Generator pwm_instance(
         .clk(clock),
-        .reset(~reset_n), 
-        .duty_cycle(acumulado),
+        .reset(~reset_n),
+        .duty_cycle(resultado_ALU),
         .pwm_out(pwm_signal)
     );
 
-    // Asignaciones de control del motor
+    // Asignación de la señal PWM al control del motor
     assign motor_in1 = pwm_signal;
-    assign prueba = motor_in1;
 
 endmodule
