@@ -132,6 +132,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "prueba",
+					"strict" : false
+				},
+				{
 					"name" : "entrada_dedos[2]",
 					"strict" : false
 				},
@@ -156,6 +160,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "confirm_btn",
+					"strict" : false
+				},
+				{
 					"name" : "operation[1]",
 					"strict" : false
 				},
@@ -165,10 +173,6 @@
 				},
 				{
 					"name" : "i_Rx_Serial",
-					"strict" : false
-				},
-				{
-					"name" : "confirm_btn",
 					"strict" : false
 				}
 			]

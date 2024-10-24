@@ -1,5 +1,5 @@
 |PG1_FAC_Top
-clock => clock.IN6
+clock => clock.IN3
 reset_n => reset_n.IN1
 button => button.IN1
 i_Rx_Serial => i_Rx_Serial.IN1
@@ -9,87 +9,45 @@ entrada_dedos[2] => entrada_dedos[2].IN1
 entrada_dedos[3] => entrada_dedos[3].IN1
 operation[0] => operation[0].IN1
 operation[1] => operation[1].IN1
-confirm_btn => confirm_btn.IN1
-o_Tx_Serial << uart_fpga_top:uart_instance.o_Tx_Serial
-seg_unidades[0] << uart_fpga_top:uart_instance.seg_unidades
-seg_unidades[1] << uart_fpga_top:uart_instance.seg_unidades
-seg_unidades[2] << uart_fpga_top:uart_instance.seg_unidades
-seg_unidades[3] << uart_fpga_top:uart_instance.seg_unidades
-seg_unidades[4] << uart_fpga_top:uart_instance.seg_unidades
-seg_unidades[5] << uart_fpga_top:uart_instance.seg_unidades
-seg_unidades[6] << uart_fpga_top:uart_instance.seg_unidades
-seg_decenas[0] << uart_fpga_top:uart_instance.seg_decenas
-seg_decenas[1] << uart_fpga_top:uart_instance.seg_decenas
-seg_decenas[2] << uart_fpga_top:uart_instance.seg_decenas
-seg_decenas[3] << uart_fpga_top:uart_instance.seg_decenas
-seg_decenas[4] << uart_fpga_top:uart_instance.seg_decenas
-seg_decenas[5] << uart_fpga_top:uart_instance.seg_decenas
-seg_decenas[6] << uart_fpga_top:uart_instance.seg_decenas
-seg_handshake[0] << uart_fpga_top:uart_instance.seg_handshake
-seg_handshake[1] << uart_fpga_top:uart_instance.seg_handshake
-seg_handshake[2] << uart_fpga_top:uart_instance.seg_handshake
-seg_handshake[3] << uart_fpga_top:uart_instance.seg_handshake
-seg_handshake[4] << uart_fpga_top:uart_instance.seg_handshake
-seg_handshake[5] << uart_fpga_top:uart_instance.seg_handshake
-seg_handshake[6] << uart_fpga_top:uart_instance.seg_handshake
-seg_decodificador_dedos[0] << BCD_to_7Segment:bcd_to_7seg.seg
-seg_decodificador_dedos[1] << BCD_to_7Segment:bcd_to_7seg.seg
-seg_decodificador_dedos[2] << BCD_to_7Segment:bcd_to_7seg.seg
-seg_decodificador_dedos[3] << BCD_to_7Segment:bcd_to_7seg.seg
-seg_decodificador_dedos[4] << BCD_to_7Segment:bcd_to_7seg.seg
-seg_decodificador_dedos[5] << BCD_to_7Segment:bcd_to_7seg.seg
-seg_decodificador_dedos[6] << BCD_to_7Segment:bcd_to_7seg.seg
-seg_resultado[0] << BCD_to_7Segment:bcd_to_7seg_result.seg
-seg_resultado[1] << BCD_to_7Segment:bcd_to_7seg_result.seg
-seg_resultado[2] << BCD_to_7Segment:bcd_to_7seg_result.seg
-seg_resultado[3] << BCD_to_7Segment:bcd_to_7seg_result.seg
-seg_resultado[4] << BCD_to_7Segment:bcd_to_7seg_result.seg
-seg_resultado[5] << BCD_to_7Segment:bcd_to_7seg_result.seg
-seg_resultado[6] << BCD_to_7Segment:bcd_to_7seg_result.seg
-motor_in1 << PWM_Generator:pwm_instance.pwm_out
-motor_in2 << <GND>
-
-
-|PG1_FAC_Top|D_FF_Manual:button_sync0_ff
-clk => clk.IN1
-reset => reset.IN1
-d[0] => d[0].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-
-
-|PG1_FAC_Top|D_FF_Manual:button_sync0_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|D_FF_Manual:button_sync1_ff
-clk => clk.IN1
-reset => reset.IN1
-d[0] => d[0].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-
-
-|PG1_FAC_Top|D_FF_Manual:button_sync1_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|D_FF_Manual:button_prev_ff
-clk => clk.IN1
-reset => reset.IN1
-d[0] => d[0].IN1
-q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
-
-
-|PG1_FAC_Top|D_FF_Manual:button_prev_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
-clk => q~reg0.CLK
-reset => q~reg0.ACLR
-d => q~reg0.DATAIN
-q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
+confirm_btn => confirm_btn_sync0.DATAIN
+o_Tx_Serial <= uart_fpga_top:uart_instance.o_Tx_Serial
+seg_unidades[0] <= uart_fpga_top:uart_instance.seg_unidades
+seg_unidades[1] <= uart_fpga_top:uart_instance.seg_unidades
+seg_unidades[2] <= uart_fpga_top:uart_instance.seg_unidades
+seg_unidades[3] <= uart_fpga_top:uart_instance.seg_unidades
+seg_unidades[4] <= uart_fpga_top:uart_instance.seg_unidades
+seg_unidades[5] <= uart_fpga_top:uart_instance.seg_unidades
+seg_unidades[6] <= uart_fpga_top:uart_instance.seg_unidades
+seg_decenas[0] <= uart_fpga_top:uart_instance.seg_decenas
+seg_decenas[1] <= uart_fpga_top:uart_instance.seg_decenas
+seg_decenas[2] <= uart_fpga_top:uart_instance.seg_decenas
+seg_decenas[3] <= uart_fpga_top:uart_instance.seg_decenas
+seg_decenas[4] <= uart_fpga_top:uart_instance.seg_decenas
+seg_decenas[5] <= uart_fpga_top:uart_instance.seg_decenas
+seg_decenas[6] <= uart_fpga_top:uart_instance.seg_decenas
+seg_handshake[0] <= uart_fpga_top:uart_instance.seg_handshake
+seg_handshake[1] <= uart_fpga_top:uart_instance.seg_handshake
+seg_handshake[2] <= uart_fpga_top:uart_instance.seg_handshake
+seg_handshake[3] <= uart_fpga_top:uart_instance.seg_handshake
+seg_handshake[4] <= uart_fpga_top:uart_instance.seg_handshake
+seg_handshake[5] <= uart_fpga_top:uart_instance.seg_handshake
+seg_handshake[6] <= uart_fpga_top:uart_instance.seg_handshake
+seg_decodificador_dedos[0] <= BCD_to_7Segment:bcd_to_7seg.seg
+seg_decodificador_dedos[1] <= BCD_to_7Segment:bcd_to_7seg.seg
+seg_decodificador_dedos[2] <= BCD_to_7Segment:bcd_to_7seg.seg
+seg_decodificador_dedos[3] <= BCD_to_7Segment:bcd_to_7seg.seg
+seg_decodificador_dedos[4] <= BCD_to_7Segment:bcd_to_7seg.seg
+seg_decodificador_dedos[5] <= BCD_to_7Segment:bcd_to_7seg.seg
+seg_decodificador_dedos[6] <= BCD_to_7Segment:bcd_to_7seg.seg
+seg_resultado[0] <= BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[1] <= BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[2] <= BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[3] <= BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[4] <= BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[5] <= BCD_to_7Segment:bcd_to_7seg_result.seg
+seg_resultado[6] <= BCD_to_7Segment:bcd_to_7seg_result.seg
+motor_in1 <= PWM_Generator:pwm_instance.pwm_out
+prueba <= PWM_Generator:pwm_instance.pwm_out
 
 
 |PG1_FAC_Top|Decodificador_Dedos:decodificador
@@ -12569,193 +12527,89 @@ q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 |PG1_FAC_Top|PWM_Generator:pwm_instance
 clk => clk.IN1
 reset => reset.IN1
-duty_cycle[0] => duty_cycle[0].IN1
-duty_cycle[1] => duty_cycle[1].IN1
-pwm_out <= lessthan:lessthan_2.port2
+duty_cycle[0] => Equal1.IN1
+duty_cycle[0] => Equal2.IN0
+duty_cycle[0] => Equal3.IN1
+duty_cycle[1] => Equal1.IN0
+duty_cycle[1] => Equal2.IN1
+duty_cycle[1] => Equal3.IN0
+pwm_out <= LessThan0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_1
-A[0] => A[0].IN1
-A[1] => A[1].IN1
-A[2] => A[2].IN1
-B[0] => _.IN1
-B[1] => _.IN1
-B[2] => _.IN1
-OUT <= fulladderOP:fulladder3.s
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff
+clk => clk.IN8
+reset => reset.IN8
+d[0] => d[0].IN1
+d[1] => d[1].IN1
+d[2] => d[2].IN1
+d[3] => d[3].IN1
+d[4] => d[4].IN1
+d[5] => d[5].IN1
+d[6] => d[6].IN1
+d[7] => d[7].IN1
+q[0] <= D_FF_Cell:DFF_ARRAY[0].dff_cell.q
+q[1] <= D_FF_Cell:DFF_ARRAY[1].dff_cell.q
+q[2] <= D_FF_Cell:DFF_ARRAY[2].dff_cell.q
+q[3] <= D_FF_Cell:DFF_ARRAY[3].dff_cell.q
+q[4] <= D_FF_Cell:DFF_ARRAY[4].dff_cell.q
+q[5] <= D_FF_Cell:DFF_ARRAY[5].dff_cell.q
+q[6] <= D_FF_Cell:DFF_ARRAY[6].dff_cell.q
+q[7] <= D_FF_Cell:DFF_ARRAY[7].dff_cell.q
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_1|fulladderOP:fulladder1
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff|D_FF_Cell:DFF_ARRAY[0].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_1|fulladderOP:fulladder2
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff|D_FF_Cell:DFF_ARRAY[1].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_1|fulladderOP:fulladder3
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff|D_FF_Cell:DFF_ARRAY[2].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|mux2a1:mux2a1_1
-a => y.IN0
-b => y.IN0
-s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff|D_FF_Cell:DFF_ARRAY[3].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|mux2a1:mux2a1_2
-a => y.IN0
-b => y.IN0
-s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff|D_FF_Cell:DFF_ARRAY[4].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|mux2a1:mux2a1_3
-a => y.IN0
-b => y.IN0
-s => y.IN1
-s => y.IN1
-y <= y.DB_MAX_OUTPUT_PORT_TYPE
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff|D_FF_Cell:DFF_ARRAY[5].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|fulladderOP:fulladder1
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff|D_FF_Cell:DFF_ARRAY[6].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|PG1_FAC_Top|PWM_Generator:pwm_instance|fulladderOP:fulladder2
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|PWM_Generator:pwm_instance|fulladderOP:fulladder3
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|PWM_Generator:pwm_instance|register:register
-D[0] => Q[0]~reg0.DATAIN
-D[1] => Q[1]~reg0.DATAIN
-D[2] => Q[2]~reg0.DATAIN
-clk => Q[0]~reg0.CLK
-clk => Q[1]~reg0.CLK
-clk => Q[2]~reg0.CLK
-reset => Q[0]~reg0.ACLR
-reset => Q[1]~reg0.ACLR
-reset => Q[2]~reg0.ACLR
-Q[0] <= Q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Q[1] <= Q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-Q[2] <= Q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_2
-A[0] => A[0].IN1
-A[1] => A[1].IN1
-A[2] => A[2].IN1
-B[0] => _.IN1
-B[1] => _.IN1
-B[2] => _.IN1
-OUT <= fulladderOP:fulladder3.s
-
-
-|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_2|fulladderOP:fulladder1
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_2|fulladderOP:fulladder2
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
-
-
-|PG1_FAC_Top|PWM_Generator:pwm_instance|lessthan:lessthan_2|fulladderOP:fulladder3
-a => s.IN0
-a => cout.IN0
-a => cout.IN0
-b => s.IN1
-b => cout.IN1
-b => cout.IN0
-cin => s.IN1
-cin => cout.IN1
-cin => cout.IN1
-s <= s.DB_MAX_OUTPUT_PORT_TYPE
-cout <= cout.DB_MAX_OUTPUT_PORT_TYPE
+|PG1_FAC_Top|PWM_Generator:pwm_instance|D_FF_Manual:counter_ff|D_FF_Cell:DFF_ARRAY[7].dff_cell
+clk => q~reg0.CLK
+reset => q~reg0.ACLR
+d => q~reg0.DATAIN
+q <= q~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
