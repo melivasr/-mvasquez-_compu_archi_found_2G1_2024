@@ -1,0 +1,10 @@
+// uart_tx_mux_4.sv
+module uart_tx_mux_4 (
+    input  logic        sel,
+    input  logic [15:0] a,
+    input  logic [15:0] b,
+    output logic [15:0] y
+);
+    // 16-bit 2:1 Multiplexer
+    assign y = sel ? a : b;
+endmodule

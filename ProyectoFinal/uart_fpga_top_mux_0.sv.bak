@@ -1,0 +1,10 @@
+module uart_fpga_top_mux_0 (
+    input  logic sel,
+    input  logic in0,
+    input  logic in1,
+    output logic out
+);
+    // Implementación del multiplexor sin usar el operador ternario '?'
+    // out = (sel & in1) | (~sel & in0)
+    assign out = (sel & in1) | (~sel & in0);
+endmodule

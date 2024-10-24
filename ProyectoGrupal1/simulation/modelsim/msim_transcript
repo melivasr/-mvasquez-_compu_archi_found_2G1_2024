@@ -1,0 +1,124 @@
+# Reading pref.tcl
+# do ProyectoGrupal1_run_msim_rtl_verilog.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/IntelFPGA2/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:30:05 on Oct 22,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/fulladderOP.sv 
+# -- Compiling module fulladderOP
+# 
+# Top level modules:
+# 	fulladderOP
+# End time: 14:30:05 on Oct 22,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:30:06 on Oct 22,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/mux2a1.sv 
+# -- Compiling module mux2a1
+# 
+# Top level modules:
+# 	mux2a1
+# End time: 14:30:06 on Oct 22,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:30:06 on Oct 22,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv 
+# -- Compiling module PWM_Generator
+# 
+# Top level modules:
+# 	PWM_Generator
+# End time: 14:30:06 on Oct 22,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/register.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:30:06 on Oct 22,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/register.sv 
+# -- Compiling module register
+# 
+# Top level modules:
+# 	register
+# End time: 14:30:06 on Oct 22,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:30:06 on Oct 22,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv 
+# -- Compiling module lessthan
+# 
+# Top level modules:
+# 	lessthan
+# End time: 14:30:06 on Oct 22,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vlog -sv -work work +incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1 {C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:30:06 on Oct 22,2024
+# vlog -reportprogress 300 -sv -work work "+incdir+C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1" C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv 
+# -- Compiling module PWM_Generator_tb
+# 
+# Top level modules:
+# 	PWM_Generator_tb
+# End time: 14:30:06 on Oct 22,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs="+acc"  PWM_Generator_tb
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cyclonev_ver -L cyclonev_hssi_ver -L cyclonev_pcie_hip_ver -L rtl_work -L work -voptargs=""+acc"" PWM_Generator_tb 
+# Start time: 14:30:06 on Oct 22,2024
+# Loading sv_std.std
+# Loading work.PWM_Generator_tb
+# Loading work.PWM_Generator
+# Loading work.lessthan
+# Loading work.fulladderOP
+# Loading work.mux2a1
+# Loading work.register
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder1'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/lessthan_1/fulladder1 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 5
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv(5): [TFMPC] - Missing connection for port 's'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder2'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/lessthan_1/fulladder2 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 6
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv(6): [TFMPC] - Missing connection for port 's'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder3'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/lessthan_1/fulladder3 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 7
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv(7): [TFMPC] - Missing connection for port 's'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder4'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/lessthan_1/fulladder4 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 8
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv(8): [TFMPC] - Missing connection for port 'cout'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder4'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/fulladder4 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv Line: 20
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator.sv(20): [TFMPC] - Missing connection for port 'cout'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder1'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/lessthan_2/fulladder1 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 5
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv(5): [TFMPC] - Missing connection for port 's'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder2'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/lessthan_2/fulladder2 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 6
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv(6): [TFMPC] - Missing connection for port 's'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder3'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/lessthan_2/fulladder3 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 7
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv(7): [TFMPC] - Missing connection for port 's'.
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fulladder4'.  Expected 5, found 4.
+#    Time: 0 ps  Iteration: 0  Instance: /PWM_Generator_tb/dut/lessthan_2/fulladder4 File: C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv Line: 8
+# ** Warning: (vsim-3722) C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/lessthan.sv(8): [TFMPC] - Missing connection for port 'cout'.
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# ** Note: $finish    : C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv(38)
+#    Time: 1240 ps  Iteration: 0  Instance: /PWM_Generator_tb
+# 1
+# Break in Module PWM_Generator_tb at C:/FUNDA/-mvasquez-_compu_archi_found_2G1_2024/ProyectoGrupal1/PWM_Generator_tb.sv line 38
+# End time: 14:30:42 on Oct 22,2024, Elapsed time: 0:00:36
+# Errors: 0, Warnings: 18

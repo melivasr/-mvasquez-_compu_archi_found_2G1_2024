@@ -1,2 +1,2 @@
-Este proyecto tiene como objetivo el diseño e implementación de un sistema de control de velocidad utilizando el protocolo de comunicación UART y una FPGA. Se integrarán varios elementos como un microcontrolador, un motor y un display, con el fin de aplicar conceptos de arquitectura de computadores.
+Este proyecto tiene como objetivo el diseño e implementación de un sistema de control de velocidad utilizando el protocolo de comunicación UART y una FPGA. Se integrarán varios elementos como microcontroladores, motores y displays, con el fin de aplicar conceptos de arquitectura de computadores.
 

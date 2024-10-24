@@ -1,0 +1,8 @@
+
+State Machine - |uart_fpga_top|uart_handshake:handshake_inst|hs_state
+Name hs_state.HS_WAIT_RX hs_state.HS_WAIT_TX hs_state.HS_INIT hs_state.HS_IDLE hs_state.HS_DONE 
+hs_state.HS_IDLE 0 0 0 0 0 
+hs_state.HS_INIT 0 0 1 1 0 
+hs_state.HS_WAIT_TX 0 1 0 1 0 
+hs_state.HS_WAIT_RX 1 0 0 1 0 
+hs_state.HS_DONE 0 0 0 1 1 

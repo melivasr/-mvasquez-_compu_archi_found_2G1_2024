@@ -1,0 +1,17 @@
+// uart_rx_mux_1.sv
+module uart_rx_mux_1 (
+    input  logic [2:0] i_SM_Main,
+    input  logic [2:0] i_next_state1,
+    input  logic [2:0] i_next_state2,
+    output logic [2:0] o_next_state
+);
+    // Example mux logic based on state
+    // Modify selection criteria as needed
+    always_comb begin
+        case (i_SM_Main)
+            3'b001: o_next_state = i_next_state1;
+            3'b010: o_next_state = i_next_state2;
+            default: o_next_state = i_SM_Main;
+        endcase
+    end
+endmodule

@@ -1,0 +1,10 @@
+// Decodificador para generar la máscara de bit
+module uart_rx_bit_decoder(
+  input  logic [2:0] index,
+  output logic [7:0] mask
+);
+  always_comb begin
+    mask = 8'b00000000;
+    mask[index] = 1'b1;
+  end
+endmodule

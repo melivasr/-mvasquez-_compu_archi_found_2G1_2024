@@ -1,0 +1,201 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "o_Tx_Serial",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_unidades[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decenas[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_handshake[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_handshake[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_handshake[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_handshake[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decodificador_dedos[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decodificador_dedos[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decodificador_dedos[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decodificador_dedos[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decodificador_dedos[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_decodificador_dedos[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_resultado[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_resultado[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_resultado[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_resultado[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_resultado[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_resultado[6]",
+					"strict" : false
+				},
+				{
+					"name" : "motor_in1",
+					"strict" : false
+				},
+				{
+					"name" : "alu_z",
+					"strict" : false
+				},
+				{
+					"name" : "alu_n",
+					"strict" : false
+				},
+				{
+					"name" : "alu_o",
+					"strict" : false
+				},
+				{
+					"name" : "alu_c",
+					"strict" : false
+				},
+				{
+					"name" : "operands[0]",
+					"strict" : false
+				},
+				{
+					"name" : "operands[1]",
+					"strict" : false
+				},
+				{
+					"name" : "entrada_dedos[2]",
+					"strict" : false
+				},
+				{
+					"name" : "entrada_dedos[3]",
+					"strict" : false
+				},
+				{
+					"name" : "entrada_dedos[0]",
+					"strict" : false
+				},
+				{
+					"name" : "entrada_dedos[1]",
+					"strict" : false
+				},
+				{
+					"name" : "operation[1]",
+					"strict" : false
+				},
+				{
+					"name" : "operation[0]",
+					"strict" : false
+				},
+				{
+					"name" : "clock",
+					"strict" : false
+				},
+				{
+					"name" : "reset_n",
+					"strict" : false
+				},
+				{
+					"name" : "i_Rx_Serial",
+					"strict" : false
+				},
+				{
+					"name" : "confirm_btn",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

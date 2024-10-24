@@ -1,0 +1,74 @@
+module uart_tx
+  #(parameter int CLKS_PER_BIT = 5208)
+  (
+    input  logic       i_Clock,
+    input  logic       i_Enable,
+    input  logic       i_Tx_DV,
+    output logic       o_Tx_Active,
+    input  logic [7:0] i_Tx_Byte,
+    output logic       o_Tx_Serial,
+    output logic       o_Tx_Done
+  );
+
+  // Estados definidos en el módulo de estado
+  typedef enum logic [2:0] {
+    s_IDLE,
+    s_TX_START_BIT,
+    s_TX_DATA_BITS,
+    s_TX_STOP_BIT,
+    s_CLEANUP
+  } state_t;
+
+  // Señales internas
+  logic [2:0]        r_SM_Main;
+  logic [15:0]       r_Clock_Count;
+  logic [2:0]        r_Bit_Index;
+
+  // Instanciación de submódulos
+  uart_tx_state #(
+    .IDLE(s_IDLE),
+    .TX_START_BIT(s_TX_START_BIT),
+    .TX_DATA_BITS(s_TX_DATA_BITS),
+    .TX_STOP_BIT(s_TX_STOP_BIT),
+    .CLEANUP(s_CLEANUP)
+  ) state_machine (
+    .i_Clock(i_Clock),
+    .i_Enable(i_Enable),
+    .i_Tx_DV(i_Tx_DV),
+    .current_state(r_SM_Main),
+    .next_state()
+  );
+
+  uart_tx_counter counter (
+    .i_Clock(i_Clock),
+    .i_Enable(i_Enable),
+    .current_state(r_SM_Main),
+    .r_Clock_Count(r_Clock_Count)
+  );
+
+  uart_tx_bit_index bit_index (
+    .i_Clock(i_Clock),
+    .i_Enable(i_Enable),
+    .current_state(r_SM_Main),
+    .r_Bit_Index(r_Bit_Index)
+  );
+
+  // Instanciación de multiplexores
+  uart_tx_mux_1 mux_serial (
+    .current_state(r_SM_Main),
+    .i_Tx_Byte(i_Tx_Byte),
+    .r_Bit_Index(r_Bit_Index),
+    .o_Tx_Serial(o_Tx_Serial)
+  );
+
+  uart_tx_mux_2 mux_done (
+    .current_state(r_SM_Main),
+    .o_Tx_Done(o_Tx_Done)
+  );
+
+  uart_tx_mux_3 mux_active (
+    .current_state(r_SM_Main),
+    .o_Tx_Active(o_Tx_Active)
+  );
+
+endmodule

@@ -1,0 +1,89 @@
+module FSM_ALU_tb;
+
+    // Declaración de señales
+    reg clk;
+    reg reset;
+    reg handshaking;
+    reg confirm_op;
+    reg [1:0] switch_op;
+    reg [1:0] operand_a;
+    reg [1:0] operand_b;
+    wire [1:0] alu_result;
+
+    // Instanciación del módulo FSM_ALU
+    FSM_ALU uut (
+        .clk(clk),
+        .reset(reset),
+        .handshaking(handshaking),
+        .confirm_op(confirm_op),
+        .switch_op(switch_op),
+        .operand_a(operand_a),
+        .operand_b(operand_b),
+        .alu_result(alu_result)
+    );
+
+    // Generación del reloj
+    initial begin
+        clk = 0;
+    end
+
+    always #5 clk = ~clk; // Reloj con periodo de 10 unidades de tiempo
+
+    // Generación de estímulos
+    initial begin
+        // Inicialización de señales
+        reset = 1;
+        handshaking = 0;
+        confirm_op = 0;
+        switch_op = 2'b00;
+        operand_a = 2'b00;
+        operand_b = 2'b00;
+
+        // Aplicar reset
+        #10;
+        reset = 0;
+        #10;
+        reset = 1;
+
+        // Esperar a que el sistema se estabilice
+        #20;
+
+        // Test Case 1: Suma (switch_op = 00)
+        operand_a = 2'b01;    // Operando A = 1
+        operand_b = 2'b10;    // Operando B = 2
+        switch_op = 2'b00;    // Operación: Suma
+
+        // Activar handshaking
+        handshaking = 1;
+        #10; // Esperar un ciclo de reloj
+        handshaking = 0;
+        #10; // Esperar para que la FSM detecte el cambio
+
+        // Activar confirm_op
+        confirm_op = 1;
+        #10; // Esperar un ciclo de reloj
+        confirm_op = 0;
+
+        // Esperar para observar el resultado
+        #50;
+
+        $display("Test Suma: %b + %b = %b", operand_a, operand_b, alu_result);
+
+        // Restablecer señales antes del siguiente test
+        handshaking = 0;
+        confirm_op = 0;
+        #20;
+
+        // Puedes añadir más casos de prueba siguiendo el mismo patrón
+
+        // Finalizar simulación
+        $stop;
+    end
+
+    // Monitor para observar las señales
+    initial begin
+        $monitor("Time=%0t | reset=%b | state=%b | alu_enable=%b | alu_result=%b | alu_out=%b | handshaking=%b | confirm_op=%b",
+                  $time, reset, uut.state, uut.alu_enable, alu_result, uut.alu_out, handshaking, confirm_op);
+    end
+
+endmodule
