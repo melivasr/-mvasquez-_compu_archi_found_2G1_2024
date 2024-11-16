@@ -9,7 +9,7 @@ class InstructionMemory:
 
     def fetch(self, pc):
         if pc % 4 != 0:
-            return None  # Error: PC is not aligned to 4 bytes
+            return None  # Error, no son 4 bytes
         index = pc // 4
         if index < len(self.instructions):
             return self.instructions[index]
