@@ -1,8 +1,10 @@
 import tkinter as tk
+from asyncio import wait_for
+import time
+
 from interfaz.configuracion_ventana import ConfiguracionVentana
 
 # # Configuración inicial
-#root = tk.Tk()
 #app = ConfiguracionVentana(root)
 #root.mainloop()
 
@@ -14,6 +16,7 @@ from src.alu import ALU
 from src.instruction_memory import InstructionMemory
 from src.program_counter import ProgramCounter
 from src.data_memory import DataMemory
+from src.pipeline import Pipeline
 
 if __name__ == "__main__":
     # Instancias necesarias
@@ -28,20 +31,27 @@ if __name__ == "__main__":
 
     # Instrucciones de ejemplo
     instructions = [
-        0b00000000010000001000000010000011,  # LW R1, 4(R2)
-        0b01000000001000001000010000100011,  # SW R2, 8(R1)
-        0b00000000001000001000000110110011,  # ADD R3, R1, R2
-        0b01000000001000001000000110110011,  # SUB R3, R1, R2
-        0b00000000000100010111000110110011,  # AND R3, R2, R1
-        0b00000000000100010110000110110011,  # OR R3, R2, R1
-        0b00000000010100010000000010010011,  # ADDI R1, R2, 5
-        0b00000000000100010010000110110011,  # SLT R3, R2, R1
-        0b00000000001000001000001001100011,  # BEQ R1, R2, 4
-        0b00000000000100010001000110110011,  # XOR R3, R2, R1
+        0b00000000010000010000000010000011,  # LW R1, 4(R2)
+        0b01000000001000001000010000100011,  # SW R2, 8(R1) (Esta instrucción se debe retrasar un ciclo para recibir el valor de R1)
+        #0b00000000001000001000000110110011,  # ADD R3, R1, R2
+        #0b01000000001000001000000110110011,  # SUB R3, R1, R2
+        #0b00000000000100010111000110110011,  # AND R3, R2, R1
+        #0b00000000000100010110000110110011,  # OR R3, R2, R1
+        #0b00000000010100010000000010010011,  # ADDI R1, R2, 5
+        #0b00000000000100010010000110110011,  # SLT R3, R2, R1
+        #0b00000000001000001000001001100011,  # BEQ R1, R2, 4
+        #0b00000000000100010001000110110011,  # XOR R3, R2, R1
     ]
     instruction_memory.load_instructions(instructions)
 
-    # Simulación del ciclo Fetch y Decode
+    # Crear el pipeline
+    pipeline = Pipeline(pc, instruction_memory, register_file, data_memory, alu, decoder, extend, control_unit)
+
+    # Ejecutar el pipeline
+    for _ in range(14):  # Ejecutar suficientes ciclos para procesar todas las instrucciones
+        pipeline.step()
+
+    """ # Simulación del ciclo Fetch y Decode
     print("=== Ciclo de Fetch y Decode ===")
     while True:
         # Fetch: obtener la instrucción usando el valor actual del PC
@@ -115,3 +125,5 @@ if __name__ == "__main__":
 
         # Incrementar el PC para la siguiente instrucción
         pc.increment()
+
+        time.sleep(3)"""

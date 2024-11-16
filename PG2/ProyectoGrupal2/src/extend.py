@@ -7,8 +7,10 @@ class Extend:
         Extiende el valor inmediato con signo dependiendo del tipo de instrucción.
         """
         if immediate & (1 << (bits - 1)):  # Si el bit más significativo es 1, es negativo
+
             return immediate | ~((1 << bits) - 1)  # Extiende con signo
         else:
+
             return immediate
 
     def execute(self, instruction, type_of_instruction):
@@ -16,6 +18,7 @@ class Extend:
         Dependiendo del tipo de instrucción, se extiende el valor inmediato.
         """
         imm = (instruction >> 20) & 0xFFF  # Para la mayoría de instrucciones I
+
         if type_of_instruction == 'I':
             return self.sign_extend(imm)
 
