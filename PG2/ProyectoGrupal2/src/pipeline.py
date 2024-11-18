@@ -1,4 +1,3 @@
-
 class Pipeline:
     def __init__(self, pc, instruction_memory, register_file, data_memory, alu, decoder, extend, control_unit):
         self.pc = pc
@@ -24,9 +23,22 @@ class Pipeline:
         self.mem_wb = {}
 
         self.execute_busy = False
+        self.mode = "hazard_unit"  # Modos posibles: no_hazard, hazard_unit, branch_prediction, full_hazard
+
+    def set_mode(self, mode):
+        """
+        Configura el modo de operación del pipeline.
+        """
+        valid_modes = ["no_hazard", "hazard_unit", "branch_prediction", "full_hazard"]
+        if mode in valid_modes:
+            self.mode = mode
+        else:
+            raise ValueError(f"Modo inválido: {mode}. Opciones válidas: {valid_modes}")
 
     def step(self):
-        #Avanza el pipeline un ciclo de reloj.
+        """
+        Avanza el pipeline un ciclo de reloj.
+        """
         print(f"\nClock Cycle: {self.clock_cycle + 1}")
         # Ejecutar las etapas en orden inverso para evitar sobrescribir datos
         self.writeback()
@@ -39,7 +51,9 @@ class Pipeline:
         self.clock_cycle += 1
 
     def fetch(self):
-        #Etapa de Fetch: Obtiene la instrucción desde la memoria de instrucciones.
+        """
+        Etapa de Fetch: Obtiene la instrucción desde la memoria de instrucciones.
+        """
         if self.fetch_stage is None:
             instruction = self.instruction_memory.fetch(self.pc.value)
             if instruction is not None:
@@ -48,13 +62,13 @@ class Pipeline:
                 self.pc.increment()
 
     def decode(self):
-        # Etapa de Decode: Decodifica la instrucción y genera señales de control.
-        # Si execute está ocupado, detener decode
-        if self.execute_busy:
+        """
+        Etapa de Decode: Decodifica la instrucción y genera señales de control.
+        """
+        if self.mode in ["hazard_unit", "full_hazard"] and self.execute_busy:
             print("Stalling decode: Waiting for execute to finish processing")
             return
 
-        # Procesar normalmente si no hay stall
         if self.fetch_stage and self.decode_stage is None:
             instruction = self.fetch_stage["instruction"]
             decoded = self.decoder.decode(instruction)
@@ -63,18 +77,27 @@ class Pipeline:
                 self.decode_stage = None
                 self.fetch_stage = None
                 return
+
+            # Asegúrate de incluir siempre la instrucción original
+            decoded["instruction"] = instruction
+
             self.control_unit.generate_signals(decoded["opcode"], decoded["funct3"], decoded["funct7"])
             print(f"Decode: PC={self.fetch_stage['pc']}: Instrucción={instruction:032b} -> Decodificación={decoded}")
             self.if_id = self.control_unit
-            print(f"Control signals en decode: {self.if_id}")
+            print(f"Control signals en decode: RegWrite: {self.if_id.RegWrite}, MemRead: {self.if_id.MemRead}, "
+                  f"MemWrite: {self.if_id.MemWrite}, ALUOp: {self.if_id.ALUOp}, Branch: {self.if_id.Branch}, "
+                  f"Jump: {self.if_id.Jump}, MemToReg: {self.if_id.MemToReg}, ALUSrc: {self.if_id.ALUSrc}, "
+                  f"PCSrc: {self.if_id.PCSrc}")
             self.decode_stage = {"decoded": decoded, "control_signals": self.control_unit}
             self.fetch_stage = None
 
     def execute(self):
-        # Etapa de Execute: Realiza operaciones de la ALU.
+        """
+        Etapa de Execute: Realiza operaciones de la ALU.
+        """
         if self.decode_stage and self.execute_stage is None:
-            # Indicar que execute está ocupado
-            self.execute_busy = True
+            if self.mode in ["hazard_unit", "full_hazard"]:
+                self.execute_busy = True
 
             decoded = self.decode_stage["decoded"]
             self.id_ex = self.decode_stage["control_signals"]
@@ -106,13 +129,14 @@ class Pipeline:
             self.ex_mem = {"alu_result": alu_result, "control_signals": self.id_ex, "decoded": decoded}
             self.decode_stage = None
 
-
     def memory(self):
-        # Etapa de Memory: Acceso a memoria para lectura/escritura.
+        """
+        Etapa de Memory: Acceso a memoria para lectura/escritura.
+        """
         if self.ex_mem and self.memory_stage is None:
             control_signals = self.ex_mem["control_signals"]
-            # Liberar execute_busy cuando el procesamiento termina
-            self.execute_busy = False
+            if self.mode in ["hazard_unit", "full_hazard"]:
+                self.execute_busy = False  # Liberar execute_busy
             print(f"Control Signals en memory {control_signals}")
             decoded = self.ex_mem["decoded"]
             alu_result = self.ex_mem["alu_result"]
@@ -125,16 +149,16 @@ class Pipeline:
                 if "rs2" in decoded:
                     data_to_write = self.register_file.read(decoded["rs2"])
                     self.data_memory.write(alu_result, data_to_write)
-                    print(f"Memory write: Dirección={alu_result}, Valor={data_to_write}")
-                else:
-                    print(f"Memory write error: La instrucción tipo S no tiene rs2. Decodificación: {decoded}")
+                    print(f"Memory write: escritura en dirección={alu_result}, valor={data_to_write}")
             else:
                 self.memory_stage = {"alu_result": alu_result, "decoded": decoded}
 
             self.ex_mem = None
 
     def writeback(self):
-        #Etapa de Write-back: Escribe los resultados en los registros.
+        """
+        Etapa de Write-back: Escribe los resultados en los registros.
+        """
         if self.memory_stage:
             decoded = self.memory_stage["decoded"]
             if "rd" in decoded and decoded["rd"] is not None:

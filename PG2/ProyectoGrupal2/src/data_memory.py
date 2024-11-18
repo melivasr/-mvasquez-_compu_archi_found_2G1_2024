@@ -1,5 +1,5 @@
 class DataMemory:
-    def __init__(self, size=1024):
+    def __init__(self, size=1050):
         self.memory = [0] * size  # Inicializamos una memoria de 1024 posiciones, con valores en 0.
 
     def read(self, address):
