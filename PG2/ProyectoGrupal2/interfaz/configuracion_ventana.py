@@ -3,11 +3,12 @@ from tkinter import ttk
 from interfaz.simulacion_ventana import SimulacionVentana
 
 class ConfiguracionVentana:
-    def __init__(self, root):
+    def __init__(self, root, pipeline):
         self.root = root
         self.root.title("Configuración de Simulación")
         self.root.geometry("600x400")
         self.root.configure(bg="#61C6E8")  # Fondo en #61C6E8
+        self.pipeline = pipeline
 
         # Frame centralizado que contendrá todos los elementos
         self.frame_central = tk.Frame(self.root, bg="#61C6E8")
@@ -55,7 +56,7 @@ class ConfiguracionVentana:
         # Oculta la ventana de configuración y abre la ventana de simulación
         self.root.withdraw()
         ventana_simulacion = tk.Toplevel(self.root)
-        SimulacionVentana(ventana_simulacion, self.root)
+        SimulacionVentana(ventana_simulacion, self.root, self.pipeline)
 
     def create_rounded_button(self, parent, text, command, width, height):
         # Crear botón redondeado en Canvas

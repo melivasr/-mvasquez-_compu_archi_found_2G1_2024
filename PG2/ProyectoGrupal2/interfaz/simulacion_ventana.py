@@ -4,12 +4,15 @@ from PIL import Image, ImageTk
 import os
 
 class SimulacionVentana:
-    def __init__(self, root, ventana_configuracion):
+    def __init__(self, root, ventana_configuracion, pipeline):
         self.root = root
         self.ventana_configuracion = ventana_configuracion
         self.root.title("Simulación de Pipeline")
         self.root.state('zoomed')
         self.root.configure(bg="#61C6E8")
+        self.register_file = pipeline.register_file
+        self.instruction_memory = pipeline.instruction_memory
+        self.data_memory = pipeline.data_memory
 
         # Frame para el pipeline visual y el área de control con borde
         frame_pipeline = tk.Frame(self.root, bg="#61C6E8", highlightbackground="black", highlightthickness=0)
@@ -87,8 +90,8 @@ class SimulacionVentana:
         self.tree_registros.column("Value", width=50)
         self.tree_registros.grid(row=4, column=0, columnspan=2, pady=5)
 
-        # Tabla de memoria de datos
-        tk.Label(frame_datos, text="Memoria de datos:", bg="#61C6E8").grid(row=5, column=0, sticky="w", columnspan=2)
+        # Tabla de memoria de instrucciones
+        tk.Label(frame_datos, text="Memoria de instrucciones:", bg="#61C6E8").grid(row=5, column=0, sticky="w", columnspan=2)
         self.tree_memoria = ttk.Treeview(frame_datos, columns=("Addr", "Stage", "Instruction"), show="headings", height=5)
         self.tree_memoria.heading("Addr", text="Addr")
         self.tree_memoria.heading("Stage", text="Stage")
@@ -98,9 +101,24 @@ class SimulacionVentana:
         self.tree_memoria.column("Instruction", width=80)
         self.tree_memoria.grid(row=6, column=0, columnspan=2, pady=5)
 
+        # Tabla de memoria de datos
+        tk.Label(frame_datos, text="Memoria de datos:", bg="#61C6E8").grid(row=7, column=0, sticky="w", columnspan=2)
+        self.tree_datos = ttk.Treeview(frame_datos, columns=("Addr", "Data"), show="headings", height=5)
+        self.tree_datos.heading("Addr", text="Addr")
+        self.tree_datos.heading("Data", text="Data")
+        self.tree_datos.column("Addr", width=50)
+        self.tree_datos.column("Data", width=80)
+        self.tree_datos.grid(row=8, column=0, columnspan=2, pady=5)
+
         # Botones redondeados
         self.create_rounded_button(self.root, "Ejecutar", self.cambiar_color_pipeline, x=760, y=500, width=100, height=40)
         self.create_rounded_button(self.root, "Volver a configuración", self.volver_a_configuracion, x=600, y=500, width=150, height=40)
+
+        # Actualización periódica de las memorias
+        self.actualizar_registros_periodicamente()
+        self.actualizar_memoria_periodicamente()
+        self.actualizar_memoria_datos_periodicamente()
+
 
     def create_rounded_button(self, parent, text, command, x, y, width, height):
         canvas = tk.Canvas(parent, width=width, height=height, bg="#61C6E8", highlightthickness=0)
@@ -119,5 +137,47 @@ class SimulacionVentana:
     def volver_a_configuracion(self):
         self.root.withdraw()
         self.ventana_configuracion.deiconify()
+
+    def actualizar_registros(self):
+        # Limpiar la tabla antes de actualizar
+        for item in self.tree_registros.get_children():
+            self.tree_registros.delete(item)
+
+        # Agregar los valores actuales de los registros
+        for i, value in enumerate(self.register_file.registers):
+            self.tree_registros.insert("", "end", values=(f"x{i}", f"R{i}", value))
+
+    def actualizar_registros_periodicamente(self):
+        self.actualizar_registros()
+        self.root.after(1000, self.actualizar_registros_periodicamente)  # Actualiza cada 1 segundo
+
+    def actualizar_memoria_instrucciones(self):
+        # Limpiar la tabla antes de actualizar
+        for item in self.tree_memoria.get_children():
+            self.tree_memoria.delete(item)
+
+        # Agregar las instrucciones actuales
+        for addr, instruction in enumerate(self.instruction_memory.instructions):
+            # Cada instrucción tiene una dirección basada en su índice
+            self.tree_memoria.insert("", "end", values=(f"0x{addr * 4}", "Fetch", instruction))
+
+    def actualizar_memoria_periodicamente(self):
+        self.actualizar_memoria_instrucciones()
+        self.root.after(1000, self.actualizar_memoria_periodicamente)  # Actualiza cada 1 segundo
+
+    def actualizar_memoria_datos(self):
+        # Limpiar la tabla antes de actualizar
+        for item in self.tree_datos.get_children():
+            self.tree_datos.delete(item)
+
+        # Agregar los datos actuales de la memoria
+        for addr, value in enumerate(self.data_memory.memory):
+
+            self.tree_datos.insert("", "end", values=(f"0x{addr*4}", value))
+
+    def actualizar_memoria_datos_periodicamente(self):
+        self.actualizar_memoria_datos()
+        self.root.after(1000, self.actualizar_memoria_datos_periodicamente)  # Actualiza cada 1 segundo
+
 
 

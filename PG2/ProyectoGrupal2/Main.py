@@ -4,10 +4,7 @@ import time
 
 from interfaz.configuracion_ventana import ConfiguracionVentana
 
-# # Configuración inicial
-#root = tk.Tk()
-#app = ConfiguracionVentana(root)
-#root.mainloop()
+
 
 from src.control_unit import ControlUnit
 from src.instruction_decoder import InstructionDecoder
@@ -48,6 +45,11 @@ if __name__ == "__main__":
 
     # Crear el pipeline
     pipeline = Pipeline(pc, instruction_memory, register_file, data_memory, alu, decoder, extend, control_unit)
+
+    # # Configuración inicial
+    root = tk.Tk()
+    app = ConfiguracionVentana(root, pipeline)
+    root.mainloop()
 
     # Ejecutar el pipeline
     for _ in range(24):  # Ejecutar suficientes ciclos para procesar todas las instrucciones
