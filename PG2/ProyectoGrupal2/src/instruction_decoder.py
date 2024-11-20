@@ -67,7 +67,17 @@ class InstructionDecoder:
             imm4_1 = (instruction >> 8) & 0b1111
             imm11 = (instruction >> 7) & 0b1
             imm = (imm12 << 12) | (imm11 << 11) | (imm10_5 << 5) | (imm4_1 << 1)
-            return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'B', 'name': 'BEQ', 'rs1': rs1, 'rs2': rs2, 'imm': imm}
+            # No extiendas el signo aquí
+            return {
+                'opcode': opcode,
+                'funct3': funct3,
+                'type': 'B',
+                'name': 'BEQ',
+                'rs1': rs1,
+                'rs2': rs2,
+                'imm': imm,  # Inmediato sin extender
+                'instruction': instruction
+            }
 
 
 
@@ -92,3 +102,4 @@ class InstructionDecoder:
                 return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'XOR', 'rd': rd, 'rs1': rs1, 'rs2': rs2}
 
         return {'error': 'Unknown instruction format or opcode'}
+    

@@ -18,6 +18,7 @@ from src.instruction_memory import InstructionMemory
 from src.program_counter import ProgramCounter
 from src.data_memory import DataMemory
 from src.pipeline import Pipeline
+from src.data_memory import DataMemory
 
 if __name__ == "__main__":
     # Instancias necesarias
@@ -40,7 +41,7 @@ if __name__ == "__main__":
         0b00000000000100010110000110110011,  # OR R3, R2, R1
         0b00000000010100010000000010010011,  # ADDI R1, R2, 5
         0b00000000000100010010000110110011,  # SLT R3, R2, R1
-        0b00000000001000001000001001100011,  # BEQ R1, R2, 4
+        0b1_111111_00010_00010_000_1_100_1_1100011,  # BEQ R2, R2, -4
         0b00000000000100010001000110110011,  # XOR R3, R2, R1
     ]
     instruction_memory.load_instructions(instructions)

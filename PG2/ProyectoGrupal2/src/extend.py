@@ -2,14 +2,10 @@ class Extend:
     def __init__(self):
         pass
 
-    def sign_extend(self, immediate, bits=12):
-        """
-        Extiende el valor inmediato con signo dependiendo del tipo de instrucción.
-        """
-        if immediate & (1 << (bits - 1)):  # Si el bit más significativo es 1, es negativo
-            return immediate | ~((1 << bits) - 1)  # Extiende con signo
-        else:
-            return immediate
+    def sign_extend(self, immediate, bits):
+        sign_bit = 1 << (bits - 1)
+        return (immediate ^ sign_bit) - sign_bit
+
 
     def execute(self, instruction, type_of_instruction):
         """
@@ -28,13 +24,16 @@ class Extend:
             return self.sign_extend(imm, bits=12)
 
         elif type_of_instruction == 'B':
-            # Para instrucciones tipo B: Imm[12|10:5|4:1|11]
             imm12 = (instruction >> 31) & 0x1
             imm10_5 = (instruction >> 25) & 0x3F
-            imm4_1 = (instruction >> 8) & 0xF
+            imm4 = (instruction >> 11) & 0x1
             imm11 = (instruction >> 7) & 0x1
-            imm = (imm12 << 12) | (imm11 << 11) | (imm10_5 << 5) | (imm4_1 << 1)
-            return self.sign_extend(imm, bits=13)
+            imm3_1 = (instruction >> 8) & 0x7  # 3 bits (bits 10-8)
+            imm = (imm12 << 12) | (imm11 << 11) | (imm10_5 << 5) | (imm4 << 4) | (imm3_1 << 1)
+            print(f"Immediate before sign extension: {imm}")
+            imm = self.sign_extend(imm, bits=13)
+            print(f"Immediate after sign extension: {imm}")
+            return imm
 
         elif type_of_instruction == 'U':
             # Para instrucciones tipo U: Imm[31:12]
