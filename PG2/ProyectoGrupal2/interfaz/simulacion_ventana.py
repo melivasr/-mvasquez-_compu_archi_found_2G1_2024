@@ -1,4 +1,5 @@
 import tkinter as tk
+from asyncio import wait_for
 from tkinter import ttk
 from PIL import Image, ImageTk
 import os
@@ -307,6 +308,14 @@ class SimulacionVentana:
             else:
                 text = etapa.get("instruction_pipeline", "")  # Si falta el campo
             self.instruccion_labels[i].config(text=text)
+
+        if self.pipeline.is_pipeline_empty():
+            self.root.after(600, self.reset_writeback_stage)
+
+    def reset_writeback_stage(self):
+        """Restablece writeback_stage y actualiza la interfaz."""
+        self.pipeline.writeback_stage = None
+        self.instruccion_labels[-1].config(text=" ")  # Limpia la última etiqueta WB en la interfaz
 
     def volver_a_configuracion(self):
         """Vuelve a la ventana de configuracion y reinicia el pipeline"""
