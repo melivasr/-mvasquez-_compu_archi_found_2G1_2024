@@ -19,6 +19,7 @@ class SimulacionVentana:
         self.instruction_memory = pipeline.instruction_memory
         self.data_memory = pipeline.data_memory
 
+
         # Frame para el pipeline visual y el área de control con borde
         frame_pipeline = tk.Frame(self.root, bg="#61C6E8", highlightbackground="black", highlightthickness=0)
         frame_pipeline.pack(side=tk.LEFT, padx=10, pady=20)
@@ -33,7 +34,7 @@ class SimulacionVentana:
         instruccion_widths = [25, 25, 26, 17, 12]
         for etapa, width in zip(instrucciones, instruccion_widths):
             label = tk.Label(frame_instruccion, text=etapa, bg="#61C6E8",
-                             font=("Arial", 8, "bold"), width=width, height=2, relief="ridge")
+                             font=("Arial", 9, "bold"), width=width, height=2, relief="ridge")
             label.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
             self.instruccion_labels.append(label)
 
@@ -87,23 +88,23 @@ class SimulacionVentana:
 
         # Campos de métricas
         tk.Label(frame_datos, text="Cycles:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=1, column=1, sticky="e", padx=10)
-        self.entry_ciclo = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_ciclo = tk.Entry(frame_datos, width=10)
         self.entry_ciclo.grid(row=1, column=2, padx=5, pady=5)
 
         tk.Label(frame_datos, text="Tiempo:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=2, column=1, sticky="e", padx=10)
-        self.entry_tiempo = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_tiempo = tk.Entry(frame_datos, width=10)
         self.entry_tiempo.grid(row=2, column=2, padx=5, pady=5)
 
         tk.Label(frame_datos, text="Valor PC:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=3, column=1, sticky="e", padx=10)
-        self.entry_pc = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_pc = tk.Entry(frame_datos, width=10)
         self.entry_pc.grid(row=3, column=2, padx=5, pady=5)
 
         tk.Label(frame_datos, text="CPI:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=4, column=1, sticky="e", padx=10)
-        self.entry_cpi = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_cpi = tk.Entry(frame_datos, width=10)
         self.entry_cpi.grid(row=4, column=2, padx=5, pady=5)
 
         tk.Label(frame_datos, text="IPC:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=5, column=1, sticky="e", padx=10)
-        self.entry_ipc = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_ipc = tk.Entry(frame_datos, width=10)
         self.entry_ipc.grid(row=5, column=2, padx=5, pady=5)
 
 
@@ -212,16 +213,17 @@ class SimulacionVentana:
         self.root.after(1000, self.actualizar_memoria_periodicamente)  # Actualiza cada 1 segundo
 
     def actualizar_memoria_datos(self):
+        """Actualiza toda la tabla de memoria de datos."""
         # Limpiar la tabla antes de actualizar
         for item in self.tree_datos.get_children():
             self.tree_datos.delete(item)
 
         # Agregar los datos actuales de la memoria
         for addr, value in enumerate(self.data_memory.memory):
-
-            self.tree_datos.insert("", "end", values=(f"0x{addr*4}", value))
+            self.tree_datos.insert("", "end", values=(f"0x{addr*4:X}", value))
 
     def actualizar_memoria_datos_periodicamente(self):
+        """Actualiza la tabla de memoria periódicamente."""
         self.actualizar_memoria_datos()
         self.root.after(1000, self.actualizar_memoria_datos_periodicamente)  # Actualiza cada 1 segundo
 
@@ -256,6 +258,26 @@ class SimulacionVentana:
         else:
             print("Pipeline ejecutado completamente.")
 
+    def actualizar_cpi_ipc(self):
+        """
+        Actualiza los valores de CPI e IPC en la interfaz.
+        """
+        # Calcular CPI
+        cpi = self.pipeline.calcular_cpi()
+
+        # Evitar división por cero para IPC
+        if cpi == 0:
+            ipc = 0
+        else:
+            ipc = 1 / cpi
+
+        # Actualizar los campos en la interfaz
+        self.entry_cpi.delete(0, tk.END)
+        self.entry_cpi.insert(0, f"{cpi:.2f}")
+
+        self.entry_ipc.delete(0, tk.END)
+        self.entry_ipc.insert(0, f"{ipc:.2f}")
+
     def actualizar_interfaz(self):
         """Actualiza los datos de la interfaz, como ciclo, PC, registros y etapas."""
         # Actualizar ciclo y PC
@@ -263,12 +285,8 @@ class SimulacionVentana:
         self.entry_ciclo.insert(0, self.pipeline.clock_cycle)
         self.entry_pc.delete(0, tk.END)
         self.entry_pc.insert(0, f"0x{self.pipeline.pc.value:X}")
-
-        # Actualizar registros
-        for item in self.tree_registros.get_children():
-            self.tree_registros.delete(item)
-        for i, value in enumerate(self.pipeline.register_file.registers):
-            self.tree_registros.insert("", "end", values=(f"x{i}", value))
+        # Actualizar CPI e IPC
+        self.actualizar_cpi_ipc()
 
         # Actualizar tiempo
         elapsed_time = self.pipeline.get_elapsed_time()

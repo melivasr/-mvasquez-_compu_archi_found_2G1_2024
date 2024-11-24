@@ -30,6 +30,9 @@ class Pipeline:
         self.start_time = None
         self.end_time = None
 
+        # Inicializar contador de instrucciones completadas
+        self.instrucciones_completadas = 0
+
     def start_timer(self):
         """Inicia el temporizador."""
         self.start_time = time.time()
@@ -326,6 +329,9 @@ class Pipeline:
         # Reiniciar el ciclo de reloj
         self.clock_cycle = 0
 
+        # Reiniciar el contador de instrucciones completadas
+        self.instrucciones_completadas = 0
+
         self.mode = "full_hazard_unit"
 
         print("Pipeline reiniciado.")
@@ -341,3 +347,26 @@ class Pipeline:
             stage is None for stage in [self.if_id, self.id_ex, self.ex_mem, self.mem_wb]
         )
         return instrucciones_terminadas and etapas_vacias
+
+    def calcular_cpi(self):
+        """
+        Calcula el CPI basado en las instrucciones completadas.
+        """
+        instrucciones_completadas = self.pipeline_instructions_completed()
+        if instrucciones_completadas == 0:  # Evitar división por cero
+            return 0
+        return self.clock_cycle / instrucciones_completadas
+
+    def pipeline_instructions_completed(self):
+        """
+        Calcula el número de instrucciones completadas (escritas en WB).
+        """
+        # Usar un contador acumulado de instrucciones completadas
+        completadas = getattr(self, "instrucciones_completadas", 0)
+
+        # Incrementar si una instrucción pasa por WB
+        if self.writeback_stage is not None: # no todas pasan por WB
+            completadas += 1
+            self.instrucciones_completadas = completadas  # Guardar el valor acumulado
+
+        return completadas
