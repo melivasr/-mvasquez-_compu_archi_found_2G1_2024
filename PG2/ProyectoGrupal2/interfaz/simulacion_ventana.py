@@ -2,9 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 import os
-
 from src import pipeline
-
 
 class SimulacionVentana:
     def __init__(self, root, ventana_configuracion, pipeline, modo_funcionamiento):
@@ -32,7 +30,7 @@ class SimulacionVentana:
         # Crear etiquetas para las etapas con anchos ajustables
         self.instruccion_labels = []
         instrucciones = ["", "", "", "", ""]
-        instruccion_widths = [20, 17, 18, 13, 10]  # Puedes ajustar el ancho de cada etapa aquí
+        instruccion_widths = [25, 25, 26, 17, 12]
         for etapa, width in zip(instrucciones, instruccion_widths):
             label = tk.Label(frame_instruccion, text=etapa, bg="#61C6E8",
                              font=("Arial", 8, "bold"), width=width, height=2, relief="ridge")
@@ -87,21 +85,43 @@ class SimulacionVentana:
         frame_datos = tk.Frame(self.root, bg="#61C6E8")
         frame_datos.pack(side=tk.RIGHT, padx=20, pady=20)
 
-        # Campos de ciclo, tiempo y PC
-        tk.Label(frame_datos, text="Cycles:", bg="#61C6E8").grid(row=0, column=0, sticky="e")
-        self.entry_ciclo = tk.Entry(frame_datos, width=10)
-        self.entry_ciclo.grid(row=0, column=1, padx=5, pady=5)
+        # Campos de métricas
+        tk.Label(frame_datos, text="Cycles:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=1, column=1, sticky="e", padx=10)
+        self.entry_ciclo = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_ciclo.grid(row=1, column=2, padx=5, pady=5)
 
-        tk.Label(frame_datos, text="Tiempo:", bg="#61C6E8").grid(row=1, column=0, sticky="e")
-        self.entry_tiempo = tk.Entry(frame_datos, width=10)
-        self.entry_tiempo.grid(row=1, column=1, padx=5, pady=5)
+        tk.Label(frame_datos, text="Tiempo:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=2, column=1, sticky="e", padx=10)
+        self.entry_tiempo = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_tiempo.grid(row=2, column=2, padx=5, pady=5)
 
-        tk.Label(frame_datos, text="Valor PC:", bg="#61C6E8").grid(row=2, column=0, sticky="e")
-        self.entry_pc = tk.Entry(frame_datos, width=10)
-        self.entry_pc.grid(row=2, column=1, padx=5, pady=5)
+        tk.Label(frame_datos, text="Valor PC:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=3, column=1, sticky="e", padx=10)
+        self.entry_pc = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_pc.grid(row=3, column=2, padx=5, pady=5)
+
+        tk.Label(frame_datos, text="CPI:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=4, column=1, sticky="e", padx=10)
+        self.entry_cpi = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_cpi.grid(row=4, column=2, padx=5, pady=5)
+
+        tk.Label(frame_datos, text="IPC:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=5, column=1, sticky="e", padx=10)
+        self.entry_ipc = tk.Entry(frame_datos, width=10, state="readonly")
+        self.entry_ipc.grid(row=5, column=2, padx=5, pady=5)
+
+
+        # Tabla de memoria de instrucciones
+        tk.Label(frame_datos, text="Memoria de instrucciones:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=6, column=1, sticky="w",
+                                                                                   columnspan=1)
+        self.tree_memoria = ttk.Treeview(frame_datos, columns=("Addr", "Stage", "Instruction"), show="headings",
+                                         height=5)
+        self.tree_memoria.heading("Addr", text="Addr")
+        self.tree_memoria.heading("Stage", text="Stage")
+        self.tree_memoria.heading("Instruction", text="Instruction")
+        self.tree_memoria.column("Addr", width=50)
+        self.tree_memoria.column("Stage", width=50)
+        self.tree_memoria.column("Instruction", width=80)
+        self.tree_memoria.grid(row=7, column=1, padx=5, pady=5)
 
         # Tabla de registros
-        tk.Label(frame_datos, text="Valor registros:", bg="#61C6E8").grid(row=3, column=0, sticky="w", columnspan=2)
+        tk.Label(frame_datos, text="Valor registros:", font=("Comic Sans MS", 10), bg="#61C6E8",).grid(row=8, column=1, sticky="w", columnspan=2)
         self.tree_registros = ttk.Treeview(frame_datos, columns=("Name", "Alias", "Value"), show="headings", height=5)
         self.tree_registros.heading("Name", text="Name")
         self.tree_registros.heading("Alias", text="Alias")
@@ -109,36 +129,25 @@ class SimulacionVentana:
         self.tree_registros.column("Name", width=50)
         self.tree_registros.column("Alias", width=50)
         self.tree_registros.column("Value", width=50)
-        self.tree_registros.grid(row=4, column=0, columnspan=2, pady=5)
-
-        # Tabla de memoria de instrucciones
-        tk.Label(frame_datos, text="Memoria de instrucciones:", bg="#61C6E8").grid(row=5, column=0, sticky="w", columnspan=2)
-        self.tree_memoria = ttk.Treeview(frame_datos, columns=("Addr", "Stage", "Instruction"), show="headings", height=5)
-        self.tree_memoria.heading("Addr", text="Addr")
-        self.tree_memoria.heading("Stage", text="Stage")
-        self.tree_memoria.heading("Instruction", text="Instruction")
-        self.tree_memoria.column("Addr", width=50)
-        self.tree_memoria.column("Stage", width=50)
-        self.tree_memoria.column("Instruction", width=80)
-        self.tree_memoria.grid(row=6, column=0, columnspan=2, pady=5)
+        self.tree_registros.grid(row=9, column=1, padx=5, pady=5)
 
         # Tabla de memoria de datos
-        tk.Label(frame_datos, text="Memoria de datos:", bg="#61C6E8").grid(row=7, column=0, sticky="w", columnspan=2)
+        tk.Label(frame_datos, text="Memoria de datos:", font=("Comic Sans MS", 10), bg="#61C6E8").grid(row=8, column=2, sticky="w", columnspan=1)
         self.tree_datos = ttk.Treeview(frame_datos, columns=("Addr", "Data"), show="headings", height=5)
         self.tree_datos.heading("Addr", text="Addr")
         self.tree_datos.heading("Data", text="Data")
         self.tree_datos.column("Addr", width=50)
         self.tree_datos.column("Data", width=80)
-        self.tree_datos.grid(row=8, column=0, columnspan=2, pady=5)
+        self.tree_datos.grid(row=9, column=2, padx=5, pady=5)
 
         # Botones redondeados
         if self.modo_funcionamiento == "Step by step":
-            self.create_rounded_button(self.root, "Next", self.ejecutar_next, x=760, y=500, width=100, height=40)
+            self.create_rounded_button(self.root, "Next", self.ejecutar_next, x=660, y=550, width=100, height=40)
         elif    self.modo_funcionamiento == "Un ciclo cada unidad de tiempo":
-            self.create_rounded_button(self.root, "Ejecutar", self.ejecutar_pipeline, x=760, y=500, width=100, height=40)
+            self.create_rounded_button(self.root, "Ejecutar", self.ejecutar_pipeline, x=660, y=550, width=100, height=40)
         else:
-            self.create_rounded_button(self.root, "Ejecutar completo", self.ejecutar_pipeline_completo, x=760, y=500, width=100, height=40)
-        self.create_rounded_button(self.root, "Volver a configuración", self.volver_a_configuracion, x=600, y=500, width=150, height=40)
+            self.create_rounded_button(self.root, "Ejecutar completo", self.ejecutar_pipeline_completo, x=660, y=550, width=150, height=40)
+        self.create_rounded_button(self.root, "Volver a configuración", self.volver_a_configuracion, x=500, y=550, width=150, height=40)
 
 
         # Actualización periódica de las memorias
@@ -147,14 +156,14 @@ class SimulacionVentana:
         self.actualizar_memoria_datos_periodicamente()
 
 
-    def create_rounded_button(self, parent, text, command, x, y, width, height):
+    def create_rounded_button(self, parent, text, command, x, y, width, height, font=("Comic Sans MS", 10, "bold")):
         canvas = tk.Canvas(parent, width=width, height=height, bg="#61C6E8", highlightthickness=0)
         canvas.place(x=x, y=y)
         radius = height // 2
         canvas.create_oval(0, 0, height, height, fill="#005F6A", outline="")
         canvas.create_oval(width - height, 0, width, height, fill="#005F6A", outline="")
         canvas.create_rectangle(radius, 0, width - radius, height, fill="#005F6A", outline="")
-        canvas.create_text(width // 2, height // 2, text=text, fill="white", font=("Arial", 10, "bold"))
+        canvas.create_text(width // 2, height // 2, text=text, fill="white", font=font)
         canvas.bind("<Button-1>", lambda event: command())
 
     def cambiar_color_pipeline(self):
