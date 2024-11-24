@@ -3,13 +3,20 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import os
 
+from src import pipeline
+
+
 class SimulacionVentana:
-    def __init__(self, root, ventana_configuracion, pipeline):
+    def __init__(self, root, ventana_configuracion, pipeline, modo_funcionamiento):
+        self.ejecutar_simulacion = None
+        self.siguiente_paso = None
+        self.modo_funcionamiento = modo_funcionamiento
         self.root = root
         self.ventana_configuracion = ventana_configuracion
         self.root.title("Simulación de Pipeline")
         self.root.state('zoomed')
         self.root.configure(bg="#61C6E8")
+        self.pipeline = pipeline
         self.register_file = pipeline.register_file
         self.instruction_memory = pipeline.instruction_memory
         self.data_memory = pipeline.data_memory
@@ -17,6 +24,20 @@ class SimulacionVentana:
         # Frame para el pipeline visual y el área de control con borde
         frame_pipeline = tk.Frame(self.root, bg="#61C6E8", highlightbackground="black", highlightthickness=0)
         frame_pipeline.pack(side=tk.LEFT, padx=10, pady=20)
+
+        # Frame para las instrucciones en el pipeline
+        frame_instruccion= tk.Frame(frame_pipeline, bg="#61C6E8", highlightbackground="black", highlightthickness=0)
+        frame_instruccion.pack(side=tk.TOP, fill=tk.X, pady=(0, 10))
+
+        # Crear etiquetas para las etapas con anchos ajustables
+        self.instruccion_labels = []
+        instrucciones = ["", "", "", "", ""]
+        instruccion_widths = [20, 17, 18, 13, 10]  # Puedes ajustar el ancho de cada etapa aquí
+        for etapa, width in zip(instrucciones, instruccion_widths):
+            label = tk.Label(frame_instruccion, text=etapa, bg="#61C6E8",
+                             font=("Arial", 8, "bold"), width=width, height=2, relief="ridge")
+            label.pack(side=tk.LEFT, expand=True, padx=5, pady=5)
+            self.instruccion_labels.append(label)
 
         # Crear el canvas para el pipeline
         self.canvas = tk.Canvas(frame_pipeline, width=800, height=330, bg="#61C6E8", highlightthickness=0)
@@ -67,7 +88,7 @@ class SimulacionVentana:
         frame_datos.pack(side=tk.RIGHT, padx=20, pady=20)
 
         # Campos de ciclo, tiempo y PC
-        tk.Label(frame_datos, text="Ciclo de ejecución:", bg="#61C6E8").grid(row=0, column=0, sticky="e")
+        tk.Label(frame_datos, text="Cycles:", bg="#61C6E8").grid(row=0, column=0, sticky="e")
         self.entry_ciclo = tk.Entry(frame_datos, width=10)
         self.entry_ciclo.grid(row=0, column=1, padx=5, pady=5)
 
@@ -111,8 +132,14 @@ class SimulacionVentana:
         self.tree_datos.grid(row=8, column=0, columnspan=2, pady=5)
 
         # Botones redondeados
-        self.create_rounded_button(self.root, "Ejecutar", self.cambiar_color_pipeline, x=760, y=500, width=100, height=40)
+        if self.modo_funcionamiento == "Step by step":
+            self.create_rounded_button(self.root, "Next", self.ejecutar_next, x=760, y=500, width=100, height=40)
+        elif    self.modo_funcionamiento == "Un ciclo cada unidad de tiempo":
+            self.create_rounded_button(self.root, "Ejecutar", self.ejecutar_pipeline, x=760, y=500, width=100, height=40)
+        else:
+            self.create_rounded_button(self.root, "Ejecutar completo", self.ejecutar_pipeline_completo, x=760, y=500, width=100, height=40)
         self.create_rounded_button(self.root, "Volver a configuración", self.volver_a_configuracion, x=600, y=500, width=150, height=40)
+
 
         # Actualización periódica de las memorias
         self.actualizar_registros_periodicamente()
@@ -134,10 +161,6 @@ class SimulacionVentana:
         for component in self.rectangles.values():
             self.canvas.itemconfig(component, fill="lightblue")
 
-    def volver_a_configuracion(self):
-        self.root.withdraw()
-        self.ventana_configuracion.deiconify()
-
     def actualizar_registros(self):
         # Limpiar la tabla antes de actualizar
         for item in self.tree_registros.get_children():
@@ -152,14 +175,28 @@ class SimulacionVentana:
         self.root.after(1000, self.actualizar_registros_periodicamente)  # Actualiza cada 1 segundo
 
     def actualizar_memoria_instrucciones(self):
+        """Actualiza la tabla de memoria de instrucciones en función de la etapa del pipeline."""
         # Limpiar la tabla antes de actualizar
         for item in self.tree_memoria.get_children():
             self.tree_memoria.delete(item)
 
-        # Agregar las instrucciones actuales
+        # Agrega etapas actuales de las instrucciones
         for addr, instruction in enumerate(self.instruction_memory.instructions):
-            # Cada instrucción tiene una dirección basada en su índice
-            self.tree_memoria.insert("", "end", values=(f"0x{addr * 4}", "Fetch", instruction))
+            stage = ""  # Valor por defecto
+            # Determinar la etapa actual para la instrucción
+            if self.pipeline.if_id and self.pipeline.if_id["pc"] == addr * 4:
+                stage = "ID"
+            elif self.pipeline.id_ex and self.pipeline.id_ex["decoded"]["instruction"] == instruction:
+                stage = "IF"
+            elif self.pipeline.ex_mem and self.pipeline.ex_mem["decoded"]["instruction"] == instruction:
+                stage = "EX"
+            elif self.pipeline.mem_wb and self.pipeline.mem_wb["decoded"]["instruction"] == instruction:
+                stage = "MEM"
+            elif self.pipeline.writeback_stage and self.pipeline.writeback_stage["instruction_pipeline"] == instruction:
+                stage = "WB"
+
+            # Insertar en la tabla
+            self.tree_memoria.insert("", "end", values=(f"0x{addr * 4:X}", stage, instruction))
 
     def actualizar_memoria_periodicamente(self):
         self.actualizar_memoria_instrucciones()
@@ -179,5 +216,73 @@ class SimulacionVentana:
         self.actualizar_memoria_datos()
         self.root.after(1000, self.actualizar_memoria_datos_periodicamente)  # Actualiza cada 1 segundo
 
+    def ejecutar_next(self):
+        """Ejecuta un ciclo del pipeline."""
+        if not self.pipeline.is_pipeline_empty():
+            print("Ejecutar paso siguiente")
+            self.pipeline.step()
+            self.actualizar_interfaz()
+        else:
+            print("El pipeline ya está vacío, no hay más pasos para ejecutar.")
 
+    def ejecutar_pipeline(self):
+        """Ejecuta el pipeline de forma continua, un ciclo cada unidad de tiempo."""
 
+        def ejecutar_ciclo():
+            if not self.pipeline.is_pipeline_empty():
+                self.pipeline.step()
+                self.actualizar_interfaz()
+                self.root.after(1000, ejecutar_ciclo)  # Ejecuta cada segundo
+            else:
+                print("Pipeline completado.")
+
+        ejecutar_ciclo()
+
+    def ejecutar_pipeline_completo(self):
+        """Ejecuta el pipeline completo hasta que esté vacío."""
+        if not self.pipeline.is_pipeline_empty():
+            self.pipeline.step()
+            self.actualizar_interfaz()
+            self.root.after(10, self.ejecutar_pipeline_completo)  # Ejecuta rápidamente sin bloquear
+        else:
+            print("Pipeline ejecutado completamente.")
+
+    def actualizar_interfaz(self):
+        """Actualiza los datos de la interfaz, como ciclo, PC, registros y etapas."""
+        # Actualizar ciclo y PC
+        self.entry_ciclo.delete(0, tk.END)
+        self.entry_ciclo.insert(0, self.pipeline.clock_cycle)
+        self.entry_pc.delete(0, tk.END)
+        self.entry_pc.insert(0, f"0x{self.pipeline.pc.value:X}")
+
+        # Actualizar registros
+        for item in self.tree_registros.get_children():
+            self.tree_registros.delete(item)
+        for i, value in enumerate(self.pipeline.register_file.registers):
+            self.tree_registros.insert("", "end", values=(f"x{i}", value))
+
+        # Actualizar tiempo
+        elapsed_time = self.pipeline.get_elapsed_time()
+        self.entry_tiempo.delete(0, tk.END)
+        self.entry_tiempo.insert(0, f"{elapsed_time:.2f} s")
+
+        # Actualizar etiquetas de las etapas del pipeline
+        etapas = [
+            self.pipeline.if_id,
+            self.pipeline.id_ex,
+            self.pipeline.ex_mem,
+            self.pipeline.mem_wb,
+            self.pipeline.writeback_stage
+        ]
+        for i, etapa in enumerate(etapas):
+            if etapa is None:
+                text = " "
+            else:
+                text = etapa.get("instruction_pipeline", "")  # Si falta el campo
+            self.instruccion_labels[i].config(text=text)
+
+    def volver_a_configuracion(self):
+        """Vuelve a la ventana de configuracion y reinicia el pipeline"""
+        self.pipeline.reiniciar()
+        self.root.withdraw()
+        self.ventana_configuracion.deiconify()

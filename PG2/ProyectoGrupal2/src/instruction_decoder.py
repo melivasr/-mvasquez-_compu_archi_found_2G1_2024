@@ -35,6 +35,7 @@ class InstructionDecoder:
                 'rs2': None,
                 'imm': None,
                 'type': 'Unknown',
+                'instruction_pipeline': "Unknown Instruction",
                 'error': f'Unknown instruction format or opcode. Opcode: {opcode:07b}'
             }
 
@@ -43,7 +44,7 @@ class InstructionDecoder:
             rs1 = (instruction >> 15) & 0b11111
             rd = (instruction >> 7) & 0b11111
             imm = (instruction >> 20) & 0xFFF
-            return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'I', 'name': 'LW', 'rd': rd, 'rs1': rs1, 'imm': imm, 'instruction' : instruction}
+            return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'I', 'name': 'LW', 'rd': rd, 'rs1': rs1, 'imm': imm, 'instruction' : instruction, 'instruction_pipeline': f"LW R{rd}, {imm}(R{rs1})"}
 
         elif instruction_name == 'SW':  # Store Word (S-type)
             rs1 = (instruction >> 15) & 0b11111
@@ -51,13 +52,13 @@ class InstructionDecoder:
             #imm11_5 = (instruction >> 25) & 0b1111111
             imm4_0 = (instruction >> 7) & 0b11111
             #imm = (imm11_5 << 5) | imm4_0
-            return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'S', 'name': 'SW', 'rs1': rs1, 'rs2': rs2, 'imm': imm4_0, 'instruction' : instruction}
+            return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'S', 'name': 'SW', 'rs1': rs1, 'rs2': rs2, 'imm': imm4_0, 'instruction' : instruction,  'instruction_pipeline': f"SW R{rs2}, {imm4_0}(R{rs1})"}
 
         elif instruction_name == 'ADDI':  # Add Immediate (I-type)
             rs1 = (instruction >> 15) & 0b11111
             rd = (instruction >> 7) & 0b11111
             imm = (instruction >> 20) & 0xFFF
-            return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'I', 'name': 'ADDI', 'rd': rd, 'rs1': rs1, 'imm': imm}
+            return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'I', 'name': 'ADDI', 'rd': rd, 'rs1': rs1, 'imm': imm, 'instruction_pipeline': f"ADDI R{rd}, R{rs1}, {imm}"}
 
         elif instruction_name == 'BEQ':  # Branch if Equal (B-type)
             rs1 = (instruction >> 15) & 0b11111
@@ -76,10 +77,9 @@ class InstructionDecoder:
                 'rs1': rs1,
                 'rs2': rs2,
                 'imm': imm,  # Inmediato sin extender
-                'instruction': instruction
+                'instruction': instruction,
+                'instruction_pipeline': f"BEQ R{rs1}, R{rs2}, {imm}"
             }
-
-
 
         elif opcode == 0b0110011:  # R-type instructions (ADD, SUB, AND, OR, SLT)
             rs1 = (instruction >> 15) & 0b11111
@@ -89,17 +89,17 @@ class InstructionDecoder:
             # Manejo con base en funct3 y funct7
             if funct3 == 0b000:  # ADD / SUB
                 if funct7 == 0b0000000:  # ADD
-                    return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'ADD', 'rd': rd, 'rs1': rs1, 'rs2': rs2}
+                    return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'ADD', 'rd': rd, 'rs1': rs1, 'rs2': rs2, 'instruction_pipeline': f"ADD R{rd}, R{rs1}, R{rs2}"}
                 elif funct7 == 0b0100000:  # SUB
-                    return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'SUB', 'rd': rd, 'rs1': rs1, 'rs2': rs2}
+                    return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'SUB', 'rd': rd, 'rs1': rs1, 'rs2': rs2,  'instruction_pipeline': f"SUB R{rd}, R{rs1}, R{rs2}"}
             elif funct3 == 0b111:  # AND
-                return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'AND', 'rd': rd, 'rs1': rs1, 'rs2': rs2}
+                return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'AND', 'rd': rd, 'rs1': rs1, 'rs2': rs2,'instruction_pipeline': f"AND R{rd}, R{rs1}, R{rs2}"}
             elif funct3 == 0b110:  # OR
-                return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'OR', 'rd': rd, 'rs1': rs1, 'rs2': rs2}
+                return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'OR', 'rd': rd, 'rs1': rs1, 'rs2': rs2, 'instruction_pipeline': f"OR R{rd}, R{rs1}, R{rs2}"}
             elif funct3 == 0b010:  # SLT (Set Less Than)
-                return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'SLT', 'rd': rd, 'rs1': rs1, 'rs2': rs2}
+                return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'SLT', 'rd': rd, 'rs1': rs1, 'rs2': rs2, 'instruction_pipeline': f"SLT R{rd}, R{rs1}, R{rs2}"}
             elif funct3 == 0b001:  # XOR
-                return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'XOR', 'rd': rd, 'rs1': rs1, 'rs2': rs2}
+                return {'opcode': opcode, 'funct3': funct3, 'funct7': funct7,'type': 'R', 'name': 'XOR', 'rd': rd, 'rs1': rs1, 'rs2': rs2, 'instruction_pipeline': f"XOR R{rd}, R{rs1}, R{rs2}"}
 
         return {'error': 'Unknown instruction format or opcode'}
     

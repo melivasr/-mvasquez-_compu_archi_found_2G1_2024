@@ -44,7 +44,7 @@ class HazardUnit:
     
     def handle_branch_prediction(self, decode_stage):
          """
-        Implementa la predicción de salto estética (Siempre predice que no hay salyo)
+        Implementa la predicción de salto estética (Siempre predice que no hay salto)
         """
          instruction_name = decode_stage["decoded"]["instruction"]
          if instruction_name == "BEQ":

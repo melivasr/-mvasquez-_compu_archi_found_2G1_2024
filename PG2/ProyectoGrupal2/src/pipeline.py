@@ -1,4 +1,5 @@
 from src.hazard_unit import HazardUnit
+import time
 class Pipeline:
     def __init__(self, pc, instruction_memory, register_file, data_memory, alu, decoder, extend, control_unit):
         self.pc = pc
@@ -25,6 +26,28 @@ class Pipeline:
         self.hazard_unit = HazardUnit()
         self.mode = "full_hazard_unit"  # Modos posibles: no_hazard, hazard_unit, branch_prediction, full_hazard
 
+        # Temporizador
+        self.start_time = None
+        self.end_time = None
+
+    def start_timer(self):
+        """Inicia el temporizador."""
+        self.start_time = time.time()
+        print("Ejecución iniciada.")
+
+    def stop_timer(self):
+        """Detiene el temporizador y muestra el tiempo de ejecución total."""
+        self.end_time = time.time()
+        elapsed_time = self.end_time - self.start_time
+        print(f"Ejecución completada en {elapsed_time:.6f} segundos.")
+        return elapsed_time
+
+    def get_elapsed_time(self):
+        """Devuelve el tiempo transcurrido desde el inicio del pipeline."""
+        if self.start_time is not None:
+            return time.time() - self.start_time
+        return 0.0
+
     def set_mode(self, mode):
         
         """
@@ -41,6 +64,9 @@ class Pipeline:
         """
         Avanza el pipeline un ciclo de reloj.
         """
+        if self.start_time is None:  # Iniciar temporizador al primer paso
+            self.start_timer()
+
         print(f"\nClock Cycle: {self.clock_cycle + 1}")
         # Ejecutar las etapas en orden inverso para evitar sobrescribir datos
         self.writeback()
@@ -52,6 +78,10 @@ class Pipeline:
         # Incrementar el ciclo de reloj
         self.clock_cycle += 1
 
+        # Verificar si el pipeline está vacío y detener el temporizador
+        if all(stage is None for stage in [self.if_id, self.id_ex, self.ex_mem, self.mem_wb]):
+            self.stop_timer()
+
     def fetch(self):
         
         """
@@ -61,7 +91,7 @@ class Pipeline:
             instruction = self.instruction_memory.fetch(self.pc.value)
             if instruction is not None:
                 print(f"Fetch: Instrucción {instruction:032b} en PC={self.pc.value}")
-                self.if_id = {"instruction": instruction, "pc": self.pc.value}
+                self.if_id = {"instruction": instruction, "pc": self.pc.value, "instruction_pipeline": instruction}
                 self.pc.increment()
 
     def decode(self):
@@ -88,7 +118,7 @@ class Pipeline:
             if stall_needed:
                 print("Stalling decode: Hazard Unit detectó riesgo")
                 # Inserta un NOP en la etapa de ejecución
-                self.id_ex = {"decoded": self.no_op_instruction(), "control_signals": self.default_control_signals()}
+                self.id_ex = {"decoded": self.no_op_instruction(), "control_signals": self.default_control_signals(), "instruction_pipeline": "NOP"}
                 # Mantén la instrucción actual en if_id para volver a decodificarla en el próximo ciclo
                 return
 
@@ -107,13 +137,14 @@ class Pipeline:
             print(f"Decode: PC={self.if_id['pc']}: Instrucción={instruction:032b} -> Decodificación={decoded}")
 
             # Actualizar el registro del pipeline para la etapa id_ex
-            self.id_ex = {"decoded": decoded, "control_signals": control_signals}
+            self.id_ex = {"decoded": decoded, "control_signals": control_signals,"instruction_pipeline": decoded["instruction_pipeline"]}
             self.if_id = None
 
     def execute(self):
         if self.id_ex and self.ex_mem is None:
             decoded = self.id_ex["decoded"]
             control_signals = self.id_ex["control_signals"]
+            instruction_pipeline  = self.id_ex["instruction_pipeline"]
             print(f"Control Signals en execute {control_signals}")
             forwarding = decoded.get("forwarding", {})
             if decoded.get("rs2") is not None:
@@ -168,7 +199,7 @@ class Pipeline:
 
 
             # Escribir en ex_mem
-            self.ex_mem = {"alu_result": alu_result, "control_signals": control_signals, "decoded": decoded}
+            self.ex_mem = {"alu_result": alu_result, "control_signals": control_signals, "decoded": decoded, "instruction_pipeline":instruction_pipeline}
             self.id_ex = None
 
 
@@ -178,20 +209,21 @@ class Pipeline:
             decoded = self.ex_mem["decoded"]
             control_signals = self.ex_mem["control_signals"]
             alu_result = self.ex_mem["alu_result"]
+            instruction_pipeline = self.ex_mem["instruction_pipeline"]
 
             if control_signals['MemRead']:
                 memory_data = self.data_memory.read(alu_result)
                 print(f"Memory read: Dirección={alu_result}, Valor={memory_data}")
-                self.mem_wb = {"memory_data": memory_data, "decoded": decoded}
+                self.mem_wb = {"memory_data": memory_data, "decoded": decoded,"instruction_pipeline": instruction_pipeline}
             elif control_signals['MemWrite']:
                 if "rs2" in decoded:
                     data_to_write = self.register_file.read(decoded["rs2"])
                     self.data_memory.write(alu_result, data_to_write)
                     print(f"Memory write: Escritura en dirección={alu_result}, valor={data_to_write}")
                 # Actualizar mem_wb después de una escritura
-                self.mem_wb = {"decoded": decoded}
+                self.mem_wb = {"decoded": decoded, "instruction_pipeline":instruction_pipeline}
             else:
-                self.mem_wb = {"alu_result": alu_result, "decoded": decoded}
+                self.mem_wb = {"alu_result": alu_result, "decoded": decoded, "instruction_pipeline":instruction_pipeline }
 
             self.ex_mem = None
 
@@ -199,6 +231,8 @@ class Pipeline:
     def writeback(self):
         if self.mem_wb:
             decoded = self.mem_wb["decoded"]
+            instruction_pipeline = self.mem_wb.get("instruction_pipeline")
+
             if "rd" in decoded and decoded["rd"] is not None:
                 if "memory_data" in self.mem_wb:
                     self.register_file.write(decoded["rd"], self.mem_wb["memory_data"])
@@ -208,7 +242,11 @@ class Pipeline:
                     print(f"WriteBack: Escrito {self.mem_wb['alu_result']} en R{decoded['rd']}")
             else:
                 print("WriteBack: No se realizó escritura (instrucción sin registro destino).")
+
+            self.writeback_stage = {"instruction_pipeline": instruction_pipeline}
             self.mem_wb = None
+        else:
+            self.writeback_stage = None #Esto es para la interfaz
 
     def no_op_instruction(self):
         return {
@@ -261,5 +299,45 @@ class Pipeline:
             'PCWrite': self.control_unit.PCWrite
         }
 
+    def reiniciar(self):
+        """
+        Reinicia el pipeline a su estado inicial.
+        """
+        # Reiniciar el contador de programa (PC)
+        self.pc.reset()
 
+        # Reiniciar el temporizador
+        self.start_time = None
+        self.end_time = None
 
+        # Vaciar todas las etapas del pipeline
+        self.fetch_stage = None
+        self.decode_stage = None
+        self.execute_stage = None
+        self.memory_stage = None
+        self.writeback_stage = None
+
+        # Reiniciar los registros del pipeline
+        self.if_id = None
+        self.id_ex = None
+        self.ex_mem = None
+        self.mem_wb = None
+
+        # Reiniciar el ciclo de reloj
+        self.clock_cycle = 0
+
+        self.mode = "full_hazard_unit"
+
+        print("Pipeline reiniciado.")
+
+    def is_pipeline_empty(self):
+        """
+        Verifica si todas las etapas del pipeline están vacías y si el PC ya ha recorrido todas las instrucciones.
+        """
+        instrucciones_terminadas = (
+                self.pc.value >= len(self.instruction_memory.instructions) * 4
+        )
+        etapas_vacias = all(
+            stage is None for stage in [self.if_id, self.id_ex, self.ex_mem, self.mem_wb]
+        )
+        return instrucciones_terminadas and etapas_vacias

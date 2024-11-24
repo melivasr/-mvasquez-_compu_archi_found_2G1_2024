@@ -5,7 +5,6 @@ class DataMemory:
     def read(self, address):
         """
         Lee un valor de memoria en la dirección especificada.
-        Asegúrate de que la dirección sea válida.
         """
         if 0 <= address < len(self.memory):
             return self.memory[address]
@@ -16,7 +15,6 @@ class DataMemory:
     def write(self, address, data):
         """
         Escribe un valor en la memoria en la dirección especificada.
-        Asegúrate de que la dirección sea válida.
         """
         if 0 <= address < len(self.memory):
             self.memory[address] = data

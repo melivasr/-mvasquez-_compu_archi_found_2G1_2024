@@ -7,3 +7,7 @@ class ProgramCounter:
 
     def set(self, address):
         self.value = address  # Para saltos o branch
+
+    def reset(self):
+        self.value = 0
+

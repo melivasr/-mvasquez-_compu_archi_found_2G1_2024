@@ -38,7 +38,7 @@ if __name__ == "__main__":
         0b00000000000100010110000110110011,  # OR R3, R2, R1
         0b00000000010100010000000010010011,  # ADDI R1, R2, 5
         0b00000000000100010010000110110011,  # SLT R3, R2, R1
-        0b1_111111_00010_00010_000_1_100_1_1100011,  # BEQ R2, R2, -4
+        0b11111110001000010000110011100011,  # BEQ R2, R2, -4
         0b00000000000100010001000110110011,  # XOR R3, R2, R1
     ]
     instruction_memory.load_instructions(instructions)
@@ -51,9 +51,6 @@ if __name__ == "__main__":
     app = ConfiguracionVentana(root, pipeline)
     root.mainloop()
 
-    # Ejecutar el pipeline
-    for _ in range(24):  # Ejecutar suficientes ciclos para procesar todas las instrucciones
-        pipeline.step()
 
     """ # Simulación del ciclo Fetch y Decode
     print("=== Ciclo de Fetch y Decode ===")
