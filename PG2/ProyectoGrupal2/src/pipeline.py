@@ -23,8 +23,8 @@ class Pipeline:
         self.id_ex = None
         self.ex_mem = None
         self.mem_wb = None
-        self.hazard_unit = HazardUnit()
-        self.mode = "full_hazard_unit"  # Modos posibles: no_hazard, hazard_unit, branch_prediction, full_hazard
+        self.hazardUnit = HazardUnit()
+        self.mode = "full_hazard_unit"  # Modos posibles: no_hazard, hazard_unit, branch_prediction, full_hazard_unit
 
         # Temporizador
         self.start_time = None
@@ -56,7 +56,7 @@ class Pipeline:
         """
         Configura el modo de operación del pipeline.
         """
-        valid_modes = ["no_hazard", "hazard_unit", "branch_prediction", "full_hazard"]
+        valid_modes = ["no_hazard", "hazard_unit", "branch_prediction", "full_hazard_unit"]
         if mode in valid_modes:
             self.mode = mode
         else:
@@ -86,7 +86,7 @@ class Pipeline:
             self.stop_timer()
 
     def fetch(self):
-        
+
         """
         Etapa de Fetch: Obtiene la instrucción desde la memoria de instrucciones.
         """
@@ -96,9 +96,15 @@ class Pipeline:
                 print(f"Fetch: Instrucción {instruction:032b} en PC={self.pc.value}")
                 self.if_id = {"instruction": instruction, "pc": self.pc.value, "instruction_pipeline": instruction}
                 self.pc.increment()
+                print(f"[DEBUG] PC en fetch: 0x{self.pc.value:X}")
+                print(self.mode)
 
     def decode(self):
         if self.if_id and self.id_ex is None:
+            if self.if_id["instruction"] is None:  # Verificar si es un estado de flush
+                print("Decode: Estado de flush detectado, no se procesa instrucción.")
+                self.if_id = None
+                return
             instruction = self.if_id["instruction"]
             decoded = self.decoder.decode(instruction)
 
@@ -111,7 +117,7 @@ class Pipeline:
             decoded['instruction'] = instruction
 
             # Detectar riesgos de datos
-            stall_needed, forwarding_signals, branch_prediction = self.hazard_unit.detect_hazards(
+            stall_needed, forwarding_signals, branch_prediction = self.hazardUnit.detect_hazards(
                 decode_stage={"decoded": decoded},
                 execute_stage=self.id_ex,
                 memory_stage=self.ex_mem,
@@ -168,7 +174,6 @@ class Pipeline:
                 self.register_file.read(decoded["rs2"]) if "rs2" in decoded and isinstance(decoded["rs2"], int) else 0
             )
 
-
             alu_result = 0
             if decoded["type"] == "R":
                 alu_result = self.alu.operate(input1, input2, control_signals['ALUOp'])
@@ -180,25 +185,29 @@ class Pipeline:
                 print(f"Ejecutando ALU: imput1={input1} , Imm={extended_imm}")
                 alu_result = self.alu.operate(input1, extended_imm, control_signals['ALUOp'])
             elif decoded["type"] == "B":
-                 # Obtener el inmediato extendido
-                extended_imm = self.extend.execute(decoded["instruction"], decoded["type"])
-                alu_result = self.alu.operate(input1, input2, control_signals['ALUOp'])
+                # Obtener el inmediato extendido
+                extended_imm = self.extend.execute(decoded["instruction"], decoded["type"]) * 4
+                print(f"Immediate before sign extension: {decoded['imm']}")
+                print(f"Immediate after sign extension: {extended_imm}")
+
+                alu_result = 0 if input1 == input2 else 1  # BEQ: alu_result = 0 si rs1 == rs2
+
                 if alu_result == 0:  # Branch Taken
+                    old_pc = self.pc.value
+                    self.pc.set(self.pc.value + extended_imm)  # Actualizar el PC
+                    print(f"BEQ: Branch Taken, PC actualizado de {old_pc} a {self.pc.value}")
+                    print(f"Modo actual del pipeline: {self.mode}")
                     if self.mode in ["branch_prediction", "full_hazard_unit"]:
-                        print("Branch Taken: Incorrect prediction, performing flush")
-                        # Realizar el flush del pipeline
-                        self.if_id = None
-                        self.id_ex = None
-                        # Ajustar el PC al destino correcto
-                        old_pc = self.pc.value
-                        self.pc.set(self.pc.value + extended_imm)
-                        print(f"BEQ Branch Taken: Imm={extended_imm}, PC Before={old_pc}, PC After={self.pc.value}")
+                        # Realizar flush
+                        self.if_id = {"instruction_pipeline": "flush",
+                                      "instruction": None}
+                        self.id_ex = {"instruction_pipeline": "flush",
+                                      "instruction": None}
+                        print("Pipeline flushed: IF and ID stages cleared.")
+
                 else:
-                    if self.mode in ["branch_prediction", "full_hazard_unit"]:
-                        print("Branch Not Taken: Prediction was correct.")      
-
+                    print("BEQ: Branch Not Taken, continuando normalmente.")
             print(f"ALU Result: {alu_result}")
-
             print(f"[Execute] ALU Result: {alu_result}, Control Signals: {control_signals}")
 
 
@@ -336,13 +345,15 @@ class Pipeline:
         self.ex_mem = None
         self.mem_wb = None
 
+        # Reiniciar las memorias y registros
+        self.register_file.resetRegisters()
+        self.data_memory.resetDM()
+
         # Reiniciar el ciclo de reloj
         self.clock_cycle = 0
 
         # Reiniciar el contador de instrucciones completadas
         self.instrucciones_completadas = 0
-
-        self.mode = "full_hazard_unit"
 
         print("Pipeline reiniciado.")
 

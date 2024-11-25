@@ -55,7 +55,8 @@ class ControlUnit:
                 self.ALUOp = 0b11
             elif funct3 == 0b010:  # SLT (Set Less Than)
                 self.ALUOp = 0b100
-
+            elif funct3 == 0b001:  # XOR
+                self.ALUOp = 0b101
 
     def __str__(self):
         return f"RegWrite: {self.RegWrite}, MemRead: {self.MemRead}, MemWrite: {self.MemWrite}, ALUOp: {self.ALUOp}, Branch: {self.Branch}, Jump: {self.Jump}, MemToReg: {self.MemToReg}, ALUSrc: {self.ALUSrc}, PCSrc: {self.PCSrc}"

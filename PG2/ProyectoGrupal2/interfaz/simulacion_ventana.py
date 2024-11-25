@@ -1,12 +1,12 @@
 import tkinter as tk
-from asyncio import wait_for
 from tkinter import ttk
 from PIL import Image, ImageTk
 import os
-from src import pipeline
+import json
+
 
 class SimulacionVentana:
-    def __init__(self, root, ventana_configuracion, pipeline, modo_funcionamiento):
+    def __init__(self, root, ventana_configuracion, pipeline, modo_funcionamiento, version1, version2):
         self.ejecutar_simulacion = None
         self.siguiente_paso = None
         self.modo_funcionamiento = modo_funcionamiento
@@ -19,7 +19,22 @@ class SimulacionVentana:
         self.register_file = pipeline.register_file
         self.instruction_memory = pipeline.instruction_memory
         self.data_memory = pipeline.data_memory
+        self.version_actual = 1  # Controla qué versión está activa
+        self.modo_version1 = version1
+        self.modo_version2 = version2
+        self.historial_file = "historial.json"
+        self.init_historial()
+        self.datos_guardados = {
+            "version1": False,
+            "version2": False
+        }
 
+        # Configurar la primera versión
+        self.pipeline.set_mode(self.modo_version1)
+
+        self.label_version = tk.Label(self.root, text=f"Ejecutando versión:{self.modo_version1} ",
+                                      bg="#61C6E8", font=("Comic Sans MS", 14, "bold"), fg="#003333")
+        self.label_version.pack(side=tk.TOP, pady=10)
 
         # Frame para el pipeline visual y el área de control con borde
         frame_pipeline = tk.Frame(self.root, bg="#61C6E8", highlightbackground="black", highlightthickness=0)
@@ -228,14 +243,71 @@ class SimulacionVentana:
         self.actualizar_memoria_datos()
         self.root.after(1000, self.actualizar_memoria_datos_periodicamente)  # Actualiza cada 1 segundo
 
+    def init_historial(self):
+        """Inicializa el archivo JSON si no existe."""
+        if not os.path.exists(self.historial_file):
+            with open(self.historial_file, 'w') as f:
+                json.dump([], f)  # Inicializa con una lista vacía
+
+    def guardar_historial(self, datos, version):
+        """Guarda los datos de la versión en el archivo JSON."""
+        try:
+            # Comprueba si el archivo existe y tiene contenido válido
+            if os.path.exists(self.historial_file) and os.path.getsize(self.historial_file) > 0:
+                with open(self.historial_file, 'r') as f:
+                    historial = json.load(f)  # Intenta cargar el contenido existente
+            else:
+                historial = []  # Si el archivo no existe o está vacío, inicializa una lista vacía
+
+            if not self.datos_guardados[version]:  # Solo guarda si no ha sido guardado aún
+                historial.append(datos)  # Agrega los nuevos datos al historial
+
+                with open(self.historial_file, 'w') as f:
+                    json.dump(historial, f, indent=4)  # Escribe el historial actualizado
+                self.datos_guardados[version] = True  # Marca como guardado
+        except json.JSONDecodeError as e:
+            print(f"Error al leer el archivo JSON: {e}")
+            # Inicializa el archivo con una lista vacía si está corrupto
+            with open(self.historial_file, 'w') as f:
+                json.dump([datos], f, indent=4)
+            self.datos_guardados[version] = True
+
     def ejecutar_next(self):
         """Ejecuta un ciclo del pipeline."""
         if not self.pipeline.is_pipeline_empty():
-            print("Ejecutar paso siguiente")
             self.pipeline.step()
             self.actualizar_interfaz()
         else:
-            print("El pipeline ya está vacío, no hay más pasos para ejecutar.")
+            if self.version_actual == 1 and not self.datos_guardados["version1"]:
+                print("Primera versión completada. Guardando datos...")
+                datos_version = {
+                    "1 Version": self.modo_version1,
+                    "Cycles": self.pipeline.clock_cycle,
+                    "Tiempo": round(self.pipeline.get_elapsed_time(), 3),  # Formato con 3 decimales
+                    "CPI": round(self.pipeline.calcular_cpi(), 3),  # Formato con 3 decimales
+                    "IPC": round(1 / self.pipeline.calcular_cpi(), 3) if self.pipeline.calcular_cpi() != 0 else 0
+                }
+                self.guardar_historial(datos_version, "version1")
+
+                print("Reiniciando pipeline para la segunda versión...")
+                # Cambiar a la segunda versión
+                self.pipeline.reiniciar()
+                self.pipeline.set_mode(self.modo_version2)
+                self.version_actual = 2
+                self.label_version.config(text=f"Ejecutando versión: {self.modo_version2}")
+                self.actualizar_interfaz()
+            elif self.version_actual == 2 and not self.datos_guardados["version2"]:
+                print("Segunda versión completada. Guardando datos...")
+                datos_version = {
+                    "2 Version": self.modo_version2,
+                    "Cycles 2": self.pipeline.clock_cycle,
+                    "Tiempo 2": round(self.pipeline.get_elapsed_time(), 3),  # Formato con 3 decimales
+                    "CPI 2": round(self.pipeline.calcular_cpi(), 3),  # Formato con 3 decimales
+                    "IPC 2": round(1 / self.pipeline.calcular_cpi(), 3) if self.pipeline.calcular_cpi() != 0 else 0
+                }
+                self.guardar_historial(datos_version, "version2")
+
+                print("Pipeline completado para ambas versiones.")
 
     def ejecutar_pipeline(self):
         """Ejecuta el pipeline de forma continua, un ciclo cada unidad de tiempo."""
@@ -246,7 +318,37 @@ class SimulacionVentana:
                 self.actualizar_interfaz()
                 self.root.after(1000, ejecutar_ciclo)  # Ejecuta cada segundo
             else:
-                print("Pipeline completado.")
+                if self.version_actual == 1 and not self.datos_guardados["version1"]:
+                    print("Primera versión completada. Guardando datos...")
+                    datos_version = {
+                        "1 Version": self.modo_version1,
+                        "Cycles": self.pipeline.clock_cycle,
+                        "Tiempo": round(self.pipeline.get_elapsed_time(), 3),  # Formato con 3 decimales
+                        "CPI": round(self.pipeline.calcular_cpi(), 3),  # Formato con 3 decimales
+                        "IPC": round(1 / self.pipeline.calcular_cpi(), 3) if self.pipeline.calcular_cpi() != 0 else 0
+                    }
+                    self.guardar_historial(datos_version, "version1")
+
+                    print("Reiniciando pipeline para la segunda versión...")
+                    # Cambiar a la segunda versión
+                    self.pipeline.reiniciar()
+                    self.pipeline.set_mode(self.modo_version2)
+                    self.version_actual = 2
+                    self.label_version.config(text=f"Ejecutando versión: {self.modo_version2}")
+                    self.actualizar_interfaz()
+                    self.root.after(1000, ejecutar_ciclo)  # Ejecuta la segunda versión
+                elif self.version_actual == 2 and not self.datos_guardados["version2"]:
+                    print("Segunda versión completada. Guardando datos...")
+                    datos_version = {
+                        "2 Version": self.modo_version2,
+                        "Cycles 2": self.pipeline.clock_cycle,
+                        "Tiempo 2": round(self.pipeline.get_elapsed_time(), 3),  # Formato con 3 decimales
+                        "CPI 2": round(self.pipeline.calcular_cpi(), 3),  # Formato con 3 decimales
+                        "IPC 2": round(1 / self.pipeline.calcular_cpi(), 3) if self.pipeline.calcular_cpi() != 0 else 0
+                    }
+                    self.guardar_historial(datos_version, "version2")
+
+                    print("Pipeline completado para ambas versiones.")
 
         ejecutar_ciclo()
 
@@ -257,8 +359,37 @@ class SimulacionVentana:
             self.actualizar_interfaz()
             self.root.after(10, self.ejecutar_pipeline_completo)  # Ejecuta rápidamente sin bloquear
         else:
-            print("Pipeline ejecutado completamente.")
+            if self.version_actual == 1 and not self.datos_guardados["version1"]:
+                print("Primera versión completada. Guardando datos...")
+                datos_version = {
+                    "1 Version": self.modo_version1,
+                    "Cycles": self.pipeline.clock_cycle,
+                    "Tiempo": round(self.pipeline.get_elapsed_time(), 3),  # Formato con 3 decimales
+                    "CPI": round(self.pipeline.calcular_cpi(), 3),  # Formato con 3 decimales
+                    "IPC": round(1 / self.pipeline.calcular_cpi(), 3) if self.pipeline.calcular_cpi() != 0 else 0
+                }
+                self.guardar_historial(datos_version, "version1")
 
+                print("Reiniciando pipeline para la segunda versión...")
+                # Cambiar a la segunda versión
+                self.pipeline.reiniciar()
+                self.pipeline.set_mode(self.modo_version2)
+                self.version_actual = 2
+                self.label_version.config(text=f"Ejecutando versión: {self.modo_version2}")
+                self.actualizar_interfaz()
+                self.root.after(10, self.ejecutar_pipeline_completo)  # Ejecuta rápidamente la segunda versión
+            elif self.version_actual == 2 and not self.datos_guardados["version2"]:
+                print("Segunda versión completada. Guardando datos...")
+                datos_version = {
+                    "2 Version": self.modo_version2,
+                    "Cycles 2": self.pipeline.clock_cycle,
+                    "Tiempo 2": round(self.pipeline.get_elapsed_time(), 3),  # Formato con 3 decimales
+                    "CPI 2": round(self.pipeline.calcular_cpi(), 3),  # Formato con 3 decimales
+                    "IPC 2": round(1 / self.pipeline.calcular_cpi(), 3) if self.pipeline.calcular_cpi() != 0 else 0
+                }
+                self.guardar_historial(datos_version, "version2")
+
+                print("Pipeline ejecutado completamente para ambas versiones.")
     def actualizar_cpi_ipc(self):
         """
         Actualiza los valores de CPI e IPC en la interfaz.

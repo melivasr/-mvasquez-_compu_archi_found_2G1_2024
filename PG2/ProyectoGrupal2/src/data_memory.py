@@ -33,3 +33,10 @@ class DataMemory:
             address = i * 4  # Calcular la dirección real
             result.append((address, self.memory[i]))
         return result
+
+    def resetDM(self):
+        """Reinicia toda la memoria de datos a 0."""
+        self.memory = [0] * 128
+        if self.update_callback:
+            for address in range(0, len(self.memory) * 4, 4):
+                self.update_callback(address, 0)

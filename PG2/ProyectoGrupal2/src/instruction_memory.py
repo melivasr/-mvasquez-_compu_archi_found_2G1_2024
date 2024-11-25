@@ -15,4 +15,3 @@ class InstructionMemory:
             return self.instructions[index]
         else:
             return None
-
