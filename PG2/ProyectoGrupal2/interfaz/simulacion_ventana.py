@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import os
 import json
+import time
 
 
 class SimulacionVentana:
@@ -198,7 +199,7 @@ class SimulacionVentana:
 
     def actualizar_registros_periodicamente(self):
         self.actualizar_registros()
-        self.root.after(1000, self.actualizar_registros_periodicamente)  # Actualiza cada 1 segundo
+        self.root.after(100, self.actualizar_registros_periodicamente)  # Actualiza cada 1 segundo
 
     def actualizar_memoria_instrucciones(self):
         """Actualiza la tabla de memoria de instrucciones en función de la etapa del pipeline."""
@@ -226,7 +227,7 @@ class SimulacionVentana:
 
     def actualizar_memoria_periodicamente(self):
         self.actualizar_memoria_instrucciones()
-        self.root.after(1000, self.actualizar_memoria_periodicamente)  # Actualiza cada 1 segundo
+        self.root.after(100, self.actualizar_memoria_periodicamente)  # Actualiza cada 1 segundo
 
     def actualizar_memoria_datos(self):
         """Actualiza toda la tabla de memoria de datos."""
@@ -241,7 +242,7 @@ class SimulacionVentana:
     def actualizar_memoria_datos_periodicamente(self):
         """Actualiza la tabla de memoria periódicamente."""
         self.actualizar_memoria_datos()
-        self.root.after(1000, self.actualizar_memoria_datos_periodicamente)  # Actualiza cada 1 segundo
+        self.root.after(100, self.actualizar_memoria_datos_periodicamente)  # Actualiza cada 1 segundo
 
     def init_historial(self):
         """Inicializa el archivo JSON si no existe."""
@@ -273,9 +274,11 @@ class SimulacionVentana:
             self.datos_guardados[version] = True
 
     def ejecutar_next(self):
-        """Ejecuta un ciclo del pipeline."""
+        """Ejecuta un ciclo del pipeline, basado en latencias de tiempo."""
+        current_time = time.time()
+
         if not self.pipeline.is_pipeline_empty():
-            self.pipeline.step()
+            self.pipeline.step(current_time)  # Pasar el tiempo actual al pipeline
             self.actualizar_interfaz()
         else:
             if self.version_actual == 1 and not self.datos_guardados["version1"]:
@@ -284,7 +287,7 @@ class SimulacionVentana:
                     "1 Version": self.modo_version1,
                     "Cycles": self.pipeline.clock_cycle,
                     "Tiempo": round(self.pipeline.get_elapsed_time(), 3),  # Formato con 3 decimales
-                    "CPI": round(self.pipeline.calcular_cpi(), 3),  # Formato con 3 decimales
+                    "CPI": round(self.pipeline.calcular_cpi(), 3),
                     "IPC": round(1 / self.pipeline.calcular_cpi(), 3) if self.pipeline.calcular_cpi() != 0 else 0
                 }
                 self.guardar_historial(datos_version, "version1")
@@ -301,8 +304,8 @@ class SimulacionVentana:
                 datos_version = {
                     "2 Version": self.modo_version2,
                     "Cycles 2": self.pipeline.clock_cycle,
-                    "Tiempo 2": round(self.pipeline.get_elapsed_time(), 3),  # Formato con 3 decimales
-                    "CPI 2": round(self.pipeline.calcular_cpi(), 3),  # Formato con 3 decimales
+                    "Tiempo 2": round(self.pipeline.get_elapsed_time(), 3),
+                    "CPI 2": round(self.pipeline.calcular_cpi(), 3),
                     "IPC 2": round(1 / self.pipeline.calcular_cpi(), 3) if self.pipeline.calcular_cpi() != 0 else 0
                 }
                 self.guardar_historial(datos_version, "version2")
@@ -316,7 +319,7 @@ class SimulacionVentana:
             if not self.pipeline.is_pipeline_empty():
                 self.pipeline.step()
                 self.actualizar_interfaz()
-                self.root.after(1000, ejecutar_ciclo)  # Ejecuta cada segundo
+                self.root.after(600, ejecutar_ciclo)  # Ejecuta cada segundo
             else:
                 if self.version_actual == 1 and not self.datos_guardados["version1"]:
                     print("Primera versión completada. Guardando datos...")
@@ -336,7 +339,7 @@ class SimulacionVentana:
                     self.version_actual = 2
                     self.label_version.config(text=f"Ejecutando versión: {self.modo_version2}")
                     self.actualizar_interfaz()
-                    self.root.after(1000, ejecutar_ciclo)  # Ejecuta la segunda versión
+                    self.root.after(600, ejecutar_ciclo)  # Ejecuta la segunda versión
                 elif self.version_actual == 2 and not self.datos_guardados["version2"]:
                     print("Segunda versión completada. Guardando datos...")
                     datos_version = {
@@ -411,7 +414,9 @@ class SimulacionVentana:
         self.entry_ipc.insert(0, f"{ipc:.2f}")
 
     def actualizar_interfaz(self):
-        """Actualiza los datos de la interfaz, como ciclo, PC, registros y etapas."""
+        """Actualiza los datos de la interfaz, como tiempo restante y etapas."""
+        current_time = time.time()
+
         # Restablecer colores de los rectángulos
         for rect in self.rectangles.values():
             self.canvas.itemconfig(rect, fill="white")  # Color predeterminado
@@ -430,50 +435,54 @@ class SimulacionVentana:
         self.entry_tiempo.delete(0, tk.END)
         self.entry_tiempo.insert(0, f"{elapsed_time:.2f} s")
 
-        # Actualizar etiquetas de las etapas del pipeline
+        # Actualizar etiquetas de las etapas del pipeline con tiempos restantes
         etapas = [
-            {"stage": "IF", "data": self.pipeline.if_id},
-            {"stage": "ID", "data": self.pipeline.id_ex},
-            {"stage": "EX", "data": self.pipeline.ex_mem},
-            {"stage": "MEM", "data": self.pipeline.mem_wb},
-            {"stage": "WB", "data": self.pipeline.writeback_stage}
+            {"stage": "IF", "data": self.pipeline.if_id,
+             "time_remaining": self.pipeline.time_remaining("IF", current_time)},
+            {"stage": "ID", "data": self.pipeline.id_ex,
+             "time_remaining": self.pipeline.time_remaining("ID", current_time)},
+            {"stage": "EX", "data": self.pipeline.ex_mem,
+             "time_remaining": self.pipeline.time_remaining("EX", current_time)},
+            {"stage": "MEM", "data": self.pipeline.mem_wb,
+             "time_remaining": self.pipeline.time_remaining("MEM", current_time)},
+            {"stage": "WB", "data": self.pipeline.writeback_stage,
+             "time_remaining": self.pipeline.time_remaining("WB", current_time)}
         ]
 
         for i, etapa in enumerate(etapas):
             stage_data = etapa["data"]
+            time_remaining = etapa["time_remaining"]
 
             if stage_data is None:
-                # Si no hay datos en la etapa, limpiar la etiqueta
-                self.instruccion_labels[i].config(text=" ")
+                self.instruccion_labels[i].config(text=f"{etapa['stage']} (Vacío)")
             else:
-                # Mostrar siempre la instrucción, incluso si es NOP
-                instruction = stage_data.get("instruction_pipeline", "")
-                self.instruccion_labels[i].config(text=instruction)
+                instruction = stage_data.get("instruction_pipeline", "NOP")
+                self.instruccion_labels[i].config(
+                    text=f"{instruction} ({time_remaining:.2f}s restantes)"
+                )
 
-                if instruction != "NOP":
-                    # Pintar los módulos correspondientes según la etapa si no es un NOP
-                    stage = etapa["stage"]
-                    if stage == "IF":
-                        self.canvas.itemconfig(self.rectangles["PC"], fill="lightblue")
-                        self.canvas.itemconfig(self.rectangles["InstrMemory"], fill="lightblue")
-                        self.canvas.itemconfig(self.rectangles["IF/ID"], fill="lightblue")
-                    elif stage == "ID":
-                        self.canvas.itemconfig(self.rectangles["RegisterFile"], fill="lightgreen")
-                        self.canvas.itemconfig(self.rectangles["Imm"], fill="lightgreen")
-                        self.canvas.itemconfig(self.rectangles["ID/EX"], fill="lightgreen")
-                    elif stage == "EX":
-                        # Pintar toda la etapa EX de rojo
-                        self.canvas.itemconfig(self.rectangles["ALU"], fill="red")
-                        self.canvas.itemconfig(self.rectangles["Mux2"], fill="red")
-                        self.canvas.itemconfig(self.rectangles["Mux3"], fill="red")
-                        self.canvas.itemconfig(self.rectangles["Mux4"], fill="red")
-                        self.canvas.itemconfig(self.rectangles["Mux5"], fill="red")
-                        self.canvas.itemconfig(self.rectangles["EX/MEM"], fill="red")
-                    elif stage == "MEM":
-                        self.canvas.itemconfig(self.rectangles["DataMemory"], fill="orange")
-                        self.canvas.itemconfig(self.rectangles["MEM/WB"], fill="orange")
-                    elif stage == "WB":
-                        self.canvas.itemconfig(self.rectangles["Mux6"], fill="pink")
+                # Cambiar colores según la etapa activa
+                stage = etapa["stage"]
+                if stage == "IF":
+                    self.canvas.itemconfig(self.rectangles["PC"], fill="lightblue")
+                    self.canvas.itemconfig(self.rectangles["InstrMemory"], fill="lightblue")
+                    self.canvas.itemconfig(self.rectangles["IF/ID"], fill="lightblue")
+                elif stage == "ID":
+                    self.canvas.itemconfig(self.rectangles["RegisterFile"], fill="lightgreen")
+                    self.canvas.itemconfig(self.rectangles["Imm"], fill="lightgreen")
+                    self.canvas.itemconfig(self.rectangles["ID/EX"], fill="lightgreen")
+                elif stage == "EX":
+                    self.canvas.itemconfig(self.rectangles["ALU"], fill="red")
+                    self.canvas.itemconfig(self.rectangles["Mux2"], fill="red")
+                    self.canvas.itemconfig(self.rectangles["Mux3"], fill="red")
+                    self.canvas.itemconfig(self.rectangles["Mux4"], fill="red")
+                    self.canvas.itemconfig(self.rectangles["Mux5"], fill="red")
+                    self.canvas.itemconfig(self.rectangles["EX/MEM"], fill="red")
+                elif stage == "MEM":
+                    self.canvas.itemconfig(self.rectangles["DataMemory"], fill="orange")
+                    self.canvas.itemconfig(self.rectangles["MEM/WB"], fill="orange")
+                elif stage == "WB":
+                    self.canvas.itemconfig(self.rectangles["Mux6"], fill="pink")
 
         # Resetear writeback_stage si el pipeline está vacío
         if self.pipeline.is_pipeline_empty():

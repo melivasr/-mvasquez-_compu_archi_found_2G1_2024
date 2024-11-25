@@ -593,5 +593,131 @@
         "Tiempo 2": 21.162,
         "CPI 2": 1.235,
         "IPC 2": 0.81
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 53,
+        "Tiempo": 53.442,
+        "CPI": 3.118,
+        "IPC": 0.321
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 60,
+        "Tiempo 2": 60.453,
+        "CPI 2": 3.158,
+        "IPC 2": 0.317
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 53,
+        "Tiempo": 53.444,
+        "CPI": 3.118,
+        "IPC": 0.321
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 60,
+        "Tiempo 2": 60.564,
+        "CPI 2": 3.158,
+        "IPC 2": 0.317
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 53,
+        "Tiempo": 53.482,
+        "CPI": 3.118,
+        "IPC": 0.321
+    },
+    {
+        "2 Version": "full_hazard_unit",
+        "Cycles 2": 42,
+        "Tiempo 2": 42.42,
+        "CPI 2": 3.231,
+        "IPC 2": 0.31
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 12.786,
+        "CPI": 1.235,
+        "IPC": 0.81
+    },
+    {
+        "2 Version": "branch_prediction",
+        "Cycles 2": 17,
+        "Tiempo 2": 10.333,
+        "CPI 2": 1.417,
+        "IPC 2": 0.706
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 12.724,
+        "CPI": 1.235,
+        "IPC": 0.81
+    },
+    {
+        "2 Version": "full_hazard_unit",
+        "Cycles 2": 18,
+        "Tiempo 2": 10.964,
+        "CPI 2": 1.385,
+        "IPC 2": 0.722
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 12.753,
+        "CPI": 1.235,
+        "IPC": 0.81
+    },
+    {
+        "2 Version": "full_hazard_unit",
+        "Cycles 2": 18,
+        "Tiempo 2": 11.083,
+        "CPI 2": 1.385,
+        "IPC 2": 0.722
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 12.801,
+        "CPI": 1.235,
+        "IPC": 0.81
+    },
+    {
+        "2 Version": "full_hazard_unit",
+        "Cycles 2": 18,
+        "Tiempo 2": 10.971,
+        "CPI 2": 1.385,
+        "IPC 2": 0.722
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 12.771,
+        "CPI": 1.235,
+        "IPC": 0.81
+    },
+    {
+        "2 Version": "full_hazard_unit",
+        "Cycles 2": 18,
+        "Tiempo 2": 10.942,
+        "CPI 2": 1.385,
+        "IPC 2": 0.722
+    },
+    {
+        "1 Version": "hazard_unit",
+        "Cycles": 23,
+        "Tiempo": 13.986,
+        "CPI": 1.211,
+        "IPC": 0.826
+    },
+    {
+        "2 Version": "branch_prediction",
+        "Cycles 2": 17,
+        "Tiempo 2": 10.36,
+        "CPI 2": 1.417,
+        "IPC 2": 0.706
     }
 ]
