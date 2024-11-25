@@ -95,8 +95,8 @@ class Pipeline:
             if instruction is not None:
                 print(f"Fetch: Instrucción {instruction:032b} en PC={self.pc.value}")
                 self.if_id = {"instruction": instruction, "pc": self.pc.value, "instruction_pipeline": instruction}
-                self.pc.increment()
                 print(f"[DEBUG] PC en fetch: 0x{self.pc.value:X}")
+                self.pc.increment()
                 print(self.mode)
 
     def decode(self):
@@ -186,27 +186,22 @@ class Pipeline:
                 alu_result = self.alu.operate(input1, extended_imm, control_signals['ALUOp'])
             elif decoded["type"] == "B":
                 # Obtener el inmediato extendido
-                extended_imm = self.extend.execute(decoded["instruction"], decoded["type"]) * 4
-                print(f"Immediate before sign extension: {decoded['imm']}")
-                print(f"Immediate after sign extension: {extended_imm}")
-
-                alu_result = 0 if input1 == input2 else 1  # BEQ: alu_result = 0 si rs1 == rs2
-
+                extended_imm = self.extend.execute(decoded["instruction"], decoded["type"])*4
+                alu_result = self.alu.operate(input1, input2, control_signals['ALUOp'])
                 if alu_result == 0:  # Branch Taken
-                    old_pc = self.pc.value
-                    self.pc.set(self.pc.value + extended_imm)  # Actualizar el PC
-                    print(f"BEQ: Branch Taken, PC actualizado de {old_pc} a {self.pc.value}")
-                    print(f"Modo actual del pipeline: {self.mode}")
                     if self.mode in ["branch_prediction", "full_hazard_unit"]:
-                        # Realizar flush
-                        self.if_id = {"instruction_pipeline": "flush",
-                                      "instruction": None}
-                        self.id_ex = {"instruction_pipeline": "flush",
-                                      "instruction": None}
-                        print("Pipeline flushed: IF and ID stages cleared.")
-
+                        print("Branch Taken: Incorrect prediction, performing flush")
+                        # Realizar el flush del pipeline
+                        self.if_id = None
+                        self.id_ex = None
+                        # Ajustar el PC al destino correcto
+                        old_pc = self.pc.value
+                        self.pc.set(self.pc.value + extended_imm)
+                        print(f"BEQ Branch Taken: Imm={extended_imm}, PC Before={old_pc}, PC After={self.pc.value}")
                 else:
-                    print("BEQ: Branch Not Taken, continuando normalmente.")
+                    if self.mode in ["branch_prediction", "full_hazard_unit"]:
+                        print("Branch Not Taken: Prediction was correct.")
+
             print(f"ALU Result: {alu_result}")
             print(f"[Execute] ALU Result: {alu_result}, Control Signals: {control_signals}")
 
