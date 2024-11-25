@@ -14,8 +14,8 @@ class HistorialVentana:
         # Configuración de estilos
         style = ttk.Style(self.root)
         style.theme_use("default")
-        style.configure("Treeview", background="white", rowheight=22, fieldbackground="white")
-        style.configure("Treeview.Heading", font=("Comic Sans MS", 10), background="#D3D3D3",
+        style.configure("Treeview", background="white", rowheight=23, fieldbackground="white")
+        style.configure("Treeview.Heading", font=("Comic Sans MS", 12), background="#D3D3D3",
                         foreground="black")  # Títulos gris claro
         style.map("Treeview.Heading", background=[("active", "#B0B0B0")])
 
@@ -31,7 +31,7 @@ class HistorialVentana:
             "# ejecución", "1 Version", "Cycles", "Tiempo", "CPI", "IPC",
             "2 Version", "Cycles 2", "Tiempo 2", "CPI 2", "IPC 2"
         ]
-        self.tree_historial = ttk.Treeview(frame_historial, columns=columnas, show="headings", height=20)
+        self.tree_historial = ttk.Treeview(frame_historial, columns=columnas, show="headings", height=12)
 
         # Configurar encabezados y ajustar columnas
         for col in columnas:
@@ -39,7 +39,7 @@ class HistorialVentana:
             self.tree_historial.column(col, width=100, anchor="center", stretch=True)
 
         # Empaquetar la tabla
-        self.tree_historial.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        self.tree_historial.pack(fill=tk.BOTH, expand=False, padx=10, pady=15)
 
         # Botón para volver a la ventana de configuración
         boton_frame = tk.Frame(frame_historial, bg="#61C6E8")  # Frame para centrar el botón
@@ -72,7 +72,7 @@ class HistorialVentana:
         self.ventana_configuracion.deiconify()
 
     def rellenar_tabla_con_historial(self):
-        """Llena la tabla con los datos del archivo historial.json, agrupando versiones 1 y 2 en la misma fila."""
+        """Llena la tabla con los últimos 10 datos del archivo historial.json, agrupando versiones 1 y 2 en la misma fila."""
         try:
             with open(self.historial_file, "r") as file:
                 historial = json.load(file)  # Cargar datos del archivo JSON
@@ -81,13 +81,14 @@ class HistorialVentana:
             for item in self.tree_historial.get_children():
                 self.tree_historial.delete(item)
 
-            # Procesar las entradas en pares (1º Versión y 2º Versión)
-            for i in range(0, len(historial), 2):  # Itera en pasos de 2
-                if (i // 2) + 1 > 20:  # Verifica que el número de ejecución no pase de 20
-                    break
+            # Tomar los últimos 10 elementos del historial
+            historial_reciente = historial[-20:]  # Extraer los últimos 10 registros
 
-                entrada1 = historial[i]  # Datos de la versión 1
-                entrada2 = historial[i + 1] if i + 1 < len(historial) else {}  # Datos de la versión 2 (si existe)
+            # Procesar las entradas en pares (1º Versión y 2º Versión)
+            for i in range(0, len(historial_reciente), 2):  # Itera en pasos de 2
+                entrada1 = historial_reciente[i]  # Datos de la versión 1
+                entrada2 = historial_reciente[i + 1] if i + 1 < len(
+                    historial_reciente) else {}  # Datos de la versión 2 (si existe)
 
                 self.tree_historial.insert("", "end", values=(
                     (i // 2) + 1,  # Número de ejecución (basado en pares)

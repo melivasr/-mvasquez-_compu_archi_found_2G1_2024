@@ -222,7 +222,7 @@ class SimulacionVentana:
                 stage = "WB"
 
             # Insertar en la tabla
-            self.tree_memoria.insert("", "end", values=(f"0x{addr * 4:X}", stage, instruction))
+            self.tree_memoria.insert("", "end", values=(f"0x{addr * 4}", stage, instruction))
 
     def actualizar_memoria_periodicamente(self):
         self.actualizar_memoria_instrucciones()
@@ -236,7 +236,7 @@ class SimulacionVentana:
 
         # Agregar los datos actuales de la memoria
         for addr, value in enumerate(self.data_memory.memory):
-            self.tree_datos.insert("", "end", values=(f"0x{addr*4:X}", value))
+            self.tree_datos.insert("", "end", values=(f"0x{addr*4}", value))
 
     def actualizar_memoria_datos_periodicamente(self):
         """Actualiza la tabla de memoria periódicamente."""
