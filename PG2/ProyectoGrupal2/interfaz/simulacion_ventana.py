@@ -412,11 +412,16 @@ class SimulacionVentana:
 
     def actualizar_interfaz(self):
         """Actualiza los datos de la interfaz, como ciclo, PC, registros y etapas."""
+        # Restablecer colores de los rectángulos
+        for rect in self.rectangles.values():
+            self.canvas.itemconfig(rect, fill="white")  # Color predeterminado
+
         # Actualizar ciclo y PC
         self.entry_ciclo.delete(0, tk.END)
         self.entry_ciclo.insert(0, self.pipeline.clock_cycle)
         self.entry_pc.delete(0, tk.END)
         self.entry_pc.insert(0, f"0x{self.pipeline.pc.value}")
+
         # Actualizar CPI e IPC
         self.actualizar_cpi_ipc()
 
@@ -427,19 +432,50 @@ class SimulacionVentana:
 
         # Actualizar etiquetas de las etapas del pipeline
         etapas = [
-            self.pipeline.if_id,
-            self.pipeline.id_ex,
-            self.pipeline.ex_mem,
-            self.pipeline.mem_wb,
-            self.pipeline.writeback_stage
+            {"stage": "IF", "data": self.pipeline.if_id},
+            {"stage": "ID", "data": self.pipeline.id_ex},
+            {"stage": "EX", "data": self.pipeline.ex_mem},
+            {"stage": "MEM", "data": self.pipeline.mem_wb},
+            {"stage": "WB", "data": self.pipeline.writeback_stage}
         ]
-        for i, etapa in enumerate(etapas):
-            if etapa is None:
-                text = " "
-            else:
-                text = etapa.get("instruction_pipeline", "")  # Si falta el campo
-            self.instruccion_labels[i].config(text=text)
 
+        for i, etapa in enumerate(etapas):
+            stage_data = etapa["data"]
+
+            if stage_data is None:
+                # Si no hay datos en la etapa, limpiar la etiqueta
+                self.instruccion_labels[i].config(text=" ")
+            else:
+                # Mostrar siempre la instrucción, incluso si es NOP
+                instruction = stage_data.get("instruction_pipeline", "")
+                self.instruccion_labels[i].config(text=instruction)
+
+                if instruction != "NOP":
+                    # Pintar los módulos correspondientes según la etapa si no es un NOP
+                    stage = etapa["stage"]
+                    if stage == "IF":
+                        self.canvas.itemconfig(self.rectangles["PC"], fill="lightblue")
+                        self.canvas.itemconfig(self.rectangles["InstrMemory"], fill="lightblue")
+                        self.canvas.itemconfig(self.rectangles["IF/ID"], fill="lightblue")
+                    elif stage == "ID":
+                        self.canvas.itemconfig(self.rectangles["RegisterFile"], fill="lightgreen")
+                        self.canvas.itemconfig(self.rectangles["Imm"], fill="lightgreen")
+                        self.canvas.itemconfig(self.rectangles["ID/EX"], fill="lightgreen")
+                    elif stage == "EX":
+                        # Pintar toda la etapa EX de rojo
+                        self.canvas.itemconfig(self.rectangles["ALU"], fill="red")
+                        self.canvas.itemconfig(self.rectangles["Mux2"], fill="red")
+                        self.canvas.itemconfig(self.rectangles["Mux3"], fill="red")
+                        self.canvas.itemconfig(self.rectangles["Mux4"], fill="red")
+                        self.canvas.itemconfig(self.rectangles["Mux5"], fill="red")
+                        self.canvas.itemconfig(self.rectangles["EX/MEM"], fill="red")
+                    elif stage == "MEM":
+                        self.canvas.itemconfig(self.rectangles["DataMemory"], fill="orange")
+                        self.canvas.itemconfig(self.rectangles["MEM/WB"], fill="orange")
+                    elif stage == "WB":
+                        self.canvas.itemconfig(self.rectangles["Mux6"], fill="pink")
+
+        # Resetear writeback_stage si el pipeline está vacío
         if self.pipeline.is_pipeline_empty():
             self.root.after(600, self.reset_writeback_stage)
 
