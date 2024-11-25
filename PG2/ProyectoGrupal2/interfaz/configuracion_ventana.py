@@ -24,7 +24,7 @@ class ConfiguracionVentana:
             "Sin unidad de riesgos": "no_hazard",
             "Con unidad de riesgos": "hazard_unit",
             "Con predicción de saltos": "branch_prediction",
-            "Con unidad de riesgos con predicción de saltos": "full_hazard",
+            "Con unidad de riesgos con predicción de saltos": "full_hazard_unit",
         }
         opciones_riesgos = list(self.riesgos_map.keys())
 
@@ -71,11 +71,9 @@ class ConfiguracionVentana:
 
         # Configurar la versión 1
         modo_riesgos_version1 = self.riesgos_map[self.combo_version1.get()]
-        self.pipeline.set_mode(modo_riesgos_version1)
 
         # Configurar la versión 2
-        modo_riesgos_version1 = self.riesgos_map[self.combo_version2.get()]
-        self.pipeline.set_mode(modo_riesgos_version1)
+        modo_riesgos_version2 = self.riesgos_map[self.combo_version2.get()]
 
         # Obtener el modo de funcionamiento
         modo_funcionamiento = self.combo_funcionamiento.get()
@@ -83,7 +81,16 @@ class ConfiguracionVentana:
         # Ocultar la ventana de configuración y abrir la ventana de simulación
         self.root.withdraw()
         ventana_simulacion = tk.Toplevel(self.root)
-        SimulacionVentana(ventana_simulacion, self.root, self.pipeline, modo_funcionamiento)
+
+        # Pasar las configuraciones a SimulacionVentana
+        SimulacionVentana(
+            ventana_simulacion,
+            self.root,
+            self.pipeline,
+            modo_funcionamiento,
+            version1=modo_riesgos_version1,
+            version2=modo_riesgos_version2
+        )
 
     def create_rounded_button(self, parent, text, command, width, height, font=("Comic Sans MS", 10, "bold")):
         # Crear botón redondeado en Canvas

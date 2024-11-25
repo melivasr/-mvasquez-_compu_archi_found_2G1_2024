@@ -24,10 +24,11 @@ class HazardUnit:
             # Forwarding desde Execute 
             if execute_stage:
                 ex_rd = execute_stage["decoded"].get("rd")
-                if ex_rd == rs1 and ex_rd is not None:
-                    forwarding_signals["rs1"] = "execute"
-                if ex_rd == rs2 and ex_rd is not None:
-                    forwarding_signals["rs2"] = "execute"
+                if execute_stage["control_signals"]["MemRead"]:
+                    if ex_rd in [rs1, rs2]:
+                        print(f"Hazard detectado: registrando stall. rd={ex_rd}, rs1={rs1}, rs2={rs2}")
+                        stall_needed = True
+
             if memory_stage:
                 mem_rd = memory_stage["decoded"].get("rd")
                 mem_control = memory_stage["control_signals"]

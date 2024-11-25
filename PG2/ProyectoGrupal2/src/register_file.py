@@ -22,6 +22,14 @@ class RegisterFile:
         if reg_num != 0:  # El registro 0 no se puede escribir
             self.registers[reg_num] = value
 
+    def resetRegisters(self):
+        """Reinicia todos los registros a 0, excepto los valores iniciales que se quieran mantener."""
+        self.registers = [0] * 32
+        # Si deseas reiniciar con valores iniciales específicos:
+        self.registers[1] = 10
+        self.registers[2] = 5
+        self.registers[3] = 0
+
     def __str__(self):
         """
         Para visualizar los valores de todos los registros.

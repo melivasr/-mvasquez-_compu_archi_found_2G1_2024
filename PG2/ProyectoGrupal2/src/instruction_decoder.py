@@ -68,7 +68,6 @@ class InstructionDecoder:
             imm4_1 = (instruction >> 8) & 0b1111
             imm11 = (instruction >> 7) & 0b1
             imm = (imm12 << 12) | (imm11 << 11) | (imm10_5 << 5) | (imm4_1 << 1)
-            # No extiendas el signo aquí
             return {
                 'opcode': opcode,
                 'funct3': funct3,
