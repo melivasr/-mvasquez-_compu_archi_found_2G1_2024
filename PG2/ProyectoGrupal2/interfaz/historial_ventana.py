@@ -83,6 +83,9 @@ class HistorialVentana:
 
             # Procesar las entradas en pares (1º Versión y 2º Versión)
             for i in range(0, len(historial), 2):  # Itera en pasos de 2
+                if (i // 2) + 1 > 20:  # Verifica que el número de ejecución no pase de 20
+                    break
+
                 entrada1 = historial[i]  # Datos de la versión 1
                 entrada2 = historial[i + 1] if i + 1 < len(historial) else {}  # Datos de la versión 2 (si existe)
 
