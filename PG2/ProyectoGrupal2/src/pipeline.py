@@ -86,7 +86,6 @@ class Pipeline:
             self.stop_timer()
 
     def fetch(self):
-
         """
         Etapa de Fetch: Obtiene la instrucción desde la memoria de instrucciones.
         """
@@ -95,7 +94,7 @@ class Pipeline:
             if instruction is not None:
                 print(f"Fetch: Instrucción {instruction:032b} en PC={self.pc.value}")
                 self.if_id = {"instruction": instruction, "pc": self.pc.value, "instruction_pipeline": instruction}
-                print(f"[DEBUG] PC en fetch: 0x{self.pc.value:X}")
+                print(f"[DEBUG] PC en fetch: 0x{self.pc.value}")
                 self.pc.increment()
                 print(self.mode)
 

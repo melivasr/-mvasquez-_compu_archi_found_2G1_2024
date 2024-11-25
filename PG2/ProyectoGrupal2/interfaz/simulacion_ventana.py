@@ -416,7 +416,7 @@ class SimulacionVentana:
         self.entry_ciclo.delete(0, tk.END)
         self.entry_ciclo.insert(0, self.pipeline.clock_cycle)
         self.entry_pc.delete(0, tk.END)
-        self.entry_pc.insert(0, f"0x{self.pipeline.pc.value:X}")
+        self.entry_pc.insert(0, f"0x{self.pipeline.pc.value}")
         # Actualizar CPI e IPC
         self.actualizar_cpi_ipc()
 
