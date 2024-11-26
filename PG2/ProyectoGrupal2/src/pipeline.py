@@ -19,11 +19,11 @@ class Pipeline:
         self.writeback_stage = None
 
         self.latency = {
-            "IF": 0.1,  # 0.1 segundos (100 ms)
-            "ID": 0.1,  # 0.1 segundos
-            "EX": 0.2,  # 0.2 segundos
-            "MEM": 0.3,  # 0.3 segundos
-            "WB": 0.1  # 0.1 segundos
+            "IF": 0.1 * 1e-12,  # 0.1 segundos en picosegundos
+            "ID": 0.1 * 1e-12,  # 0.1 segundos en picosegundos
+            "EX": 0.2 * 1e-12,  # 0.2 segundos en picosegundos
+            "MEM": 0.3 * 1e-12, # 0.3 segundos en picosegundos
+            "WB": 0.1 * 1e-12   # 0.1 segundos en picosegundos
         }
 
         self.stage_timestamps = {
@@ -87,7 +87,7 @@ class Pipeline:
 
         print(f"\nClock Cycle: {self.clock_cycle + 1}")
 
-        current_time = time.time()  # Obtén el tiempo actual en segundos
+        current_time = time.time()
 
         # Ejecutar las etapas solo si ha transcurrido el tiempo de latencia
         if current_time - self.stage_timestamps["WB"] >= self.latency["WB"]:
