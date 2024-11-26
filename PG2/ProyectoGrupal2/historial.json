@@ -40,5 +40,341 @@
         "Tiempo 2": 0.301,
         "CPI 2": 1.188,
         "IPC 2": 0.947
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 138.574,
+        "CPI": 1.417,
+        "IPC": 0.706
+    },
+    {
+        "2 Version": "no_hazard",
+        "Cycles 2": 21,
+        "Tiempo 2": 11.111,
+        "CPI 2": 1.167,
+        "IPC 2": 0.952
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.261,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "no_hazard",
+        "Cycles 2": 21,
+        "Tiempo 2": 0.332,
+        "CPI 2": 1.167,
+        "IPC 2": 0.952
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.282,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "no_hazard",
+        "Cycles 2": 21,
+        "Tiempo 2": 0.353,
+        "CPI 2": 1.167,
+        "IPC 2": 0.952
+    },
+    {
+        "1 Version": "full_hazard_unit",
+        "Cycles": 18,
+        "Tiempo": 0.22,
+        "CPI": 1.286,
+        "IPC": 0.889
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 0.269,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
+    },
+    {
+        "1 Version": "hazard_unit",
+        "Cycles": 23,
+        "Tiempo": 0.305,
+        "CPI": 1.15,
+        "IPC": 0.957
+    },
+    {
+        "2 Version": "no_hazard",
+        "Cycles 2": 21,
+        "Tiempo 2": 0.256,
+        "CPI 2": 1.167,
+        "IPC 2": 0.952
+    },
+    {
+        "1 Version": "full_hazard_unit",
+        "Cycles": 18,
+        "Tiempo": 0.231,
+        "CPI": 1.286,
+        "IPC": 0.889
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 0.338,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.24,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "no_hazard",
+        "Cycles 2": 21,
+        "Tiempo 2": 0.265,
+        "CPI 2": 1.167,
+        "IPC 2": 0.952
+    },
+    {
+        "1 Version": "hazard_unit",
+        "Cycles": 23,
+        "Tiempo": 0.289,
+        "CPI": 1.15,
+        "IPC": 0.957
+    },
+    {
+        "2 Version": "branch_prediction",
+        "Cycles 2": 17,
+        "Tiempo 2": 0.203,
+        "CPI 2": 1.308,
+        "IPC 2": 0.882
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 0.326,
+        "CPI": 1.167,
+        "IPC": 0.952
+    },
+    {
+        "2 Version": "no_hazard",
+        "Cycles 2": 21,
+        "Tiempo 2": 0.29,
+        "CPI 2": 1.167,
+        "IPC 2": 0.952
+    },
+    {
+        "1 Version": "hazard_unit",
+        "Cycles": 23,
+        "Tiempo": 0.301,
+        "CPI": 1.15,
+        "IPC": 0.957
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 0.362,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.214,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "branch_prediction",
+        "Cycles 2": 17,
+        "Tiempo 2": 0.223,
+        "CPI 2": 1.308,
+        "IPC 2": 0.882
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 0.256,
+        "CPI": 1.167,
+        "IPC": 0.952
+    },
+    {
+        "2 Version": "no_hazard",
+        "Cycles 2": 21,
+        "Tiempo 2": 0.275,
+        "CPI 2": 1.167,
+        "IPC 2": 0.952
+    },
+    {
+        "1 Version": "full_hazard_unit",
+        "Cycles": 18,
+        "Tiempo": 0.222,
+        "CPI": 1.286,
+        "IPC": 0.889
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 0.269,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.202,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "no_hazard",
+        "Cycles 2": 21,
+        "Tiempo 2": 0.286,
+        "CPI 2": 1.167,
+        "IPC 2": 0.952
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 0.262,
+        "CPI": 1.167,
+        "IPC": 0.952
+    },
+    {
+        "2 Version": "full_hazard_unit",
+        "Cycles 2": 18,
+        "Tiempo 2": 0.273,
+        "CPI 2": 1.286,
+        "IPC 2": 0.889
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.256,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "full_hazard_unit",
+        "Cycles 2": 18,
+        "Tiempo 2": 0.243,
+        "CPI 2": 1.286,
+        "IPC 2": 0.889
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.209,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "full_hazard_unit",
+        "Cycles 2": 18,
+        "Tiempo 2": 0.256,
+        "CPI 2": 1.286,
+        "IPC 2": 0.889
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 0.305,
+        "CPI": 1.167,
+        "IPC": 0.952
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 0.335,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 12.634,
+        "CPI": 1.235,
+        "IPC": 0.81
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 11.641,
+        "CPI 2": 1.211,
+        "IPC 2": 0.826
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 23,
+        "Tiempo": 12.018,
+        "CPI": 1.211,
+        "IPC": 0.826
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 23.047,
+        "CPI 2": 1.211,
+        "IPC 2": 0.826
+    },
+    {
+        "1 Version": "no_hazard",
+        "Cycles": 21,
+        "Tiempo": 0.33,
+        "CPI": 1.167,
+        "IPC": 0.952
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 0.364,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.269,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 0.36,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
+    },
+    {
+        "1 Version": "hazard_unit",
+        "Cycles": 23,
+        "Tiempo": 4.396,
+        "CPI": 1.15,
+        "IPC": 0.957
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 5.317,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
+    },
+    {
+        "1 Version": "branch_prediction",
+        "Cycles": 17,
+        "Tiempo": 0.289,
+        "CPI": 1.308,
+        "IPC": 0.882
+    },
+    {
+        "2 Version": "hazard_unit",
+        "Cycles 2": 23,
+        "Tiempo 2": 0.365,
+        "CPI 2": 1.15,
+        "IPC 2": 0.957
     }
 ]
