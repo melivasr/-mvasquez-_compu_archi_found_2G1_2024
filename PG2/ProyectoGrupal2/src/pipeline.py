@@ -18,6 +18,22 @@ class Pipeline:
         self.memory_stage = None
         self.writeback_stage = None
 
+        self.latency = {
+            "IF": 0.1 * 1e-12,  # 0.1 segundos en picosegundos
+            "ID": 0.1 * 1e-12,  # 0.1 segundos en picosegundos
+            "EX": 0.2 * 1e-12,  # 0.2 segundos en picosegundos
+            "MEM": 0.3 * 1e-12, # 0.3 segundos en picosegundos
+            "WB": 0.1 * 1e-12   # 0.1 segundos en picosegundos
+        }
+
+        self.stage_timestamps = {
+            "IF": 0,
+            "ID": 0,
+            "EX": 0,
+            "MEM": 0,
+            "WB": 0
+        }
+
         self.clock_cycle = 0
         self.if_id = None
         self.id_ex = None
@@ -63,20 +79,36 @@ class Pipeline:
             raise ValueError(f"Modo inválido: {mode}. Opciones válidas: {valid_modes}")
 
     def step(self):
-        
         """
-        Avanza el pipeline un ciclo de reloj.
+        Avanza el pipeline un ciclo de reloj basado en tiempo real.
         """
         if self.start_time is None:  # Iniciar temporizador al primer paso
             self.start_timer()
 
         print(f"\nClock Cycle: {self.clock_cycle + 1}")
-        # Ejecutar las etapas en orden inverso para evitar sobrescribir datos
-        self.writeback()
-        self.memory()
-        self.execute()
-        self.decode()
-        self.fetch()
+
+        current_time = time.time()
+
+        # Ejecutar las etapas solo si ha transcurrido el tiempo de latencia
+        if current_time - self.stage_timestamps["WB"] >= self.latency["WB"]:
+            self.writeback()
+            self.stage_timestamps["WB"] = current_time
+
+        if current_time - self.stage_timestamps["MEM"] >= self.latency["MEM"]:
+            self.memory()
+            self.stage_timestamps["MEM"] = current_time
+
+        if current_time - self.stage_timestamps["EX"] >= self.latency["EX"]:
+            self.execute()
+            self.stage_timestamps["EX"] = current_time
+
+        if current_time - self.stage_timestamps["ID"] >= self.latency["ID"]:
+            self.decode()
+            self.stage_timestamps["ID"] = current_time
+
+        if current_time - self.stage_timestamps["IF"] >= self.latency["IF"]:
+            self.fetch()
+            self.stage_timestamps["IF"] = current_time
 
         # Incrementar el ciclo de reloj
         self.clock_cycle += 1
@@ -385,3 +417,8 @@ class Pipeline:
             self.instrucciones_completadas = completadas  # Guardar el valor acumulado
 
         return completadas
+
+    def time_remaining(self, stage, current_time):
+        """Calcula el tiempo restante para que una etapa pueda avanzar."""
+        elapsed = current_time - self.stage_timestamps[stage]
+        return max(0, self.latency[stage] - elapsed)
